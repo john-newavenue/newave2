@@ -1,8 +1,21 @@
 Newave2::Application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # static pages
+  root to: 'static_pages#home'
 
-  # You can have the root of your site routed with "root"
+  scope :via => :get do
+    match '/about' => 'static_pages#about', :as => 'about'
+    match '/terms' => 'static_pages#terms', :as => 'terms'
+    match '/privacy' => 'static_pages#privacy', :as => 'privacy'
+  end
+
+  # match '/about' => 'static_pages#about', :as => 'about', :via => :get
+  # match '/terms' => 'static_pages#terns', :as => 'terns', :via => :get
+  # match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => :get
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with 'rake routes'.
+
+  # You can have the root of your site routed with 'root'
   # root to: 'welcome#index'
 
   # Example of regular route:

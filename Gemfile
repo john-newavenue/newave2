@@ -13,18 +13,26 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', platforms: :ruby
-
+  
   gem 'uglifier', '>= 1.0.3'
+  gem 'zurb-foundation', '~> 4.0.0'
 end
 
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
+end
+
+group :development do
+  gem "better_errors"
+  gem 'meta_request'
 end
 
 gem 'jquery-rails'
