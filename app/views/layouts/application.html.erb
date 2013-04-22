@@ -24,11 +24,15 @@
 
     <%= render "layouts/topbar" %>
 
-    <%= yield %>
+    <%= render "layouts/flash" %>
+
+    <%= content_for?(:content) ? yield(:content) : yield %>
 
     <%= javascript_include_tag "application" %>
 
     <%= render "layouts/footer" %>
+
+    <% debugger %>
 
   </body>
 </html>

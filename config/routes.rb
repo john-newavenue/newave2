@@ -1,6 +1,12 @@
 Newave2::Application.routes.draw do
+
   # static pages
   root to: 'static_pages#home'
+
+  # users
+  devise_for :users do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
   scope :via => :get do
     match '/about' => 'static_pages#about', :as => 'about'

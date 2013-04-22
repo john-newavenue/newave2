@@ -1004,6 +1004,7 @@ $topbar-margin-bottom: emCalc(0px);
 // Set the link colors and styles for top-level nav
 // $topbar-link-color: #fff;
 // $topbar-link-weight: bold;
+$topbar-link-weight: normal;
 // $topbar-link-font-size: emCalc(13px);
 
 // Style the top bar dropdown elements
@@ -1037,11 +1038,20 @@ $topbar-margin-bottom: emCalc(0px);
 // New Avenue Presentation Elements
 //
 
+header {
+  background: $NA-color-light-green;
+  padding: $em-base 0;
+  margin-bottom: $em-base;
+  h1, h2, h3, h4, h5, h6 { color: $NA-color-light-grey; }
+}
+
+header#home-splash-container { padding: 0; margin: 0; }
+
 section#home-splash { 
   background: $NA-color-light-green;
   padding: 100px 0 100px;
 
-  h1, h2, h3, h4, h5 { 
+  h1, h2, h3, h4, h5, h6 { 
     color: $NA-color-light-grey; 
     font-weight: normal; 
     font-family: 'PT Sans', sans-serif;
@@ -1057,3 +1067,10 @@ section#home-splash {
 section#home-features {
   background: lighten($NA-color-light-green, 50%);
 }
+
+section#topbar {
+  background: $topbar-bg;
+}
+
+// slight top margin so that alert box doesn't butt up against topbar
+#flash-messages .alert-box { margin-top: $alert-bottom-margin; }

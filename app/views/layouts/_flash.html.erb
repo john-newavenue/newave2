@@ -1,0 +1,21 @@
+<section id="flash-messages">
+  <div class="row">
+    <div class="large-12 small-12 columns">
+
+    <% if notice %>
+    <div data-alert class="alert-box success">
+      <%= notice %>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <% end %>
+
+    <% if alert %>
+    <div data-alert class="alert-box alert">
+      <%= alert %>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <% end %>
+
+    </div>
+  </div>
+</section>
