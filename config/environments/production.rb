@@ -20,7 +20,9 @@ Newave2::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  # Enabled for heroku to see /tmp/asset files
+  # http://stackoverflow.com/questions/7963049/heroku-rails-3-1-app-compiling-assets-locally-vs-compiling-assets-during-slug
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor  = :uglifier
