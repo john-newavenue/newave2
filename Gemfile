@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.beta1'
-
-gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -31,8 +30,13 @@ group :test, :development do
 end
 
 group :development do
-  gem "better_errors"
+  gem 'better_errors'
   gem 'meta_request'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg', '0.14.1'
 end
 
 gem 'jquery-rails'
