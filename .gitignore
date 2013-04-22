@@ -18,6 +18,9 @@
 # Ignore sublime text project files
 *.sublime-*
 
-# Don't check in private information
-/config/environments/production.rb
-/config/initializers/secret_token.rb
+# Don't check in private information -- handled by figaro
+# /config/environments/production.rb
+# /config/initializers/secret_token.rb
+
+# Ignore application configuration
+/config/application.yml

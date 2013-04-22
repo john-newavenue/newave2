@@ -53,6 +53,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
  # Authentication
 gem 'devise', :git => 'https://github.com/plataformatec/devise.git', :branch => 'rails4'
 
+# Configuration helper
+gem 'figaro'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
