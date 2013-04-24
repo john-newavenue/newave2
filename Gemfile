@@ -53,6 +53,10 @@ gem 'bcrypt-ruby', '~> 3.0.0'
  # Authentication
 gem 'devise', :git => 'https://github.com/plataformatec/devise.git', :branch => 'rails4'
 
+# Authorization
+gem 'cancan'
+gem 'rolify', :git => 'https://github.com/EppO/rolify.git'
+
 # Configuration helper
 gem 'figaro'
 

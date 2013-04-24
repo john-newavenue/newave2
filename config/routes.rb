@@ -1,5 +1,7 @@
 Newave2::Application.routes.draw do
 
+  get "project_type/index"
+  get "project_type/edit"
   # static pages
   root to: 'static_pages#home'
 
@@ -12,6 +14,10 @@ Newave2::Application.routes.draw do
     match '/about' => 'static_pages#about', :as => 'about'
     match '/terms' => 'static_pages#terms', :as => 'terms'
     match '/privacy' => 'static_pages#privacy', :as => 'privacy'
+  end
+
+  namespace :admin do
+    resources :project_type
   end
 
   # match '/about' => 'static_pages#about', :as => 'about', :via => :get
