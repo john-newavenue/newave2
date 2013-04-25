@@ -72,6 +72,13 @@
             <li class="divider hide-for-small"></li>
 
             <% if user_signed_in? %>
+
+              <%-# admin links -%>
+              <% if current_user.has_role? :admin %>
+              <li><%= link_to 'Admin', admin_path %></li>
+              <li class="divider"></li>
+
+              <% end %>
               <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
             <% else %>
               <li><%= link_to 'Sign Up', new_user_registration_path %></li>

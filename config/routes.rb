@@ -1,5 +1,6 @@
 Newave2::Application.routes.draw do
 
+  get "admin_controller/index"
   get "project_type/index"
   get "project_type/edit"
   # static pages
@@ -16,6 +17,7 @@ Newave2::Application.routes.draw do
     match '/privacy' => 'static_pages#privacy', :as => 'privacy'
   end
 
+  match '/admin' => 'admin/base#index', :as => 'admin', :via => 'get'
   namespace :admin do
     resources :project_type
   end

@@ -1,2 +1,26 @@
-<h1>Admin::ProjectType#index</h1>
-<p>Find me in app/views/admin/project_type/index.html.erb</p>
+<% provide(:title, 'Admin : Project Types') %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project_types.each do |pt| %>
+    <tr>
+      <td><%= pt.title %></td>
+      <td><%= pt.description %></td>
+      <td></td>
+    </tr>
+    <% end %>
+    <tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">Double click here to create new project type...</td>
+    </tr>
+  </tfoot>
+</table>
