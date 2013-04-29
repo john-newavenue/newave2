@@ -4,7 +4,7 @@ Newave2::Application.routes.draw do
   get "project_type/index"
   get "project_type/edit"
   # static pages
-  root to: 'static_pages#home'
+  
 
   # users
   devise_for :users do
@@ -19,6 +19,7 @@ Newave2::Application.routes.draw do
   scope :module => 'frontend' do
 
     # static pages
+    root to: 'static_pages#home'
     match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
     match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
     match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
