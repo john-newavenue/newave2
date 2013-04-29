@@ -31,6 +31,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'meta_request'
   gem 'sqlite3'
 end
@@ -40,6 +41,8 @@ group :production do
 end
 
 gem 'jquery-rails'
+
+gem 'roxml'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -68,3 +71,6 @@ gem 'figaro'
 
 # To use debugger
 # gem 'debugger'
+
+# helpers
+gem 'active_link_to' # https://github.com/twg/active_link_to

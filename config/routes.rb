@@ -9,18 +9,31 @@ Newave2::Application.routes.draw do
   # users
   devise_for :users do
     get '/users/sign_out' => 'devise/sessions#destroy'
+    
   end
-
-  scope :via => :get do
-    match '/about' => 'static_pages#about', :as => 'about'
-    match '/terms' => 'static_pages#terms', :as => 'terms'
-    match '/privacy' => 'static_pages#privacy', :as => 'privacy'
-  end
-
-  match '/admin' => 'admin/base#index', :as => 'admin', :via => 'get'
+  
   namespace :admin do
     resources :project_type
   end
+
+  scope :module => 'frontend' do
+
+    # static pages
+    match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
+    match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
+    match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
+
+    scope :module => 'admin' do
+      match '/admin' => 'admin#index', :as => 'admin', :via => 'get'
+    end
+
+
+    scope :module => 'projects' do
+      resources :projects
+    end
+  end
+
+  
 
   # match '/about' => 'static_pages#about', :as => 'about', :via => :get
   # match '/terms' => 'static_pages#terns', :as => 'terns', :via => :get

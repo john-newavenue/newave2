@@ -73,9 +73,12 @@
 
             <% if user_signed_in? %>
 
+              <li><a href="#">Hello, <%= current_user.username %>!</a></li>
+              <li class="divider"></li>
+
               <%-# admin links -%>
               <% if current_user.has_role? :admin %>
-              <li><%= link_to 'Admin', admin_path %></li>
+              <li><%= link_to 'Admin Dashboard', admin_path %></li>
               <li class="divider"></li>
 
               <% end %>
