@@ -2,34 +2,16 @@
 
 <% content_for :content do %>
 
-<header class="title-header">
-    <div class="row">
-          <div class="large-12 columns">
-            <h1><%= yield :title %></h1>
-          </div>
-        </div>
-</header>
-
 <section>
 
   <div class="row">
 
-    <div class="large-10 push-2 columns">
-    <%= yield %>
+    <div class="large-12 columns">
+      <h1><%= yield :title %></h1>
     </div>
 
-    <div class="large-2 pull-10 columns">
-      <ul class="side-nav">
-        <li><strong>Projects</strong></li>
-        <li><%= link_to 'Project Types', admin_project_type_index_path %></li>
-      </ul>
-
-      <ul class="side-nav">
-        <li class="active"><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-        <li><a href="#">Link 4</a></li>
-      </ul>
+    <div class="large-12 columns">
+    <%= yield %>
     </div>
 
   </div>

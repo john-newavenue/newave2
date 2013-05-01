@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Physical::User do 
+describe User do 
 
   before do
     @user = FactoryGirl.create(:user)

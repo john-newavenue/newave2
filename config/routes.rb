@@ -7,7 +7,7 @@ Newave2::Application.routes.draw do
   root to: 'frontend/static_pages#home'
 
   # users 
-  devise_for :users, :class_name => 'Physical::User::User' do
+  devise_for :users do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
   
@@ -27,7 +27,7 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'user' do
-      resources :users, :path => "/user"
+      match '/user/:username' => 'users#profile', :as => 'user_profile', :via =>'get'
     end
 
     scope :module => 'projects' do
@@ -35,6 +35,7 @@ Newave2::Application.routes.draw do
     end
   end
 
+  resources :users, :path => "/user"
   
 
   # match '/about' => 'static_pages#about', :as => 'about', :via => :get
