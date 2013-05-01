@@ -18,9 +18,9 @@ Newave2::Application.routes.draw do
   scope :module => 'frontend' do
 
     # static pages
-    match '/about' => 'frontend/static_pages#about', :as => 'about', :via => 'get'
-    match '/terms' => 'frontend/static_pages#terms', :as => 'terms', :via => 'get'
-    match '/privacy' => 'frontend/static_pages#privacy', :as => 'privacy', :via => 'get'
+    match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
+    match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
+    match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
 
     scope :module => 'admin' do
       match '/admin' => 'admin#index', :as => 'admin', :via => 'get'
