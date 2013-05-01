@@ -6,3 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+['Client','Project Manager','Architect','Builder'].each do |r|
+  Physical::Project::ProjectRole.create!(:name => r)
+end

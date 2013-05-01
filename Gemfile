@@ -74,3 +74,4 @@ gem 'figaro'
 
 # helpers
 gem 'active_link_to' # https://github.com/twg/active_link_to
+gem 'formtastic' # https://github.com/justinfrench/formtastic

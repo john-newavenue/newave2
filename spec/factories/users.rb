@@ -1,8 +1,8 @@
 FactoryGirl.define do
-  factory :user do
-    sequence(:name)  { |n| "Person #{n}" }
+  factory :user, :class => Physical::User::User do
+    sequence(:username)  { |n| "Person #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com"}   
-    password "foobar"
+    password "password"
   end
 
   factory :admin do

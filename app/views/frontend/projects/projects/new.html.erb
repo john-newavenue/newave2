@@ -1,0 +1,9 @@
+<% provide(:title, 'New Project') %>
+
+<%= semantic_form_for(projects_path) do |f| %>
+  <%= f.inputs "Create a Project" do %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+  <% end %>
+  <%= f.actions %>
+<% end  %>  

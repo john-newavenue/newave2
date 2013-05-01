@@ -4,12 +4,11 @@ Newave2::Application.routes.draw do
   get "project_type/index"
   get "project_type/edit"
   # static pages
-  root to: 'static_pages#home'
+  root to: 'frontend/static_pages#home'
 
-  # users
-  devise_for :users do
+  # users 
+  devise_for :users, :class_name => 'Physical::User::User' do
     get '/users/sign_out' => 'devise/sessions#destroy'
-    
   end
   
   namespace :admin do
@@ -19,14 +18,17 @@ Newave2::Application.routes.draw do
   scope :module => 'frontend' do
 
     # static pages
-    match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
-    match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
-    match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
+    match '/about' => 'frontend/static_pages#about', :as => 'about', :via => 'get'
+    match '/terms' => 'frontend/static_pages#terms', :as => 'terms', :via => 'get'
+    match '/privacy' => 'frontend/static_pages#privacy', :as => 'privacy', :via => 'get'
 
     scope :module => 'admin' do
       match '/admin' => 'admin#index', :as => 'admin', :via => 'get'
     end
 
+    scope :module => 'user' do
+      resources :users, :path => "/user"
+    end
 
     scope :module => 'projects' do
       resources :projects
