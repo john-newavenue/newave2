@@ -21,7 +21,7 @@ module Frontend
           Physical::Project::ProjectMember.create!(
             :user => current_user,
             :project => @project,
-            :project_role => Physical::Project::ProjectRole::CLIENT
+            :project_role => Physical::Project::ProjectRole.find_by_name('Client')
           )
 
           flash[:notice] = "Your project was created successfully!"
