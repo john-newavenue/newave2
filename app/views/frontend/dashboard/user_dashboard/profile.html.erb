@@ -1,0 +1,22 @@
+<% project_count = @user.project_memberships.count %>
+
+<% if @user == current_user %>
+  <% if project_count == 0 %>
+    You have no projects. 
+  <% else %>
+    you have <%= project_count %> projects
+    <ul>
+      <% @user.projects.each do |p| %>
+        <li><%= link_to p.title, project_path(p) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <p><%= link_to 'Click here to create a project', new_project_path %></p>
+<% else %>
+  Welcome to the profile of <%= @user.username %><br />
+  <% if project_count == 0 %>
+    there are no projects
+  <% else %>
+    the user has <%= project_count %> projects
+  <% end %>
+<% end %>

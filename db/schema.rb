@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130428183500) do
+ActiveRecord::Schema.define(version: 20130501005358) do
 
   create_table "project_members", force: true do |t|
     t.integer  "project_role_id", null: false
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20130428183500) do
   create_table "project_roles", force: true do |t|
     t.string "name", null: false
   end
+
+  add_index "project_roles", ["name"], name: "index_project_roles_on_name", unique: true
 
   create_table "project_types", force: true do |t|
     t.string   "title",       null: false

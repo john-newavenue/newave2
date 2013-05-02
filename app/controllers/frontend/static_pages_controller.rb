@@ -1,10 +1,9 @@
 module Frontend
 
   class StaticPagesController < ApplicationController
-    layout 'static_pages'
+    layout :resolve_layout
 
     def home
-      
     end
 
     def about
@@ -18,6 +17,18 @@ module Frontend
     def privacy
       
     end
+
+    private
+
+      def resolve_layout
+        case action_name
+        when 'about','terms','privacy'
+          'about'
+        else 
+          'application'
+        end
+      end
+
   end
 
 end

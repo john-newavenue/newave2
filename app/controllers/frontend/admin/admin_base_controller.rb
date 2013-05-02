@@ -3,7 +3,8 @@ module Frontend
 
     class AdminBaseController < FrontendBaseController
       layout 'admin'
-      authorize_resource :class => false # (CanCan setting) no associated manageable resource
+      
+      # authorize_resource :class => false # (CanCan setting) no associated manageable resource
 
       def index
       end

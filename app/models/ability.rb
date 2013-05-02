@@ -4,8 +4,30 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     # if user.has_role?(:admin)
-    #     ap = Admin::ProjectType
-    #     can :manage, [:admin, ap]
+    #     #can :manage, [:admin, ap]
+    #     can :access, Frontend::Admin::AdminController
+    #     # can :access, Frontend::Admin::UsersController
+    #     # can :access, :all
+    # end
+    if user.has_role?(:admin)
+        #can :manage, [:admin, ap]
+
+        # can :access, Frontend::Admin::AdminController
+        # can :access, ["admin/users"]
+
+        # TODO: restrict UsersController access
+        can :access, Frontend::Admin::UsersController
+        can :access, Frontend::Admin::AdminController
+    else
+        # cannot :access, Frontend::Admin::AdminController
+    end
+
+    # if user.has_role?(:admin)
+    #     #can :manage, [:admin, ap]
+        
+    #     can :access, ["admin/users"]
+    #     # can :access, Frontend::Admin::UsersController
+    #     # can :access, :all
     # end
 
     # Define abilities for the passed in user here. For example:

@@ -18,7 +18,7 @@
           <ul class="left">
             <li class="divider"></li>
 
-            <li class="active"><%= link_to 'What is New Avenue?', about_path %></a></li>
+            <li><%= link_to 'Learn About Us', about_path %></a></li>
             <li class="divider"></li>
 
             <li ><a href="#">Floor Plans</a></li>
@@ -78,7 +78,7 @@
 
               <%-# admin links -%>
               <% if current_user.has_role? :admin %>
-              <li><%= link_to 'Admin Dashboard', admin_path %></li>
+              <li><%= link_to 'Admin Dashboard', admin_admin_path %></li>
               <li class="divider"></li>
 
               <% end %>
@@ -152,3 +152,4 @@
   </div>
 
 </section>
+

@@ -6,9 +6,12 @@
 $NA-color-light-green: #22B04E;
 $NA-color-dark-green: #136734;
 $NA-color-dark-grey: #666666;
-$NA-color-light-grey: lighten($NA-color-dark-grey, 70%);
+$NA-color-light-grey: lighten($NA-color-dark-grey, 30%);
 $NA-color-orange: #FF9933;
 $NA-color-light-blue: #3399CC;
+
+// Some plugins
+@import "bourbon";
 
 
 // -----------
@@ -993,6 +996,7 @@ $side-nav-font-size: emCalc(16px);
 
 // Height and margin
 // $topbar-height: 45px;
+$topbar-height: 40px;
 // $topbar-margin-bottom: emCalc(30px);
 $topbar-margin-bottom: emCalc(0px);
 
@@ -1070,9 +1074,16 @@ section#home-features {
   background: lighten($NA-color-light-green, 50%);
 }
 
-section#topbar {
-  background: $topbar-bg;
-}
 
 // slight top margin so that alert box doesn't butt up against topbar
 #flash-messages .alert-box { margin-top: $alert-bottom-margin; }
+
+
+#topbar, .top-bar {
+  background: #111;
+}
+
+//override formtastic
+.formtastic ol li {
+  list-style: none;
+}

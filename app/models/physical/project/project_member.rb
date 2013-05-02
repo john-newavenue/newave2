@@ -1,12 +1,14 @@
 module Physical
   module Project
     class ProjectMember < ActiveRecord::Base
-      has_many :project_roles
-      has_one :project
-      has_one :user
+      belongs_to :project_role
+      belongs_to :project
+      belongs_to :user
 
       validates :project_role_id, :presence => true, :numericality => { :only_integer => true }
       validates :project_id, :presence => true, :numericality => { :only_integer => true }
+      validates :user, :presence => true
+
     end
   end
 end

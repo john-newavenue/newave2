@@ -4,11 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def after_sign_in_path_for(resource_or_scope)
-    # if new user, show first project steps
-    
-    new_project_path
-
-    # if returning user, show dashboard
-
+    user_profile_path(resource_or_scope.username)
   end
 end
