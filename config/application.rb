@@ -8,7 +8,9 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # Assets should be precompiled for production (so we don't need the gems loaded then)
-Bundler.require(*Rails.groups(assets: %w(development test assets)))
+#Bundler.require(*Rails.groups(assets: %w(development test assets)))
+Bundler.require(:default, :assets, Rails.env) if defined?(Bundler)    
+
 
 module Newave2
   class Application < Rails::Application
