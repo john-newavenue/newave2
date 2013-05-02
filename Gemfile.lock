@@ -1,15 +1,15 @@
 GIT
-  remote: git@github.com:justinm715/formtastic.git
-  revision: 14c93704b6df3476179c859bc5379bfa723a6abc
-  specs:
-    formtastic (2.2.1)
-      actionpack (>= 3.0)
-
-GIT
   remote: https://github.com/EppO/rolify.git
   revision: 1a7c1af51962291b43db22f33f707e80b51343ee
   specs:
     rolify (3.3.0.rc4)
+
+GIT
+  remote: https://github.com/justinm715/formtastic.git
+  revision: 14c93704b6df3476179c859bc5379bfa723a6abc
+  specs:
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
 
 GIT
   remote: https://github.com/plataformatec/devise.git
