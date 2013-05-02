@@ -9,7 +9,6 @@ gem 'rails', '4.0.0.beta1'
 group :assets do
   gem 'sass-rails',   '~> 4.0.0.beta1'
   gem 'coffee-rails', '~> 4.0.0.beta1'
-  gem "bourbon", "~> 3.1.6"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', platforms: :ruby
@@ -18,6 +17,7 @@ group :assets do
 
 end
 
+gem "bourbon", "~> 3.1.6"
 gem 'zurb-foundation'
 
 group :test do

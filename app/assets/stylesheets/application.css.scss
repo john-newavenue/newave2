@@ -10,9 +10,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require foundation_and_overrides
+ *= require fonts
  */
 
+/*
 @import "foundation_and_overrides";
 @import "fonts";
+*/
 
 /* @import "formtastic"; This messes with Foundation's styling */
