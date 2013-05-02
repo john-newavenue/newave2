@@ -76,4 +76,4 @@ gem 'figaro'
 # helpers
 gem 'active_link_to' # https://github.com/twg/active_link_to
 
-gem 'formtastic', :git => 'git@github.com:justinm715/formtastic.git'
+gem 'formtastic', :git => 'https://github.com/justinm715/formtastic.git'
