@@ -9,6 +9,7 @@ gem 'rails', '4.0.0.beta1'
 group :assets do
   gem 'sass-rails',   '~> 4.0.0.beta1'
   gem 'coffee-rails', '~> 4.0.0.beta1'
+  gem "bourbon", "~> 3.1.6"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', platforms: :ruby
@@ -74,4 +75,5 @@ gem 'figaro'
 
 # helpers
 gem 'active_link_to' # https://github.com/twg/active_link_to
-gem 'formtastic' # https://github.com/justinfrench/formtastic
+
+gem 'formtastic', :git => 'git@github.com:justinm715/formtastic.git'

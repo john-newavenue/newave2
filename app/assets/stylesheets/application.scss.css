@@ -11,9 +11,8 @@
  *
  *= require_self
  */
- 
+
 @import "foundation_and_overrides";
 @import "fonts";
-@import "formtastic";
-@import "fonts";
-@import "test";
+
+/* @import "formtastic"; This messes with Foundation's styling */

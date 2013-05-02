@@ -1082,3 +1082,8 @@ section#home-features {
 #topbar, .top-bar {
   background: #111;
 }
+
+//override formtastic
+.formtastic ol li {
+  list-style: none;
+}

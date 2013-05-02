@@ -3,13 +3,22 @@ FactoryGirl.define do
     sequence(:username)  { |n| "Person #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com"}   
     password "password"
+
+
+    factory :client do
+      after(:create) { |user| 
+        user.add_role(:client)
+      }
+    end
+
+
+    factory :admin do
+      after(:create) { |user| 
+        user.add_role(:admin)
+      }
+    end
   end
 
-  factory :admin do
-    after(:create) { |user| 
-      [:admin,:editor].each { |role| user.add_role(role) }
-    }
-  end
 
 
 end

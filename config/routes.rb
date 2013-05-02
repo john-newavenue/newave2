@@ -11,9 +11,9 @@ Newave2::Application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
   
-  namespace :admin do
-    resources :project_type
-  end
+  # namespace :admin do
+    # resources :project_type
+  # end
 
   scope :module => 'frontend' do
 
@@ -22,20 +22,22 @@ Newave2::Application.routes.draw do
     match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
     match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
 
-    scope :module => 'admin' do
-      match '/admin' => 'admin#index', :as => 'admin', :via => 'get'
+    # TODO: create admin user and role manager
+    scope :module => 'admin', :as => 'admin' do
+      match '/admin' => 'admin#index', :via => 'get'
+      resources :users, :path => '/admin/users'
     end
 
-    scope :module => 'user' do
-      match '/user/:username' => 'users#profile', :as => 'user_profile', :via =>'get'
+    scope :module => 'dashboard' do
+      match '/user/:username' => 'user_dashboard#profile', :as => 'user_profile', :via =>'get'
+      match '/pro/:proname' => 'pro_dashboard#profile', :as => 'pro_profile', :via =>'get'
     end
 
     scope :module => 'projects' do
-      resources :projects
+      resources :projects, :path => "/project"
     end
   end
 
-  resources :users, :path => "/user"
   
 
   # match '/about' => 'static_pages#about', :as => 'about', :via => :get

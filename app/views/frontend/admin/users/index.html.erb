@@ -1,0 +1,18 @@
+<ol>
+<% @users.each do |user| %>
+  <li><%= link_to user.username, user_profile_path(user) %>
+    <% if user.project_memberships.count > 0 %>
+      <ul>
+      <% user.project_memberships.each do |membership| %>
+        <li>
+          <span class="label"><%= membership.project_role.name %></span> of <%= membership.project.title %>
+        <%= link_to membership.project.title, project_path(membership.project.id) %>
+        </li>
+      <% end %>
+      </ul>
+    <% else %>
+      user has no projects
+    <% end %>
+  </li>
+<% end %>
+</ol>

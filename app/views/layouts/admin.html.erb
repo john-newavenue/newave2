@@ -1,14 +1,6 @@
-<%#  wrap views with foundation containers %>
-
 <% content_for :content do %>
 
-<header class="title-header">
-    <div class="row">
-          <div class="large-12 columns">
-            <h1><%= yield :title %></h1>
-          </div>
-        </div>
-</header>
+<br />
 
 <section>
 
@@ -19,16 +11,12 @@
     </div>
 
     <div class="large-2 pull-10 columns">
+      <h6>Admin Options</h6>
       <ul class="side-nav">
-        <li><strong>Projects</strong></li>
-        <li><%= link_to 'Project Types', admin_project_type_index_path %></li>
-      </ul>
-
-      <ul class="side-nav">
-        <li class="active"><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-        <li><a href="#">Link 4</a></li>
+        <li><%= active_link_to 'Users', admin_users_path, :wrap_tag => :li %></li>
+        <li><%= active_link_to 'Somewhere 2', '#', :wrap_tag => :li %></li>
+        <li><%= active_link_to 'Somewhere 3', '#', :wrap_tag => :li %></li>
+        <li><%= active_link_to 'Somewhere 4', '#', :wrap_tag => :li %></li>
       </ul>
     </div>
 
