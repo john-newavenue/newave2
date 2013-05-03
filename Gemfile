@@ -67,8 +67,7 @@ gem 'rolify', :git => 'https://github.com/EppO/rolify.git'
 # Configuration helper
 gem 'figaro'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+gem 'thin' # app server
 
 # Deploy with Capistrano
 # gem 'capistrano', group: :development
