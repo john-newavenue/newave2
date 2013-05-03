@@ -30,17 +30,18 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
+  gem 'pg'
 end
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'sqlite3'
+  # gem 'sqlite3'
 end
 
 group :production do
-  gem 'pg', '0.14.1'
+  gem 'pg'
 end
 
 gem 'jquery-rails'
