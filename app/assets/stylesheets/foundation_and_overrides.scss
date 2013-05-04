@@ -51,6 +51,7 @@ $body-font-family: 'PT Sans', sans-serif;
 $primary-color: $NA-color-light-green;
 // $secondary-color: #e9e9e9;
 // $alert-color: #c60f13;
+$alert-color: lighten(#c60f13, 50%);
 // $success-color: #5da423;
 
 // We use these to make sure border radius matches unless we want it different.
@@ -164,6 +165,7 @@ $paragraph-font-size: emCalc(14px);
 
 // We use these to style lists
 // $list-style-position: outside;
+$list-style-position: inside;
 // $list-side-margin: emCalc(18px);
 // $definition-list-header-weight: bold;
 // $definition-list-header-margin-bottom: .3em;

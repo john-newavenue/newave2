@@ -7,11 +7,12 @@ Newave2::Application.routes.draw do
   root to: 'frontend/static_pages#home'
 
   # users 
-  devise_for :users do
-    get '/users/sign_out' => 'devise/sessions#destroy'
-    
-  end
+  # devise_for :users do
+  #   get '/users/sign_out' => 'devise/sessions#destroy'
+  # end
   
+  devise_for :users, :controllers => { :registrations => 'frontend/devise_custom/registrations' }
+
   # namespace :admin do
     # resources :project_type
   # end

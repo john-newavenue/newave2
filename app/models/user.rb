@@ -7,13 +7,15 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
 
-  validates :username, :presence => true, :allow_blank => false, :length => { :minimum => 1 , :maximum => 100},
-            :format => { :with => /\A[A-Z0-9a-z\w\b\ \-\_\'\!&@#\.]+\z/i,
-              :message => "A valid username may contain only alphanumeric characters and common special characters." }
-  validates :email, :presence => true, :allow_blank => false,
-            :format => { :with => Devise.email_regexp, :message => "Please enter a valid email address."}
+  validates :username, :presence => true, :uniqueness => true, :length => { :minimum => 3 },
+            :format => { :with => /\A[A-Z0-9a-z\w\b\ \-\_\'\!&@#\.]*\z/i,
+              :message => "may contain only alphanumeric characters and common special characters." }
+  validates :email, :uniqueness => true, :presence => true,
+            :format => { :with => Devise.email_regexp, :message => "isn't valid"}
+
+  validates :password, :length => { :minimum => 6 }
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
   has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"

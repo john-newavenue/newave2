@@ -2,19 +2,29 @@
 
 <h2>Sign up</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+<div class="row">
+  <div class="large-7 small-7 columns">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+      <div><%= f.label :email %><br />
+      <%= f.email_field :email %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+      <div><%= f.label :username %><br />
+      <%= f.text_field :username %></div>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+      <div><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
+
+      <div><%= f.submit "Sign up" %></div>
+    <% end %>
+  </div>
+  <div class="large-5 small-5 columns">
+    TODO: Fancy Picture here
+  </div>
+</div>
+
+
 
 <%= render "devise/shared/links" %>
