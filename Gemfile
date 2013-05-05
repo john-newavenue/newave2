@@ -79,5 +79,5 @@ gem 'thin' # app server
 
 # helpers
 gem 'active_link_to' # https://github.com/twg/active_link_to
-
 gem 'formtastic', :git => 'https://github.com/justinm715/formtastic.git'
+gem 'friendly_id', :git => 'git://github.com/FriendlyId/friendly_id.git', :branch => 'rails4'

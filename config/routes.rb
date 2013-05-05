@@ -31,7 +31,7 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'dashboard' do
-      match '/user/:username' => 'user_dashboard#profile', :as => 'user_profile', :via =>'get'
+      match '/user/:username_slug' => 'user_dashboard#profile', :as => 'user_profile', :via =>'get'
       match '/pro/:proname' => 'pro_dashboard#profile', :as => 'pro_profile', :via =>'get'
     end
 

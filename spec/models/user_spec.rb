@@ -10,7 +10,7 @@ describe User do
 
   it { should respond_to(:email) }
   it { should respond_to(:username) }
-  # JM 2013-04-30: also should make tests for: password, reset_password_token, etc.
+  it { should respond_to(:slug) }
 
   describe "when email is not present" do
     before { @user.email = " " }
@@ -37,6 +37,11 @@ describe User do
       before { @user.username = invalid_name }
       it { should_not be_valid }
     end
+  end
+
+  describe "when slug is not present" do
+    before {@user.slug = ""}
+    it { should_not be_valid }
   end
 
 end

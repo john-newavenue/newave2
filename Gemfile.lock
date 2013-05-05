@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/FriendlyId/friendly_id.git
+  revision: 903f2fac79774edb119a7f6baa2396ab7c555d47
+  branch: rails4
+  specs:
+    friendly_id (4.1.0.beta.2)
+
+GIT
   remote: https://github.com/EppO/rolify.git
   revision: 1a7c1af51962291b43db22f33f707e80b51343ee
   specs:
@@ -13,13 +20,13 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: c6189696772925ae0c608fdd8d535f735e8e114e
+  revision: e26314ee8dcd1f82cd2d0dc499ded5289c3469ab
   branch: rails4
   specs:
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (~> 4.0.0.beta)
+      railties (>= 3.2.6, < 5)
       warden (~> 1.2.1)
 
 GEM
@@ -227,6 +234,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   formtastic!
+  friendly_id!
   jbuilder (~> 1.0.1)
   jquery-rails
   meta_request

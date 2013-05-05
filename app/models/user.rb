@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  extend FriendlyId
+  friendly_id :username, :use => :slugged
+
   rolify
 
   # Include default devise modules. Others available are:
@@ -10,12 +13,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   validates :username, :presence => true, :uniqueness => true, :length => { :minimum => 3 },
-            :format => { :with => /\A[A-Z0-9a-z\w\b\ \-\_\'\!&@#\.]*\z/i,
+            :format => { :with => /\A[A-Z0-9a-z\w\b\ \-\_\'\!&@#\.]+\z/i,
               :message => "may contain only alphanumeric characters and common special characters." }
   validates :email, :uniqueness => true, :presence => true,
             :format => { :with => Devise.email_regexp, :message => "isn't valid"}
 
-  validates :password, :length => { :minimum => 6 }
+  validates :password, length: { in: 6..128 }, on: :create
+  validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
+
+  validates :slug, :presence => true
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
   has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
