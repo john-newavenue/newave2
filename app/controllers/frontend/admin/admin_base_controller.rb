@@ -3,16 +3,22 @@ module Frontend
 
     class AdminBaseController < FrontendBaseController
       layout 'admin'
-      
-      # authorize_resource :class => false # (CanCan setting) no associated manageable resource
+      before_filter :verify_admin
 
       def index
       end
 
-      def current_ability
-        @current_ability ||= AdminAbility.new(current_user)
+      private
+
+        def current_ability
+          @current_ability ||= AdminAbility.new(current_user)
+        end
+
+        def verify_admin
+          redirect_to root_url unless current_user and current_user.has_role? :admin
+        end
+
       end
-    end
 
   end
 end

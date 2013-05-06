@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StaticPagesController do
+describe Frontend::StaticPagesController do
 
   describe "GET 'home'" do
     it "returns http success" do
@@ -18,7 +18,7 @@ describe StaticPagesController do
 
   describe "GET 'tos'" do
     it "returns http success" do
-      get 'tos'
+      get 'terms'
       response.should be_success
     end
   end

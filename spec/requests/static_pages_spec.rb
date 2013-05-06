@@ -11,7 +11,7 @@ describe "Static pages" do
 
   describe "about" do
     before { visit about_path }
-    it { should have_title('About')}
+    it { should have_title('What is New Avenue?')}
   end
 
   describe "terms of service" do

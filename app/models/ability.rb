@@ -9,18 +9,23 @@ class Ability
     #     # can :access, Frontend::Admin::UsersController
     #     # can :access, :all
     # end
-    if user.has_role?(:admin)
-        #can :manage, [:admin, ap]
 
-        # can :access, Frontend::Admin::AdminController
-        # can :access, ["admin/users"]
+    # if user.has_role?(:admin)
+    #     #can :manage, [:admin, ap]
 
-        # TODO: restrict UsersController access
-        can :access, Frontend::Admin::UsersController
-        can :access, Frontend::Admin::AdminController
-    else
-        # cannot :access, Frontend::Admin::AdminController
-    end
+    #     # can :access, Frontend::Admin::AdminController
+    #     # can :access, ["admin/users"]
+
+    #     # TODO: restrict UsersController access
+    #     #debugger
+    #     can :access, ::Frontend::Admin::AdminBaseController
+    #     # can :manage, ::Frontend::Admin::AdminBaseController
+    #     # can :read, ::Frontend::Admin::AdminBaseController
+    #     # can :access, ::Frontend::Admin::AdminController
+    #     # can :access, ::Frontend::Admin::UsersController
+    # else
+    #     # cannot :access, Frontend::Admin::AdminController
+    # end
 
     # if user.has_role?(:admin)
     #     #can :manage, [:admin, ap]
