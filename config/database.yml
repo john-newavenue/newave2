@@ -25,7 +25,10 @@ test:
   port: 5432
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: newave2_production
   pool: 5
   timeout: 5000
+  username: newave2
+  host: localhost
+  port: 5432

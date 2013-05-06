@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Physical::Project::ProjectMember do 
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:client_role) { Physical::Project::ProjectRole::CLIENT }
+  let(:client_role) { Physical::Project::ProjectRole.find_by_name('Client') }
   let(:project) { FactoryGirl.create(:project) }
   before do
     @project_member = Physical::Project::ProjectMember.new(
