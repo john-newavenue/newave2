@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/FriendlyId/friendly_id.git
-  revision: 903f2fac79774edb119a7f6baa2396ab7c555d47
-  branch: rails4
-  specs:
-    friendly_id (4.1.0.beta.2)
-
-GIT
   remote: https://github.com/EppO/rolify.git
   revision: 1a7c1af51962291b43db22f33f707e80b51343ee
   specs:
     rolify (3.3.0.rc4)
+
+GIT
+  remote: https://github.com/FriendlyId/friendly_id.git
+  revision: 903f2fac79774edb119a7f6baa2396ab7c555d47
+  branch: rails4
+  specs:
+    friendly_id (4.1.0.beta.2)
 
 GIT
   remote: https://github.com/justinm715/formtastic.git
