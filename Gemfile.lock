@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: e26314ee8dcd1f82cd2d0dc499ded5289c3469ab
+  revision: 69f79ad446101b45bf7ec29d290dc2be96142686
   branch: rails4
   specs:
     devise (2.2.3)
@@ -69,6 +69,7 @@ GEM
       sass (>= 3.2.0)
       thor
     builder (3.1.4)
+    callsite (0.0.11)
     cancan (1.6.9)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -130,12 +131,13 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    meta_request (0.2.3)
+    meta_request (0.2.4)
+      callsite
       rack-contrib
       railties
     mime-types (1.23)
     minitest (4.7.4)
-    multi_json (1.7.2)
+    multi_json (1.7.3)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
     pg (0.15.1)
