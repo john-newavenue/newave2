@@ -1,4 +1,4 @@
-<% project_count = @user.project_memberships.count %>
+<% project_count = @user && @user.project_memberships.count | 0 %>
 
 <% if @user == current_user %>
   <% if project_count == 0 %>

@@ -5,13 +5,6 @@ GIT
     rolify (3.3.0.rc4)
 
 GIT
-  remote: https://github.com/FriendlyId/friendly_id.git
-  revision: 903f2fac79774edb119a7f6baa2396ab7c555d47
-  branch: rails4
-  specs:
-    friendly_id (4.1.0.beta.2)
-
-GIT
   remote: https://github.com/justinm715/formtastic.git
   revision: 14c93704b6df3476179c859bc5379bfa723a6abc
   specs:
@@ -193,6 +186,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    stringex (1.5.1)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -236,7 +230,6 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   formtastic!
-  friendly_id!
   jbuilder (~> 1.0.1)
   jquery-rails
   meta_request
@@ -246,6 +239,7 @@ DEPENDENCIES
   roxml
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0.beta1)
+  stringex
   thin
   turbolinks
   uglifier (>= 1.0.3)

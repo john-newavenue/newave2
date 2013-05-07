@@ -1,8 +1,5 @@
 class User < ActiveRecord::Base
 
-  extend FriendlyId
-  friendly_id :username, :use => :slugged
-
   rolify
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
@@ -20,5 +17,8 @@ class User < ActiveRecord::Base
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
   has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
+
+  acts_as_url :username, :sync_url => true, :url_attribute => :slug
+
           
 end
