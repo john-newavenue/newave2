@@ -6,11 +6,11 @@ module DeviseHelper
 
     return "" if resource.errors.empty?
 
-    messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
-
-    # sentence = I18n.t("errors.messages.not_saved",
-    #                   :count => resource.errors.count,
-    #                   :resource => resource.class.model_name.human.downcase)
+    # return only the first error of each field
+    messages = ""
+    resource.errors.messages.each { |k,v|
+      messages += "<li>" + ActiveSupport::Inflector.titleize(k) + " #{v.first}" + "</li>"
+    }
 
     sentence = "Please correct the following:"
 
@@ -22,7 +22,7 @@ module DeviseHelper
     </div>
 
     HTML
-
+    
     html.html_safe
   end
 end
