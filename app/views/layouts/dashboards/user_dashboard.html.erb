@@ -6,24 +6,29 @@
 
   <div class="row">
 
-    <div class="large-10 push-2 columns">
+
+    <div class="large-2 columns">
+
+      <p>TODO: User's profile picture</p>
+      <h1 class="show-for-small"><%= @user ? @user.username  : current_user.username%></h1>
+
+      <ul class="side-nav">
+        <% if !@user or @user == current_user %>
+          <li><%= active_link_to 'Edit your profile', '#', :wrap_tag => :li %></li>
+          <li><%= active_link_to 'Account settings', '#', :wrap_tag => :li %></li>
+          <li><%= active_link_to 'Log out', '#', :wrap_tag => :li %></li>
+        <% else %>
+          <li><%= active_link_to 'Follow user', '#', :wrap_tag => :li %></li>
+          <li><%= active_link_to 'Send message', '#', :wrap_tag => :li %></li>
+        <% end %>
+      </ul>
+
+    </div>
+
+    <div class="large-10 columns">
     <%= yield %>
     </div>
 
-    <div class="large-2 pull-10 columns">
-
-      <% if @user == current_user %>
-        Welcome to your profile!
-      <% else %>
-        Welcome to the profile of <%= @user.username %>
-      <% end %>
-
-      <ul class="side-nav">
-        <li><%= active_link_to 'Your Profile', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'A Link', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Another Link', '#', :wrap_tag => :li %></li>
-      </ul>
-    </div>
 
   </div>
 

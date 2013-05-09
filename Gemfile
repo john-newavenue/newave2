@@ -14,9 +14,9 @@ group :assets do
   # gem 'therubyracer', platforms: :ruby
   
   gem 'uglifier', '>= 1.0.3'
-
 end
 
+gem 'foundation-icons-sass-rails'
 gem "bourbon", "~> 3.1.6"
 gem 'zurb-foundation'
 

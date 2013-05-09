@@ -1,7 +1,7 @@
 module Frontend
   module Projects
     class ProjectsController < FrontendBaseController
-      layout 'project'
+      layout :resolve_layout
 
       before_filter :authenticate_user!, only: [:new, :create, :destroy]
       #before_action :correct_user,   only: :destroy
@@ -56,6 +56,15 @@ module Frontend
 
         def project_params
           params.require(:project).permit(:title, :description)
+        end
+
+        def resolve_layout
+          case action_name
+          when 'new'
+            'one-column'
+          else
+            'project'
+          end
         end
 
     end

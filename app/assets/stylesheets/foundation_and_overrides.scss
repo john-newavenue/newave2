@@ -6,7 +6,7 @@
 $NA-color-light-green: #22B04E;
 $NA-color-dark-green: #136734;
 $NA-color-dark-grey: #666666;
-$NA-color-light-grey: lighten($NA-color-dark-grey, 30%);
+$NA-color-light-grey: lighten($NA-color-dark-grey, 50%);
 $NA-color-orange: #FF9933;
 $NA-color-light-blue: #3399CC;
 
@@ -1088,4 +1088,9 @@ section#home-features {
 //override formtastic
 .formtastic ol li {
   list-style: none;
+}
+
+i[class*="foundicon"] {
+  font-size: .75em;
+  padding-right: .4em;
 }

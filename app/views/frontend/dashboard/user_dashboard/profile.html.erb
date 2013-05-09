@@ -1,8 +1,16 @@
+<h1 class="hide-for-small"><%= @user.username %></h1>
+
+<hr />
+
+<!-- Project List -->
+
 <% project_count = @user && @user.project_memberships.count | 0 %>
 
 <% if @user == current_user %>
   <% if project_count == 0 %>
-    You have no projects. 
+    <%= link_to new_project_path, :class => 'button' do %>
+      <i class='general foundicon-plus'></i>Start Your Project
+    <% end %>
   <% else %>
     you have <%= project_count %> projects
     <ul>
@@ -11,12 +19,22 @@
       <% end %>
     </ul>
   <% end %>
-  <p><%= link_to 'Click here to create a project', new_project_path %></p>
+  
 <% else %>
   Welcome to the profile of <%= @user.username %><br />
   <% if project_count == 0 %>
-    there are no projects
+    This user has no projects.
   <% else %>
-    the user has <%= project_count %> projects
+    TOOD: List projects
   <% end %>
 <% end %>
+
+<hr />
+
+<!-- Recent Activity -->
+
+<h4>Activity</h4>
+
+<p>No recent activity.</p>
+
+<p>TODO: Recent activity</p>
