@@ -3,9 +3,38 @@
 <h1><%= yield(:title) %></h1>
 
 <%= semantic_form_for @project, :as => :project, :url => projects_path do |f| %>
-  <%= f.inputs "Tell us about it" do %>
-    <%= f.input :title  %>
-    <%= f.input :description %>
-  <% end %>
+  <div class="row">
+    <div class="columns large-6 small-12">
+      <%= f.inputs "Tell us about yor project" do %>
+        <%= f.input :title  %>
+        <%= f.input :description,
+          :as => :text,
+          :input_html => { :rows => 6, :max_length => 10000 },
+          :placeholder => "What are you looking for? A second unit? For grandma or kids? Generating second income?" 
+        %>
+      <% end %>
+    </div>
+    <div class="columns large-6 small-12">
+
+      <%= f.inputs "Where are you looking to build?" do %>
+        <%= f.semantic_fields_for :address do |a| %>
+          <%= a.input :line_1, :required => false %>
+          <%= a.input :line_2, :required => false %>
+
+          <div class="row">
+            <div class="large-6 columns"><%= a.input :city, :required => false %></div>
+            <div class="large-3 columns"><%= a.input :state, :required => false %></div>
+            <div class="large-3 columns"><%= a.input :zip_or_postal_code, :label => 'Zip Code', :required => false %></div>
+          </div>
+          
+          <%= a.input :country, :input_html => {:value => 'United States'} %>
+          <%= a.input :other_details, :required => false %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+
+  
   <%= f.actions %>
 <% end  %>  

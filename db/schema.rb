@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130505201618) do
+ActiveRecord::Schema.define(version: 20130509200443) do
+
+  create_table "addresses", force: true do |t|
+    t.string "line_1"
+    t.string "line_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip_or_postal_code"
+    t.string "country"
+    t.string "other_details"
+  end
 
   create_table "project_members", force: true do |t|
     t.integer  "project_role_id", null: false
@@ -41,6 +51,7 @@ ActiveRecord::Schema.define(version: 20130505201618) do
     t.string   "description", default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "address_id"
   end
 
   add_index "projects", ["title"], name: "index_projects_on_title"

@@ -1,4 +1,4 @@
-['Client','Project Manager','Architect','Builder'].each do |r|
+['Lead','Client','Project Manager','Architect','Builder'].each do |r|
   Physical::Project::ProjectRole.create(:name => r)
 end
 

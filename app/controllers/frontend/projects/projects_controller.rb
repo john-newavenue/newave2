@@ -11,24 +11,28 @@ module Frontend
       end
 
       def create # POST verb
-        @project = Physical::Project::Project.create(project_params)
-        if @project.save
-          
-          # TODO: Probably remove rolify or limit its use...
-          # Not easy to query "get all projects where this user is the client"
-          #current_user.add_role :client, @project
 
-          Physical::Project::ProjectMember.create!(
-            :user => current_user,
-            :project => @project,
-            :project_role => Physical::Project::ProjectRole.find_by_name('Client')
-          )
-
+        begin
+          ActiveRecord::Base.transaction do
+            @address = Physical::General::Address.create(address_params)
+            @project = Physical::Project::Project.create(project_params)
+            
+            @project.address = @address
+            @project.save
+            
+            Physical::Project::ProjectMember.create!(
+              :user => current_user,
+              :project => @project,
+              :project_role => Physical::Project::ProjectRole.find_by_name('Lead')
+            )
+          end
           flash[:notice] = "Your project was created successfully!"
+          # TODO: ping project managers about this project
           redirect_to user_profile_path(current_user.username)
-        else
+        rescue ActiveRecord::RecordInvalid => invalid
           flash[:alert] = "We found some errors in your submission. Please correct them."
           render 'new'
+          return
         end
       end
 
@@ -41,8 +45,8 @@ module Frontend
       end
 
       def new # create new project form
-        @no_sidebars = true
         @project = Physical::Project::Project.new
+        @address = Physical::General::Address.new
 
         # if POST request and valid
         # create user project role as client
@@ -55,12 +59,17 @@ module Frontend
       private
 
         def project_params
-          params.require(:project).permit(:title, :description)
+          params.require(:project).permit(:title, :description,:address)
+        end
+
+        def address_params
+          fields = [:line_1, :line_2, :city, :state, :zip_or_postal_code, :country, :other_details]
+          params.require(:project).permit(:address => fields)[:address]
         end
 
         def resolve_layout
           case action_name
-          when 'new'
+          when 'new', 'create'
             'one-column'
           else
             'project'

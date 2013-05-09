@@ -1,4 +1,10 @@
 <% provide(:title, @project.title) %>
 
 
-This is a project page.
+<%= @project.description %>
+
+<p>
+TODO: render address nicely
+<%= @project.address.line_1 %>
+<%= @project.address.line_2 %>
+</p>
