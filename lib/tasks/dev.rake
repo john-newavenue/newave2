@@ -1,34 +1,58 @@
 namespace :db do
   desc "Fill database with sample data"
-  task :populate, :environment do
-    make_users
-    make_project_types
+  task :populate => :environment do
+    make_users_and_projects
+    #make_project_types
   end
 
   desc "Renew database with sample data"
-  task :renew, :environment do
+  task :renew => :environment do
     Rake::Task['db:drop'].invoke
     Rake::Task['db:migrate'].invoke
+    Rake::Task['db:seed'].invoke
     Rake::Task['db:populate'].invoke
   end
 
 end
 
-def make_users
-  admin = User.create!(
-    username: 'admin',
-    email: 'admin@example.com',
-    password: 'password'
-  )
-  [:admin, :editor].each { |r| admin.add_role(r) }
+def make_users_and_projects
+  # create some more users
+  user_client_jane = User.create!(:username => 'Client Jane ', :email => 'jane@example.com', :password => 'password')
+  user_client_jane.add_role(:client)
+  user_client_john = User.create!(:username => 'Client John', :email => 'john@example.com', :password => 'password')
+  user_client_john.add_role(:client)
+  user_pm_adam = User.create!(:username => 'PM Adam', :email => 'adam@example.com', :password => 'password')
+  user_pm_adam.add_role(:pm)
+  user_arch_sylvester = User.create!(:username => 'Architect Sylvester', :email => 'sylvester@example.com', :password => 'password')
+  user_pm_adam.add_role(:vendor)
+  user_builder_bob = User.create!(:username => 'Builder Bob', :email => 'bob@example.com', :password => 'password')
+  user_pm_adam.add_role(:vendor)
+  20.times.each { 
+    u = User.create(:username => Faker::Name.name, :email => Faker::Internet.email, :password => 'password') 
+    u.add_role( [:client, :pm, :vendor].sample )
+  }
+  
 
-  editor = User.create!(
-    username: 'editor',
-    email: 'editor@example.com',
-    password: 'password'
-  )
+  # make some projects
+  proj_jane_adu = Physical::Project::Project.create!(:title => "Jane's ADU", :description => "This is my ADU project.")
+  proj_jane_2nd_adu = Physical::Project::Project.create!(:title => "Jane's 2nd ADU", :description => "This is my 2nd ADU project.")
+  proj_john_cottage = Physical::Project::Project.create!(:title => "John's Cottage", :description => "This is John's cottage project.")
 
-  editor.add_role :editor
+  # get the kinds of roles
+  client_role = Physical::Project::ProjectRole.find_by_name('Client')
+  arch_role = Physical::Project::ProjectRole.find_by_name('Architect')
+  pm_role = Physical::Project::ProjectRole.find_by_name('Project Manager')
+  builder_role = Physical::Project::ProjectRole.find_by_name('Builder')
+
+  # assign some users to projects
+  Physical::Project::ProjectMember.create!(:user => user_client_jane, :project_role => client_role, :project => proj_jane_adu)
+  Physical::Project::ProjectMember.create!(:user => user_client_jane, :project_role => client_role, :project => proj_jane_2nd_adu)
+  Physical::Project::ProjectMember.create!(:user => user_client_john, :project_role => client_role, :project => proj_john_cottage)
+  Physical::Project::ProjectMember.create!(:user => user_pm_adam, :project_role => pm_role, :project => proj_jane_adu)
+  Physical::Project::ProjectMember.create!(:user => user_pm_adam, :project_role => pm_role, :project => proj_jane_2nd_adu)
+  Physical::Project::ProjectMember.create!(:user => user_builder_bob, :project_role => builder_role, :project => proj_jane_adu)
+
+
 end
 
 def make_project_types

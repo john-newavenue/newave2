@@ -39,9 +39,5 @@ describe User do
     end
   end
 
-  describe "when slug is not present" do
-    before {@user.slug = ""}
-    it { should_not be_valid }
-  end
 
 end

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :password, length: { in: 6..128 }, on: :create
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
 
-  validates :slug, :presence => true
+  validates :slug, :presence => true, :allow_blank => false
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
   has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"

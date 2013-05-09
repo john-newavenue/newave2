@@ -73,7 +73,7 @@
 
             <% if user_signed_in? %>
 
-              <li><a href="#">Hello, <%= current_user.username %>!</a></li>
+              <li><%= link_to "#{current_user.username}", user_profile_path(current_user.slug) %></li>
               <li class="divider"></li>
 
               <%-# admin links -%>

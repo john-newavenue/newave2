@@ -33,6 +33,7 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'pg'
   gem 'debugger'
+  gem 'faker'
 end
 
 group :development do
