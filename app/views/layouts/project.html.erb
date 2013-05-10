@@ -1,16 +1,13 @@
+<% provide(:title, @project.title) %>
+
 <% content_for :content do %>
 
 <section>
 
   <div class="row">
 
-    <div class="large-12 columns">
-      <h1><%= yield :title %></h1>
-    </div>
-
-    <hr>
-
-    <div class="<%= @layout_no_sidebars == true ? "large-12" : "large-10 push-2" %> columns">
+    <div class="large-10 push-2 columns">
+      <h3><%= yield :title %></h1>
       <%= yield %>
     </div>
 

@@ -10,6 +10,7 @@ module Physical
       # zip_or_postal_code
       # country
       # other_details
+      
     end
   end
 end

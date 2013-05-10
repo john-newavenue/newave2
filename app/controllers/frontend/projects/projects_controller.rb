@@ -12,28 +12,38 @@ module Frontend
 
       def create # POST verb
 
-        begin
-          ActiveRecord::Base.transaction do
-            @address = Physical::General::Address.create(address_params)
-            @project = Physical::Project::Project.create(project_params)
-            
-            @project.address = @address
-            @project.save
-            
-            Physical::Project::ProjectMember.create!(
-              :user => current_user,
-              :project => @project,
-              :project_role => Physical::Project::ProjectRole.find_by_name('Lead')
-            )
-          end
+        @project = Physical::Project::Project.new(project_params)
+        if @project.save
           flash[:notice] = "Your project was created successfully!"
-          # TODO: ping project managers about this project
-          redirect_to user_profile_path(current_user.username)
-        rescue ActiveRecord::RecordInvalid => invalid
+          redirect_to project_path(@project)
+        else
           flash[:alert] = "We found some errors in your submission. Please correct them."
           render 'new'
-          return
         end
+
+        # begin
+        #   ActiveRecord::Base.transaction do
+        #     @address = Physical::General::Address.create(address_params)
+        #     @project = Physical::Project::Project.create(project_params)
+            
+        #     @project.address = @address
+        #     @project.save
+            
+        #     Physical::Project::ProjectMember.create!(
+        #       :user => current_user,
+        #       :project => @project,
+        #       :project_role => Physical::Project::ProjectRole.find_by_name('Lead')
+        #     )
+        #   end
+        #   flash[:notice] = "Your project was created successfully!"
+        #   # TODO: ping project managers about this project
+        #   redirect_to user_profile_path(current_user.username)
+        # rescue ActiveRecord::RecordInvalid => invalid
+        #   flash[:alert] = "We found some errors in your submission. Please correct them."
+        #   render 'new'
+        #   return
+        # end
+
       end
 
       def show
