@@ -3,13 +3,13 @@
 <h1><%= yield(:title) %></h1>
 
 <%= semantic_form_for @project, :as => :project, :url => projects_path do |f| %>
-  <%= f.inputs "Tell us about yor project" do %>
-    <%= f.input :title  %>
-    <%= f.input :description,
-      :as => :text,
-      :input_html => { :rows => 6, :max_length => 10000 },
-      :placeholder => "What are you looking for? A second unit? For grandma or kids? Generating second income?" 
-    %>
-  <% end %>
-  <%= f.actions %>
+<%= f.inputs "Tell us about yor project" do %>
+  <%= f.input :title  %>
+  <%= f.input :description,
+    :as => :text,
+    :input_html => { :rows => 6, :max_length => 10000 },
+    :placeholder => "What are you looking for? A second unit? For grandma or kids? Generating second income?" 
+  %>
+<% end %>
+<%= f.actions %>
 <% end  %>  

@@ -3,12 +3,20 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+
     # if user.has_role?(:admin)
     #     #can :manage, [:admin, ap]
     #     can :access, Frontend::Admin::AdminController
     #     # can :access, Frontend::Admin::UsersController
     #     # can :access, :all
     # end
+
+    # TODO: check authorize update addressj
+    if user.has_any_role?({ :name => "admin"}, {:name => "client"})
+        if params.has_key?(:project_id)
+            can :update, Frontend::General::Address
+    end
+
 
     # if user.has_role?(:admin)
     #     #can :manage, [:admin, ap]

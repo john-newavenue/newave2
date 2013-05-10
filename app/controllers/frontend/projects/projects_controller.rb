@@ -15,6 +15,8 @@ module Frontend
         @project = Physical::Project::Project.new(project_params)
         if @project.save
           flash[:notice] = "Your project was created successfully!"
+          @project.address = Physical::General::Address.new
+          @project.save(:validate => false)
           redirect_to project_path(@project)
         else
           flash[:alert] = "We found some errors in your submission. Please correct them."

@@ -1,0 +1,25 @@
+<% provide(:title, "Edit Address - #{@project.title}") %>
+
+<h3><%= @project.title %></h3>
+<ul class="breadcrumbs">
+  <li class="unavailable">Project</li>
+  <li class="current">Edit Address</li>
+</ul>
+
+<%= semantic_form_for @address, :as => :address, :url => project_address_path(@project), :method => "patch" do |f| %>
+<%= f.inputs 'Address Information' do %>
+  <%= f.input :line_1 %>
+  <%= f.input :line_2 %>
+  <div class="row">
+    <div class="columns large-6"><%= f.input :city %></div>
+    <div class="columns large-2"><%= f.input :state %></div>
+    <div class="columns large-4"><%= f.input :zip_or_postal_code, :label => 'Zip Code' %></div>
+  </div>
+  
+  <%= f.input :country, :as => :string,
+              :input_html => { :value => @address.country ? @address.country : "United States"}
+  %>
+  <%= f.input :other_details %>
+<% end %>
+<%= f.actions %>
+<% end %>

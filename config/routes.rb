@@ -36,7 +36,11 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'projects' do
-      resources :projects, :path => "/project"
+      resources :projects, :path => "/project" do
+        #resources :addresses, :path => 'address', :only => [:edit, :create, :update]
+        match 'address/edit' => 'address#edit', :as => 'address_edit', :via => 'get'
+        match 'address' => 'address#update', :via => 'patch'
+      end
     end
   end
 
