@@ -2,7 +2,7 @@
 
 <h3><%= @project.title %></h3>
 <ul class="breadcrumbs">
-  <li class="unavailable">Project</li>
+  <li><%= link_to "Project", project_path(@project) %></li>
   <li class="current">Edit Address</li>
 </ul>
 

@@ -5,7 +5,6 @@ module Frontend
       
       def profile
         @user = ::User.find_by_slug(params[:username_slug])
-
       end
 
       def profile_edit

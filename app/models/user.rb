@@ -17,9 +17,9 @@ class User < ActiveRecord::Base
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
   has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
+  
   belongs_to :address, :class_name => "Physical::General::Address"
 
   acts_as_url :username, :sync_url => true, :url_attribute => :slug
-
           
 end

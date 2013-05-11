@@ -11,12 +11,23 @@ class Ability
     #     # can :access, :all
     # end
 
-    # TODO: check authorize update addressj
-    if user.has_any_role?({ :name => "admin"}, {:name => "client"})
-        if params.has_key?(:project_id)
-            can :update, Frontend::General::Address
+    # TODO: check authorize update address
+
+    Physical::Project::ProjectRole.role_params.each do |role_param|
+      role = role_param[0]
+      role_name = role_param[1]
+      instance_variable_set("@#{role_name}_role", role)
     end
 
+    # projects user is a client of
+    client_projects = Physical::Project::ProjectMember.where(
+        :user => user,
+        :project_role => @client_role
+        ).map { |m| m.project.id } 
+    
+
+    can :update, Physical::Project::Project, :id => client_projects
+    
 
     # if user.has_role?(:admin)
     #     #can :manage, [:admin, ap]

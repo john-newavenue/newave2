@@ -17,6 +17,13 @@ module Frontend
           flash[:notice] = "Your project was created successfully!"
           @project.address = Physical::General::Address.new
           @project.save(:validate => false)
+
+          # assign some roles and tags
+          if current_user.has_role? :customer
+            @project.add_user_as_client(current_user)
+            # TODO: tag project as lead, feed to activities
+          end
+
           redirect_to project_path(@project)
         else
           flash[:alert] = "We found some errors in your submission. Please correct them."
