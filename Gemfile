@@ -26,7 +26,6 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'factory_girl_rails'
-
 end
 
 group :test, :development do
@@ -82,3 +81,4 @@ gem 'thin' # app server
 gem 'active_link_to' # https://github.com/twg/active_link_to
 gem 'formtastic', :git => 'https://github.com/justinm715/formtastic.git'
 gem 'stringex'
+gem 'draper', '~> 1.0'

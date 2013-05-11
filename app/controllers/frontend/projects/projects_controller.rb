@@ -57,6 +57,7 @@ module Frontend
 
       def show
         @project = Physical::Project::Project.find(params[:id])
+        @address = @project.address.decorate
       end
 
       def destroy
