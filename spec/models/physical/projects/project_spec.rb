@@ -2,23 +2,38 @@ require 'spec_helper'
 
 describe Physical::Project::Project do 
 
-  before do
-    @project = Physical::Project::Project.new(:title => "Sample Project")
-  end
+  context "creating a project" do
 
-  subject { @project }
+    project = Physical::Project::Project.create!(:title => "Sample Project", :description => "Project Description")
 
-  it { should respond_to(:title) }
-  it { should respond_to(:description) }
+    it "should respond to certain fields" do
 
-  describe "when title is not present" do
-    before { @project.title = " " }
-    it { should_not be_valid }
-  end
+      expect(project).to respond_to(:title)
+      expect(project).to respond_to(:description)
+      expect(project).to respond_to(:address)
+    end
 
-  describe "when description is not present" do
-    before { @project.description = " " }
-    it { should_not be_valid }
+    describe "validation" do
+      before(:each) do
+        project = FactoryGirl.create(:project) 
+      end
+
+      it "should have a title" do
+        project.title = " "
+        expect(project).not_to be_valid
+      end
+      it "should have a description" do
+        project.description = " "
+        expect(project).not_to be_valid
+      end
+      it "should build associated models" do
+        debugger
+        expect(project.address).to_not be_nil()
+      end
+    end
+
+
+
   end
 
 end

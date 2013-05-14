@@ -11,6 +11,8 @@ module Physical
 
       has_many :members, :class_name => "Physical::Project::ProjectMember"
 
+      after_create :build_associated_models
+
       Physical::Project::ProjectRole.role_params.each do |role_param|
         role = role_param[0]
         role_name = role_param[1]
@@ -23,6 +25,12 @@ module Physical
           )
         end
       end
+
+      private
+
+        def build_associated_models
+          self.build_address.save(:validate => false)
+        end
     end
   end
 end

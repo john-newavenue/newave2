@@ -15,11 +15,7 @@ module Frontend
         @project = Physical::Project::Project.new(project_params)
         if @project.save
           flash[:notice] = "Your project was created successfully!"
-          @address = Physical::General::Address.new
-          @address.save(:validate => false)
-          @project.address = @address
-          @project.save()
-
+          
           # assign some roles and tags
           if current_user.has_role? :customer
             @project.add_user_as_client(current_user)
