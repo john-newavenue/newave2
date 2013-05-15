@@ -14,21 +14,21 @@ describe Physical::Project::Project do
     end
 
     describe "validation" do
-      before(:each) do
-        project = FactoryGirl.create(:project) 
-      end
+      
+      let!(:project) { FactoryGirl.create(:project) }
 
       it "should have a title" do
         project.title = " "
+        project.description = "Test"
         expect(project).not_to be_valid
       end
       it "should have a description" do
+        project.title = "Test"
         project.description = " "
         expect(project).not_to be_valid
       end
       it "should build associated models" do
-        debugger
-        expect(project.address).to_not be_nil()
+        expect(project.address).to_not be_nil
       end
     end
 

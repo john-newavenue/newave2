@@ -1047,6 +1047,8 @@ $topbar-link-weight: normal;
 // New Avenue Presentation Elements
 //
 
+$NA-error-label-color: red;
+
 header {
   background: $NA-color-light-green;
   padding: $em-base 0;
@@ -1097,6 +1099,12 @@ i[class*="foundicon"] {
   vertical-align: middle;
   padding-right: .4em;
 }
+
+.error label {
+  color: $NA-error-label-color;
+}
+
+// custom buttons
 
 .button.neutral {
   @include button-base;

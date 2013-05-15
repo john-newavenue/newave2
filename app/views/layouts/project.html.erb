@@ -8,8 +8,9 @@
       <%= yield %>
     </div>
 
-    <% if !@layout_no_sidebars %>
     <div class="large-2 pull-10 columns">
+      <img src="http://placehold.it/137x150" alt="TODO: Project cover photo">
+
       <ul class="side-nav">
         <li><%= active_link_to 'Newsfeed', project_path(@project.id), :wrap_tag => :li %></li>
         <li><%= active_link_to 'Status', '#', :wrap_tag => :li %></li>
@@ -19,7 +20,6 @@
         <li><%= active_link_to 'Notes', '#', :wrap_tag => :li %></li>
       </ul>
     </div>
-    <% end %>
 
   </div>
 

@@ -13,6 +13,9 @@ module Physical
 
       after_create :build_associated_models
 
+      accepts_nested_attributes_for :address
+
+
       Physical::Project::ProjectRole.role_params.each do |role_param|
         role = role_param[0]
         role_name = role_param[1]
@@ -29,7 +32,8 @@ module Physical
       private
 
         def build_associated_models
-          self.build_address.save(:validate => false)
+          self.build_address
+          self.save(:validate => false)
         end
     end
   end

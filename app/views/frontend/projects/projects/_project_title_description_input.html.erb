@@ -1,0 +1,6 @@
+  <%= f.input :title  %>
+  <%= f.input :description,
+    :as => :text,
+    :input_html => { :rows => 6, :max_length => 10000 },
+    :placeholder => "What are you looking for? A second unit? For grandma or kids? Generating second income?" 
+  %>

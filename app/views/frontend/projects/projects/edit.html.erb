@@ -1,0 +1,39 @@
+<% provide(:title, "Edit Project - #{@project.title}") %>
+
+<h3><%= @project.title %></h3>
+<ul class="breadcrumbs">
+  <li><%= link_to "Project", project_path(@project) %></li>
+  <li class="current">Edit Proje</li>
+</ul>
+
+<%= semantic_form_for @project, :as => :project, :url => project_path(@project), :method => "patch" do |f| %>
+  <%= f.inputs 'Project Information' do %>
+
+    <%= render 'frontend/projects/projects/project_title_description_input', :f => f %>
+
+    <div class="alert-box secondary"><i class='general foundicon-flag'></i>Address will not be publicly visible.</div>
+
+    <%= f.semantic_fields_for :address, :as => :address_attributes do |address| %>
+
+      <%= address.input :line_1 %>
+      <%= address.input :line_2 %>
+      <div class="row">
+        <div class="columns large-6"><%= address.input :city %></div>
+        <div class="columns large-2"><%= address.input :state %></div>
+        <div class="columns large-4"><%= address.input :zip_or_postal_code, :label => 'Zip Code' %></div>
+      </div>
+      
+      <%= address.input :country, :as => :string,
+        :input_html => { :value => (@project.address.country ? @project.address.country : "United States") }
+      %>
+
+      <%= address.input :other_details %>
+
+    <% end %>
+
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :class => "small success button" %>
+    <%= link_to "Cancel and go back", project_path(@project) %>
+  <% end %>
+<% end %>

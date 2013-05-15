@@ -5,17 +5,12 @@
 <div class="row">
   <div class="columns large-8">
     <p><%= @project.description %></p>
-    <%= link_to project_address_edit_path(@project), :class => 'button tiny neutral' do %>
-      Edit Description
+    <%= link_to edit_project_path(@project), :class => 'button tiny neutral' do %>
+      <i class='general foundicon-edit'></i> Edit Project
     <% end %>
-    <p>TODO: Edit project description</p>
   </div>
   <div class="columns large-4">
     <%= @address.to_full_display %>
-    <br />
-    <%= link_to project_address_edit_path(@project), :class => 'button tiny neutral' do %>
-      Edit Address
-    <% end %>
   </div>
 </div>
 

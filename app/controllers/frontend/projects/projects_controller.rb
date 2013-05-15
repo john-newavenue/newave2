@@ -3,11 +3,23 @@ module Frontend
     class ProjectsController < FrontendBaseController
       layout :resolve_layout
 
-      before_filter :authenticate_user!, only: [:new, :create, :destroy]
+      before_filter :authenticate_user!, only: [:new, :create, :destroy, :edit, :update]
       #before_action :correct_user,   only: :destroy
 
       def index
 
+      end
+
+      def new # create new project form
+        @project = Physical::Project::Project.new
+        @address = Physical::General::Address.new
+
+        # if POST request and valid
+        # create user project role as client
+        # redirect to blank project
+
+        # if POST request and invalid
+        # show errors
       end
 
       def create # POST verb
@@ -28,29 +40,6 @@ module Frontend
           render 'new'
         end
 
-        # begin
-        #   ActiveRecord::Base.transaction do
-        #     @address = Physical::General::Address.create(address_params)
-        #     @project = Physical::Project::Project.create(project_params)
-            
-        #     @project.address = @address
-        #     @project.save
-            
-        #     Physical::Project::ProjectMember.create!(
-        #       :user => current_user,
-        #       :project => @project,
-        #       :project_role => Physical::Project::ProjectRole.find_by_name('Lead')
-        #     )
-        #   end
-        #   flash[:notice] = "Your project was created successfully!"
-        #   # TODO: ping project managers about this project
-        #   redirect_to user_profile_path(current_user.username)
-        # rescue ActiveRecord::RecordInvalid => invalid
-        #   flash[:alert] = "We found some errors in your submission. Please correct them."
-        #   render 'new'
-        #   return
-        # end
-
       end
 
       def show
@@ -58,31 +47,34 @@ module Frontend
         @address = @project.address.decorate
       end
 
+      def edit
+        @project = Physical::Project::Project.find(params[:id])
+      end
+
+      def update
+        @project = Physical::Project::Project.find(params[:id])
+        @project.update_attributes(project_params)
+        if @project.save
+          flash[:notice] = "Your project was updated successfully."
+          redirect_to project_path(@project)
+        else
+          flash[:alert] = "Something went wrong. Please fix any errors."
+          render 'edit'
+        end
+      end
+
       def destroy
 
       end
 
-      def new # create new project form
-        @project = Physical::Project::Project.new
-        @address = Physical::General::Address.new
-
-        # if POST request and valid
-        # create user project role as client
-        # redirect to blank project
-
-        # if POST request and invalid
-        # show errors
-      end
 
       private
 
         def project_params
-          params.require(:project).permit(:title, :description,:address)
-        end
-
-        def address_params
-          fields = [:line_1, :line_2, :city, :state, :zip_or_postal_code, :country, :other_details]
-          params.require(:project).permit(:address => fields)[:address]
+          params.require(:project).permit(:title, :description, 
+            :address_attributes => [:line_1, :line_2, :city, :state, :zip_or_postal_code, 
+              :country, :other_details]
+          )
         end
 
         def resolve_layout
