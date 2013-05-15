@@ -7,6 +7,14 @@ class ApplicationController < ActionController::Base
     user_profile_path(resource_or_scope.slug)
   end
 
+  def not_found
+    render :file => File.join(Rails.root, 'public/404.html'), :status => 404, :layout => 'one-column'
+  end
+
+  def forbidden
+    render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => 'one-column'
+  end
+
   protected
 
 end

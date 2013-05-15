@@ -24,7 +24,6 @@ class Ability
         :user => user,
         :project_role => @client_role
         ).map { |m| m.project.id } 
-    
 
     can :update, Physical::Project::Project, :id => client_projects
     

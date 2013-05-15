@@ -35,7 +35,6 @@ module Frontend
         def authorize_user
           @project = Physical::Project::Project.find_by_id(params[:project_id])
           redirect_to(root_path) unless can? :update, @project
-
         end
 
     end

@@ -4,7 +4,8 @@ module Frontend
       layout :resolve_layout
 
       before_filter :authenticate_user!, only: [:new, :create, :destroy, :edit, :update]
-      #before_action :correct_user,   only: :destroy
+      before_action :authorize_user, only: [:edit, :update]
+      rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
       def index
 
@@ -75,6 +76,11 @@ module Frontend
             :address_attributes => [:line_1, :line_2, :city, :state, :zip_or_postal_code, 
               :country, :other_details]
           )
+        end
+
+        def authorize_user
+          @project = Physical::Project::Project.find_by_id(params[:id])
+          forbidden unless can? :update, @project
         end
 
         def resolve_layout
