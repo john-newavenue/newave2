@@ -25,6 +25,7 @@ describe Physical::Vendor::VendorMember do
   end
 
   it "passes with valid user and vendor" do
+    # this test is kind of pointless as FactoryGirl creates a valid instance
     vendor_member = FactoryGirl.create(:vendor_member)
     expect(vendor_member).to be_valid
   end

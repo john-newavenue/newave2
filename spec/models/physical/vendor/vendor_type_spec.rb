@@ -9,11 +9,8 @@ describe Physical::Vendor::VendorType do
     expect(vendor_type).to respond_to(:description)
   end
 
-  it "fails with no name" do
+  it "fails with invalid name/slug" do
     expect(Physical::Vendor::VendorType.new).to have(1).error_on(:name)
-  end
-
-  it "fails with no slug" do
     expect(Physical::Vendor::VendorType.new).to have(1).error_on(:slug)
   end
 

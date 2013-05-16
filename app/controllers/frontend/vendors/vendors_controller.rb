@@ -15,18 +15,24 @@ module Frontend
       end
 
       def create
+
+        render 'show'
       end
 
       def show
+
       end
 
       def edit
+
       end
 
       def update
+
       end
 
       def destroy
+
       end
 
       private
@@ -36,9 +42,9 @@ module Frontend
           @vendor = Physical::Vendor::Vendor.find_by_slug!(params[:slug]) if params.has_key? :slug
           # forbidden defined in ApplicationController         
           case params[:action]            
-          when 'new', 'create', 'destroy' # reserved for project managers and admins
+          when 'new', 'create', 'destroy' # allow project managers and admins
             forbidden unless can? :access, Physical::Vendor::Vendor
-          when 'edit', 'update' # for the vendors
+          when 'edit', 'update' # allow project managers, admins, and vendors
             forbidden unless can? :update, vendor
           end
         end

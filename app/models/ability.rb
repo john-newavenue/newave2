@@ -19,7 +19,7 @@ class Ability
 
     # vendors
     if user.has_role? :vendor
-        vendor_membership = Physical::Vendor::Vendormember.where(:user => user).map { |v| v.id }
+        vendor_membership = Physical::Vendor::VendorMember.where(:user => user).map { |v| v.id }
         can :update, Physical::Vendor::Vendor, :id => vendor_membership
     end
 
