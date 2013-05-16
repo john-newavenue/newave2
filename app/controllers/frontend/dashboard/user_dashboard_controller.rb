@@ -1,6 +1,6 @@
 module Frontend
   module Dashboard
-    class UserDashboardController < FrontendBaseController
+    class UserDashboardController < ApplicationController
       layout 'dashboards/user_dashboard'
       
       def profile

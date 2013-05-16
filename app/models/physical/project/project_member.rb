@@ -1,10 +1,12 @@
 module Physical
   module Project
     class ProjectMember < ActiveRecord::Base
+      # TODO: delete following 3 lines?      
       belongs_to :project_role
       belongs_to :project
       belongs_to :user
 
+      # TODO: add inclusion constraints
       validates :project_role_id, :presence => true, :numericality => { :only_integer => true }
       validates :project_id, :presence => true, :numericality => { :only_integer => true }
       validates :user, :presence => true

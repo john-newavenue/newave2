@@ -4,15 +4,6 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    # if user.has_role?(:admin)
-    #     #can :manage, [:admin, ap]
-    #     can :access, Frontend::Admin::AdminController
-    #     # can :access, Frontend::Admin::UsersController
-    #     # can :access, :all
-    # end
-
-    # TODO: check authorize update address
-
     Physical::Project::ProjectRole.role_params.each do |role_param|
       role = role_param[0]
       role_name = role_param[1]
@@ -24,8 +15,18 @@ class Ability
         :user => user,
         :project_role => @client_role
         ).map { |m| m.project.id } 
-
     can :update, Physical::Project::Project, :id => client_projects
+
+    # vendors
+    if user.has_role? :vendor
+        vendor_membership = Physical::Vendor::Vendormember.where(:user => user).map { |v| v.id }
+        can :update, Physical::Vendor::Vendor, :id => vendor_membership
+    end
+
+    # admin
+    if user.has_any_role? :admin, :project_manager
+        can :access, Physical::Vendor::Vendor
+    end
     
 
     # if user.has_role?(:admin)

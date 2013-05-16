@@ -45,16 +45,20 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:transaction)
   end
 
   config.before(:each) do
     DatabaseCleaner.start
-    load "#{Rails.root}/db/seeds.rb" 
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.after(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    load "#{Rails.root}/db/seeds.rb"  # seeds loaded by RAILS_ENV=test rake db:resest
   end
 
 

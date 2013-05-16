@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Frontend::Projects::ProjectsController do
 
   let!(:project) { FactoryGirl.create(:project) }
-  let!(:customer) { FactoryGirl.create(:customer) }
-  let!(:other_customer) { FactoryGirl.create(:customer) }
+  let!(:customer) { FactoryGirl.create(:customer_user) }
+  let!(:other_customer) { FactoryGirl.create(:customer_user) }
 
   before(:all) {project.add_user_as_client(customer)}
 
   describe "GET 'index" do
     it "should display something" do
-
+      pending 'not done'
     end
   end
 

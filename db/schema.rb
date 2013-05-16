@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130509200443) do
+ActiveRecord::Schema.define(version: 20130515230947) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -95,5 +95,36 @@ ActiveRecord::Schema.define(version: 20130509200443) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+
+  create_table "vendor_members", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vendor_members", ["user_id"], name: "index_vendor_members_on_user_id"
+
+  create_table "vendor_types", force: true do |t|
+    t.string "name"
+    t.string "slug"
+    t.text   "description"
+  end
+
+  add_index "vendor_types", ["name"], name: "index_vendor_types_on_name", unique: true
+  add_index "vendor_types", ["slug"], name: "index_vendor_types_on_slug", unique: true
+
+  create_table "vendors", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "vendor_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true
+  add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true
 
 end

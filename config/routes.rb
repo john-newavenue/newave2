@@ -38,6 +38,12 @@ Newave2::Application.routes.draw do
     scope :module => 'projects' do
       resources :projects, :path => "/project"
     end
+
+    scope :module => 'vendors' do
+      match '/b/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
+      match '/b/:slug/edit' => 'vendors#edit', :as => 'edit_vendor', :via => 'get'
+      resources :vendors, :path => "/vendors/"
+    end
   end
 
   

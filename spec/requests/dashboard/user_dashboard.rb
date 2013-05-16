@@ -7,7 +7,7 @@ describe "Dashboard" do
     describe "viewing own dashboard" do
 
       before(:all) { 
-        @customer =  FactoryGirl.create(:customer)
+        @customer =  FactoryGirl.create(:customer_user)
         sign_in @customer
       }
       

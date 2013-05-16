@@ -15,7 +15,8 @@ module Physical
 
       accepts_nested_attributes_for :address
 
-
+      # ignore migration definition preqrequisites
+      
       Physical::Project::ProjectRole.role_params.each do |role_param|
         role = role_param[0]
         role_name = role_param[1]

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontend::Admin::AdminController do
 
   before(:all) {
-    @admin = FactoryGirl.create(:admin)
+    @admin = FactoryGirl.create(:admin_user)
   }
 
   describe "GET 'index'" do

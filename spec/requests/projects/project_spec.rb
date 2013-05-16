@@ -4,7 +4,7 @@ describe 'Project Interaction' do
 
   context "customer" do
 
-    let!(:customer)  { FactoryGirl.create(:customer) }
+    let!(:customer)  { FactoryGirl.create(:customer_user) }
     before(:each) { sign_in customer }
     
     describe "can create a project" do
