@@ -2,7 +2,7 @@
 
 <h3><%= yield(:title) %></h3>
 
-<%= semantic_form_for @invitation, :url => invitations_path do |f| %>
+<%= semantic_form_for @invitation, :as => "invitation", :url => admin_invitations_path do |f| %>
   <%= f.inputs "" do %>
     <%= f.input :email, :as => :email %>
     <%= f.input :project_role,

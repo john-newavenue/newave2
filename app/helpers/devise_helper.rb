@@ -4,7 +4,9 @@ module DeviseHelper
   
   def devise_error_messages!
 
-    return "" if resource.errors.empty?
+    resource = @resource unless resource
+
+    return "" if not resource or resource.errors.empty?
 
     # return only the first error of each field
     messages = ""

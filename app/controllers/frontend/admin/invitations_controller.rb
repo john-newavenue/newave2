@@ -6,20 +6,25 @@ module Frontend
       end
 
       def new
-        @invitation
+        @invitation = Logical::Admin::Invitation.new()
       end
 
       def create
-        # verify project role
-        valid_roles = Physical::Project::ProjectRole.all.map { |r| r.id }
-        valid_roles.include? params[:invitation][:project_role].to_i
         debugger
+        @invitation = Logical::Admin::Invitation.new(params[:invitation])
 
-        render 'show'
-
+        if @invitation.valid?
+          User.invite!(:email => @invitation.email, :username => /^[^@]+/.match(@invitation.email).to_s )
+          flash[:notice] = "Invitation sent."
+          redirect_to admin_invitations_path
+        else
+          flash[:alert] = "There was an error with the invitation."
+          render 'new'
+        end
       end
 
       def show
+        @user = User.find_by_id(params[:id])
       end
 
       def edit
@@ -37,6 +42,10 @@ module Frontend
     end
 
     private
+
+      def invitation_params
+        params.require(:invitation).permit(:email, :message, :project_role)
+      end
 
       def verify_admin
         correct_role = current_user.has_role?(:admin) or current_user.has_role?(:project_manager)

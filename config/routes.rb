@@ -11,7 +11,12 @@ Newave2::Application.routes.draw do
   #   get '/users/sign_out' => 'devise/sessions#destroy'
   # end
   
-  devise_for :users, :controllers => { :registrations => 'frontend/devise_custom/registrations' }
+  devise_for :users, :controllers => {
+    :registrations => 'frontend/devise_custom/registrations',
+    :invitations => "frontend/users/invitations"
+  }
+  match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_patch", :via => "patch"
+  match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_put", :via => "put"
 
   # namespace :admin do
     # resources :project_type
@@ -30,7 +35,7 @@ Newave2::Application.routes.draw do
       resources :users, :path => '/admin/users'
     end
 
-    resources :invitations, :as => "invitations", :path => '/admin/invitations', :module => "admin"
+    resources :invitations, :as => "admin_invitations", :path => '/admin/invitations', :module => "admin"
 
     scope :module => 'dashboard' do
       match '/user/:username_slug' => 'user_dashboard#profile', :as => 'user_profile', :via =>'get'
