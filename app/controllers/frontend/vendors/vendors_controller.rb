@@ -11,12 +11,19 @@ module Frontend
       end
 
       def new
-        
+        @vendor = Physical::Vendor::Vendor.new
       end
 
       def create
-
-        render 'show'
+        @vendor = Physical::Vendor::Vendor.new(vendor_params)
+        if @vendor.save
+          flash[:notice] = "Vendor created successfully."
+          redirect_to vendor_path(:slug => @vendor.slug)
+        else
+          flash[:alert] = "We found some errors in your submission. Please correct them."
+          render 'new'
+        end
+        
       end
 
       def show
@@ -26,13 +33,19 @@ module Frontend
       end
 
       def edit
-        # debugger
         @vendor = get_vendor
       end
 
       def update
-        # debugger
         @vendor = get_vendor
+        @vendor.update_attributes(vendor_params)
+        if @vendor.save
+          flash[:notice] = "Your profile was updated successfully."
+          redirect_to vendor_path(:slug => @vendor.slug)
+        else
+          flash[:alert] = "Something went wrong. Please fix any errors."
+          render 'edit'
+        end
       end
 
       def destroy
@@ -62,6 +75,10 @@ module Frontend
           elsif params.has_key? :id
             @vendor = Physical::Vendor::Vendor.find_by_id!(params[:id])
           end
+        end
+
+        def vendor_params
+          params.require(:vendor).permit(:name, :description, :vendor_type_id)
         end
 
     end

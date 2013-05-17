@@ -1,1 +1,20 @@
-new vendor
+<% provide(:title, "New Vendor") %>
+
+<h3><%= yield(:title) %></h3>
+
+<%= semantic_form_for @vendor, :as => :vendor, :url => vendors_path(@vendor), :method => "post" do |f| %>
+  <%= f.inputs "Basic Information" do %>
+    <%= f.input :name %>
+    <%= f.input :description,
+      :as => :text,
+      :input_html => { :rows => 6, :max_length => 2000 },
+      :placeholder => "A description about the vendor. Max 5000 characters." 
+    %>
+    <%= f.input :vendor_type, :as => :radio, :collection => Physical::Vendor::VendorType.all %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :class => "small success button" %>
+    <%= link_to "Cancel", root_path %>
+  <% end %>
+<% end %>

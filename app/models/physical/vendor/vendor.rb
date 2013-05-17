@@ -13,7 +13,10 @@ module Physical
       validates :slug, :presence => true, :allow_blank => false
       validates :description, :presence => false, :allow_blank => true
       # lazy inclusion set so that set isn't defined fixed to when the class is defined
-      validates :vendor_type, :allow_nil => false, :inclusion => { :in => proc { Physical::Vendor::VendorType.all.to_a} }
+      validates :vendor_type, :allow_nil => false, :inclusion => { 
+        :in => proc { Physical::Vendor::VendorType.all.to_a},
+        :message => "Invalid vendor type."
+      }
 
       # TODO  test destroy
       has_many :vendor_members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy

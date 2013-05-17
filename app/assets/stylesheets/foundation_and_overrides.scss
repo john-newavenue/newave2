@@ -1104,6 +1104,20 @@ i[class*="foundicon"] {
   color: $NA-error-label-color;
 }
 
+fieldset fieldset { 
+  margin: 0;
+  padding: 0;
+
+  .label { font-size: 1em !important }
+
+  input[type="radio"] { margin: .5em; }
+
+  legend {
+    text-align: left !important; 
+    background-color: transparent !important;
+  }
+}
+
 // custom buttons
 
 .button.neutral {
