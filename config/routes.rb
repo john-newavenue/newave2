@@ -30,6 +30,8 @@ Newave2::Application.routes.draw do
       resources :users, :path => '/admin/users'
     end
 
+    resources :invitations, :as => "invitations", :path => '/admin/invitations', :module => "admin"
+
     scope :module => 'dashboard' do
       match '/user/:username_slug' => 'user_dashboard#profile', :as => 'user_profile', :via =>'get'
       match '/pro/:proname' => 'pro_dashboard#profile', :as => 'pro_profile', :via =>'get'

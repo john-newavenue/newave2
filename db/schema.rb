@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130515230947) do
+ActiveRecord::Schema.define(version: 20130517195140) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.string "name", null: false
   end
 
-  add_index "project_roles", ["name"], name: "index_project_roles_on_name", unique: true
+  add_index "project_roles", ["name"], name: "index_project_roles_on_name", unique: true, using: :btree
 
   create_table "project_types", force: true do |t|
     t.string   "title",       null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.datetime "updated_at"
   end
 
-  add_index "project_types", ["title"], name: "index_project_types_on_title", unique: true
+  add_index "project_types", ["title"], name: "index_project_types_on_title", unique: true, using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "title",                    null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.integer  "address_id"
   end
 
-  add_index "projects", ["title"], name: "index_projects_on_title"
+  add_index "projects", ["title"], name: "index_projects_on_title", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -64,16 +64,16 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], name: "index_roles_on_name"
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                             default: "", null: false
+    t.string   "encrypted_password",                default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                     default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -82,19 +82,25 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.datetime "updated_at"
     t.string   "username"
     t.string   "slug"
+    t.string   "invitation_token",       limit: 60
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["slug"], name: "index_users_on_slug", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
 
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "vendor_members", force: true do |t|
     t.integer  "user_id"
@@ -103,7 +109,7 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.datetime "updated_at"
   end
 
-  add_index "vendor_members", ["user_id"], name: "index_vendor_members_on_user_id"
+  add_index "vendor_members", ["user_id"], name: "index_vendor_members_on_user_id", using: :btree
 
   create_table "vendor_types", force: true do |t|
     t.string "name"
@@ -111,8 +117,8 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.text   "description"
   end
 
-  add_index "vendor_types", ["name"], name: "index_vendor_types_on_name", unique: true
-  add_index "vendor_types", ["slug"], name: "index_vendor_types_on_slug", unique: true
+  add_index "vendor_types", ["name"], name: "index_vendor_types_on_name", unique: true, using: :btree
+  add_index "vendor_types", ["slug"], name: "index_vendor_types_on_slug", unique: true, using: :btree
 
   create_table "vendors", force: true do |t|
     t.string   "name"
@@ -124,7 +130,7 @@ ActiveRecord::Schema.define(version: 20130515230947) do
     t.datetime "updated_at"
   end
 
-  add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true
-  add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true
+  add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
+  add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true, using: :btree
 
 end

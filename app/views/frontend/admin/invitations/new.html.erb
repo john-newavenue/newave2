@@ -1,0 +1,23 @@
+<% provide(:title, "Invite") %>
+
+<h3><%= yield(:title) %></h3>
+
+<%= semantic_form_for @invitation, :url => invitations_path do |f| %>
+  <%= f.inputs "" do %>
+    <%= f.input :email, :as => :email %>
+    <%= f.input :project_role,
+      :as => :radio,
+      :label => "Type of Account",
+      :collection => Physical::Project::ProjectRole.all
+    %>
+    <br />
+    <%= f.input :message,
+      :as => :text,
+      :input_html => { :rows => 6, :max_length => 10000 },
+      :placeholder => "A message to accompany the invitation." 
+    %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :class => "small success button", :label => "Send Invitation" %>
+  <% end %>
+<% end %>

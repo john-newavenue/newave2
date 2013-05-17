@@ -59,10 +59,9 @@ gem 'jbuilder', '~> 1.0.1'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
- # Authentication
+ # User Matters
 gem 'devise', :git => 'https://github.com/plataformatec/devise.git', :branch => 'rails4'
-
-# Authorization
+gem 'devise_invitable', :git => 'https://github.com/scambra/devise_invitable.git', :branch => 'rails4'
 gem 'cancan'
 gem 'rolify', :git => 'https://github.com/EppO/rolify.git'
 

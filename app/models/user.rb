@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   rolify
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable
 
   validates :username, :presence => true, :uniqueness => {:case_sensitive => false}, :length => { :minimum => 3 },
             :format => { :with => /\A[A-Z0-9a-z\w\b\ \-\_\'\!&@#\.]+\z/i,

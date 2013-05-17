@@ -22,6 +22,15 @@ GIT
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.1)
 
+GIT
+  remote: https://github.com/scambra/devise_invitable.git
+  revision: 02f521b41516ced079d40e31755f0699bf739abc
+  branch: rails4
+  specs:
+    devise_invitable (1.1.7)
+      actionmailer (>= 4.0.0.beta)
+      railties (>= 4.0.0.beta)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -232,6 +241,7 @@ DEPENDENCIES
   database_cleaner
   debugger
   devise!
+  devise_invitable!
   draper (~> 1.0)
   factory_girl_rails
   faker
