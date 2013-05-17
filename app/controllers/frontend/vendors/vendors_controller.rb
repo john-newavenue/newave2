@@ -1,6 +1,7 @@
 module Frontend
   module Vendors
     class VendorsController < ApplicationController
+      layout 'vendors'
       
       before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
       before_action :authorize_user, :only => [:new, :create, :edit, :update, :destroy]
