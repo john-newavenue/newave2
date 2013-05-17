@@ -8,6 +8,8 @@ describe Physical::Vendor::Vendor do
     expect(vendor).to respond_to(:slug)
     expect(vendor).to respond_to(:description)
     expect(vendor).to respond_to(:vendor_type)
+    expect(vendor).to respond_to(:members)
+    expect(vendor).to respond_to(:add_member)
   end
 
   it "fails with no name/slug" do
@@ -28,6 +30,19 @@ describe Physical::Vendor::Vendor do
 
   it "passes with a valid vendor type" do
     expect(FactoryGirl.create(:vendor, :vendor_type => FactoryGirl.create(:vendor_type))).to be_valid
+  end
+
+  it "should let me add and retrieve vendor members only and only once" do
+    vendor = FactoryGirl.create(:vendor)
+    customer_user = FactoryGirl.create(:customer_user)
+    vendor_user = FactoryGirl.create(:vendor_user)
+    # cannot add someone without a vendor role
+    expect(vendor.add_member(customer_user)).to be_nil
+    # can add someone with a vendor role
+    vendor.add_member(vendor_user)
+    expect(vendor.members.to_a.include? vendor_user).to be_true
+    # cannot readd the same vendor_user
+    expect(vendor.add_member(vendor_user)).to be_nil
   end
 
 end

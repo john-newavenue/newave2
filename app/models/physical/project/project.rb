@@ -17,16 +17,19 @@ module Physical
 
       # ignore migration definition preqrequisites
       
-      Physical::Project::ProjectRole.role_params.each do |role_param|
-        role = role_param[0]
-        role_name = role_param[1]
-        method_name = ("add_user_as_" + role_name.to_s).to_sym
-        send :define_method, method_name do |user|
-          Physical::Project::ProjectMember.create!(
-            :user => user, 
-            :project => self,
-            :project_role => role
-          )
+      def after_initialize
+
+        Physical::Project::ProjectRole.role_params.each do |role_param|
+          role = role_param[0]
+          role_name = role_param[1]
+          method_name = ("add_user_as_" + role_name.to_s).to_sym
+          send :define_method, method_name do |user|
+            Physical::Project::ProjectMember.create!(
+              :user => user, 
+              :project => self,
+              :project_role => role
+            )
+          end
         end
       end
 

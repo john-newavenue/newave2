@@ -5,7 +5,6 @@ module Frontend
 
       before_filter :authenticate_user!, :only => [:new, :create, :destroy, :edit, :update]
       before_action :authorize_user, :only => [:edit, :update]
-      rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
       def index
 

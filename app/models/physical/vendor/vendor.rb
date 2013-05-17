@@ -16,9 +16,16 @@ module Physical
       validates :vendor_type, :allow_nil => false, :inclusion => { :in => proc { Physical::Vendor::VendorType.all.to_a} }
 
       # TODO  test destroy
-      has_many :members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
+      has_many :vendor_members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
+      has_many :members, :through => :vendor_members, :source => :user
 
       acts_as_url :name, :sync_url => true, :url_attribute => :slug
+
+      def add_member(user)
+        if user.has_role? :vendor and not self.members.to_a.include? user
+          self.members << user
+        end
+      end
 
     end
   end

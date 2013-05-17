@@ -40,8 +40,20 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'vendors' do
-      match '/b/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
-      match '/b/:slug/edit' => 'vendors#edit', :as => 'edit_vendor', :via => 'get'
+      
+      match '/v/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
+      # match '/vendors/new' => 'vendors#new', :as => 'new_vendor', :via => 'get'
+      # match '/vendors/create' => 'vendors#create', :as => 'vendors', :via => 'post'
+      # match '/vendors/:slug/edit' => 'vendors#edit', :as => 'edit_vendor', :via => 'get'
+      # match '/vendors/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
+      # match '/vendors/:slug' => 'vendors#update', :via => 'put'
+      # match '/vendors/:slug' => 'vendors#update', :via => 'patch'
+      # match '/vendors/:slug' => 'vendors#destroy',  :via => 'delete'
+
+      # match '/vendors/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
+      # match '/vendors/:slug' => 'vendors#update', :as => 'vendor', :via => 'put'
+      # match '/vendors/:slug' => 'vendors#update', :as => 'vendor', :via => 'patch'
+      # match '/vendors/:slug' => 'vendors#destroy', :as => 'vendor', :via => 'delete'
       resources :vendors, :path => "/vendors/"
     end
   end

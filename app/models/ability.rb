@@ -19,13 +19,19 @@ class Ability
 
     # vendors
     if user.has_role? :vendor
-        vendor_membership = Physical::Vendor::VendorMember.where(:user => user).map { |v| v.id }
+        vendor_membership = Physical::Vendor::VendorMember.where(:user => user).map { |v| v.vendor_id }
         can :update, Physical::Vendor::Vendor, :id => vendor_membership
     end
 
+    # project maangers
+    if user.has_role? :project_manager
+        can :manage, Physical::Vendor::Vendor
+    end
+
     # admin
-    if user.has_any_role? :admin, :project_manager
-        can :access, Physical::Vendor::Vendor
+    if user.has_role? :admin
+        # can :manage, Physical::Vendor::Vendor
+        can :manage, :all
     end
     
 
@@ -82,3 +88,4 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end
+
