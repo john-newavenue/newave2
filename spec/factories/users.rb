@@ -4,40 +4,14 @@ FactoryGirl.define do
     sequence(:email) { |n| "person_#{n}@example.com"}   
     password "password"
 
-    # TODO: DRY this up with seeded vendor types
-
-    factory :client_user do
-      after(:create) { |user| 
-        user.add_role(:client)
-      }
+    [:client_user, :customer_user, :project_manager_user, :vendor_user, :admin_user].each do |user_type|
+      factory user_type do
+        after(:create) do |user|
+          user.add_role(/(.+)_user$/.match(user_type).to_a.last.to_sym ) 
+        end
+      end
     end
 
-    factory :customer_user do
-      after(:create) { |user| 
-        user.add_role(:customer)
-      }
-    end
-
-
-    factory :project_manager_user do
-      after(:create) { |user| 
-        user.add_role(:project_manager)
-      }
-    end
-
-    factory :vendor_user do
-      after(:create) { |user| 
-        user.add_role(:vendor)
-      }
-    end
-
-    factory :admin_user do
-      after(:create) { |user| 
-        user.add_role(:admin)
-      }
-    end
   end
-
-
 
 end

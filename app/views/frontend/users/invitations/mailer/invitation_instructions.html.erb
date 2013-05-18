@@ -1,3 +1,5 @@
+<% @user = User.find_by_email(@resource.email) %>
+
 <p>Hello <%= @resource.email %>!</p>
 
 <p>Someone has invited you to <%= root_url %>, you can accept it through the link below.</p>

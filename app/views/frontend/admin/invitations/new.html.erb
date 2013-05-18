@@ -10,12 +10,6 @@
       :label => "Type of Account",
       :collection => Physical::Project::ProjectRole.all
     %>
-    <br />
-    <%= f.input :message,
-      :as => :text,
-      :input_html => { :rows => 6, :max_length => 10000 },
-      :placeholder => "A message to accompany the invitation." 
-    %>
   <% end %>
   <%= f.actions do %>
     <%= f.action :submit, :as => :button, :class => "small success button", :label => "Send Invitation" %>

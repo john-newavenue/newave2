@@ -2,6 +2,8 @@ module Frontend
   module Admin
     class InvitationsController < AdminBaseController
 
+      before_filter :verify_admin
+
       def index
       end
 
@@ -10,11 +12,13 @@ module Frontend
       end
 
       def create
-        debugger
-        @invitation = Logical::Admin::Invitation.new(params[:invitation])
-
+        @invitation = Logical::Admin::Invitation.new(params[:invitation] ? params[:invitation] : {} )
         if @invitation.valid?
-          User.invite!(:email => @invitation.email, :username => /^[^@]+/.match(@invitation.email).to_s )
+          User.invite!(
+            :email => @invitation.email,
+            :username => /^[^@]+/.match(@invitation.email).to_s,
+            :invited_by => current_user
+          )
           flash[:notice] = "Invitation sent."
           redirect_to admin_invitations_path
         else
@@ -28,28 +32,32 @@ module Frontend
       end
 
       def edit
+        @user = User.find_by_id(params[:id])
       end
 
       def update
+        @user = User.find_by_id(params[:id])
       end
 
       def delete
+        @user = User.find_by_id(params[:id])
       end
 
       def destroy
+        @user = User.find_by_id(params[:id])
+      end
+
+    private
+
+      def verify_admin
+        forbidden unless current_user and (current_user.has_role?(:admin) or current_user.has_role?(:project_manager))
+      end
+
+      def invitation_params
+        params.require(:invitation).permit(:email, :project_role)
       end
 
     end
 
-    private
-
-      def invitation_params
-        params.require(:invitation).permit(:email, :message, :project_role)
-      end
-
-      def verify_admin
-        correct_role = current_user.has_role?(:admin) or current_user.has_role?(:project_manager)
-        forbidden unless current_user and correct_role
-      end
   end
 end

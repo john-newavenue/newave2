@@ -1100,7 +1100,7 @@ i[class*="foundicon"] {
   padding-right: .4em;
 }
 
-.error label {
+.error label, .inline-errors {
   color: $NA-error-label-color;
 }
 

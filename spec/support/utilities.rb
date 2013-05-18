@@ -20,7 +20,7 @@ def quick_check_1(user, method, action, code, params = {})
   
   sign_in user
   eval("#{method} :#{action.to_sym}, #{params.to_h}") # evaluates something like "get :index"
-  debugger if response.code == "404"
+  debugger if response.code == "403"
   return expect(response.code).to eq(code.to_s)
 end
 
