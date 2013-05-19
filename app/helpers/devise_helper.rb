@@ -4,6 +4,8 @@ module DeviseHelper
   
   def devise_error_messages!
 
+    # debugger
+
     resource = @resource unless resource
 
     return "" if not resource or resource.errors.empty?

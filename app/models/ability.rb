@@ -10,12 +10,8 @@ class Ability
       instance_variable_set("@#{role_name}_role", role)
     end
 
-    # projects user is a client of
-    client_projects = Physical::Project::ProjectMember.where(
-        :user => user,
-        :project_role => @client_role
-        ).map { |m| m.project.id } 
-    can :update, Physical::Project::Project, :id => client_projects
+    # user's projects
+    can :update, Physical::Project::Project, :id => user.projects.map(&:id)
 
     # vendors
     if user.has_role? :vendor

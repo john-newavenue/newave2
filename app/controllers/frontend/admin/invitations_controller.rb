@@ -2,8 +2,6 @@ module Frontend
   module Admin
     class InvitationsController < AdminBaseController
 
-      before_filter :verify_admin
-
       def index
       end
 
@@ -49,7 +47,7 @@ module Frontend
 
     private
 
-      def verify_admin
+      def authorize_user
         forbidden unless current_user and (current_user.has_role?(:admin) or current_user.has_role?(:project_manager))
       end
 

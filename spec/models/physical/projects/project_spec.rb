@@ -4,18 +4,16 @@ describe Physical::Project::Project do
 
   context "creating a project" do
 
-    project = Physical::Project::Project.create!(:title => "Sample Project", :description => "Project Description")
-
-    it "should respond to certain fields" do
-
-      expect(project).to respond_to(:title)
-      expect(project).to respond_to(:description)
-      expect(project).to respond_to(:address)
-    end
+    let!(:customer) { FactoryGirl.create(:customer_user) }
+    let!(:project) { FactoryGirl.create(:project) }
 
     describe "validation" do
-      
-      let!(:project) { FactoryGirl.create(:project) }
+
+      it "should respond to certain fields" do
+        expect(project).to respond_to(:title)
+        expect(project).to respond_to(:description)
+        expect(project).to respond_to(:address)
+      end
 
       it "should have a title" do
         project.title = " "
@@ -30,9 +28,14 @@ describe Physical::Project::Project do
       it "should build associated models" do
         expect(project.address).to_not be_nil
       end
+
     end
 
-
+    describe "membership" do
+      it "should let me add a client" do
+        expect(project.add_user_as_client(customer)).to be_true
+      end
+    end
 
   end
 

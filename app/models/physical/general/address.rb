@@ -12,11 +12,11 @@ module Physical
       # country
       # other_details
 
-      validates :line_1, :presence => true
-      validates :city, :presence => true
-      validates :state, :presence => true
-      validates :zip_or_postal_code, :presence => true
-      validates :country, :presence => true
+      # validates :line_1
+      # validates :city, :presence => true
+      # validates :state, :presence => true
+      # validates :zip_or_postal_code, :presence => true
+      # validates :country, :presence => true
       
       
 
