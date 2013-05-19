@@ -15,25 +15,30 @@ describe Frontend::Vendors::VendorsController do
     end
   end
 
+  describe "show" do
+
+    action = :show
+    method = "get"
+    let!(:params) { {:slug => vendor.slug} }
+
+    it "should return a page (for anyone)" do
+      quick_check_1(User.new, method, action, 200, params)
+    end
+
+  end
+
   describe "new" do
 
     action = :new
     method = "get"
+    let!(:params) { {} }
 
-    it "should let admin through" do
-      quick_check_1(admin_user, method, action, 200)
-    end
-
-    it "should let project managers through" do
-      quick_check_1(project_manager_user, method, action, 200)
-    end
-
-    it "should forbid vendors" do
-      quick_check_1(vendor_user, method, action, 403)
-    end
-
-    it "should forbid customers" do
-      quick_check_1(customer_user, method, action, 403)
+    context 'authorization' do
+      describe "admin" do it "OK" do quick_check_1(admin_user, method, action, 200, params) end end
+      describe "pm" do it "OK" do quick_check_1(project_manager_user, method, action, 200, params) end end
+      describe "other vendor" do it "not OK" do quick_check_1(other_vendor_user, method, action, 403, params) end end
+      describe "vendor" do it "not OK" do vendor.add_member(vendor_user); quick_check_1(vendor_user, method, action, 403, params) end end
+      describe "customer" do it "not OK" do quick_check_1(customer_user, method, action, 403, params) end end       
     end
 
   end
@@ -42,36 +47,17 @@ describe Frontend::Vendors::VendorsController do
 
     action = :create
     method = "post"
+    let!(:params) { {:vendor => {:foo => "bar"} } }
 
     # TODO: expect( post :create, SOMETHING).to change(Physical::Vendor::Vendor, :count).by(1)
     # test valid request actually creates record
 
-    it "should let admin through" do
-      quick_check_1(admin_user, method, action, 200)
-    end
-
-    it "should let project managers through" do
-      quick_check_1(project_manager_user, method, action, 200)
-    end
-
-    it "should forbid vendors" do
-      quick_check_1(vendor_user, method, action, 403)
-    end
-
-    it "should forbid customers" do
-      quick_check_1(customer_user, method, action, 403)
-    end
-
-  end
-
-  describe "show" do
-
-    action = :show
-    method = "get"
-    let!(:params) { {:slug => vendor.slug} }
-
-    it "should return a page " do
-      quick_check_1(User.new, method, action, 200, params)
+    context 'authorization' do
+      describe "admin" do it "OK" do quick_check_1(admin_user, method, action, 200, params) end end
+      describe "pm" do it "OK" do quick_check_1(project_manager_user, method, action, 200, params) end end
+      describe "other vendor" do it "not OK" do quick_check_1(other_vendor_user, method, action, 403, params) end end
+      describe "vendor" do it "not OK" do vendor.add_member(vendor_user); quick_check_1(vendor_user, method, action, 403, params) end end
+      describe "customer" do it "not OK" do quick_check_1(customer_user, method, action, 403, params) end end       
     end
 
   end
@@ -82,25 +68,12 @@ describe Frontend::Vendors::VendorsController do
     method = "get"
     let!(:params) { {:id => vendor.id} }
 
-    it "should let admin through" do
-      quick_check_1(admin_user, method, action, 200, params)
-    end
-
-    it "should let project managers through" do
-      quick_check_1(project_manager_user, method, action, 200, params)
-    end
-
-    it "should not allow nonmember vendors" do
-      quick_check_1(other_vendor_user, method, action, 403, params)
-    end
-
-    it "should allow member vendors" do
-      vendor.add_member(vendor_user)
-      quick_check_1(vendor_user, method, action, 200, params)
-    end
-
-    it "should forbid customers" do
-      quick_check_1(customer_user, method, action, 403, params)
+    context 'authorization' do
+      describe "admin" do it "OK" do quick_check_1(admin_user, method, action, 200, params) end end
+      describe "pm" do it "OK" do quick_check_1(project_manager_user, method, action, 200, params) end end
+      describe "other vendor" do it "OK" do quick_check_1(other_vendor_user, method, action, 403, params) end end
+      describe "vendor" do it "OK" do vendor.add_member(vendor_user); quick_check_1(vendor_user, method, action, 200, params) end end
+      describe "customer" do it "not OK" do quick_check_1(customer_user, method, action, 403, params) end end       
     end
 
   end
@@ -111,27 +84,14 @@ describe Frontend::Vendors::VendorsController do
 
     action = :update
     method = "patch"
-    let!(:params) { {:id => vendor.id} }
+    let!(:params) {{ :id => vendor.id, :vendor => FactoryGirl.attributes_for(:vendor)  }}
 
-    it "should let admin through" do
-      quick_check_1(admin_user, method, action, 200, params)
-    end
-
-    it "should let project managers through" do
-      quick_check_1(project_manager_user, method, action, 200, params)
-    end
-
-    it "should not allow nonmember vendors" do
-      quick_check_1(other_vendor_user, method, action, 403, params)
-    end
-
-    it "should allow member vendors" do
-      vendor.add_member(vendor_user)
-      quick_check_1(vendor_user, method, action, 200, params)
-    end
-
-    it "should forbid customers" do
-      quick_check_1(customer_user, method, action, 403, params)
+    context 'authorization' do
+      describe "admin" do it "OK" do quick_check_1(admin_user, method, action, 302, params) end end
+      describe "pm" do it "OK" do quick_check_1(project_manager_user, method, action, 302, params) end end
+      describe "other vendor" do it "not OK" do quick_check_1(other_vendor_user, method, action, 403, params) end end
+      describe "vendor" do it "OK" do vendor.add_member(vendor_user); quick_check_1(vendor_user, method, action, 302, params) end end
+      describe "customer" do it "not OK" do quick_check_1(customer_user, method, action, 403, params) end end       
     end
 
   end
@@ -144,20 +104,12 @@ describe Frontend::Vendors::VendorsController do
     method = "delete"
     let!(:params) { {:id => vendor.id} }
 
-    it "should let admin through" do
-      quick_check_1(admin_user, method, action, 200, params)
-    end
-
-    it "should let project managers through" do
-      quick_check_1(project_manager_user, method, action, 200, params)
-    end
-
-    it "should forbid vendors" do
-      quick_check_1(vendor_user, method, action, 403, params)
-    end
-
-    it "should forbid customers" do
-      quick_check_1(customer_user, method, action, 403, params)
+    context 'authorization' do
+      describe "admin" do it "OK" do quick_check_1(admin_user, method, action, 200, params) end end
+      describe "pm" do it "OK" do quick_check_1(project_manager_user, method, action, 200, params) end end
+      describe "other vendor" do it "not OK" do quick_check_1(other_vendor_user, method, action, 403, params) end end
+      describe "vendor" do it "not OK" do vendor.add_member(vendor_user); quick_check_1(vendor_user, method, action, 403, params) end end
+      describe "customer" do it "not OK" do quick_check_1(customer_user, method, action, 403, params) end end       
     end
 
   end

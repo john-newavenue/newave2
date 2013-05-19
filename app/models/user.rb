@@ -22,5 +22,7 @@ class User < ActiveRecord::Base
 
   acts_as_url :username, :sync_url => true, :url_attribute => :slug
 
-          
+  has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
+  has_many :vendors, :through => :vendor_memberships
+
 end
