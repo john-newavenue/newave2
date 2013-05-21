@@ -24,6 +24,8 @@ module Physical
 
       acts_as_url :name, :sync_url => true, :url_attribute => :slug
 
+      default_scope order('name ASC')
+
       def add_member(user)
         if user.has_role? :vendor and not self.members.to_a.include? user
           self.members << user

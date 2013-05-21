@@ -47,21 +47,10 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'vendors' do
-      
-      match '/v/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
-      # match '/vendors/new' => 'vendors#new', :as => 'new_vendor', :via => 'get'
-      # match '/vendors/create' => 'vendors#create', :as => 'vendors', :via => 'post'
-      # match '/vendors/:slug/edit' => 'vendors#edit', :as => 'edit_vendor', :via => 'get'
-      # match '/vendors/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
-      # match '/vendors/:slug' => 'vendors#update', :via => 'put'
-      # match '/vendors/:slug' => 'vendors#update', :via => 'patch'
-      # match '/vendors/:slug' => 'vendors#destroy',  :via => 'delete'
-
-      # match '/vendors/:slug' => 'vendors#show', :as => 'vendor', :via => 'get'
-      # match '/vendors/:slug' => 'vendors#update', :as => 'vendor', :via => 'put'
-      # match '/vendors/:slug' => 'vendors#update', :as => 'vendor', :via => 'patch'
-      # match '/vendors/:slug' => 'vendors#destroy', :as => 'vendor', :via => 'delete'
-      resources :vendors, :path => "/vendors/"
+      resources :vendors, :path => "/partners/" do
+        resources :staff
+      end
+      match '/pro/:slug' => 'vendors#show', :as => 'vendor_profile', :via => 'get'
     end
   end
 

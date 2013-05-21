@@ -1047,6 +1047,8 @@ $topbar-link-weight: normal;
 // New Avenue Presentation Elements
 //
 
+.hidden { display: none; }
+
 $NA-error-label-color: red;
 
 header {
@@ -1092,6 +1094,8 @@ section#home-features {
 .formtastic ol li {
   list-style: none;
 }
+
+p.inline-hints { color: #999; }
 
 textarea { height: auto; }
 

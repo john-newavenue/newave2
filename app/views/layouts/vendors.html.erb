@@ -5,16 +5,21 @@
   <div class="row">
 
     <div class="large-10 push-2 columns">
+      <br />
       <%= yield %>
     </div>
 
     <div class="large-2 pull-10 columns">
-      <img src="http://placehold.it/137x150" alt="TODO: Vendor cover photo">
+      <% if @vendor %>
+        <%= link_to vendor_path(@vendor) do %>
+          <img src="http://placehold.it/137x150" alt="TODO: Vendor cover photo" title="<%= @vendor.name %>">
+        <% end %>
+      <% end %>
 
       <% if @vendor and can? :update, @vendor %>
         <ul class="side-nav">
           <li><%= link_to 'Edit Page', edit_vendor_path(@vendor) %></li>
-          <li><%= link_to 'Invite Staff', "#" %></li>
+          <li><%= link_to 'Manage Staff', vendor_staff_index_path(@vendor) %></li>
           <% if @vendor and can? :manage, @vendor %>
             <li><%= link_to 'Delete Vendor', "#" %></li>
           <% end %>

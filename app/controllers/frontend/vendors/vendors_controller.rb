@@ -8,6 +8,7 @@ module Frontend
 
       def index
         # TODO: something....
+        @vendors = Physical::Vendor::Vendor.all
       end
 
       def new
@@ -18,7 +19,7 @@ module Frontend
         @vendor = Physical::Vendor::Vendor.new(vendor_params)
         if @vendor.save
           flash[:notice] = "Vendor created successfully."
-          redirect_to vendor_path(:slug => @vendor.slug)
+          redirect_to vendor_path(@vendor)
         else
           flash[:alert] = "We found some errors in your submission. Please correct them."
           render 'new'

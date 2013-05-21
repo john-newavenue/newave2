@@ -1,0 +1,30 @@
+<h3><%= @vendor.name %> &raquo; Staff </h3>
+
+
+<% @vendor_members.each do |vendor_member| %>
+<div class="row user-<%= vendor_member.id %>">
+  <div class="large-7 columns">
+    <%= render :partial => 'frontend/vendors/staff/vendor_member', :locals => { :vendor_member => vendor_member } %>
+  </div>
+  <div class="large-3 columns">
+    <ul class="button-group">
+      <li>
+        <%= link_to "Remove", vendor_staff_path(:vendor_id => @vendor.id, :user_id => vendor_member.id, :id => vendor_member.id), :method => :delete,
+          :id => "vendor-member-delete-#{vendor_member.id}", :class => "small button" 
+        %>
+      </li>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+
+<hr>
+
+<%= semantic_form_for @added_vendor_member, :url => vendor_staff_index_path(@vendor), :method => "post", :as => "added_vendor_member" do |f| %>
+  <%= f.inputs "Add Staff Member" do %>
+    <%= f.input :vendor_id, :as => :hidden, :value => @vendor.id %>
+    <%= f.input :username, :label => "Username", :as => :string, :hint => "Enter the username you would like to list as a staff member for #{@vendor.name}" %>
+    <%= f.action :submit, :as => :button, :label => "Add", :class => "small success button inline" %>
+  <% end %>
+<% end %>

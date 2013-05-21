@@ -2,7 +2,7 @@
 
 <h3><%= yield(:title) %></h3>
 
-<%= semantic_form_for @vendor, :as => :vendor, :url => vendors_path(@vendor), :method => "post" do |f| %>
+<%= semantic_form_for @vendor, :as => :vendor, :url => vendor_path(@vendor.id), :method => "patch" do |f| %>
   <%= f.inputs "Basic Information" do %>
     <%= f.input :name %>
     <%= f.input :description,

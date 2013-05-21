@@ -28,13 +28,40 @@ describe "Vendor profiles" do
       page.has_title? new_name
       page.has_selector? "alert-box.success"
     end
+
+    describe "managing vendor staff" do
+      before(:each) {
+        visit vendor_path(vendor)
+        click_link 'Manage Staff'
+      }
+
+      it "shows the right content" do
+        page.has_title? "Manage Staff"
+        vendor.members.each do |user|
+          page.has_selector?("li", :text => user.username)
+        end
+      end
+
+      it "lets staff be added and removed" do
+        new_vendor_user = FactoryGirl.create(:vendor_user)
+        fill_in 'added_vendor_member[username]', :with => new_vendor_user.username
+        click_button "Add"
+        page.has_selector? "alert-box.success"
+        page.has_selector?("div.user-#{new_vendor_user.id}", :text => new_vendor_user.username)
+        click_link( "vendor-member-delete-#{new_vendor_user.id}")
+        page.should_not have_selector("div.user-#{new_vendor_user.id}", :text => new_vendor_user.username)
+      end
+
+      pending "notify staff that they've been invited"
+
+    end
   end
 
   shared_examples_for "staff privileges" do
 
     before(:each) {sign_in user}
 
-    it "can create a vendor profile" do
+    it "can create a vendor" do
       visit new_vendor_path
       page.has_title? "New Vendor"
       fill_in 'vendor[name]', :with => "Some Vendor"
@@ -45,12 +72,7 @@ describe "Vendor profiles" do
       page.has_selector? "alert-box.success"
     end
 
-    # it "can delete a vendor profile" do
-    #   visit delete_vendor_path(vendor)
-    #   expect(page.title).to have_content("Delete Vendor")
-    #   expect(page).to have_content("Are you sure")
-    #   expect(page).to have_content(vendor.name)
-    # end
+    pending "delete vendor"
 
   end
 
@@ -65,7 +87,7 @@ describe "Vendor profiles" do
     [:project_manager_user, :admin_user].each do |sample_user|
       it_should_behave_like "staff privileges" do
         let(:user) { FactoryGirl.create(sample_user) }
-        let(:vendor) { FactoryGirl.create(:vendor) }
+        let(:vendor) { FactoryGirl.attributes_for(:vendor) }
       end
       it_should_behave_like "vendor privileges" do
         let(:user) { FactoryGirl.create(sample_user) }
@@ -73,22 +95,6 @@ describe "Vendor profiles" do
       end
     end
   end
-
-  # describe "viewing" do
-  #   it "should let a PM make a profile"
-  # end
-
-  # describe "creating" do
-
-  # end
-
-  # describe "updating" do
-
-  # end
-
-  # describe "deleting" do
-
-  # end
 
 
 end
