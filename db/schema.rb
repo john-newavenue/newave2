@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130517195140) do
+ActiveRecord::Schema.define(version: 20130521215033) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -128,6 +128,10 @@ ActiveRecord::Schema.define(version: 20130517195140) do
     t.integer  "vendor_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree

@@ -18,6 +18,8 @@ module Physical
         :message => "Invalid vendor type."
       }
 
+      has_attached_file :logo, styles: { profile: "137x150" }
+
       # TODO  test destroy
       has_many :vendor_members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
       has_many :members, :through => :vendor_members, :source => :user

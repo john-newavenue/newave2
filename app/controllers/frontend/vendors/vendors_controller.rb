@@ -78,7 +78,7 @@ module Frontend
         end
 
         def vendor_params
-          params.require(:vendor).permit(:name, :description, :vendor_type_id)
+          params.require(:vendor).permit(:name, :description, :vendor_type_id, :logo)
         end
 
     end

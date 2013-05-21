@@ -2,14 +2,6 @@ require 'spec_helper'
 
 describe "Vendor profiles" do
 
-  # let!(:vendor) { FactoryGirl.create(:vendor)}
-  # let!(:vendor_user) { 
-  #   u = FactoryGirl.create(:vendor_user) 
-  #   vendor.add_member(vendor_user)
-  # }
-  
-  # before { vendor.add_member(vendor_user) }
-
   shared_examples_for "vendor privileges" do 
     before(:each) {
       sign_in user
@@ -28,6 +20,8 @@ describe "Vendor profiles" do
       page.has_title? new_name
       page.has_selector? "alert-box.success"
     end
+
+    pending "upload logo"
 
     describe "managing vendor staff" do
       before(:each) {

@@ -38,4 +38,17 @@ Newave2::Application.configure do
 
   # for devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' } 
+
+  # paperclip and fog
+  config.paperclip_defaults = {
+    :storage => :fog, 
+    :fog_credentials => {
+      :provider => "Rackspace",
+      :rackspace_username => ENV['RACKSPACE_USERNAME'],
+      :rackspace_api_key => ENV['RACKSPACE_API_KEY']
+    }, 
+    :fog_directory => ENV['RACKSPACE_FILES_CONTAINER'],
+    :fog_host => ENV['RACKSPACE_FILES_CDN']
+  }
+
 end

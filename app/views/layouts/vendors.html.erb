@@ -1,18 +1,22 @@
 <% content_for :content do %>
 
+<br />
+
 <section>
 
   <div class="row">
 
     <div class="large-10 push-2 columns">
-      <br />
+      
       <%= yield %>
     </div>
 
     <div class="large-2 pull-10 columns">
       <% if @vendor %>
         <%= link_to vendor_path(@vendor) do %>
-          <img src="http://placehold.it/137x150" alt="TODO: Vendor cover photo" title="<%= @vendor.name %>">
+          <%= image_tag((@vendor.logo ? @vendor.logo.url(:profile) : "http://placehold.it/137x150"),
+            :title => @vendor.name, :alt => @vendor.name)
+          %>
         <% end %>
       <% end %>
 

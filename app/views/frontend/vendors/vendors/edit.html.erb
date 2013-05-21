@@ -5,6 +5,8 @@
 <%= semantic_form_for @vendor, :as => :vendor, :url => vendor_path(@vendor.id), :method => "patch" do |f| %>
   <%= f.inputs "Basic Information" do %>
     <%= f.input :name %>
+    <%= f.input :logo, :as => :file %>
+    <p><%= image_tag @vendor.logo.url if @vendor.logo %></p>
     <%= f.input :description,
       :as => :text,
       :input_html => { :rows => 6, :max_length => 2000 },
