@@ -21,7 +21,7 @@ describe "Vendor profiles" do
       page.has_selector? "alert-box.success"
     end
 
-    pending "upload logo"
+    pending "upload logo test"
 
     describe "managing vendor staff" do
       before(:each) {

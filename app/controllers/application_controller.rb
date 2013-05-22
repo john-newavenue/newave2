@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   def after_sign_in_path_for(resource_or_scope)
-    user_profile_path(resource_or_scope.slug)
+    user_profile_path(:username_slug => resource_or_scope.slug)
   end
 
   def not_found

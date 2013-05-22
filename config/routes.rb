@@ -6,10 +6,6 @@ Newave2::Application.routes.draw do
   # static pages
   root to: 'frontend/static_pages#home'
 
-  # users 
-  # devise_for :users do
-  #   get '/users/sign_out' => 'devise/sessions#destroy'
-  # end
   
   devise_for :users, :controllers => {
     :registrations => 'frontend/devise_custom/registrations',
@@ -17,10 +13,6 @@ Newave2::Application.routes.draw do
   }
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_patch", :via => "patch"
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_put", :via => "put"
-
-  # namespace :admin do
-    # resources :project_type
-  # end
 
   scope :module => 'frontend' do
 
@@ -37,9 +29,11 @@ Newave2::Application.routes.draw do
 
     resources :invitations, :as => "admin_invitations", :path => '/admin/invitations', :module => "admin"
 
-    scope :module => 'dashboard' do
-      match '/user/:username_slug' => 'user_dashboard#profile', :as => 'user_profile', :via =>'get'
-      match '/pro/:proname' => 'pro_dashboard#profile', :as => 'pro_profile', :via =>'get'
+    scope :module => 'users' do
+      match '/u/:username_slug' => 'profiles#show', :as => 'user_profile', :via =>'get'
+      resources :profiles, :path => 'user'
+      
+      # match '/pro/:proname' => 'pro_dashboard#profile', :as => 'pro_profile', :via =>'get'
     end
 
     scope :module => 'projects' do

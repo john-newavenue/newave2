@@ -26,6 +26,8 @@
 
     <%= render "layouts/flash" %>
 
+    <br />
+
     <%= content_for?(:content) ? yield(:content) : yield %>
 
     <%= javascript_include_tag "application" %>
