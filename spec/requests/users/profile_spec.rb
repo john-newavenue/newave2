@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "Profile spec" do
   
-  context "customer " do
+  context "customer" do
 
-    describe "viewing own dashboard" do
+    describe "own profile" do
 
       before(:all) { 
         @customer =  FactoryGirl.create(:customer_user)
@@ -12,6 +12,10 @@ describe "Profile spec" do
       }
       
       before(:each) { visit user_profile_path(@customer.slug) }
+
+      it "should let user edit profile information" do
+        
+      end
       
       it "should ask new customer to start first project" do
         visit user_profile_path(@customer.slug)

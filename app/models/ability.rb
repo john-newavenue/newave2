@@ -13,20 +13,33 @@ class Ability
     # user's projects
     can :update, Physical::Project::Project, :id => user.projects.map(&:id)
 
+    # customer
+    if user.has_role? :customer
+        can :update, Physical::User::UserProfile, :id => [user.profile.id]
+        can :read, Physical::User::UserProfile
+    end
+    
+
     # vendors
     if user.has_role? :vendor
         can :update, Physical::Vendor::Vendor, :id => user.vendors.map(&:id)
     end
 
-    # project maangers
+    # project managers
     if user.has_role? :project_manager
         can :manage, Physical::Vendor::Vendor
+        can :manage, Physical::User::UserProfile
     end
 
     # admin
     if user.has_role? :admin
         # can :manage, Physical::Vendor::Vendor
         can :manage, :all
+    end
+
+    # service providers
+    if user.has_role? :admin or user.has_role? :project_manager or user.has_role? :vendor
+        can :read, Physical::User::UserProfile
     end
     
 

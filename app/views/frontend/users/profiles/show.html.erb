@@ -1,4 +1,10 @@
+<% provide(:title, @user.username) %>
 
+
+<% if can? :read, @profile %>
+  <%= @profile.full_name %>
+  <hr>
+<% end %>
 
 <!-- Project List -->
 

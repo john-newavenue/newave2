@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522185341) do
+ActiveRecord::Schema.define(version: 20130522191242) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 20130522185341) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "user_profiles", force: true do |t|
+    t.integer "user_id"
+    t.string  "first_name"
+    t.string  "middle_name"
+    t.string  "last_name"
+  end
+
+  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                             default: "", null: false

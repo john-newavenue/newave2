@@ -25,4 +25,15 @@ class User < ActiveRecord::Base
   has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
   has_many :vendors, :through => :vendor_memberships
 
+  has_one :profile, :class_name => "Physical::User::UserProfile"
+
+  after_create :build_associated_models
+
+  private
+
+    def build_associated_models
+      self.build_profile
+      self.save(:validate => false)
+    end
+
 end

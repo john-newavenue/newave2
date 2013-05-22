@@ -13,12 +13,12 @@
 
       <ul class="side-nav">
         <% if !@user or @user == current_user %>
-          <li><%= active_link_to 'Edit your profile', '#', :wrap_tag => :li %></li>
+          <li><%= active_link_to 'Edit Profile', edit_profile_path(@user), :wrap_tag => :li %></li>
           <li><%= active_link_to 'Account settings', '#', :wrap_tag => :li %></li>
-          <li><%= active_link_to 'Log out', '#', :wrap_tag => :li %></li>
+          <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, :wrap_tag => :li %></li>
         <% else %>
-          <li><%= active_link_to 'Follow user', '#', :wrap_tag => :li %></li>
-          <li><%= active_link_to 'Send message', '#', :wrap_tag => :li %></li>
+          <li><%= active_link_to 'TODO: Follow user', '#', :wrap_tag => :li %></li>
+          <li><%= active_link_to 'TODO: Send message', '#', :wrap_tag => :li %></li>
         <% end %>
       </ul>
 
