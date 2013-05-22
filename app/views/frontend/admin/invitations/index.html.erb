@@ -1,7 +1,40 @@
-<% provide(:title, "Invitation List") %>
+  <% provide(:title, "Invitation List") %>
 
 <h3><%= yield(:title) %></h3>
 
-This is a list of invitations.
+<hr>
 
-<p><%= link_to "invite more", new_admin_invitation_path %></p>
+<ul class="button-group">
+  <li><%= link_to "Invite", new_admin_invitation_path, :class => "button small neutral" %></li>
+</ul>
+
+<table style="width: 100%;">
+  <thead>
+    <tr>
+      <td>User</td>
+      <td>Invited By</td>
+      <td>On</td>
+      <td>Role</td>
+   </tr>
+  </thead>
+  <tbody>
+    <% @invited_users.each do |invited_user| %>
+    <tr>
+      <td><%= invited_user.username_and_email %></td>
+      <td>
+        <% if invited_user.invited_by %>
+          <%= link_to invited_user.invited_by, user_profile_path(invited_user.invited_by_slug) %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+      <td>
+        <%= invited_user.invitation_sent_at %>
+      </td>
+      <td>
+        <%= invited_user.roles %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

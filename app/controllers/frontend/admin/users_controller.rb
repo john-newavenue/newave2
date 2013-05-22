@@ -5,7 +5,7 @@ module Frontend
       # authorize_resource :class => false
 
       def index
-        @users = User.all
+        @users = UserDecorator.decorate_collection(User.active)
       end
 
       def edit

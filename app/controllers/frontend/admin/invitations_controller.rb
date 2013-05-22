@@ -3,6 +3,7 @@ module Frontend
     class InvitationsController < AdminBaseController
 
       def index
+        @invited_users = UserDecorator.decorate_collection(User.invited)
       end
 
       def new
@@ -12,11 +13,14 @@ module Frontend
       def create
         @invitation = Logical::Admin::Invitation.new(params[:invitation] ? params[:invitation] : {} )
         if @invitation.valid?
-          User.invite!(
-            :email => @invitation.email,
-            :username => /^[^@]+/.match(@invitation.email).to_s,
-            :invited_by => current_user
+          user = User.invite!(
+            {
+              :email => @invitation.email,
+              :username => /^[^@]+/.match(@invitation.email).to_s + 3.times.to_a.map{rand(0..5)}.join
+            }, current_user
           )
+          project_role = Physical::Project::ProjectRole.find_by_id(params[:invitation][:project_role])
+          user.add_role project_role.to_user_role
           flash[:notice] = "Invitation sent."
           redirect_to admin_invitations_path
         else

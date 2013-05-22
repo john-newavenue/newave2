@@ -1,0 +1,13 @@
+<% provide(:title, "#{@user.username} - Edit Profile") %>
+
+<%= semantic_form_for @profile, :as => :profile, :url => profile_path(@user), :method => "patch" do |f| %>
+  <%= f.inputs "Edit Profile" do %>
+    <%= f.input :first_name %>
+    <%= f.input :middle_name %>
+    <%= f.input :last_name %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :class => "small success button" %>
+    <%= link_to "Cancel and go back", user_profile_path(@user.slug) %>
+  <% end %>
+<% end %>

@@ -9,25 +9,25 @@ class User < ActiveRecord::Base
               :message => "may contain only alphanumeric characters and common special characters." }
   validates :email, :uniqueness => {:case_sensitive => false}, :presence => true, 
             :format => { :with => Devise.email_regexp, :message => "isn't valid"}
-
   validates :password, length: { in: 6..128 }, on: :create
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
-
   validates :slug, :presence => true, :allow_blank => false
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
   has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
-  
   belongs_to :address, :class_name => "Physical::General::Address"
-
-  acts_as_url :username, :sync_url => true, :url_attribute => :slug
-
   has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
   has_many :vendors, :through => :vendor_memberships
-
   has_one :profile, :class_name => "Physical::User::UserProfile"
 
   after_create :build_associated_models
+  acts_as_url :username, :sync_url => true, :url_attribute => :slug
+
+  scope :invited, lambda { where("users.invitation_token IS NOT NULL") }
+  scope :not_invited, lambda { where("users.invitation_token IS NULL") }
+  scope :active, lambda { where("users.invitation_token IS NULL OR users.invitation_accepted_at IS NOT NULL")}
+  default_scope order('created_at ASC')
+
 
   private
 
