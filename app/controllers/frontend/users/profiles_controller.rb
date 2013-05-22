@@ -1,7 +1,7 @@
 module Frontend
   module Users
     class ProfilesController < ApplicationController
-      layout 'dashboards/user_dashboard'
+      layout 'user_profile'
       
       def show
         @user = ::User.find_by_slug(params[:username_slug])

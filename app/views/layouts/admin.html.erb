@@ -1,6 +1,5 @@
 <% content_for :content do %>
 
-<br />
 
 <section>
 
@@ -11,10 +10,10 @@
     </div>
 
     <div class="large-2 pull-10 columns">
-      <h6>Admin Options</h6>
+      <h6>Manage:</h6>
       <ul class="side-nav">
         <li><%= active_link_to 'Users', admin_users_path, :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Somewhere 2', '#', :wrap_tag => :li %></li>
+        <li><%= active_link_to 'Invitations', admin_invitations_path, :wrap_tag => :li %></li>
         <li><%= active_link_to 'Somewhere 3', '#', :wrap_tag => :li %></li>
         <li><%= active_link_to 'Somewhere 4', '#', :wrap_tag => :li %></li>
       </ul>

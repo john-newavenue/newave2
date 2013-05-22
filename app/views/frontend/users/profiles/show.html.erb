@@ -4,7 +4,8 @@
 
 <% project_count = @user && @user.project_memberships.count | 0 %>
 
-<% if @user == current_user %>
+<% if @user == current_user and current_user.has_role? :customer %>
+
   <% if project_count == 0 %>
     <%= link_to new_project_path, :class => 'button' do %>
       <i class='general foundicon-plus'></i>Start Your First Project
@@ -29,12 +30,9 @@
   <% end %>
   
 <% else %>
-  Welcome to the profile of <%= @user.username %><br />
-  <% if project_count == 0 %>
-    This user has no projects.
-  <% else %>
-    TOOD: List projects
-  <% end %>
+
+  Welcome to the profile of <%= @user.username %>
+
 <% end %>
 
 <hr />
