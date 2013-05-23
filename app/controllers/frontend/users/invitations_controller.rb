@@ -1,6 +1,7 @@
 module Frontend
   module Users
     class InvitationsController < Devise::InvitationsController
+
       def update
         resource_check = Logical::Users::InvitedUser.new(update_resource_params)
         if resource_check.valid?
