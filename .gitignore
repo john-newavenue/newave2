@@ -19,7 +19,6 @@
 *.sublime-*
 
 # Don't check in private information -- handled by figaro
-# /config/environments/production.rb
 # /config/initializers/secret_token.rb
 
 # Ignore application configuration
