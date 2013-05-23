@@ -22,7 +22,7 @@ module Physical
 
       # TODO  test destroy
       has_many :vendor_members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
-      has_many :members, :through => :vendor_members, :source => :user
+      has_many :members, :through => :vendor_members, :source => :user, :class_name => "::User"
 
       acts_as_url :name, :sync_url => true, :url_attribute => :slug
 
