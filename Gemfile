@@ -83,3 +83,5 @@ gem 'stringex'
 gem 'draper', '~> 1.0'
 gem "paperclip", "~> 3.0" # attachments
 gem 'fog' # cloud services
+gem 'foreigner' # foreign key support for migrations
+gem 'acts_as_relation' # multiple table inheritance (MTI) support

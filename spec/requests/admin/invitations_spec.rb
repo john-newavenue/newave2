@@ -7,6 +7,8 @@ describe "Invitations" do
 
   context "admin" do
 
+    peinding "view, sending, controller"
+
     describe "view" do
 
     end

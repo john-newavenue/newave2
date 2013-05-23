@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522191242) do
+ActiveRecord::Schema.define(version: 20130522234608) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -21,6 +21,44 @@ ActiveRecord::Schema.define(version: 20130522191242) do
     t.string "zip_or_postal_code"
     t.string "country"
     t.string "other_details"
+  end
+
+  create_table "album_items", force: true do |t|
+    t.integer  "album_id"
+    t.integer  "asset_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
+  add_index "album_items", ["asset_id"], name: "index_album_items_on_asset_id", using: :btree
+
+  create_table "albums", force: true do |t|
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "albums", ["parent_id", "parent_type"], name: "index_albums_on_parent_id_and_parent_type", using: :btree
+
+  create_table "assets", force: true do |t|
+    t.integer  "as_asset_id"
+    t.string   "as_asset_type"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "image_assets", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "project_members", force: true do |t|
