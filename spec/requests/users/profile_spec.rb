@@ -24,9 +24,9 @@ describe "Profile spec" do
 
       it "should list projects for a customer and show new project button" do
         @project1 = FactoryGirl.create(:project)
-        @project1.add_user_as_client(@customer)
+        @project1.add_user_as_customer(@customer)
         @project2 = FactoryGirl.create(:project)
-        @project2.add_user_as_client(@customer)
+        @project2.add_user_as_customer(@customer)
 
         visit user_profile_path(@customer.slug)
 

@@ -6,7 +6,7 @@ describe Frontend::Projects::ProjectsController do
   project = FactoryGirl.create(:project) 
   customer = FactoryGirl.create(:customer_user) 
   other_customer = FactoryGirl.create(:customer_user) 
-  project.add_user_as_client(customer) 
+  project.add_user_as_customer(customer) 
   
 
   describe "GET 'index" do

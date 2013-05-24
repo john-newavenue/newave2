@@ -29,11 +29,13 @@ describe Physical::Project::Project do
         expect(project.address).to_not be_nil
       end
 
+      pending "replace not valid with field error counts"
+      
     end
 
     describe "membership" do
       it "should let me add a client" do
-        expect(project.add_user_as_client(customer)).to be_true
+        expect(project.add_user_as_customer(customer)).to be_true
       end
     end
 

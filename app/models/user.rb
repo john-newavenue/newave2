@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   scope :invited, lambda { where("users.invitation_token IS NOT NULL") }
   scope :not_invited, lambda { where("users.invitation_token IS NULL") }
   scope :active, lambda { where("users.invitation_token IS NULL OR users.invitation_accepted_at IS NOT NULL")}
-  default_scope order('created_at ASC')
+  default_scope order('users.created_at ASC')
 
 
   private

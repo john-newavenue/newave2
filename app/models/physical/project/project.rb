@@ -10,14 +10,13 @@ module Physical
       belongs_to :address, :class_name => "Physical::General::Address"
 
       has_many :memberships, :class_name => "Physical::Project::ProjectMember"
-      has_many :members, :through => :memberships, :source => :user
+      has_many :members, :through => :memberships, :source => :user, :class_name => "::User"
 
       after_create :build_associated_models
 
       accepts_nested_attributes_for :address
 
       def method_missing name, *args, &block
-        
 
         name = name.to_s.downcase
 

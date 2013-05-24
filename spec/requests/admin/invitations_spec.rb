@@ -7,7 +7,7 @@ describe "Invitations" do
 
   context "admin" do
 
-    peinding "view, sending, controller"
+    pending "view, sending, controller"
 
     describe "view" do
 

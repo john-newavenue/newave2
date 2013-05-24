@@ -1,7 +1,7 @@
 <% provide(:title, @user.username) %>
 
 
-<% if can? :read, @profile %>
+<% if can?(:read, @profile) and !@profile.full_name.blank? %>
   <%= @profile.full_name %>
   <hr>
 <% end %>

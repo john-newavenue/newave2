@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522234608) do
+ActiveRecord::Schema.define(version: 20130524031615) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -110,6 +110,10 @@ ActiveRecord::Schema.define(version: 20130522234608) do
     t.string  "first_name"
     t.string  "middle_name"
     t.string  "last_name"
+    t.text    "bio"
+    t.string  "website_title"
+    t.string  "website_url"
+    t.integer "address_id"
   end
 
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
@@ -183,5 +187,7 @@ ActiveRecord::Schema.define(version: 20130522234608) do
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true, using: :btree
+
+  add_foreign_key "user_profiles", "addresses", :name => "user_profiles_address_id_fk", :dependent => :delete
 
 end

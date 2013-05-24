@@ -16,6 +16,7 @@ class Ability
     # customer
     if user.has_role? :customer
         can :update, Physical::User::UserProfile, :id => [user.profile.id]
+        can :read, Physical::User::UserProfile, :id => [user.profile.id]
         can :read, Physical::User::UserProfile
     end
     

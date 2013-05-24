@@ -23,7 +23,7 @@ describe 'Project Interaction' do
 
       let!(:project) { FactoryGirl.create(:project) }
       before(:each) { 
-        project.add_user_as_client(customer)
+        project.add_user_as_customer(customer)
         visit edit_project_path(project)
       }
 
@@ -51,9 +51,16 @@ describe 'Project Interaction' do
         page.has_selector? "alert-box.alert", :count => 0
       end
 
-      it "should let them choose a cover photo" do
-        pending "g"
-      end
+      pending "can see name info"
+
+    end
+
+    context "project manager" do
+
+      pending "can create a project"
+      pending "can invite participants"
+      pending "can edit project info"
+      pending "can tag project for admin purposes"
 
     end
 

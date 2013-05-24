@@ -30,7 +30,7 @@ module Frontend
           
           # assign some roles and tags
           if current_user.has_role? :customer
-            @project.add_user_as_client(current_user)
+            @project.add_user_as_customer(current_user)
             # TODO: tag project as lead, feed to activities
           end
 
