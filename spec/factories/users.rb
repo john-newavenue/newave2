@@ -6,6 +6,7 @@ FactoryGirl.define do
 
     [:client_user, :customer_user, :project_manager_user, :vendor_user, :admin_user].each do |user_type|
       factory user_type do
+        sequence(:username)  { |n| "#{user_type.to_s}_user #{n}" }
         after(:create) do |user|
           user.add_role(/(.+)_user$/.match(user_type).to_a.last.to_sym ) 
         end

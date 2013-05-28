@@ -1,12 +1,12 @@
-<% provide(:title, "Edit #{@vendor.name}") %>
+<% provide(:title, "Edit #{@vendor.object.name}") %>
 
 <h3><%= yield(:title) %></h3>
 
-<%= semantic_form_for @vendor, :as => :vendor, :url => vendor_path(@vendor.id), :method => "patch" do |f| %>
+<%= semantic_form_for @vendor.object, :as => :vendor, :url => vendor_path(@vendor.object.id), :method => "patch" do |f| %>
   <%= f.inputs "Basic Information" do %>
     <%= f.input :name %>
     <%= f.input :logo, :as => :file %>
-    <p><%= image_tag @vendor.logo.url if @vendor.logo %></p>
+    <p><%= image_tag @vendor.object.logo.url if @vendor.object.logo %></p>
     <%= f.input :description,
       :as => :text,
       :input_html => { :rows => 6, :max_length => 2000 },
@@ -17,6 +17,6 @@
 
   <%= f.actions do %>
     <%= f.action :submit, :as => :button, :class => "small success button" %>
-    <%= link_to "Cancel", vendor_path(:slug => @vendor.slug) %>
+    <%= link_to "Cancel", vendor_path(:slug => @vendor.object.slug) %>
   <% end %>
 <% end %>

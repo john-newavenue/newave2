@@ -25,7 +25,6 @@ group :test do
   gem 'database_cleaner'
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'factory_girl_rails'
 end
 
 group :test, :development do
@@ -33,13 +32,14 @@ group :test, :development do
   gem 'pg'
   gem 'debugger'
   gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  # gem 'sqlite3'
+  gem "rails-erd"
 end
 
 group :production do

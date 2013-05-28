@@ -1,7 +1,7 @@
 module Frontend
   module Vendors
     class VendorsController < ApplicationController
-      layout 'vendors'
+      layout :resolve_layout
       
       before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
       before_action :authorize_user, :only => [:new, :create, :edit, :update, :destroy]
@@ -29,12 +29,12 @@ module Frontend
 
       def show
         
-        @vendor = get_vendor
+        @vendor = get_vendor.decorate
         
       end
 
       def edit
-        @vendor = get_vendor
+        @vendor = get_vendor.decorate
       end
 
       def update
@@ -79,6 +79,15 @@ module Frontend
 
         def vendor_params
           params.require(:vendor).permit(:name, :description, :vendor_type_id, :logo)
+        end
+
+        def resolve_layout
+          case action_name
+          when 'new'
+            'admin'
+          else 
+            'vendors'
+          end
         end
 
     end

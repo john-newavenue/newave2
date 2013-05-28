@@ -1,0 +1,32 @@
+<% provide(:title, "Vendors") %>
+
+<h3><%= yield(:title) %></h3>
+
+<table style="width: 100%;">
+  <thead>
+    <tr>
+      <td style="width: 137px;">Logo</td>
+      <td>Name</td>
+      <td>Created</td>
+      <td>Members</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vendors.each do |vendor| %>
+    <tr>
+      <td>
+        <%= link_to image_tag(vendor.profile_logo_url), vendor_path(vendor.object) %>
+      </td>
+      <td><%= link_to "#{vendor.object.name}", vendor_path(vendor.object) %></td>
+      <td><%= vendor.object.created_at %></td>
+      <td>
+        <ul>
+        <% vendor.object.members.each do |member| %>
+          <li><%= link_to "#{member.slug}", user_profile_path(member.slug) %></li>
+        <% end %>
+        </ul>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

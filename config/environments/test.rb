@@ -33,4 +33,16 @@ Newave2::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # paperclip and fog
+  config.paperclip_defaults = {
+    :storage => :fog, 
+    :fog_credentials => {
+      :provider => "Rackspace",
+      :rackspace_username => ENV['RACKSPACE_USERNAME'],
+      :rackspace_api_key => ENV['RACKSPACE_API_KEY']
+    }, 
+    :fog_directory => 'newave2-test',
+    :fog_host => 'https://fdd6dceb757964ee42ea-822f2935e8d3aeed7eed31ff7058ee85.ssl.cf1.rackcdn.com'
+  }
 end

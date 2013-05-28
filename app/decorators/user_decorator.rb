@@ -2,7 +2,7 @@ class UserDecorator < Draper::Decorator
   include ActionView::Helpers::TextHelper
 
   def roles
-    object.roles.map(&:name).join(", ")
+    object.roles.map { |r| content_tag :span, r.name, :class => "label"}.join(" ").html_safe
   end
 
   def username_and_email

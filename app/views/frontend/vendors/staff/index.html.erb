@@ -4,7 +4,7 @@
 <% @vendor_members.each do |vendor_member| %>
 <div class="row user-<%= vendor_member.id %>">
   <div class="large-7 columns">
-    <%= render :partial => 'frontend/vendors/staff/vendor_member', :locals => { :vendor_member => vendor_member } %>
+    <%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member } %>
   </div>
   <div class="large-3 columns">
     <ul class="button-group">

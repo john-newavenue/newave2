@@ -12,9 +12,7 @@
     <div class="large-2 pull-10 columns">
       <% if @vendor %>
         <%= link_to vendor_path(@vendor) do %>
-          <%= image_tag((@vendor.logo ? @vendor.logo.url(:profile) : "http://placehold.it/137x150"),
-            :title => @vendor.name, :alt => @vendor.name)
-          %>
+          <%= image_tag @vendor.profile_logo_url,:title => @vendor.object.name, :alt => @vendor.object.name %>
         <% end %>
       <% end %>
 

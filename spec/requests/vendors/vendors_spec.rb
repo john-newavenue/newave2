@@ -1,10 +1,12 @@
 require 'spec_helper'
 
-describe "Vendor profiles" do
+describe "Vendor Pages" do
 
-  shared_examples_for "vendor privileges" do 
+  shared_examples_for "manage members, edit info" do 
     before(:each) {
       sign_in user
+      # project manager and admin should be able to do these examples already for any vendor page
+      # a vendor user is added to a particular vendor so that they can manage that page
       vendor.add_member(user) if user.has_role? :vendor
     }
 
@@ -16,12 +18,11 @@ describe "Vendor profiles" do
       page.has_title? "Edit #{vendor.name}"
       new_name = "#{vendor.name} Blah"
       fill_in 'vendor[name]', :with => new_name
+      attach_file 'vendor[logo]', Rails.root.join('spec','files','vendors','test-logo.jpg')
       click_button 'Update Vendor'
       page.has_title? new_name
       page.has_selector? "alert-box.success"
     end
-
-    pending "upload logo test"
 
     describe "managing vendor staff" do
       before(:each) {
@@ -51,18 +52,18 @@ describe "Vendor profiles" do
     end
   end
 
-  shared_examples_for "staff privileges" do
+  shared_examples_for "manage vendors" do
 
     before(:each) {sign_in user}
 
     it "can create a vendor" do
       visit new_vendor_path
       page.has_title? "New Vendor"
-      fill_in 'vendor[name]', :with => "Some Vendor"
-      fill_in 'vendor[description]', :with => "This is a description"
+      fill_in 'vendor[name]', :with => new_vendor[:name]
+      fill_in 'vendor[description]', :with => new_vendor[:description]
       choose("vendor_vendor_type_id_1")
       click_button 'Create Vendor'
-      page.has_title? "Some Vendor"
+      page.has_title? new_vendor[:name]
       page.has_selector? "alert-box.success"
     end
 
@@ -70,25 +71,41 @@ describe "Vendor profiles" do
 
   end
 
-  describe "privileges of a vendor" do
-    it_should_behave_like "vendor privileges" do
-      let!(:user) { FactoryGirl.create(:vendor_user) }
-      let!(:vendor) { FactoryGirl.create(:vendor) }
+  [:project_manager_user, :admin_user].each do |sample_user|
+    it_should_behave_like "manage vendors" do
+      let(:user) { FactoryGirl.create(sample_user) }
+      let(:new_vendor) { FactoryGirl.attributes_for(:vendor) }
     end
   end
 
-  describe "privileges of staff" do
-    [:project_manager_user, :admin_user].each do |sample_user|
-      it_should_behave_like "staff privileges" do
-        let(:user) { FactoryGirl.create(sample_user) }
-        let(:vendor) { FactoryGirl.attributes_for(:vendor) }
-      end
-      it_should_behave_like "vendor privileges" do
-        let(:user) { FactoryGirl.create(sample_user) }
-        let(:vendor) { FactoryGirl.create(:vendor) }
+  [:project_manager_user, :admin_user, :vendor_user].each do |sample_user|
+    it_should_behave_like "manage members, edit info" do
+      let(:user) { FactoryGirl.create(sample_user) }
+      let(:vendor) { FactoryGirl.create(:vendor) }
+    end
+  end
+
+  describe "viewing a vendor profile" do
+
+    let(:vendor) {
+      vendor = FactoryGirl.create(
+        :vendor, 
+        :name => "Joe's Firm",
+        :description => "This that something."
+      )
+      5.times { vendor.add_member(FactoryGirl.create(:vendor_user) ) }
+      vendor
+    }
+
+    it "should have company info and members visible" do
+      visit vendor_profile_path(vendor.slug)
+      page.has_content? vendor.name
+      vendor.members.each do |member|
+        expect(page).to have_link(member.username, user_profile_path(member.slug))
       end
     end
   end
 
+  pending "company work visible"
 
 end
