@@ -8,7 +8,9 @@ module Frontend
       
       def show
         @user = ::User.find_by_slug(params[:username_slug])
+
         @profile = @user.profile.decorate
+        @user = @user.decorate
       end
 
       def edit

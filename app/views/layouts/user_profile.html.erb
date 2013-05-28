@@ -9,11 +9,11 @@
 
       <img src="http://placehold.it/137x150" alt="TODO: User profile image">
       
-      <h3 class="show-for-small"><%= @user ? @user.username  : current_user.username%></h3>
+      <h3 class="show-for-small"><%= @user.object ? @user.object.username  : current_user.object.username%></h3>
 
       <ul class="side-nav">
         <% if !@user or @user == current_user %>
-          <li><%= active_link_to 'Edit Profile', edit_profile_path(@user), :wrap_tag => :li %></li>
+          <li><%= active_link_to 'Edit Profile', edit_profile_path(@user.object), :wrap_tag => :li %></li>
           <li><%= active_link_to 'Account settings', '#', :wrap_tag => :li %></li>
           <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, :wrap_tag => :li %></li>
         <% else %>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="large-10 columns">
-      <h3 class="hide-for-small"><%= @user.username %></h3>
+      <h3 class="hide-for-small"><%= @user.object.username %></h3>
       <hr />
       <%= yield %>
     </div>

@@ -9,6 +9,8 @@
 
 <hr />
 
+<h4>Staff</h4>
+
 <ul>
 <% @vendor.object.members.each do |vendor_member| %>
 <li><%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %></li>

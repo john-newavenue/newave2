@@ -1,4 +1,4 @@
-<% provide(:title, @user.username) %>
+<% provide(:title, @user.object.username) %>
 
 
 <% if can?(:read, @profile) and !@profile.full_name.blank? %>
@@ -6,11 +6,26 @@
   <hr>
 <% end %>
 
+<!-- Vendors List -->
+
+<% if @user.object.has_role? :vendor %>
+
+<ul>
+<% @user.object.vendors.each do |vendor| %>
+  <li><%= link_to vendor.name, vendor_path(vendor) %></li>
+<% end %>
+</ul>
+
+<hr />
+
+<% end %>
+
 <!-- Project List -->
 
-<% project_count = @user && @user.project_memberships.count | 0 %>
 
-<% if @user == current_user and current_user.has_role? :customer %>
+<% project_count = @user.object && @user.project_count | 0 %>
+
+<% if @user.object == current_user and current_user.has_role? :customer %>
 
   <% if project_count == 0 %>
     <%= link_to new_project_path, :class => 'button' do %>
@@ -19,7 +34,7 @@
   <% else %>
     
     <ul class="large-block-grid-2">
-      <% @user.projects.each do |p| %>
+      <% @user.object.projects.each do |p| %>
         <li>
           <h4><%= link_to p.title, project_path(p) %></h4>
           <p><%= truncate(p.description, :length => 50) %></p>
@@ -37,7 +52,7 @@
   
 <% else %>
 
-  Welcome to the profile of <%= @user.username %>
+  No Projects.
 
 <% end %>
 

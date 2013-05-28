@@ -10,29 +10,22 @@
     </div>
 
     <div class="large-2 pull-10 columns">
-      <% if @vendor %>
-        <%= link_to vendor_path(@vendor) do %>
+      <% if @vendor.object %>
+        <%= link_to vendor_path(@vendor.object) do %>
           <%= image_tag @vendor.profile_logo_url,:title => @vendor.object.name, :alt => @vendor.object.name %>
         <% end %>
       <% end %>
 
-      <% if @vendor and can? :update, @vendor %>
+      <% if @vendor.object and can? :update, @vendor.object %>
         <ul class="side-nav">
-          <li><%= link_to 'Edit Page', edit_vendor_path(@vendor) %></li>
-          <li><%= link_to 'Manage Staff', vendor_staff_index_path(@vendor) %></li>
+          <li><%= link_to 'Edit Page', edit_vendor_path(@vendor.object) %></li>
+          <li><%= link_to 'Manage Staff', vendor_staff_index_path(@vendor.object) %></li>
+          <li><%= link_to 'Add Album', "#" %></li>
           <% if @vendor and can? :manage, @vendor %>
             <li><%= link_to 'Delete Vendor', "#" %></li>
           <% end %>
         </ul>
       <% end %>
-
-      <ul class="side-nav">
-        <li><%= active_link_to '1', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to '2', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to '3', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to '4', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to '5', '#', :wrap_tag => :li %></li>
-      </ul>
     </div>
 
   </div>

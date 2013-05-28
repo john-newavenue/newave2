@@ -10,16 +10,15 @@ class Ability
       instance_variable_set("@#{role_name}_role", role)
     end
 
-    # user's projects
-    can :update, Physical::Project::Project, :id => user.projects.map(&:id)
-
-    # customer
-    if user.has_role? :customer
+    # anyone can read or update their own profile
+    if user.has_any_role?
         can :update, Physical::User::UserProfile, :id => [user.profile.id]
         can :read, Physical::User::UserProfile, :id => [user.profile.id]
-        can :read, Physical::User::UserProfile
     end
-    
+
+    # user's projects
+    can :update, Physical::Project::Project, :id => user.projects.map(&:id)
+  
 
     # vendors
     if user.has_role? :vendor
