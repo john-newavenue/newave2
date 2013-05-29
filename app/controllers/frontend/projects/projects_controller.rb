@@ -36,7 +36,6 @@ module Frontend
 
           redirect_to project_path(@project)
         else
-          debugger
           flash[:alert] = "We found some errors in your submission. Please correct them."
           render 'new'
         end

@@ -84,6 +84,7 @@ describe Frontend::Vendors::VendorsController do
 
     action = :update
     method = "patch"
+    # TODO : Convert FactoryGirl.attributes_for(:vendor) TO JUST DICTIONARY
     let!(:params) {{ :id => vendor.id, :vendor => FactoryGirl.attributes_for(:vendor)  }}
 
     context 'authorization' do

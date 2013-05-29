@@ -30,16 +30,16 @@ module Physical
           role_index = possible_project_role_names.find_index(desired_role_name)
           # PROJECTROLE is a valid choice and user is not already a member
           if role_index != nil and not self.members.include? user
-            Physical::Project::ProjectMember.create!(
-              :user => user, 
-              :project => self,
-              :project_role => possible_project_roles[role_index-1].first
-            )
+            p = Physical::Project::ProjectMember.new
+            p.user = user
+            p.project = self
+            p.project_role = possible_project_roles[role_index-1].first
+            p.save
             return true
           end
         end
 
-        super
+        super name, *args, &block
       end
 
       private

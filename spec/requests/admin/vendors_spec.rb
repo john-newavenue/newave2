@@ -1,3 +1,7 @@
 require 'spec_helper'
 
-pending "admin vendors"
+describe "Admin Vendors" do
+
+  pending "admin vendors"
+
+end

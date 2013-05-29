@@ -10,6 +10,8 @@ module Frontend
         @vendor = Physical::Vendor::Vendor.find_by_id(params[:vendor_id])
         @vendor_members = @vendor.members
         @added_vendor_member = Logical::Vendor::AddedVendorMember.new(:vendor_id => @vendor.id)
+
+        @vendor = @vendor.decorate
       end
 
       def new
@@ -27,9 +29,10 @@ module Frontend
         else
           flash[:alert] = "We found some errors in your submission. Please correct them."
           @vendor_members = @vendor.members
+          @vendor = @vendor.decorate
           render 'index'
         end
-        
+
       end
 
       def show

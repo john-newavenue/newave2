@@ -17,8 +17,10 @@ class AssetsAndAlbums < ActiveRecord::Migration
     add_index :album_items, :album_id
     add_index :album_items, :asset_id
 
-    create_table :assets, :as_relation_superclass => true do |t|
-      t.text      :description
+    create_table :assets do |t|
+      t.references  :azzet, :polymorphic => true, :index => true
+      t.string      :title
+      t.text        :description
       t.timestamps
     end
 

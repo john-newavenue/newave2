@@ -45,12 +45,15 @@ ActiveRecord::Schema.define(version: 20130524031615) do
   add_index "albums", ["parent_id", "parent_type"], name: "index_albums_on_parent_id_and_parent_type", using: :btree
 
   create_table "assets", force: true do |t|
-    t.integer  "as_asset_id"
-    t.string   "as_asset_type"
+    t.integer  "azzet_id"
+    t.string   "azzet_type"
+    t.string   "title"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "assets", ["azzet_id", "azzet_type"], name: "index_assets_on_azzet_id_and_azzet_type", using: :btree
 
   create_table "image_assets", force: true do |t|
     t.datetime "created_at"
