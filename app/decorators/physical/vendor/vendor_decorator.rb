@@ -1,6 +1,7 @@
 module Physical
   module Vendor
     class VendorDecorator < Draper::Decorator
+      delegate_all
       #include ActionView::Helpers::TextHelper
 
       def profile_logo_url

@@ -6,7 +6,7 @@ module Physical
       validates :vendor, :presence => true, :inclusion => { :in => proc { Physical::Vendor::Vendor.all.to_a } }
 
       belongs_to :vendor, :class_name => 'Physical::Vendor::Vendor'
-      belongs_to :user, :class_name => 'User'
+      belongs_to :user, :class_name => '::User'
 
     end
   end

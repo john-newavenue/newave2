@@ -42,7 +42,6 @@ module Frontend
         @vendor.update_attributes(vendor_params)
         if @vendor.save
           flash[:notice] = "Your profile was updated successfully."
-
           redirect_to vendor_path(:slug => @vendor.slug)
         else
           flash[:alert] = "Something went wrong. Please fix any errors."

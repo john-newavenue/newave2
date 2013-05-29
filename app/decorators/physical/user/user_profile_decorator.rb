@@ -2,6 +2,9 @@ module Physical
   module User
     class UserProfileDecorator < Draper::Decorator
       include ActionView::Helpers::TextHelper
+
+      delegate_all 
+
       def id
         object.user_id
       end

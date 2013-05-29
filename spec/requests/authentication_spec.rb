@@ -24,7 +24,6 @@ describe 'Authentication' do
         fill_in "user[username]", with: "test user"
         fill_in "user[password]", with: "password"
         click_button "Sign up"
-        debugger
         expect(page).to have_content ('Welcome! You have signed up successfully.')
         expect(page).to have_link('Sign Out', href: destroy_user_session_path )
       end

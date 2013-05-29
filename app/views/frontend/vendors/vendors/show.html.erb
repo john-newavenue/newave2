@@ -1,18 +1,18 @@
-<% provide(:title, @vendor.object.name) %>
+<% provide(:title, @vendor.name) %>
 
 <h3><%= yield(:title) %></h3>
 
 <hr />
 
-<p><%= @vendor.object.vendor_type.name %></p>
-<p><%= @vendor.object.description %></p>
+<p><%= @vendor.vendor_type.name %></p>
+<p><%= @vendor.description %></p>
 
 <hr />
 
 <h4>Staff</h4>
 
 <ul>
-<% @vendor.object.members.each do |vendor_member| %>
+<% @vendor.members.each do |vendor_member| %>
 <li><%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %></li>
 <% end %>
 </ul>

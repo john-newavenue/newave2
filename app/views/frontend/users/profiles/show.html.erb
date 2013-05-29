@@ -1,4 +1,4 @@
-<% provide(:title, @user.object.username) %>
+<% provide(:title, @user.username) %>
 
 
 <% if can?(:read, @profile) and !@profile.full_name.blank? %>
@@ -8,10 +8,10 @@
 
 <!-- Vendors List -->
 
-<% if @user.object.has_role? :vendor %>
+<% if @user.has_role? :vendor %>
 
 <ul>
-<% @user.object.vendors.each do |vendor| %>
+<% @user.vendors.each do |vendor| %>
   <li><%= link_to vendor.name, vendor_path(vendor) %></li>
 <% end %>
 </ul>
@@ -34,7 +34,7 @@
   <% else %>
     
     <ul class="large-block-grid-2">
-      <% @user.object.projects.each do |p| %>
+      <% @user.projects.each do |p| %>
         <li>
           <h4><%= link_to p.title, project_path(p) %></h4>
           <p><%= truncate(p.description, :length => 50) %></p>

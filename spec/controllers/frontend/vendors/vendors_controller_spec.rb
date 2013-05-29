@@ -83,11 +83,17 @@ describe Frontend::Vendors::VendorsController do
     # TODO: test valid request actually updates record    
 
     action = :update
-    method = "patch"
-    # TODO : Convert FactoryGirl.attributes_for(:vendor) TO JUST DICTIONARY
-    let!(:params) {{ :id => vendor.id, :vendor => FactoryGirl.attributes_for(:vendor)  }}
+    method = "patch"   
 
     context 'authorization' do
+
+      let(:vendor) { FactoryGirl.create(:vendor) }
+
+      let(:params) { { 
+        :id => vendor.id, 
+        :vendor => {:name => (0..8).map{ ('a'..'z').to_a[rand(26)] }.join } } # create a random string for the name
+      }
+
       describe "admin" do it "OK" do quick_check_1(admin_user, method, action, 302, params) end end
       describe "pm" do it "OK" do quick_check_1(project_manager_user, method, action, 302, params) end end
       describe "other vendor" do it "not OK" do quick_check_1(other_vendor_user, method, action, 403, params) end end

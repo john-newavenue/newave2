@@ -237,6 +237,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     stringex (1.5.1)
+    syntax (1.0.0)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -298,6 +299,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0.beta1)
   stringex
+  syntax
   thin
   turbolinks
   uglifier (>= 1.0.3)

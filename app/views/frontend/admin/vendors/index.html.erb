@@ -17,11 +17,11 @@
       <td>
         <%= link_to image_tag(vendor.profile_logo_url), vendor_path(vendor.object) %>
       </td>
-      <td><%= link_to "#{vendor.object.name}", vendor_path(vendor.object) %></td>
-      <td><%= vendor.object.created_at %></td>
+      <td><%= link_to "#{vendor.name}", vendor_path(vendor.object) %></td>
+      <td><%= vendor.created_at %></td>
       <td>
         <ul>
-        <% vendor.object.members.each do |member| %>
+        <% vendor.members.each do |member| %>
           <li><%= link_to "#{member.slug}", user_profile_path(member.slug) %></li>
         <% end %>
         </ul>

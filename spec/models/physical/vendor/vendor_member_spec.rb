@@ -12,7 +12,7 @@ describe Physical::Vendor::VendorMember do
     vendor_member = FactoryGirl.create(:vendor_member)
     vendor_member.user = nil
     expect(vendor_member.valid?).to be_false
-    vendor_member.user_id = -1
+    vendor_member.user_id = 999
     expect(vendor_member.valid?).to be_false
   end
 

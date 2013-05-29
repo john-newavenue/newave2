@@ -9,7 +9,7 @@
 
       <img src="http://placehold.it/137x150" alt="TODO: User profile image">
       
-      <h3 class="show-for-small"><%= @user.object ? @user.object.username  : current_user.object.username%></h3>
+      <h3 class="show-for-small"><%= @user.object ? @user.username  : current_user.username%></h3>
 
       <ul class="side-nav">
         <% if !@user or @user == current_user %>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="large-10 columns">
-      <h3 class="hide-for-small"><%= @user.object.username %></h3>
+      <h3 class="hide-for-small"><%= @user.username %></h3>
       <hr />
       <%= yield %>
     </div>

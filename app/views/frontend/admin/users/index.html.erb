@@ -17,11 +17,11 @@
     <% @users.each do |user| %>
     <tr>
       <td>
-        <%= link_to user.object.username, user_profile_path(user.object.slug) %> - <br />
-        <%= user.object.email %>
+        <%= link_to user.username, user_profile_path(user.slug) %> - <br />
+        <%= user.email %>
       </td>
       <td>
-        <%= user.object.created_at %>
+        <%= user.created_at %>
       </td>
       <td>
         <%= user.roles %>

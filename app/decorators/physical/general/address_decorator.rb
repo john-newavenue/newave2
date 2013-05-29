@@ -2,6 +2,9 @@ module Physical
   module General
     class AddressDecorator < Draper::Decorator
       include ActionView::Helpers::TextHelper
+
+      delegate_all
+
       def to_full_display
 
         # if line_1 is present, we know that the form was validated,

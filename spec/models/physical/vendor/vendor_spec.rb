@@ -29,7 +29,7 @@ describe Physical::Vendor::Vendor do
   end
 
   it "passes with a valid vendor type" do
-    expect(FactoryGirl.create(:vendor, :vendor_type => FactoryGirl.create(:vendor_type))).to be_valid
+    expect(FactoryGirl.create(:vendor, :vendor_type => Physical::Vendor::VendorType.all.sample )).to be_valid
   end
 
   it "should let me add and retrieve vendor members only and only once" do
