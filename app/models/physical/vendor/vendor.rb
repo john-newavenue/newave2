@@ -1,11 +1,6 @@
 module Physical
   module Vendor
     class Vendor < ActiveRecord::Base
-      # name
-      # slug
-      # descriptoin
-      # url
-      # vendor_type_id
 
       belongs_to :vendor_type, :class_name => "Physical::Vendor::VendorType"
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130524031615) do
+ActiveRecord::Schema.define(version: 20130530064913) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 20130524031615) do
     t.integer  "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "soft_delete", default: false
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
@@ -45,12 +48,12 @@ ActiveRecord::Schema.define(version: 20130524031615) do
   add_index "albums", ["parent_id", "parent_type"], name: "index_albums_on_parent_id_and_parent_type", using: :btree
 
   create_table "assets", force: true do |t|
-    t.integer  "azzet_id"
-    t.string   "azzet_type"
-    t.string   "title"
-    t.text     "description"
+    t.integer  "azzet_id",                             null: false
+    t.string   "azzet_type",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "origin_album_item_id"
+    t.boolean  "soft_delete",          default: false
   end
 
   add_index "assets", ["azzet_id", "azzet_type"], name: "index_assets_on_azzet_id_and_azzet_type", using: :btree
@@ -190,6 +193,8 @@ ActiveRecord::Schema.define(version: 20130524031615) do
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true, using: :btree
+
+  add_foreign_key "assets", "album_items", :name => "assets_origin_album_item_id_fk", :column => "origin_album_item_id"
 
   add_foreign_key "user_profiles", "addresses", :name => "user_profiles_address_id_fk", :dependent => :delete
 

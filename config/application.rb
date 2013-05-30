@@ -32,6 +32,7 @@ module Newave2
     config.autoload_paths += %W(
       #{config.root}/app/controllers/**/
       #{config.root}/app/models/**/
+      #{config.root}/lib/**/
     )
 
   end

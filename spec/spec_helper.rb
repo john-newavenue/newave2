@@ -4,6 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+include ActionDispatch::TestProcess
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -46,6 +48,12 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:transaction)
+
+    # create some files for testing
+    large_file_path = Rails.root.join('spec','fixtures','large_file.txt')
+    system("dd if=/dev/zero of=#{large_file_path} bs=1M count=3") unless File.exist?(large_file_path)
+    fake_image_path = Rails.root.join('spec','fixtures','fake_image.jpg')
+    system("dd if=/dev/zero of=#{fake_image_path} bs=1K count=50") unless File.exist?(fake_image_path)
   end
 
   config.before(:each) do
