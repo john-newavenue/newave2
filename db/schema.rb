@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20130530064913) do
     t.string   "azzet_type",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "origin_album_item_id"
     t.boolean  "soft_delete",          default: false
+    t.integer  "origin_album_item_id"
   end
 
   add_index "assets", ["azzet_id", "azzet_type"], name: "index_assets_on_azzet_id_and_azzet_type", using: :btree

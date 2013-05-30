@@ -2,16 +2,21 @@ require 'spec_helper'
 
 describe "Asset Model" do
 
-  it "should respond to properties" do
+  let(:new_asset) { Physical::Asset::Asset.new() }
+  let(:concrete_asset) {
+   image_asset = FactoryGirl.create(:image_asset)
+   image_asset.asset
+ }
 
+  it "shouldn't be directly created" do
+    new_asset.valid?
+    expect(new_asset).to_not be_valid
   end
 
-  it "should have access to its origin album item" do
-
-  end
-
-  it "should have access to its references" do
-
+  it "a concrete asset has certain properties" do
+    expect(concrete_asset).to respond_to(:azzet)
+    expect(concrete_asset).to respond_to(:soft_delete)
+    expect(concrete_asset).to respond_to(:origin_album_item)
   end
 
 end
