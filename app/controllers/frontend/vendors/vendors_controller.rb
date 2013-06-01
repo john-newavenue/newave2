@@ -28,9 +28,8 @@ module Frontend
       end
 
       def show
-        
         @vendor = get_vendor.decorate
-        
+        @album = Physical::Album::Album.new(:parent => @vendor.object)
       end
 
       def edit

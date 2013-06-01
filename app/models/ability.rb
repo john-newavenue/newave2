@@ -23,6 +23,7 @@ class Ability
     # vendors
     if user.has_role? :vendor
         can :update, Physical::Vendor::Vendor, :id => user.vendors.map(&:id)
+        can :create, Physical::Album::Album
     end
 
     # project managers

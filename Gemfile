@@ -85,3 +85,4 @@ gem 'draper', '~> 1.0'
 gem "paperclip", "~> 3.0" # attachments
 gem 'fog' # cloud services
 gem 'foreigner' # foreign key support for migrations
+gem 'paranoia', :git => 'git://github.com/radar/paranoia.git' # soft delete

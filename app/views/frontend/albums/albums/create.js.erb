@@ -1,0 +1,6 @@
+<%#- redirect if album was created and valid %>
+<% if @album and @album.id %>
+  window.location = '<%= medium_path(@album) %>'
+<% end %>
+
+$('#new_album_modal form').replaceWith("<%= escape_javascript(render :partial => 'new_form') %>")

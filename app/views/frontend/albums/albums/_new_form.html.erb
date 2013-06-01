@@ -1,0 +1,9 @@
+<%= semantic_form_for @album, :as => :album, :url => media_path, :remote => true do |f| %>
+  <%= f.inputs "Create Album" do %>
+    <%= f.input :parent_id, :as => :hidden, :value => @album.parent_id %>
+    <%= f.input :parent_type, :as => :hidden, :value => @album.parent_type %>
+    <%= f.input :title, :as => :string %>
+    <%= f.input :description, :input_html => { :rows => 5 } %>
+    <%= f.action :submit, :as => :button, :class => "small success button" %>
+  <% end %>
+<% end  %>

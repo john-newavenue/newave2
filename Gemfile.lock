@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/radar/paranoia.git
+  revision: 5aaef5ad96d6de3bc9db93c550c5442368881a0b
+  specs:
+    paranoia (1.2.0)
+      activerecord (>= 3.1.0)
+
+GIT
   remote: https://github.com/EppO/rolify.git
   revision: 1a7c1af51962291b43db22f33f707e80b51343ee
   specs:
@@ -292,6 +299,7 @@ DEPENDENCIES
   jquery-rails
   meta_request
   paperclip (~> 3.0)
+  paranoia!
   pg
   rails (= 4.0.0.rc1)
   rails-erd

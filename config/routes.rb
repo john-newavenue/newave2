@@ -33,8 +33,6 @@ Newave2::Application.routes.draw do
     scope :module => 'users' do
       match '/u/:username_slug' => 'profiles#show', :as => 'user_profile', :via =>'get'
       resources :profiles, :path => 'user'
-      
-      # match '/pro/:proname' => 'pro_dashboard#profile', :as => 'pro_profile', :via =>'get'
     end
 
     scope :module => 'projects' do
@@ -44,9 +42,15 @@ Newave2::Application.routes.draw do
     scope :module => 'vendors' do
       resources :vendors, :path => "/v/" do
         resources :staff
+        
       end
       match '/pro/:slug' => 'vendors#show', :as => 'vendor_profile', :via => 'get'
     end
+
+    resources :albums, :controller => "albums/albums", :as => "media", :path => "media"
+    resources :albums, :controller => "albums/albums", :as => "medium", :path => "media"
+    resources :photos, :controller => "assets/photos", :as => "photos", :path => "photo"
+
   end
 
   

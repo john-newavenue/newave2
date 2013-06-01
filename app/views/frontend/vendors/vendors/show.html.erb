@@ -16,3 +16,10 @@
 <li><%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %></li>
 <% end %>
 </ul>
+
+
+<a href="#" data-reveal-id="new_album_modal">Click Me For A Modal</a>
+
+<% provide :modals do %>
+<%= render :partial => 'frontend/albums/albums/new_modal' %>
+<% end %>

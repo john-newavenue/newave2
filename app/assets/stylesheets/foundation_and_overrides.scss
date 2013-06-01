@@ -1091,8 +1091,13 @@ section#home-features {
 }
 
 //override formtastic
-.formtastic ol li {
-  list-style: none;
+.formtastic {
+  
+  ol li { list-style: none; }
+  li.button_action button { margin-bottom: 0; }
+}
+.reveal-modal {
+  fieldset { margin: 0; }
 }
 
 p.inline-hints { color: #999; }

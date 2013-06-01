@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130530064913) do
+ActiveRecord::Schema.define(version: 20130531182400) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20130530064913) do
     t.datetime "updated_at"
     t.string   "title"
     t.text     "description"
-    t.boolean  "soft_delete", default: false
+    t.datetime "deleted_at"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20130530064913) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "albums", ["parent_id", "parent_type"], name: "index_albums_on_parent_id_and_parent_type", using: :btree
