@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130531182400) do
+ActiveRecord::Schema.define(version: 20130605202042) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -25,16 +25,16 @@ ActiveRecord::Schema.define(version: 20130531182400) do
 
   create_table "album_items", force: true do |t|
     t.integer  "album_id"
-    t.integer  "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
     t.text     "description"
     t.datetime "deleted_at"
+    t.integer  "asset_id"
+    t.string   "asset_type"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
-  add_index "album_items", ["asset_id"], name: "index_album_items_on_asset_id", using: :btree
 
   create_table "albums", force: true do |t|
     t.integer  "parent_id"

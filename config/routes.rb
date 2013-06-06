@@ -49,7 +49,8 @@ Newave2::Application.routes.draw do
 
     resources :albums, :controller => "albums/albums", :as => "media", :path => "media"
     resources :albums, :controller => "albums/albums", :as => "medium", :path => "media"
-    resources :photos, :controller => "assets/photos", :as => "photos", :path => "photo"
+    resources :album_items, :controller => "albums/album_items", :as => "item", :path => "item"
+    resources :uploads, :controller => "assets/uploads", :as => "uploads", :path => "uploads"
 
   end
 

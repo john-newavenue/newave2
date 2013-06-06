@@ -20,7 +20,7 @@
         <ul class="side-nav">
           <li><%= link_to 'Edit Page', edit_vendor_path(@vendor.object) %></li>
           <li><%= link_to 'Manage Staff', vendor_staff_index_path(@vendor.object) %></li>
-          <li><%= link_to 'Add Album', "#" %></li>
+          <li><%= link_to 'Add Album', "#", :'data-reveal-id' => 'new_album_modal' %></li>
           <% if @vendor and can? :manage, @vendor %>
             <li><%= link_to 'Delete Vendor', "#" %></li>
           <% end %>
@@ -33,5 +33,12 @@
 </section>
 
 <% end %>
+
+
+
+<% provide :modals do %>
+<%= render :partial => 'frontend/albums/albums/new_modal' %>
+<% end %>
+
 
 <%= render :template => 'layouts/application' %>

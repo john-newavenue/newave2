@@ -19,6 +19,14 @@ module Physical
       validates_with AttachmentPresenceValidator, :attributes => :image
       validates_with AttachmentSizeValidator, :attributes => :image, :in => (1.kilobytes..(2.5).megabytes)
 
+      def to_jq_upload
+        {
+          'url' => image.url,
+          'name' => image.original_filename,
+          'thumbnail_url' => image(:small_square)
+        }
+      end
+
     end
   end
 end

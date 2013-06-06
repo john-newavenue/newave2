@@ -9,6 +9,8 @@ module Physical
       validates :title, :presence => true, :allow_blank => false
       validate :parent, :check_parent_valid
 
+      has_many :items, :class_name => "::Physical::Album::AlbumItem", :source => :asset
+
       private
 
         def check_parent_valid
