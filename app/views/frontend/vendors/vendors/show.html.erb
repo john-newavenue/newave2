@@ -17,5 +17,7 @@
 <h4>Albums</h4>
 
 <ul>
-  
+  <% @vendor.albums.each do |album| %>
+    <li><%= link_to medium_path(album) do %><%= "#{album.title}" %><% end %></li>
+  <% end %>  
 </ul>

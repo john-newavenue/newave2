@@ -1,0 +1,13 @@
+<div class="row" style="background: #efefef; margin-left: 0; margin-right: 0; padding-top: 30px; padding-bottom: 10px; margin-bottom: 5px;">
+  <div class="large-3 columns">
+    <% if @vendor.object %>
+      <%= link_to vendor_path(@vendor.object) do %>
+        <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name, :style => "border: 5px solid #ccc;" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="large-9 columns">
+    <h3><%= @vendor.name %></h3>
+    <h6><%= @vendor.vendor_type.name %></h6>
+  </div>
+</div>

@@ -10,6 +10,7 @@ describe Physical::Vendor::Vendor do
     expect(vendor).to respond_to(:vendor_type)
     expect(vendor).to respond_to(:members)
     expect(vendor).to respond_to(:add_member)
+    expect(vendor).to respond_to(:albums)
   end
 
   it "fails with no name/slug" do

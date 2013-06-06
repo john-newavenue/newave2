@@ -19,6 +19,8 @@ module Physical
       has_many :vendor_members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
       has_many :members, :through => :vendor_members, :source => :user, :class_name => "::User"
 
+      has_many :albums, :class_name => 'Physical::Album::Album', :source => :parent, :foreign_key => "parent_id"
+
       acts_as_url :name, :sync_url => true, :url_attribute => :slug
 
       default_scope order('name ASC')

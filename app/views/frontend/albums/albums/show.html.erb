@@ -1,19 +1,41 @@
 <% provide(:title, @album.title) %>
 
-<ul class="button-group">
-  <li><%= link_to edit_medium_path(@album), :class => "small button neutral" do %><i class='general foundicon-edit'></i>Edit<% end %></li>
-  <li><%= link_to media_upload_path(@album), :class => "small button neutral" do %><i class='general foundicon-up-arrow'></i>Upload<% end %></li>
-</ul>
-
-<h3><%= yield(:title) %></h3>
-
-<% if @album.description %>
-  <%= @album.description %>
-  <hr>
+<% provide :toolbar do %>
+<% if can? :update, @album.parent %>
+  <%= render :partial => 'frontend/albums/albums/toolbar' %>
+<% end %>
 <% end %>
 
-<ul>
+<div class="row">
+  <div class="large-6 columns">
+    <h3><%= yield(:title) %></h3>
+    <% if @album.description %>
+      <p><%= @album.description %></p>
+    <% end %>
+  </div>
+  <div class="large-6 columns" style="text-align: right;">
+
+  </div>
+</div>
+
+    
+
+<hr>
+
+<ul class="large-block-grid-4 small-block-grid-2">
     <% @album.items.each do |item| %>
-        <li><%= "#{item}" %></li>
+        <% if item.asset %>
+        <li>
+            <p>
+              <%= link_to item.asset.image.url do %>
+                <%= image_tag item.asset.image(:medium_square), :data => {:caption => item.asset.image.url} %>
+              <% end %>
+            </p>
+            
+            <p><%= item.title %></p>
+
+            <hr>
+        </li>
+        <% end %>
     <% end %>
 </ul>
