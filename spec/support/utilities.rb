@@ -13,12 +13,14 @@ end
 
 def quick_check_1(user, method, action, code, params = {})
   # user   : user instance
-  # method : string such as "get", "post"
+  # method : string such as "get", "post", "xhr :delete"
   # action : symbol such as :new, :index
   # code   : HTTP code integer such as 200, 404
   # params : dictionary such as {:id => 1} or {:slug => 50}
   
   sign_in user
+
+  method = "#{method}," if method.index("xhr") == 0
   eval("#{method} :#{action.to_sym}, #{params.to_h}") # evaluates something like "get :index"
   return expect(response.code).to eq(code.to_s)
 end

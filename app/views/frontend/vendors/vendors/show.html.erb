@@ -1,18 +1,21 @@
 <% provide(:title, @vendor.name) %>
 
-<h3><%= yield(:title) %></h3>
-
 <hr />
 
-<p><%= @vendor.vendor_type.name %></p>
 <p><%= @vendor.description %></p>
 
 <hr />
 
-<h4>Staff</h4>
+<h4>Members</h4>
 
 <ul>
 <% @vendor.members.each do |vendor_member| %>
 <li><%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %></li>
 <% end %>
+</ul>
+
+<h4>Albums</h4>
+
+<ul>
+  
 </ul>

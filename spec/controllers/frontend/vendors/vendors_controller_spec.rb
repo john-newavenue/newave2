@@ -108,7 +108,7 @@ describe Frontend::Vendors::VendorsController do
     # TODO: test valid request actually destroys record
 
     action = :destroy
-    method = "delete"
+    method = "xhr :delete"
     let!(:params) { {:id => vendor.id} }
 
     context 'authorization' do

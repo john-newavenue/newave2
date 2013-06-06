@@ -1,4 +1,6 @@
-<h3><%= @vendor.name %> &raquo; Staff </h3>
+<% provide(:title, "#{@vendor.name} - Manage Members") %>
+
+<h3>Manage Members</h3>
 
 
 <% @vendor_members.each do |vendor_member| %>

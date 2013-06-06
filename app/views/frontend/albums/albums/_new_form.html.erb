@@ -1,3 +1,5 @@
+<% @album = [@album, Physical::Album::Album.new].compact.first %>
+
 <%= semantic_form_for @album, :as => :album, :url => media_path, :remote => true do |f| %>
   <%= f.inputs "Create Album" do %>
     <%= f.input :parent_id, :as => :hidden, :value => @album.parent_id %>

@@ -6,7 +6,7 @@
 $NA-color-light-green: #22B04E;
 $NA-color-dark-green: #136734;
 $NA-color-dark-grey: #666666;
-$NA-color-light-grey: lighten($NA-color-dark-grey, 57%);
+$NA-color-light-grey: lighten($NA-color-dark-grey, 50%);
 $NA-color-orange: #FF9933;
 $NA-color-light-blue: #3399CC;
 
@@ -1093,7 +1093,7 @@ section#home-features {
 //override formtastic
 .formtastic {
   
-  ol li { list-style: none; }
+  ol li { list-style: none; display: inline; }
   li.button_action button { margin-bottom: 0; }
 }
 .reveal-modal {
@@ -1131,5 +1131,6 @@ fieldset fieldset {
 
 .button.neutral {
   @include button-base;
+  @include inset-shadow;
   @include button-style($NA-color-light-grey, 0, false);
 }

@@ -4,28 +4,49 @@
 
   <div class="row">
 
-    <div class="large-10 push-2 columns">
-      
-      <%= yield %>
-    </div>
 
-    <div class="large-2 pull-10 columns">
-      <% if @vendor.object %>
-        <%= link_to vendor_path(@vendor.object) do %>
-          <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name %>
-        <% end %>
-      <% end %>
+
+    <div class="large-2 push-10 columns">
+
 
       <% if @vendor.object and can? :update, @vendor.object %>
         <ul class="side-nav">
-          <li><%= link_to 'Edit Page', edit_vendor_path(@vendor.object) %></li>
-          <li><%= link_to 'Manage Staff', vendor_staff_index_path(@vendor.object) %></li>
-          <li><%= link_to 'Add Album', "#", :'data-reveal-id' => 'new_album_modal' %></li>
-          <% if @vendor and can? :manage, @vendor %>
-            <li><%= link_to 'Delete Vendor', "#" %></li>
-          <% end %>
+
         </ul>
       <% end %>
+    </div>
+
+    <div class="large-10 pull-2 columns">
+      <div class="row" style="background: #efefef; margin-left: 0; margin-right: 0; padding-top: 30px; padding-bottom: 10px; margin-bottom: 5px;">
+        <div class="large-3 columns">
+          <% if @vendor.object %>
+            <%= link_to vendor_path(@vendor.object) do %>
+              <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name, :style => "border: 5px solid #ccc;" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="large-9 columns">
+          <h3><%= @vendor.name %></h3>
+          <h6><%= @vendor.vendor_type.name %></h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-10 columns">
+          <ul class="button-group">
+            <li><%= link_to edit_vendor_path(@vendor), :class => "small button neutral" do %><i class='general foundicon-edit'></i>Edit Company Profile<% end %></li>
+            <li><%= link_to vendor_staff_index_path(@vendor), :class => "small button neutral" do %><i class='general foundicon-address-book'></i>Manage Members<% end %></li>
+            <li><%= link_to "#", :'data-reveal-id' => 'new_album_modal', :class => "small button neutral" do %><i class='general foundicon-photo'></i>Create Album<% end %></</li>
+            <% if @vendor and can? :manage, @vendor %>
+              <li><%= link_to 'Delete Vendor', "#", :class => "small button neutral" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+
+
+      <%= yield %>
     </div>
 
   </div>

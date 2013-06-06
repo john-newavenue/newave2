@@ -1,6 +1,7 @@
 FactoryGirl.define do
 
   factory :album, :class => Physical::Album::Album do |album|
+    association :parent, factory: :vendor, strategy: :create
     sequence(:title) { |n| "Album title #{n}"}
     sequence(:description) { |n| "Album description #{n}"}
   end

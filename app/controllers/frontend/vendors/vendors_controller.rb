@@ -51,6 +51,9 @@ module Frontend
       def destroy
         # debugger
         @vendor = get_vendor
+        respond_to do |format|
+          format.json { render json: {:status => 200} }
+        end
       end
 
       private

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Album Model" do
 
-  let(:album) { FactoryGirl.create(:album)}
+  let(:album) { FactoryGirl.create(:album, :parent => FactoryGirl.create(:vendor))}
 
   it "should respond to properties" do
     %w(parent title description deleted_at).each do |att| 
