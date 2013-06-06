@@ -23,7 +23,7 @@ module Physical
         {
           'url' => image.url,
           'name' => image.original_filename,
-          'thumbnail_url' => image(:small_square)
+          'thumbnail_url' => image(:small)
         }
       end
 

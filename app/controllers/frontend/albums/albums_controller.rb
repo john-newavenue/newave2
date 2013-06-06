@@ -37,6 +37,16 @@ module Frontend
       def edit
       end
 
+      def upload
+        @album = Physical::Album::Album.find_by_id(params[:id])
+        # page variables dependent on the album owner
+        case @album.parent_type
+        when "Physical::Vendor::Vendor"
+          @vendor = @album.parent.decorate
+        else
+        end
+      end
+
       def update
         # @vendor = get_vendor
         # @vendor.update_attributes(vendor_params)
@@ -51,7 +61,6 @@ module Frontend
 
       def destroy
         # debugger
-        @vendor = get_vendor
       end
 
       private

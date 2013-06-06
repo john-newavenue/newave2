@@ -97,7 +97,7 @@ module Frontend
         end
 
         def set_container
-          cont_id = URI(request.referrer).path.split('/')[-1].to_i # "http://somewhere.com/media/123/?blah" returns 123
+          cont_id = URI(request.referrer).path.split('/')[2].to_i # "http://somewhere.com/media/123/upload" returns 123
           @container = Physical::Album::Album.find_by_id(cont_id)
         end
 
