@@ -1,4 +1,18 @@
 <ul class="button-group">
-  <li><%= link_to edit_medium_path(@album), :class => "small button neutral" do %><i class='general foundicon-edit'></i>Edit Album<% end %></li>
+  <li>
+    <%= link_to edit_medium_path(@album), :remote => true, :class => "small button neutral edit-album-action" do %>
+      <i class='general foundicon-edit'></i>Edit Album
+    <% end %>
+  </li>
   <li><%= link_to media_upload_path(@album), :class => "small button neutral" do %><i class='general foundicon-up-arrow'></i>Upload Images<% end %></li>
 </ul>
+
+<script>
+$(document).ready( function () {
+  $('.edit-album-action')
+    .on('ajax:beforeSend', function() {
+      c = $('#album_container')
+      c.hide().html('<h3>Loading form...</h3>').fadeIn()
+    })
+});
+</script>

@@ -35,6 +35,10 @@ module Frontend
       end
 
       def edit
+        @album = Physical::Album::Album.find_by_id(params[:id])
+        respond_to do |format|
+          format.js
+        end
       end
 
       def upload
@@ -57,6 +61,16 @@ module Frontend
         #   flash[:alert] = "Something went wrong. Please fix any errors."
         #   render 'edit'
         # end
+        @album = Physical::Album::Album.find_by_id(params[:id])
+        @album.update_attributes(album_params)
+        respond_to do |format|
+          if @album.save
+            format.js
+          else
+
+          end
+          
+        end
       end
 
       def destroy
@@ -74,7 +88,7 @@ module Frontend
         end
 
         def album_params
-          params.require(:album).permit(:title, :description, :parent_id, :parent_type)
+          params.require(:album).permit(:title, :description, :items_attributes => [:id, :title, :description, :mark_delete])
         end
 
 

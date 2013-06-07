@@ -1,0 +1,4 @@
+c = $('#album_container')
+c.fadeOut( function () {
+  c.html("<%= escape_javascript(render :partial => 'edit_form') %>").fadeIn()
+});

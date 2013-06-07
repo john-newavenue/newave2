@@ -268,7 +268,7 @@ $list-style-position: inside;
 
 // We use this to control the display property.
 // $button-display: inline-block;
-// $button-margin-bottom: emCalc(20px);
+// $button-margin-bottom: emCalc(5px);
 
 // We use these to control button text styles.
 // $button-font-family: inherit;
@@ -1092,10 +1092,13 @@ section#home-features {
 
 //override formtastic
 .formtastic {
-  
+  ol { margin-bottom: 0; }
   ol li { list-style: none; display: inline; }
+  fieldset.nested ol { margin: 0; }
   li.button_action button { margin-bottom: 0; }
+  input[type="checkbox"] { margin: 0; }
 }
+
 .reveal-modal {
   fieldset { margin: 0; }
 }
@@ -1133,4 +1136,20 @@ fieldset fieldset {
   @include button-base;
   @include inset-shadow;
   @include button-style($NA-color-light-grey, 0, false);
+  margin-bottom: 0;
+}
+
+.button.warning {
+  @include button-base;
+  @include inset-shadow;
+  @include button-style($NA-color-orange, 0, false);
+  margin-bottom: 0;
+}
+
+.button { margin-bottom: 0; }
+.button.icon-only i { padding: 0; }
+
+.item-contents-wrapper { 
+  padding: 1.25em; 
+  border: solid 1px #dddddd ;
 }

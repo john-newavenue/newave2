@@ -17,6 +17,7 @@
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -30,7 +31,7 @@
 
     <%= content_for?(:content) ? yield(:content) : yield %>
 
-    <%= javascript_include_tag "application" %>
+    
     <%= yield(:scripts) if content_for?(:scripts) %>
 
     <%= render "layouts/footer" %>

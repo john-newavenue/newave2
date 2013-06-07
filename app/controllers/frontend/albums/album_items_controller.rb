@@ -7,10 +7,9 @@ module Frontend
 
 
       def destroy
-        debugger
         @item.destroy
         respond_to do |format|
-          format.js { "$('.item-#{@item.id}').fadeOut( function(this) { $(this).remove(); });"  }
+          format.js
         end
       end
 

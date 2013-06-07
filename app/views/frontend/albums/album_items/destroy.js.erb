@@ -1,0 +1,5 @@
+c = $('.item-<%= "#{@item.id}" %>')
+// remove the container
+c.fadeOut( function ()  { c.remove() });
+// remove nested hidden field w/item id
+$('input[value="<%= "#{@item.id}" %>"][id^="album_items_attributes"]').remove()

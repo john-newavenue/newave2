@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="large-6 columns">
+    <h3><%= yield(:title) %></h3>
+    <% if @album.description %>
+      <p><%= @album.description %></p>
+    <% end %>
+  </div>
+  <div class="large-6 columns" style="text-align: right;">
+
+  </div>
+</div>
+
+<hr>
+
+<ul class="large-block-grid-4 small-block-grid-2">
+    <% @album.items.each do |item| %>
+        <% if item.asset %>
+        <li class="item-<%= item.id %>">
+            <div class="item-contents-wrapper">
+              <p>
+                <%= link_to item.asset.image.url do %>
+                  <%= image_tag item.asset.image(:medium_square), :data => {:caption => item.asset.image.url} %>
+                <% end %>
+              </p>
+            
+              <p><%= !item.title.blank? ? truncate(item.title,:length => 30) : simple_format("&nbsp;") %></p>
+
+              <ul class="button-group">
+                <li><%= link_to "#", :class => "button small neutral icon-only" do %><i class="general foundicon-heart"></i><% end %></li>
+              </ul>
+            </div>
+        </li>
+        <% end %>
+    <% end %>
+</ul>

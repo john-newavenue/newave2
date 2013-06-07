@@ -1,0 +1,45 @@
+<%= semantic_form_for @album, :as => :album, :url => medium_path(@album), :remote => true do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :description, :as => :text, :input_html => { :rows => 5 }  %>
+
+    <%= f.action :submit, :as => :button, :label => "Save Changes", :class => "success button" %>
+    <%= f.action :cancel, :as => :link, :label => "Cancel and Go Back", :button_html => {:class => "neutral button"} %>
+  <% end %>
+
+  <div data-alert class="alert-box alert">
+    Deleting a picture from your album cannot be undone.
+    <a href="#" class="close">&times;</a>
+  </div>
+
+  <ul class="large-block-grid-4 small-block-grid-2">
+  
+  <%= f.semantic_fields_for :items do |item| %>
+    <% if item.object.asset %>
+      <% asset = item.object.asset %>
+      <li class="item-<%= item.object.id %>">
+        <%= item.inputs :class => "nested inputs" do %>
+          <% if asset.image %>
+              <p><%= image_tag asset.image(:medium_square), :data => {:caption => asset.image.url} %></p>
+          <% end %>
+            <%= item.input :title, :label => false, :placeholder => "Title" %>
+            <%= item.input :description, :as => :text, :input_html => { :rows => 2 }, :label => false, :placeholder => "Description"  %>
+            <%= link_to "Delete", item_path(item.object), :method => :delete, :class => "button warning small", :remote => true %>
+          <% end %>
+      </li>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>
+
+<script>
+$(document).ready( function () {
+  $('.formtastic.album#edit_album')
+    .on('ajax:before', function() {
+      if (event.srcElement == $("#edit_album")[0]) {
+        c = $('#album_container')
+        c.hide().html('<h3>Saving changes...</h3>').fadeIn()
+      }
+    })
+});
+</script>

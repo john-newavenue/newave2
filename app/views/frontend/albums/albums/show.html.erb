@@ -6,36 +6,6 @@
 <% end %>
 <% end %>
 
-<div class="row">
-  <div class="large-6 columns">
-    <h3><%= yield(:title) %></h3>
-    <% if @album.description %>
-      <p><%= @album.description %></p>
-    <% end %>
-  </div>
-  <div class="large-6 columns" style="text-align: right;">
-
-  </div>
+<div id="album_container">
+<%= render :partial => 'frontend/albums/albums/show' %>
 </div>
-
-    
-
-<hr>
-
-<ul class="large-block-grid-4 small-block-grid-2">
-    <% @album.items.each do |item| %>
-        <% if item.asset %>
-        <li>
-            <p>
-              <%= link_to item.asset.image.url do %>
-                <%= image_tag item.asset.image(:medium_square), :data => {:caption => item.asset.image.url} %>
-              <% end %>
-            </p>
-            
-            <p><%= item.title %></p>
-
-            <hr>
-        </li>
-        <% end %>
-    <% end %>
-</ul>

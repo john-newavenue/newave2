@@ -10,6 +10,7 @@ module Physical
       validate :parent, :check_parent_valid
 
       has_many :items, :class_name => "::Physical::Album::AlbumItem", :source => :asset
+      accepts_nested_attributes_for :items
 
       private
 
