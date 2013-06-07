@@ -4,14 +4,12 @@
 
   <div class="row">
 
-
-
     <div class="large-2 push-10 columns">
 
     </div>
 
     <div class="large-10 pull-2 columns">
-      <%= render :partial => 'frontend/vendors/vendors/header' %>
+      
       <% if @vendor.object and can? :update, @vendor.object %>
         <% if !content_for?(:toolbar)  %>
           <%= render :partial => 'frontend/vendors/vendors/toolbar' %>
@@ -19,6 +17,9 @@
           <%= yield(:toolbar) %>
         <% end %>
       <% end %>
+
+      <%= render :partial => 'frontend/vendors/vendors/header' %>
+
       <%= yield %>
     </div>
 

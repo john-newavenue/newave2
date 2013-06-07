@@ -1060,6 +1060,16 @@ header {
 
 header#home-splash-container { padding: 0; margin: 0; }
 
+.vendor-header { 
+  margin-left: 0; 
+  margin-right: 0; 
+  margin-bottom: 1em !important; 
+  padding-top: 30px; 
+  padding-bottom: 10px; 
+  background: #efefef;
+}
+
+
 section#home-splash { 
   background: $NA-color-light-green;
   padding: 100px 0 100px;
@@ -1153,3 +1163,6 @@ fieldset fieldset {
   padding: 1.25em; 
   border: solid 1px #dddddd ;
 }
+
+.button-group { margin-bottom: 1em; }
+

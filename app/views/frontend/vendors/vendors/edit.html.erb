@@ -1,9 +1,7 @@
 <% provide(:title, "#{@vendor.name} - Edit Company Profile") %>
 
-<h3>Edit Company Profile</h3>
-
 <%= semantic_form_for @vendor.object, :as => :vendor, :url => vendor_path(@vendor.id), :method => "patch" do |f| %>
-  <%= f.inputs "" do %>
+  <%= f.inputs "Company Profile" do %>
     <%= f.input :name %>
     <%= f.input :logo, :as => :file %>
     <%= f.input :description,
@@ -17,6 +15,6 @@
 
   <%= f.actions do %>
       <%= f.action :submit, :as => :button, :label => "Save Changes", :class => "success button" %>
-      <%= f.action :cancel, :as => :link, :label => "Cancel and Go Back", :button_html => {:class => "neutral button"} %>
+      <%= f.action :cancel, :as => :link, :url => vendor_path(@vendor), :label => "Cancel and Go Back", :button_html => {:class => "neutral button"} %>
   <% end %>
 <% end %>

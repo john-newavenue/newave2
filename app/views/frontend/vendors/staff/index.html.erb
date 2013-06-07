@@ -24,7 +24,7 @@
 <hr>
 
 <%= semantic_form_for @added_vendor_member, :url => vendor_staff_index_path(@vendor), :method => "post", :as => "added_vendor_member" do |f| %>
-  <%= f.inputs "Add Staff Member" do %>
+  <%= f.inputs "Add Member" do %>
     <%= f.input :vendor_id, :as => :hidden, :value => @vendor.id %>
     <%= f.input :username, :label => "Username", :as => :string, :hint => "Enter the username you would like to list as a staff member for #{@vendor.name}" %>
     <%= f.action :submit, :as => :button, :label => "Add", :class => "small success button inline" %>
