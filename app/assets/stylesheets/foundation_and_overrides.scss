@@ -1115,6 +1115,10 @@ section#home-features {
 
 p.inline-hints { color: #999; }
 
+//
+// forms
+//
+
 textarea { height: auto; }
 
 i[class*="foundicon"] {
@@ -1140,7 +1144,18 @@ fieldset fieldset {
   }
 }
 
+.ui-state-highlight { background: yellow; border: 1px solid $NA-color-orange; }
+.draggable-handle.vertical { 
+  background: #efefef; 
+  text-align: center; 
+  font-size: .85em; 
+  padding: .2em; 
+  cursor: move; 
+}
+
+//
 // custom buttons
+//
 
 .button.neutral {
   @include button-base;

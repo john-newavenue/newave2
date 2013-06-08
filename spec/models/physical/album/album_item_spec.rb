@@ -5,7 +5,7 @@ describe "Album Item Model" do
   let(:album_item) { FactoryGirl.create(:album_item )}
 
   it "should respond to properties" do
-    %w(album title description deleted_at).each do |att| 
+    %w(album title description deleted_at position).each do |att| 
       expect(album_item).to respond_to(att.to_sym)
     end
   end

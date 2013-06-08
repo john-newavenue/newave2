@@ -12,18 +12,39 @@
     <a href="#" class="close">&times;</a>
   </div>
 
-  <ul class="large-block-grid-4 small-block-grid-2">
+  <ul class="large-block-grid-4 small-block-grid-2 sortable-album-items">
   
   <%= f.semantic_fields_for :items do |item| %>
     <% if item.object.asset %>
       <% asset = item.object.asset %>
-      <li class="item-<%= item.object.id %>">
+      <li class="item item-<%= item.object.id %>">
         <%= item.inputs :class => "nested inputs" do %>
+          <div class="draggable-handle vertical">Drag to Move</div>
+
           <% if asset.image %>
               <p><%= image_tag asset.image(:medium_square), :data => {:caption => asset.image.url} %></p>
           <% end %>
             <%= item.input :title, :label => false, :placeholder => "Title" %>
             <%= item.input :description, :as => :text, :input_html => { :rows => 2 }, :label => false, :placeholder => "Description"  %>
+
+            <li class="radio input optional" id="album_cover_image_input">
+              <ol class="choices-group">
+                <li class="choice">
+                  <label for="album_cover_image_id_<%= item.object.id %>">
+                    <input type="radio" 
+                      id="album_cover_image_id_<%= item.object.id %>" 
+                      name="album[cover_image_id]" 
+                      value="<%= item.object.id %>"
+                      <%= (item.object.id == @album.cover_image_id) ? "checked='checked'" : "" %>
+                    >
+                    Make cover image
+                  </label>
+                </li>
+              </ol>
+            </li>
+
+            <%= item.input :position, :as => :hidden, :class => "item-position-input" %>
+
             <%= link_to "Delete", item_path(item.object), :method => :delete, :class => "button warning small", :remote => true %>
           <% end %>
       </li>
@@ -40,6 +61,20 @@ $(document).ready( function () {
         c = $('#album_container')
         c.hide().html('<h3>Saving changes...</h3>').fadeIn()
       }
-    })
+  })
+
+  $('.formtastic.album#edit_album .sortable-album-items').sortable({
+    placeholder: "ui-state-highlight",
+    forcePlaceholderSize: true,
+    handle: ".draggable-handle",
+    containment: ".sortable-album-items",
+    stop: function() {
+
+      $('.sortable-album-items input[id^="album_items_attributes_"][id$="_position"] ').each( function(index, elem) {
+        $(elem).attr('value',index)
+      })
+    }
+  })
+
 });
 </script>
