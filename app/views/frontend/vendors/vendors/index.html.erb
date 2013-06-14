@@ -1,7 +1,17 @@
-here is a list of vendorss
+<% provide(:title, "Vendors" ) %>
 
-<ul>
+<h1><%=yield(:title) %></h1>
+
+<div class="row">
   <% @vendors.each do |vendor| %>
-  <li><%= link_to "#{vendor.name}", vendor_path(vendor) %></li>
+  <div class="columns large-4">
+    <div class="vendor tile">
+      <div class="logo-wrapper">
+        <%= image_tag vendor.profile_logo_url %>
+      </div>
+      <h5><%= link_to "#{vendor.name}", vendor_path(vendor) %></h5>
+      <p><%= truncate(vendor.description, :length => 120) %></p>
+    </div>
+  </div>
   <% end %>
-</ul>
+</div>

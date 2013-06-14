@@ -1,13 +1,19 @@
 <div class="row vendor-header">
-  <div class="large-3 columns">
+
+  <div class="large-3 push-9 columns">
+    <div class="logo-wrapper">
     <% if @vendor.object %>
       <%= link_to vendor_path(@vendor.object) do %>
-        <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name, :style => "border: 5px solid #ccc;" %>
+        <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name %>
       <% end %>
     <% end %>
+    </div>
   </div>
-  <div class="large-9 columns">
+
+  <div class="large-9 pull-3 columns">
     <h3><%= @vendor.name %></h3>
-    <h6><%= @vendor.vendor_type.name %></h6>
+    <p><%= @vendor.vendor_type.name %></p>
+    <p><%= @vendor.description %></p>
   </div>
+
 </div>

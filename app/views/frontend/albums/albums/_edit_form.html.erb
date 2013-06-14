@@ -4,7 +4,7 @@
     <%= f.input :description, :as => :text, :input_html => { :rows => 5 }  %>
 
     <%= f.action :submit, :as => :button, :label => "Save Changes", :class => "success button" %>
-    <%= f.action :cancel, :as => :link, :label => "Cancel and Go Back", :button_html => {:class => "neutral button"} %>
+    <%= f.action :cancel, :as => :link, :label => "Go Back", :button_html => {:class => "neutral button"} %>
   <% end %>
 
   <div data-alert class="alert-box alert">
@@ -12,7 +12,7 @@
     <a href="#" class="close">&times;</a>
   </div>
 
-  <ul class="large-block-grid-4 small-block-grid-2 sortable-album-items">
+  <ul class="large-block-grid-3 small-block-grid-2 sortable-album-items">
   
   <%= f.semantic_fields_for :items do |item| %>
     <% if item.object.asset %>
@@ -45,7 +45,7 @@
 
             <%= item.input :position, :as => :hidden, :class => "item-position-input" %>
 
-            <%= link_to "Delete", item_path(item.object), :method => :delete, :class => "button warning small", :remote => true %>
+            <%= link_to "Delete", item_path(item.object), :method => :delete, :class => "button warning small delete-item", :remote => true %>
           <% end %>
       </li>
     <% end %>

@@ -106,6 +106,18 @@ describe "Vendor Pages" do
     end
   end
 
+  describe "viewing vendors" do
+    it "should show architects" do
+      visit architects_path
+      expect(page).to have_title('Architects')
+      Physical::Vendor::Vendor.architects.each do |v|
+        expect(page).to have_link(v.name, vendor_profile(v.slug))
+      end
+    end
+  end
+
   pending "company work visible"
+  pending "vendor albums"
+  
 
 end

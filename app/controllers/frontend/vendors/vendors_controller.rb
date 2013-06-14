@@ -9,6 +9,8 @@ module Frontend
       def index
         # TODO: something....
         @vendors = Physical::Vendor::Vendor.all
+        @vendors = Physical::Vendor::VendorDecorator.decorate_collection(@vendors)
+        render 'architects'
       end
 
       def new
@@ -70,6 +72,19 @@ module Frontend
           end
         end
 
+        def get_vendors
+          if params.has_key?(:vendor_type)
+            type = Physical::Vendor::VendorType.find_by_name(params[:vendor_type])
+            if type
+              @vendors = Physical::Vendor::Vendor.find_by_vendor_type(type)
+              return
+            else
+              # show error, invalid type
+            end
+          end
+          @vendors = Physical::Vendor::Vendor.all
+        end
+
         def get_vendor
           if params.has_key? :slug
             @vendor = Physical::Vendor::Vendor.find_by_slug!(params[:slug])
@@ -84,6 +99,8 @@ module Frontend
 
         def resolve_layout
           case action_name
+          when 'index'
+            'one-column'
           when 'new'
             'admin'
           else 

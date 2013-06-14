@@ -1,21 +1,32 @@
+<% provide(:title, @album.title) if not content_for?(:title) %>
+
 <div class="row">
-  <div class="large-6 columns">
+
+  <div class="large-3 push-9 small-12 columns">
+    <% if @album.parent %>
+      <div class="logo-wrapper">
+        <%= link_to vendor_path(@album.parent) do %>
+          <%= image_tag @album.parent.logo(:profile),:title => @album.parent.name, :alt => @album.parent.name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="large-9 pull-3 small-12 columns">
     <h3><%= yield(:title) %></h3>
+    <% if @album.parent and @album.parent.name %>
+      <p>by <%= link_to @album.parent.name, vendor_path(@album.parent) %></p>
+    <% end %>
     <% if @album.description %>
       <p><%= @album.description %></p>
     <% end %>
   </div>
-  <div class="large-6 columns" style="text-align: right;">
-
-  </div>
 </div>
 
-<hr>
-
-<ul class="large-block-grid-4 small-block-grid-2">
+<ul class="large-block-grid-3 small-block-grid-2">
     <% @album.items.each do |item| %>
         <% if item.asset %>
-        <li class="item-<%= item.id %>">
+        <li class="item item-<%= item.id %>">
             <div class="item-contents-wrapper">
               <p>
                 <%= link_to item.asset.image.url do %>
@@ -33,3 +44,10 @@
         <% end %>
     <% end %>
 </ul>
+
+<% if @album.images.count == 0 %>
+<hr>
+<div class="alert-box secondary">
+  <h4>There are no images in this album.</h4>
+</div>
+<% end %>

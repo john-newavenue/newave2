@@ -2,7 +2,7 @@
   Physical::Project::ProjectRole.find_or_create_by_name(:name => r)
 end
 
-['General Contractor','Design-Build', 'Architects & Designers', 'Landscape Architects & Designers'].each do |r|
+['General Contractor','Design-Build', 'Architect', 'Landscape'].each do |r|
   Physical::Vendor::VendorType.find_or_create_by_name(:name => r)
 end
 

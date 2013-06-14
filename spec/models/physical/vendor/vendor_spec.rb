@@ -46,4 +46,9 @@ describe Physical::Vendor::Vendor do
     expect(vendor.add_member(vendor_user)).to be_nil
   end
 
+  it "should let me retrieve with architect scope" do
+    vendor = FactoryGirl.create(:vendor, :vendor_type => Physical::Vendor::VendorType.find_by_name('Architect'))
+    expect(Physical::Vendor::Vendor.architects.include? vendor).to be_true
+  end
+
 end

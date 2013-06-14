@@ -1,0 +1,22 @@
+<% provide(:title, "Architects" ) %>
+
+<h1><%=yield(:title) %></h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin in lorem eget lobortis. Proin justo velit, tincidunt vitae hendrerit sit amet, ultrices eu velit. Integer sit amet felis vehicula, vestibulum felis eget, dapibus nisl. Donec pulvinar, nibh sed vehicula feugiat, diam erat semper neque, et imperdiet magna mi non mi. Proin vel elementum turpis. Quisque at laoreet felis. In placerat nisl eu semper euismod. Aliquam sagittis condimentum massa eget sollicitudin. Pellentesque vitae est tristique, gravida purus vel, fringilla nibh. Sed laoreet erat erat, sed venenatis odio suscipit placerat.</p>
+
+
+<div class="row">
+  <% @vendors.each do |vendor| %>
+  <div class="columns large-4">
+    <div class="vendor tile">
+      <div class="logo-wrapper">
+        <%= link_to vendor_path(vendor) do %>
+          <%= image_tag vendor.profile_logo_url %>
+        <% end %>
+      </div>
+      <h5><%= link_to "#{vendor.name}", vendor_path(vendor) %></h5>
+      <p><%= truncate(vendor.description, :length => 120) %></p>
+    </div>
+  </div>
+  <% end %>
+</div>

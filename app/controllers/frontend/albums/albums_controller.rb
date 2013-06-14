@@ -67,7 +67,6 @@ module Frontend
           if @album.save
             format.js
           else
-
           end
           
         end

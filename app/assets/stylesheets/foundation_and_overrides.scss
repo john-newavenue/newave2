@@ -1061,12 +1061,13 @@ header {
 header#home-splash-container { padding: 0; margin: 0; }
 
 .vendor-header { 
-  margin-left: 0; 
-  margin-right: 0; 
-  margin-bottom: 1em !important; 
-  padding-top: 30px; 
-  padding-bottom: 10px; 
-  background: #efefef;
+  margin-bottom: 1.5em !important;
+
+  .logo-wrapper {
+    text-align: center;
+    padding: 1em;
+    border: 1px solid $NA-color-light-grey;
+  }
 }
 
 
@@ -1092,6 +1093,25 @@ section#home-features {
 }
 
 
+.logo-wrapper { 
+  text-align: center; 
+  border: 1px solid #eee;
+  padding: 1em; 
+}
+  
+.vendor.tile {
+  @include transition (all 0.25s ease-in-out);
+  margin: 1em 0;
+  padding: 1em;
+  height: 300px; 
+  overflow: hidden;
+  box-shadow: 0px 0px 3px 1px $NA-color-light-grey;
+  &:hover { 
+    box-shadow: 0px 0px 6px 1px $NA-color-dark-grey;
+  }
+}
+
+
 // slight top margin so that alert box doesn't butt up against topbar
 #flash-messages .alert-box { margin-top: $alert-bottom-margin; }
 
@@ -1100,7 +1120,10 @@ section#home-features {
   background: #111;
 }
 
+//
 //override formtastic
+//
+
 .formtastic {
   ol { margin-bottom: 0; }
   ol li { list-style: none; display: inline; }
