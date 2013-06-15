@@ -1012,11 +1012,13 @@ $topbar-margin-bottom: emCalc(0px);
 
 // Set the link colors and styles for top-level nav
 // $topbar-link-color: #fff;
+$topbar-link-color: #666;
 // $topbar-link-weight: bold;
 $topbar-link-weight: normal;
 // $topbar-link-font-size: emCalc(13px);
 
 // Style the top bar dropdown elements
+// $topbar-dropdown-bg: #333;
 // $topbar-dropdown-bg: #333;
 // $topbar-dropdown-link-color: #fff;
 // $topbar-dropdown-toggle-size: 5px;
@@ -1029,6 +1031,7 @@ $topbar-link-weight: normal;
 // $topbar-menu-link-font-size: emCalc(13px);
 // $topbar-menu-link-weight: bold;
 // $topbar-menu-link-color: #fff;
+$topbar-menu-link-color: $NA-color-dark-grey;
 // $topbar-menu-icon-color: #fff;
 // $topbar-menu-link-color-toggled: #888;
 // $topbar-menu-icon-color-toggled: #888;
@@ -1043,9 +1046,47 @@ $topbar-link-weight: normal;
 
 // -----------
 
-//
+// =========================================
 // New Avenue Presentation Elements
 //
+
+//
+// topbar
+//
+
+#topbar, #topbar .top-bar {
+  @include linear-gradient(to top, white, lighten($NA-color-light-grey,5));
+  .top-bar-section > ul, .top-bar-section > ul > li { 
+    @include linear-gradient(to top, white, lighten($NA-color-light-grey,5));
+  }
+}
+
+#topbar .top-bar-section > ul > .divider {
+  border-color: #ccc; 
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+}
+
+
+#topbar {
+  border-bottom: 10px solid $NA-color-light-green;
+  .title-area .name h1 img { vertical-align: bottom; }
+  .top-bar-section > ul > li > a { height: 32px; margin-top: 8px; background: none; }
+  .divider { height: 27px; margin-top: 13px; }
+  .top-bar.expanded  { 
+    .title-area { 
+      background: inherit; 
+      border-bottom: 10px solid $NA-color-light-green;
+    }
+    .divider { height: 1px; }
+  }
+  .right .dropdown i { font-size: 1.25em; }
+  .dropdown > li > a { 
+    background: #eee;
+    color: #666;
+  }
+}
+
 
 .hidden { display: none; }
 
@@ -1115,11 +1156,6 @@ section#home-features {
 // slight top margin so that alert box doesn't butt up against topbar
 #flash-messages .alert-box { margin-top: $alert-bottom-margin; }
 
-
-#topbar, .top-bar {
-  background: #111;
-}
-
 //
 //override formtastic
 //
@@ -1180,18 +1216,22 @@ fieldset fieldset {
 // custom buttons
 //
 
+.button.light-blue {
+  @include button-base;
+  @include inset-shadow;
+  @include button-style(lighten($NA-color-light-blue, 10), 0, false);
+}
+
 .button.neutral {
   @include button-base;
   @include inset-shadow;
   @include button-style($NA-color-light-grey, 0, false);
-  margin-bottom: 0;
 }
 
 .button.warning {
   @include button-base;
   @include inset-shadow;
   @include button-style($NA-color-orange, 0, false);
-  margin-bottom: 0;
 }
 
 .button { margin-bottom: 0; }

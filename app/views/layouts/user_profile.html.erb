@@ -4,13 +4,17 @@
 
   <div class="row">
 
+    <div class="large-3 columns">
 
-    <div class="large-2 columns">
+      <div style="padding: 1em; box-shadow: 0 0 1px 2px #efefef;">
+        <img src="http://placehold.it/188x188" alt="TODO: User profile image">
+      </div>
+      <br>
 
-      <img src="http://placehold.it/137x150" alt="TODO: User profile image">
+      <%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>
+
+      <h4>Projects</h4>
       
-      <h3 class="show-for-small"><%= @user.object ? @user.username  : current_user.username%></h3>
-
       <ul class="side-nav">
         <% if !@user or @user == current_user %>
           <li><%= active_link_to 'Edit Profile', edit_profile_path(@user.object), :wrap_tag => :li %></li>
@@ -24,12 +28,11 @@
 
     </div>
 
-    <div class="large-10 columns">
+    <div class="large-9 columns">
       <h3 class="hide-for-small"><%= @user.username %></h3>
       <hr />
       <%= yield %>
     </div>
-
 
   </div>
 

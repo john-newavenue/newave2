@@ -7,7 +7,11 @@
         <ul class="title-area">
           <!-- Title Area -->
           <li class="name">
-            <h1><%= link_to '[NA LOGO]', root_path %></a></h1>
+            <h1>
+              <%= link_to root_path do %>
+                <%= image_tag "logo-topbar.png" %>
+              <% end %>
+            </h1>
           </li>
           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -31,14 +35,12 @@
             <li class="divider"></li>
 
             <li><a href="#">Contact Us</a></li>
-            <li class="divider"></li>
             
           </ul>
 
 
           <!-- Right Nav Section -->
           <ul class="right">
-            <li class="divider hide-for-small"></li>
 
             <% if user_signed_in? %>
 
@@ -52,10 +54,26 @@
 
               <% end %>
               <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+
+            <li class="has-dropdown settings-dropdown">
+              <a href="#" class="settings show-for-large-up"><i class="general foundicon-settings"></i></a>
+              <a href="#" class="settings show-for-medium-down"><i class="general foundicon-settings"></i>Settings</a>
+              <ul class="dropdown">
+                <li><a href="#">Dropdown Level 1b</a></li>
+                <li><a href="#">Dropdown Level 1b</a></li>
+                <li><a href="#">Dropdown Level 1b</a></li>
+                <li><a href="#">Dropdown Level 1b</a></li>
+                <li><a href="#">Dropdown Level 1b</a></li>
+                <li><a href="#">Dropdown Level 1c</a></li>
+              </ul>
+            </li>
+
             <% else %>
+
               <li><%= link_to 'Sign Up', new_user_registration_path %></li>
               <li class="divider"></li>
               <li><%= link_to 'Sign In', new_user_session_path %></li>
+
             <% end %>
 
             <% if false %>
@@ -111,7 +129,6 @@
               <a class="button" href="#">Button!</a>
             </li>
             <% end %>
-
 
           </ul>
         </section>
