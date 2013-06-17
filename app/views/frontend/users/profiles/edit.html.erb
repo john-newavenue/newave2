@@ -1,14 +1,20 @@
 <% provide(:title, "#{@user.username} - Edit Profile") %>
 
 <%= semantic_form_for @profile, :as => :profile, :url => profile_path(@user), :method => "patch" do |f| %>
-  <%= f.inputs "Personal" do %>
+  <%= f.inputs "Profile Info" do %>
+    <%= f.input :avatar, :as => :file %>
+    <br />
+    <%= image_tag user_picture_for(@user, :original), :class => "user-profile-picture" %>
+  <% end %>
+
+  <%= f.inputs "Personal Info" do %>
     <div class="alert-box secondary"><i class='general foundicon-flag'></i>This information will not be publicly visible.</div>
     <%= f.input :first_name %>
     <%= f.input :middle_name %>
     <%= f.input :last_name %>
   <% end %>
   <%= f.actions do %>
-    <%= f.action :submit, :as => :button, :class => "small success button" %>
+    <%= f.action :submit, :as => :button, :label => 'Update', :class => "small success button" %>
     <%= link_to "Cancel and go back", user_profile_path(@user.slug) %>
   <% end %>
 <% end %>

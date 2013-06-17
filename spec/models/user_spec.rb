@@ -11,6 +11,7 @@ describe User do
   it { should respond_to(:email) }
   it { should respond_to(:username) }
   it { should respond_to(:slug) }
+  it { should respond_to(:profile) }
 
   describe "when email is not present" do
     before { @user.email = " " }

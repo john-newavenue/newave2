@@ -15,6 +15,7 @@ module Frontend
 
       def edit
         @user = ::User.find_by_id(params[:id])
+        @user.decorate
         @profile = @user.profile
       end
 
@@ -41,7 +42,7 @@ module Frontend
         end
 
         def profile_params
-          params.require(:profile).permit(:first_name, :middle_name, :last_name)
+          params.require(:profile).permit(:first_name, :middle_name, :last_name, :avatar)
         end
 
     end

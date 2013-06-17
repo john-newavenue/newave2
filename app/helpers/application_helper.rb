@@ -10,4 +10,17 @@ module ApplicationHelper
     pluralize(2, word).split(' ')[1..-1].join(' ')
   end
 
+  def user_icon_for(user, size = :tiny)
+    # for sizes, see User model
+    user = User.new if user == nil
+    # debugger
+    defaults = {
+      :tiny => 'icons/user-default-icon.png',
+      :profile => 'icons/user-default-icon-large.png'
+    }
+    user.profile.avatar.file? ? user.profile.avatar(size) : defaults[size]
+  end
+
+  alias_method :user_picture_for, :user_icon_for
+
 end

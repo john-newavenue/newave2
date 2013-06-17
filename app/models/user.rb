@@ -1,8 +1,19 @@
 class User < ActiveRecord::Base
 
-  rolify
+  #
+  # fields and associations
+  #
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable
+  has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
+  has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
+  belongs_to :address, :class_name => "Physical::General::Address"
+  has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
+  has_many :vendors, :through => :vendor_memberships
+  has_one :profile, :class_name => "Physical::User::UserProfile"
+
+  #
+  # validations
+  #
 
   validates :username, :presence => true, :uniqueness => {:case_sensitive => false}, :length => { :minimum => 3 },
             :format => { :with => /\A[A-Z0-9a-z\w\b\ \-\_\'\!&@#\.]+\z/i,
@@ -13,21 +24,28 @@ class User < ActiveRecord::Base
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
   validates :slug, :presence => true, :allow_blank => false
 
-  has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
-  has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
-  belongs_to :address, :class_name => "Physical::General::Address"
-  has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
-  has_many :vendors, :through => :vendor_memberships
-  has_one :profile, :class_name => "Physical::User::UserProfile"
+  #
+  # other
+  #
 
+  rolify
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable
   after_create :build_associated_models
   acts_as_url :username, :sync_url => true, :url_attribute => :slug
+
+
+  #
+  # scope
+  #
 
   scope :invited, lambda { where("users.invitation_token IS NOT NULL") }
   scope :not_invited, lambda { where("users.invitation_token IS NULL") }
   scope :active, lambda { where("users.invitation_token IS NULL OR users.invitation_accepted_at IS NOT NULL")}
   default_scope order('users.created_at ASC')
 
+  #
+  # methods
+  #
 
   private
 

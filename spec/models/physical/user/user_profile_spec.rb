@@ -7,6 +7,10 @@ describe Physical::User::UserProfile do
     user.profile
   }
 
+  it "should have an avatar" do
+    expect(profile).to respond_to(:avatar)
+  end
+
   it "should be created upon user creation" do
     expect(profile).to_not be_nil
   end
@@ -16,5 +20,7 @@ describe Physical::User::UserProfile do
       expect(profile).to respond_to(f.to_sym)
     end    
   end
+
+
 
 end

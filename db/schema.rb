@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130607222739) do
+ActiveRecord::Schema.define(version: 20130616224048) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -115,14 +115,18 @@ ActiveRecord::Schema.define(version: 20130607222739) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "user_profiles", force: true do |t|
-    t.integer "user_id"
-    t.string  "first_name"
-    t.string  "middle_name"
-    t.string  "last_name"
-    t.text    "bio"
-    t.string  "website_title"
-    t.string  "website_url"
-    t.integer "address_id"
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.text     "bio"
+    t.string   "website_title"
+    t.string   "website_url"
+    t.integer  "address_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree

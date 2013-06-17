@@ -1069,10 +1069,15 @@ $topbar-menu-link-color: $NA-color-dark-grey;
 
 
 #topbar {
+
   border-bottom: 10px solid $NA-color-light-green;
+
   .title-area .name h1 img { vertical-align: bottom; }
+  
   .top-bar-section > ul > li > a { height: 32px; margin-top: 8px; background: none; }
+  
   .divider { height: 27px; margin-top: 13px; }
+
   .top-bar.expanded  { 
     .title-area { 
       background: inherit; 
@@ -1080,11 +1085,22 @@ $topbar-menu-link-color: $NA-color-dark-grey;
     }
     .divider { height: 1px; }
   }
+user
   .right .dropdown i { font-size: 1.25em; }
   .dropdown > li > a { 
     background: #eee;
     color: #666;
   }
+  .user-icon {
+    width: 22px;
+    height: 22px;
+    margin-top: -5px;
+    margin-right: 5px;
+    box-shadow: 0 0 1px 1px $NA-color-light-grey;
+    background: white;
+  }
+
+  .settings-dropdown > a > i { font-size: 1.2em; }
 }
 
 
@@ -1155,6 +1171,16 @@ section#home-features {
 
 // slight top margin so that alert box doesn't butt up against topbar
 #flash-messages .alert-box { margin-top: $alert-bottom-margin; }
+
+//
+// profiles
+//
+
+.user-profile-picture {
+  padding: 1em;
+  margin-bottom: 1em;
+  box-shadow: 0 0 1px 2px $NA-color-light-grey;
+}
 
 //
 //override formtastic

@@ -6,9 +6,8 @@
 
     <div class="large-3 columns">
 
-      <div style="padding: 1em; box-shadow: 0 0 1px 2px #efefef;">
-        <img src="http://placehold.it/188x188" alt="TODO: User profile image">
-      </div>
+      <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture" %>
+
       <br>
 
       <%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>
@@ -16,14 +15,8 @@
       <h4>Projects</h4>
       
       <ul class="side-nav">
-        <% if !@user or @user == current_user %>
-          <li><%= active_link_to 'Edit Profile', edit_profile_path(@user.object), :wrap_tag => :li %></li>
-          <li><%= active_link_to 'Account settings', '#', :wrap_tag => :li %></li>
-          <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, :wrap_tag => :li %></li>
-        <% else %>
-          <li><%= active_link_to 'TODO: Follow user', '#', :wrap_tag => :li %></li>
-          <li><%= active_link_to 'TODO: Send message', '#', :wrap_tag => :li %></li>
-        <% end %>
+        <li><%= active_link_to 'TODO: Follow user', '#', :wrap_tag => :li %></li>
+        <li><%= active_link_to 'TODO: Send message', '#', :wrap_tag => :li %></li>
       </ul>
 
     </div>
@@ -36,7 +29,7 @@
 
   </div>
 
-</section>
+</section
 
 <% end %>
 
