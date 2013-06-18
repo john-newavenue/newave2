@@ -1,19 +1,39 @@
 <% content_for :content do %>
 
-<section>
+<section class="user-profile">
 
   <div class="row">
 
-    <div class="large-3 columns">
+    <div class="large-9 push-3 columns">
+      <h2><%= @user.username %></h2>
+      
+      <% if @user.has_role? :vendor %>
+        <p class="user-company">of <% @user.vendors.each do |vendor| %><%= link_to vendor.name, vendor_profile_path(vendor.slug) %><% end %></p>
+      <% end %>
 
-      <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture" %>
+      <div class="profile-picture-wrapper show-for-small">
+        <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture profile-picture" %> 
+      </div>
+
+      <div class="show-for-small">
+        <br>
+        <%= link_to "Send Message", "#", :class => "button light-blue show-for-small", :style => "width: 100%; " %>
+      </div>
+      
+
+      <hr />
+      <%= yield %>
+    </div>
+
+    <div class="large-3 pull-9 columns">
+      <div class="profile-picture-wrapper hide-for-small">
+        <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture profile-picture" %> 
+      </div>
 
       <br>
 
-      <%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>
+      <%= link_to "Send Message", "#", :class => "button light-blue hide-for-small", :style => "width: 100%; " %>
 
-      <h4>Projects</h4>
-      
       <ul class="side-nav">
         <li><%= active_link_to 'TODO: Follow user', '#', :wrap_tag => :li %></li>
         <li><%= active_link_to 'TODO: Send message', '#', :wrap_tag => :li %></li>
@@ -21,11 +41,7 @@
 
     </div>
 
-    <div class="large-9 columns">
-      <h3 class="hide-for-small"><%= @user.username %></h3>
-      <hr />
-      <%= yield %>
-    </div>
+
 
   </div>
 

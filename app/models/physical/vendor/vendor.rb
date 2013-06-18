@@ -22,7 +22,7 @@ module Physical
       # other
       #
 
-      has_attached_file :logo, styles: { profile: "137x150" }
+      has_attached_file :logo, styles: { profile: "188x250" }
 
       #
       # associations

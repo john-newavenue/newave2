@@ -7,15 +7,15 @@
 
 <div class="row">
   <% @vendors.each do |vendor| %>
-  <div class="columns large-4">
+  <div class="columns large-3">
     <div class="vendor tile">
-      <div class="logo-wrapper">
-        <%= link_to vendor_path(vendor) do %>
-          <%= image_tag vendor.profile_logo_url %>
+      <div class="logo-wrapper tile-image-wrapper">
+        <%= link_to vendor_profile_path(vendor.slug) do %>
+          <%= image_tag vendor_logo_for(vendor) %>
         <% end %>
       </div>
-      <h5><%= link_to "#{vendor.name}", vendor_path(vendor) %></h5>
-      <p><%= truncate(vendor.description, :length => 120) %></p>
+      <h5><%= link_to "#{vendor.name}", vendor_profile_path(vendor.slug) %></h5>
+      <p><%= truncate(vendor.description, :length => 60) %></p>
     </div>
   </div>
   <% end %>

@@ -1,1 +1,13 @@
-<%= link_to "#{vendor_member.username}", user_profile_path(vendor_member.slug) %>
+
+<div class="row staff-row">
+  <div class="columns small-2 large-2 user-avatar">
+    <div class="tiny tile">
+    <%= link_to user_profile_path(vendor_member.slug) do %>
+      <%= image_tag user_icon_for(vendor_member, :small) %>
+    <% end %>
+    </div>
+  </div>
+  <div class="columns large-8 small-8 user-info">
+    <p><%= link_to vendor_member.username, user_profile_path(vendor_member.slug) %></p>
+  </div>
+</div>

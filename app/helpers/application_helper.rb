@@ -13,14 +13,22 @@ module ApplicationHelper
   def user_icon_for(user, size = :tiny)
     # for sizes, see User model
     user = User.new if user == nil
-    # debugger
-    defaults = {
+    placeholders = {
       :tiny => 'icons/user-default-icon.png',
+      :small => 'icons/user-default-icon.png',
       :profile => 'icons/user-default-icon-large.png'
     }
-    user.profile.avatar.file? ? user.profile.avatar(size) : defaults[size]
+    user.profile.avatar.file? ? user.profile.avatar(size) : placeholders[size]
   end
 
   alias_method :user_picture_for, :user_icon_for
+
+  def vendor_logo_for(vendor, size = :profile)
+    vendor = Physical::Vendor::Vendor.new if vendor == nil
+    placeholders = {
+      :profile => 'icons/misc-icon.png'
+    }
+    vendor.logo.file? ? vendor.logo(size) : placeholders[size]
+  end
 
 end

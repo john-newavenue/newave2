@@ -1050,6 +1050,12 @@ $topbar-menu-link-color: $NA-color-dark-grey;
 // New Avenue Presentation Elements
 //
 
+[class*="column"] + [class*="column"]:last-child { float: left; }
+
+@mixin NA-shadow {
+  box-shadow: 0 0 1px 2px $NA-color-light-grey;
+}
+
 //
 // topbar
 //
@@ -1120,11 +1126,6 @@ header#home-splash-container { padding: 0; margin: 0; }
 .vendor-header { 
   margin-bottom: 1.5em !important;
 
-  .logo-wrapper {
-    text-align: center;
-    padding: 1em;
-    border: 1px solid $NA-color-light-grey;
-  }
 }
 
 
@@ -1156,34 +1157,74 @@ section#home-features {
   padding: 1em; 
 }
   
-.vendor.tile {
-  @include transition (all 0.25s ease-in-out);
-  margin: 1em 0;
-  padding: 1em;
-  height: 300px; 
-  overflow: hidden;
-  box-shadow: 0px 0px 3px 1px $NA-color-light-grey;
-  &:hover { 
-    box-shadow: 0px 0px 6px 1px $NA-color-dark-grey;
-  }
-}
+
 
 
 // slight top margin so that alert box doesn't butt up against topbar
 #flash-messages .alert-box { margin-top: $alert-bottom-margin; }
 
 //
-// profiles
+// thumbnails, grids, squares, tiles
 //
 
-.user-profile-picture {
+.tile {
+  @include NA-shadow;
+  @include transition (all 0.25s ease-in-out);
+  &:hover { 
+    box-shadow: 0px 0px 6px 1px $NA-color-dark-grey;
+  }
+  
+  margin: 1em 0;
   padding: 1em;
-  margin-bottom: 1em;
-  box-shadow: 0 0 1px 2px $NA-color-light-grey;
+  overflow: hidden;
+
+  .tile-image-wrapper {
+    padding: 1em;
+    text-align: center;
+    height: 200px;
+    width: 100%;
+    vertical-align: middle;
+    display: table-cell;
+  }
+
 }
 
+.tiny.tile {
+  padding: 0;
+  margin: 0;
+}
+
+.vendor.tile { height: 300px; }
+
+
 //
-//override formtastic
+// profiles, staff
+//
+
+.user-profile-picture {}
+
+.profile-picture { padding: 1em; }
+
+.profile-picture-wrapper {
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  @include NA-shadow;
+}
+
+
+
+.staff-row {
+  padding-bottom: .25em;
+  margin-bottom: .25em;
+  .user-avatar { width: 64px; }
+  .user-info { height: 64px; }
+}
+
+
+//
+// override formtastic
 //
 
 .formtastic {
