@@ -5,24 +5,6 @@
   <div class="row">
 
     <div class="large-9 push-3 columns">
-      
-    <h2><%= @vendor.name %></h2>
-    <p><%= @vendor.vendor_type.name %></p>
-
-    <div class="profile-picture-wrapper show-for-small">
-      <% if @vendor.object %>
-        <%= link_to vendor_path(@vendor.object) do %>
-          <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name, :class => "vendor-profile-picture profile-picture" %>
-        <% end %>
-      <% end %>      
-    </div>
-
-    <div class="show-for-small">
-      <br>
-      <%= link_to "Send Message", "#", :class => "button light-blue show-for-small", :style => "width: 100%; " %>
-    </div>
-
-    <hr>
 
       <% if @vendor.object and can? :update, @vendor.object %>
         <% if !content_for?(:toolbar)  %>
@@ -35,27 +17,8 @@
     </div>
 
     <div class="large-3 pull-9 columns">
-      <div class="profile-picture-wrapper hide-for-small">
-        <% if @vendor.object %>
-          <%= link_to vendor_path(@vendor.object) do %>
-            <%= image_tag @vendor.profile_logo_url,:title => @vendor.name, :alt => @vendor.name, :class => "vendor-profile-picture profile-picture" %>
-          <% end %>
-        <% end %>
-      </div>
-      <br />
-      <%= link_to "Send Message", "#", :class => "button light-blue hide-for-small", :style => "width: 100%; " %>
-
-      <br />
-
-      <h4>Team Members</h4>
-
-      <% @vendor.members.each do |vendor_member| %>
-      <%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %>
-      <% end %>
-
+      <%= render :partial => 'frontend/vendors/vendors/vendor_profile_sidebar', :locals => {:vendor => @vendor} %>
     </div>
-
-
 
   </div>
 
@@ -63,11 +26,8 @@
 
 <% end %>
 
-
-
 <% provide :modals do %>
 <%= render :partial => 'frontend/albums/albums/new_modal' %>
 <% end %>
-
 
 <%= render :template => 'layouts/application' %>

@@ -1,0 +1,9 @@
+<div class="profile-picture-wrapper">
+  <% if vendor %>
+    <%= link_to vendor_path(vendor) do %>
+      <%= image_tag vendor.profile_logo_url,:title => vendor.name, :alt => vendor.name, :class => "vendor-profile-picture profile-picture" %>
+    <% end %>
+  <% end %>
+</div>
+<br />
+<%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>

@@ -1,8 +1,9 @@
 <% provide(:title, @vendor.name) %>
 
-<p><%= @vendor.description %></p>
+<h2><%= @vendor.name %></h2>
+<p><%= @vendor.vendor_type.name %></p>
 
-<hr />
+<p><%= @vendor.description %></p>
 
 <h4>Albums</h4>
 

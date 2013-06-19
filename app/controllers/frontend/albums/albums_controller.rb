@@ -1,9 +1,10 @@
 module Frontend
   module Albums
     class AlbumsController < ApplicationController
-      layout :resolve_layout
+
+      layout 'albums'
       
-      before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+      before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
       before_action :authorize_user, :only => [:new, :create, :edit, :update, :destroy]
 
       def index
@@ -88,18 +89,6 @@ module Frontend
 
         def album_params
           params.require(:album).permit(:title, :description, :cover_image_id, :items_attributes => [:id, :title, :description, :mark_delete, :position])
-        end
-
-
-        def resolve_layout
-          if @album
-            case @album.parent_type
-            when "Physical::Vendor::Vendor"
-              'vendors'
-            end
-          else
-            'one-column'
-          end
         end
 
     end
