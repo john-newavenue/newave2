@@ -1,7 +1,7 @@
 module Frontend
-  module Admin
+  module Crm
 
-    class ProjectTypeController < AdminBaseController
+    class ProjectTypeController < CrmBaseController
 
       def index
         @project_types = Admin::ProjectType.all

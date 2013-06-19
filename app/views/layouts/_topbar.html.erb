@@ -51,6 +51,10 @@
                 <% end %>
               </li>
               <li class="divider"></li>
+                  <% if current_user.has_role? :admin %>
+                  <li><%= link_to crm_path, :title => "CRM" do %><i class="general foundicon-website"></i> CRM<% end %></li>
+                  <% end %>
+              <li class="divider"></li>                  
 
               <li class="has-dropdown settings-dropdown">
                 <a href="#" class="settings"><i class="general foundicon-settings"></i></a>
@@ -58,10 +62,6 @@
                   
                   <li><%= active_link_to 'Edit Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
                   <li><%=link_to "Settings", "#"%></li>
-
-                  <% if current_user.has_role? :admin %>
-                  <li><%= link_to 'Admin Dashboard', admin_path %></li>
-                  <% end %>
                   
                   <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
                 </ul>

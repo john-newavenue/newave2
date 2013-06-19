@@ -10,7 +10,7 @@ describe "Admin" do
   describe "admin home" do
     
     it 'should have descriptors' do
-      visit admin_path
+      visit crm_path
       expect(page).to have_title('Admin')
     end
 

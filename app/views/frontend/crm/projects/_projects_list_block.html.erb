@@ -6,7 +6,7 @@
   </thead>
   <tbody>
     <% Physical::Project::Project.limit(objects_per_page).each do |project| %>
-      <%= render :partial => 'frontend/admin/admin/projects/projects_list_row', :locals => {:project => project} %>
+      <%= render :partial => 'frontend/crm/projects/projects_list_row', :locals => {:project => project} %>
     <% end %>
   </tbody>
 </table>

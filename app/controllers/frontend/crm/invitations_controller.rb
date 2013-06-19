@@ -1,6 +1,6 @@
 module Frontend
-  module Admin
-    class InvitationsController < AdminBaseController
+  module Crm
+    class InvitationsController < CrmBaseController
 
       def index
         @invited_users = UserDecorator.decorate_collection(User.invited)
@@ -22,7 +22,7 @@ module Frontend
           project_role = Physical::Project::ProjectRole.find_by_id(params[:invitation][:project_role])
           user.add_role project_role.to_user_role
           flash[:notice] = "Invitation sent."
-          redirect_to admin_invitations_path
+          redirect_to crm_invitations_path
         else
           flash[:alert] = "There was an error with the invitation."
           render 'new'

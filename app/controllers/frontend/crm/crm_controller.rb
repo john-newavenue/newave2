@@ -1,7 +1,7 @@
 module Frontend
-  module Admin
+  module Crm
 
-    class AdminController < AdminBaseController
+    class CrmController < CrmBaseController
       layout :resolve_layout
 
       # authorize_resource :class => false

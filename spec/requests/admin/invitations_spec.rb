@@ -25,7 +25,7 @@ describe "Invitations" do
 
     describe "viewing" do
       it "should list all invitations" do
-        visit admin_invitations_path
+        visit crm_invitations_path
         page.has_title? "Invitations"
         User.invited.each { |u| page.has_content? u.username }
       end

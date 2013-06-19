@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource_or_scope)
     user = resource_or_scope
     if user.has_role? :admin
-      admin_path
+      crm_path
     else
       user_profile_path(:username_slug => resource_or_scope.slug)
     end

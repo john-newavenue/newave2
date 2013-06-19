@@ -1,6 +1,5 @@
 Newave2::Application.routes.draw do
 
-  get "admin_controller/index"
   get "project_type/index"
   get "project_type/edit"
   # static pages
@@ -21,14 +20,14 @@ Newave2::Application.routes.draw do
     match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
     match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
 
-    match '/admin' => 'admin/admin#index', :as => 'admin', :via => 'get'
-    scope :module => 'admin', :as => 'admin' do
-      resources :users, :path => '/admin/users'
-      resources :vendors, :path => '/admin/vendors'
-      resources :projects, :path => '/admin/projects'
+    match '/crm' => 'crm/crm#index', :as => 'crm', :via => 'get'
+    scope :module => 'crm', :as => 'crm' do
+      resources :users, :path => '/crm/users'
+      resources :vendors, :path => '/crm/vendors'
+      resources :projects, :path => '/crm/projects'
     end
 
-    resources :invitations, :as => "admin_invitations", :path => '/admin/invitations', :module => "admin"
+    resources :invitations, :as => "crm_invitations", :path => '/crm/invitations', :module => "crm"
 
     scope :module => 'users' do
       match '/u/:username_slug' => 'profiles#show', :as => 'user_profile', :via =>'get'

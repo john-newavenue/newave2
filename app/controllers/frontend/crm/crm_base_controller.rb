@@ -1,7 +1,7 @@
 module Frontend
-  module Admin
+  module Crm
 
-    class AdminBaseController < FrontendBaseController
+    class CrmBaseController < FrontendBaseController
       layout :resolve_layout
       
       before_filter :authenticate_user!

@@ -1,5 +1,5 @@
 module Frontend
-  module Admin
+  module Crm
     class VendorsController < ApplicationController
       layout 'admin'
       
