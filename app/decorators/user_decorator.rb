@@ -3,24 +3,12 @@ class UserDecorator < Draper::Decorator
 
   delegate_all
 
-  def roles
-    object.roles.map { |r| content_tag :span, r.name, :class => "label"}.join(" ").html_safe
-  end
-
   def username_and_email
     simple_format("#{object.username}\n#{object.email}")
   end
 
-  def invitation_sent_at
-    object.invitation_sent_at
-  end
-
   def project_count
     object.projects.count
-  end
-
-  def invited_by_id
-    object.invited_by_id
   end
 
   def invited_by

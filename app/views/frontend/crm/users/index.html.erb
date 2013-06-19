@@ -1,35 +1,7 @@
-<%= provide(:title, "Active Users") %>
+<%= provide(:title, "Users") %>
 
 <h3><%= yield(:title) %></h3>
 
-<hr>
+<%= render :partial => 'frontend/crm/users/users_list_block', :locals => {:users => @users} %>
 
-<table style="width: 100%; ">
-  <thead>
-    <tr>
-      <td>User</td>
-      <td>Joined</td>
-      <td>Role</td>
-      <td># Projects</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td>
-        <%= link_to user.username, user_profile_path(user.slug) %> - <br />
-        <%= user.email %>
-      </td>
-      <td>
-        <%= user.created_at %>
-      </td>
-      <td>
-        <%= user.roles %>
-      </td>
-      <td>
-        <%= user.project_count %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= will_paginate @users_raw %>

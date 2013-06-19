@@ -1,0 +1,48 @@
+<% provide(:title, "CRM - Users - #{@user.username}") %>
+
+<ul class="button-group">
+  <li><%= link_to "View Profile", user_profile_path(@user.slug), :class => "small button neutral" %></li>
+</ul>
+
+<%= semantic_form_for @user, :as => :user, :url => crm_user_path(@user) do |f| %>
+  <%= f.inputs 'User Info' do %>
+    <%= f.input :username %>
+    <%= f.input :email %>
+    <%= f.input :created_at, :as => :string %>
+    <li>
+      Role: <%= @user.roles.map { |r| r.name.gsub(/_/, ' ').capitalize }.join(", ") %>
+    </li>
+  <% end %>
+
+  <%= f.inputs "Profile Info" do %>
+    <%= f.semantic_fields_for :profile, :as => :profile_attributes do |profile| %>
+      <%= profile.input :first_name %>
+      <%= profile.input :middle_name %>
+      <%= profile.input :last_name %>
+      <%= profile.input :avatar, :as => :file, :required => false %>
+      <p>
+        <%= image_tag user_picture_for(@user, :profile) %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <fieldset class="inputs">
+    <legend>
+      <span>
+        Projects
+      </span>
+    </legend>
+    <ul>
+      <% @user.projects.each do |project| %>
+        <li>
+          <%= link_to project.title, project_path(project) %>
+        </li>
+      <% end %>
+    </ul>    
+  </fieldset>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :class => "small success button", :label => "Save" %>
+    <%= link_to "Cancel and Go Back to Users", crm_users_path, :class => "small neutral button large" %>
+  <% end %>
+<% end %>

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
   has_many :vendors, :through => :vendor_memberships
   has_one :profile, :class_name => "Physical::User::UserProfile"
+  accepts_nested_attributes_for :profile
 
   #
   # validations

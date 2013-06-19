@@ -87,3 +87,4 @@ gem "paperclip", "~> 3.0" # attachments
 gem 'fog' # cloud services
 gem 'foreigner' # foreign key support for migrations
 gem 'paranoia', :git => 'git://github.com/radar/paranoia.git' # soft delete
+gem 'will_paginate', '~> 3.0'

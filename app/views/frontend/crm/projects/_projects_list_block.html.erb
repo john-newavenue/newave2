@@ -1,11 +1,11 @@
-<table style="width: 100%;">
+<table class="projects-list-block">
   <thead>
     <th>Title</th>
     <th>Created</th>
     <th>Team Members</th>
   </thead>
   <tbody>
-    <% Physical::Project::Project.limit(objects_per_page).each do |project| %>
+    <% projects.each do |project| %>
       <%= render :partial => 'frontend/crm/projects/projects_list_row', :locals => {:project => project} %>
     <% end %>
   </tbody>

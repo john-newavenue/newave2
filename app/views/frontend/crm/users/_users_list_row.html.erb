@@ -6,5 +6,5 @@
   </td>
   <td><%= user.created_at %></td>
   <td><%= user.roles.map(&:name).join(', ') %></td>
-  <td><%= link_to crm_user_path(user), :title => "Edit" do %><i class="general foundicon-address-book"></i><% end %></td>
+  <td><%= link_to edit_crm_user_path(user), :title => "Edit" do %><i class="general foundicon-edit"></i><% end %></td>
 </tr>
