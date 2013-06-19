@@ -21,11 +21,11 @@ Newave2::Application.routes.draw do
     match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
     match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
 
-    # TODO: create admin user and role manager
     match '/admin' => 'admin/admin#index', :as => 'admin', :via => 'get'
     scope :module => 'admin', :as => 'admin' do
       resources :users, :path => '/admin/users'
       resources :vendors, :path => '/admin/vendors'
+      resources :projects, :path => '/admin/projects'
     end
 
     resources :invitations, :as => "admin_invitations", :path => '/admin/invitations', :module => "admin"

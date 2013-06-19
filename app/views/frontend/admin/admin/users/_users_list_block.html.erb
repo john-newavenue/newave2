@@ -1,0 +1,16 @@
+<table style="width: 100%;">
+  <thead>
+    <th>User</th>
+    <th>Joined</th>
+    <th>Role</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% User.limit(objects_per_page).each do |user| %>
+      <%= render :partial => 'frontend/admin/admin/users/users_list_row', :locals => {:user => user} %>
+    <% end %>
+  </tbody>
+</table>
+
+
+    

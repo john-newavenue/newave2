@@ -61,7 +61,6 @@
 
                   <% if current_user.has_role? :admin %>
                   <li><%= link_to 'Admin Dashboard', admin_path %></li>
-                  <li class="divider"></li>
                   <% end %>
                   
                   <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>

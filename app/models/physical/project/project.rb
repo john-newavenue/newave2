@@ -16,6 +16,8 @@ module Physical
 
       accepts_nested_attributes_for :address
 
+      default_scope order('created_at DESC')
+
       def method_missing name, *args, &block
 
         name = name.to_s.downcase

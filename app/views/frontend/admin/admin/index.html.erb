@@ -1,3 +1,13 @@
 <% provide(:title, 'Admin') %>
 
-TODO: Admin dashboard.
+<h3>New Users</h3>
+
+<%= render :partial => 'frontend/admin/admin/users/users_list_block', :locals => {:objects_per_page => 10} %>
+
+<hr>
+
+<h3>New Projects</h3>
+
+<%= render :partial => 'frontend/admin/admin/projects/projects_list_block', :locals => {:objects_per_page => 10} %>
+
+<hr>

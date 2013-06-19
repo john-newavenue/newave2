@@ -18,6 +18,7 @@ module Physical
       validates_with AttachmentContentTypeValidator, :attributes => :avatar, :content_type => /^image\/(png|gif|jpeg|jpg)/
       validates_with AttachmentSizeValidator, :attributes => :avatar, :in => (1.kilobytes..(500).kilobytes)
 
+
     end
   end
 end

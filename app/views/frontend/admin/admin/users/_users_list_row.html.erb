@@ -1,0 +1,10 @@
+<tr>
+  <td>
+    <%= link_to user_profile_path(user.slug) do %>
+      <%= image_tag user_icon_for(user, :tiny), :class => "user-icon" %> <%= user.username %>
+    <% end %>
+  </td>
+  <td><%= user.created_at %></td>
+  <td><%= user.roles.map(&:name).join(', ') %></td>
+  <td><%= link_to admin_user_path(user), :title => "Edit" do %><i class="general foundicon-address-book"></i><% end %></td>
+</tr>

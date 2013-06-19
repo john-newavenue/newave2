@@ -1,0 +1,11 @@
+<tr>
+  <td><%= link_to project.title, project_path(project) %></td>
+  <td><%= project.created_at %></td>
+  <td>
+    <ul>
+    <% project.members.each do |member| %>
+      <li><%= link_to member.username, user_profile_path(member.slug) %></li>
+    <% end %>
+    </ul>
+  </td>
+</tr>

@@ -944,6 +944,7 @@ $side-nav-font-size: emCalc(16px);
 
 // These control the row padding and font styles
 // $table-row-padding: emCalc(9px) emCalc(10px);
+$table-row-padding: emCalc(4px) emCalc(4px);
 // $table-row-font-size: emCalc(14px);
 // $table-row-font-color: #222;
 // $table-line-height: emCalc(18px);
@@ -1056,6 +1057,8 @@ $topbar-menu-link-color: $NA-color-dark-grey;
   box-shadow: 0 0 1px 2px $NA-color-light-grey;
 }
 
+table td { vertical-align: top; }
+
 //
 // topbar
 //
@@ -1097,16 +1100,17 @@ user
     background: #eee;
     color: #666;
   }
-  .user-icon {
-    width: 22px;
-    height: 22px;
-    margin-top: -5px;
-    margin-right: 5px;
-    box-shadow: 0 0 1px 1px $NA-color-light-grey;
-    background: white;
-  }
 
   .settings-dropdown > a > i { font-size: 1.2em; }
+}
+
+.user-icon {
+  width: 22px;
+  height: 22px;
+  margin-top: -5px;
+  margin-right: 5px;
+  box-shadow: 0 0 1px 1px $NA-color-light-grey;
+  background: white;
 }
 
 

@@ -2,21 +2,27 @@ module Frontend
   module Admin
 
     class AdminBaseController < FrontendBaseController
-      layout 'admin'
+      layout :resolve_layout
       
       before_filter :authenticate_user!
       before_action :authorize_user
 
-      def index
-      end
-
       private
 
         def authorize_user
-          redirect_to root_url unless current_user and current_user.has_role? :admin
+          redirect_to root_url unless current_user and (current_user.has_role? :admin or current_user.has_role? :project_manager)
         end
 
-      end
+        def resolve_layout
+          case action_name
+          when 'index'
+            'one-column'
+          else
+            'admin'
+          end
+        end
+
+    end
 
   end
 end
