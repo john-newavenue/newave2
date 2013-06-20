@@ -29,6 +29,10 @@
 }(function ($) {
     'use strict';
 
+    if ($.blueimp.fileupload.prototype.options.processQueue == undefined) {
+        document.location.reload(true)
+    }
+
     // Append to the default processQueue:
     $.blueimp.fileupload.prototype.options.processQueue.push(
         {

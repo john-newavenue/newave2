@@ -3,6 +3,7 @@ module Frontend
     class UploadsController < ApplicationController
 
       before_filter :set_container
+      protect_from_forgery :except => [:create]
 
       # # GET /uploads
       # # GET /uploads.json
@@ -45,19 +46,24 @@ module Frontend
       # POST /uploads
       # POST /uploads.json
       def create
-        @upload = Logical::Asset::Upload.new(:file => upload_params[0], :container => @container)
-        respond_to do |format|
-          if @upload.save
-            format.html {
-              render :json => [@upload.to_jq_upload].to_json,
-              :content_type => 'text/html',
-              :layout => false
-            }
-            format.json { render json: {files: [@upload.to_jq_upload]}, status: :created, location: @upload.to_jq_upload["original"] }
-          else
-            format.html { render action: "new" }
-            format.json { render json: @upload.errors, status: :unprocessable_entity }
+        begin
+          @upload = Logical::Asset::Upload.new(:file => upload_params[0], :container => @container)
+          respond_to do |format|
+            if @upload.save
+              format.html {
+                render :json => [@upload.to_jq_upload].to_json,
+                :content_type => 'text/html',
+                :layout => false
+              }
+              format.json { render json: {files: [@upload.to_jq_upload]}, status: :created, location: @upload.to_jq_upload["original"] }
+            else
+              format.html { render action: "new" }
+              format.json { render json: @upload.errors, status: :unprocessable_entity }
+            end
           end
+        rescue => error
+          debugger
+          redirect_to root_path
         end
       end
 
@@ -102,6 +108,7 @@ module Frontend
         end
 
         def upload_params
+          # params.merge({:files => {}})
           params.require(:files)
         end
 
