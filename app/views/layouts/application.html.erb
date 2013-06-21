@@ -27,10 +27,7 @@
 
     <%= render "layouts/flash" %>
 
-    <br />
-
     <%= content_for?(:content) ? yield(:content) : yield %>
-
     
     <%= yield(:scripts) if content_for?(:scripts) %>
 
