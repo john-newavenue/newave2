@@ -15,10 +15,25 @@ Newave2::Application.routes.draw do
 
   scope :module => 'frontend' do
 
+    #
     # static pages
+    #
+
     match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
+
     match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
+    %w(/about/terms /about/tos /tos).each do |p|
+      match p => redirect('/terms'), :via => 'get'
+    end
+
     match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
+    %w(/about/privacy /privacy-policy /about/privacy-policy).each do |p|
+      match p => redirect('/privacy'), :via => 'get'
+    end
+
+    #
+    # Static Pages
+    #
 
     match '/crm' => 'crm/crm#index', :as => 'crm', :via => 'get'
     scope :module => 'crm', :as => 'crm' do

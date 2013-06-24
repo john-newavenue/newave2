@@ -1,19 +1,28 @@
-<hr />
-
-<footer class="row">
-  <div class="large-12 columns">
-    <div class="row">
-      <div class="large-6 columns">
-        <p>&copy; Copyright New Avenue, Inc.</p>
-      </div>
-      <div class="large-6 columns">
-        <ul class="inline-list right">
-          <li><a href="#">[FACEBOOK]</a></li>
-          <li><a href="#">[TWITTER]</a></li>
-          <li><a href="#">[RSS]</a></li>
-          <li><a href="#">[G+]</a></li>
-        </ul>
-      </div>
+<section class="footer">
+  <div class="row">
+    <div class="large-8 small-12 columns">
+  
+      <ul class="button-group footer-links show-for-medium-up">
+        <%= render :partial => "layouts/footer_links" %>
+      </ul>
+  
+      <ul class="side-nav show-for-small">
+        <%= render :partial => "layouts/footer_links" %>
+      </ul>
+  
     </div>
-  </div> 
-</footer>
+    <div class="large-4 small-12 columns">
+      <ul class="button-group social-buttons">
+        <li><%= link_to "https://www.facebook.com/NewAvenueHomes", :target => "_blank" do %><i class="social foundicon-facebook"></i><% end %></li>
+        <li><%= link_to "https://twitter.com/#!/NewAvenueHomes", :target => "_blank" do %><i class="social foundicon-twitter"></i><% end %></li>
+        <li><%= link_to "http://pinterest.com/NewAvenue/", :target => "_blank" do %><i class="social foundicon-pinterest"></i><% end %></li>
+        <li><%= link_to "http://blog.newavenuehomes.com/", :target => "_blank" do %><i class="social foundicon-wordpress"></i><% end %></li>
+      </ul>
+    </div>
+  
+    <div class="large-12 columns">
+      <p>&copy; 2013 New Avenue, Inc.</p>
+    </div>
+  
+  </div>
+</section>

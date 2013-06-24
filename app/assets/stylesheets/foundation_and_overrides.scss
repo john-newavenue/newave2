@@ -9,6 +9,7 @@ $NA-color-dark-grey: #666666;
 $NA-color-light-grey: lighten($NA-color-dark-grey, 50%);
 $NA-color-orange: #FF9933;
 $NA-color-light-blue: #3399CC;
+$NA-error-label-color: red;
 
 // Some plugins
 @import "bourbon";
@@ -1051,6 +1052,10 @@ $topbar-menu-link-color: $NA-color-dark-grey;
 // New Avenue Presentation Elements
 //
 
+//
+// Global
+//
+
 [class*="column"] + [class*="column"]:last-child { float: left; }
 
 @mixin NA-shadow {
@@ -1060,8 +1065,14 @@ $topbar-menu-link-color: $NA-color-dark-grey;
 table td { vertical-align: top; }
 table { width: 100%; }
 
+.hidden { display: none; }
+
+#flash-messages .alert-box { margin-top: $alert-bottom-margin; } // so that alert box doesn't butt up against topbar
+
+.center-text { text-align: center;}
+
 //
-// topbar
+// Topbar
 //
 
 #topbar, #topbar .top-bar {
@@ -1095,7 +1106,6 @@ table { width: 100%; }
     }
     .divider { height: 1px; }
   }
-user
   .right .dropdown i { font-size: 1.25em; }
   .dropdown > li > a { 
     background: #eee;
@@ -1114,10 +1124,18 @@ user
   background: white;
 }
 
+.row.stage {
+  padding-top: 3em;
+  padding-bottom: 3em;
+  p { font-size: 1.2em; font-family: 'Open Sans', sans-serif }
+  h3 { margin-top: 1em; }
+}
 
-.hidden { display: none; }
 
-$NA-error-label-color: red;
+//
+// Header
+//
+
 
 header {
   background: $NA-color-light-green;
@@ -1148,12 +1166,6 @@ section#home-splash {
   h1 { margin-top: 1em; }
 }
 
-.row.stage {
-  padding-top: 3em;
-  padding-bottom: 3em;
-  p { font-size: 1.2em; font-family: 'Open Sans', sans-serif }
-  h3 { margin-top: 1em; }
-}
 
 
 .logo-wrapper { 
@@ -1170,12 +1182,44 @@ section.page-content {
   margin-top: 1em;
 }
 
+//
+// Footer
+//
 
-// slight top margin so that alert box doesn't butt up against topbar
-#flash-messages .alert-box { margin-top: $alert-bottom-margin; }
+section.footer {
+  background: $NA-color-light-grey;
+  border-top: 1px solid darken($NA-color-light-grey,5);
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  margin-top: 1.5em;
+  
+  .columns { font-size: .75em; }
+  
+  ul { font-size: inherit; margin-bottom: 0; }
+
+  ul.footer-links { 
+
+    margin-top: .5em;
+
+    li {
+      padding-left: 1em;
+      padding-right: 1em;
+      border-right: 1px solid darken($NA-color-light-grey,10);
+      &:first-child { padding-left: 0; }
+      &:last-child { border-right: 0; padding-right: 0; }
+    }
+
+  }
+  
+  .social-buttons { 
+    font-size: 2.25em;
+    a i { color: $NA-color-dark-grey; }
+  }
+
+}
 
 //
-// thumbnails, grids, squares, tiles
+// Thumbnails, Tiles, Grids
 //
 
 .tile {
@@ -1234,7 +1278,7 @@ section.page-content {
 
 
 //
-// override formtastic
+// Forms
 //
 
 .formtastic {
@@ -1250,10 +1294,6 @@ section.page-content {
 }
 
 p.inline-hints { color: #999; }
-
-//
-// forms
-//
 
 textarea { height: auto; }
 
@@ -1290,7 +1330,7 @@ fieldset fieldset {
 }
 
 //
-// custom buttons
+// Buttons
 //
 
 .button.light-blue {

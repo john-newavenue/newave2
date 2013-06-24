@@ -9,7 +9,7 @@
       </div>
       <div class="large-6  columns">
         <h1>New Avenue</h1>
-        <h4>The marketplace for your next<br class="hide-for-small"> generation small home.</h4>
+        <h4>We help you build your small home or in-law unit and eliminate the stress of dealing with permits and contractors.</h4>
         <a href="#" class="large button neutral">Start My Project</a>
       </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="large-6 columns">
       <h3>Improve your livelihood</h3>
       <p>By building an accessory dwelling unit, backyard cottage, micro unit, or in-law suite, you create opportunity for family, friends, work, and play. </p>
-      <%= link_to "Learn More", '#', :class => 'button neutral small radius' %>
+      <%= link_to "Read about our clients", '#', :class => 'button neutral small radius' %>
     </div>
     <div class="large-5 large-offset-1 columns">
       <%= image_tag 'http://lorempixel.com/400/300/people' %>
@@ -46,7 +46,7 @@
     <div class="large-6 large-offset-1 push-5 columns">
       <h3>Why New Avenue?</h3>
       <p>New Avenue is the leading backyard cottage and small home expert. We have over 50 projects and growing in the San Francisco Bay Area!</p>
-      <%= link_to "Learn More", '#', :class => 'button neutral small radius' %>
+      <%= link_to "See what we're about", '#', :class => 'button neutral small radius' %>
     </div>
     <div class="large-5 pull-6 columns">
       <%= image_tag 'http://lorempixel.com/400/300/abstract' %>
@@ -60,7 +60,7 @@
     <div class="large-6 columns">
       <h3>We make it easy</h3>
       <p>Adding to your home or building a small home is a walk in the park with New Avenue. We bring our vetted and certified network of architects and builders to you.</p>
-      <%= link_to "Learn More", '#', :class => 'button neutral small radius' %>
+      <%= link_to "Understand our process", '#', :class => 'button neutral small radius' %>
     </div>
     <div class="large-5 large-offset-1 columns">
       <%= image_tag 'http://lorempixel.com/400/300/city' %>
@@ -69,18 +69,35 @@
 
   <hr>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <div style="text-align: center; padding: 1em;">
-        <h1>Contact us for free consultation!</h1>
-        <%= link_to 'Design and Build with New Avenue', '#', :class => 'button large radius' %>
-      </div>
+  <div class="row center-text">
+    <div class="large-4 small-6 columns">
+      <h4>What are you waiting for?</h4>
+      <%= link_to 'Get Started', '#', :class => 'button radius' %>
     </div>
-  </div>
+    <div class="large-4 small-6 columns">
+      <h4>Want to learn more?</h4>
+      <ul class="side-nav">
+        <li><%= link_to "Visit the Help Center", "#" %></li>
+      </ul>
+    </div>
+    <div class="large-4 small-12 columns">
+      <h4>Recommend New Avenue</h4>
 
-  <div class="row">
-    <div class="large-12 columns" style="text-align: center;">
-      TODO: MAD LIB FORM AND/OR FINANCING FORM
+      <!-- facebook --> 
+      <div class="fb-like" data-href="https://www.facebook.com/NewAvenueHomes" data-send="true" data-layout="button_count" data-width="300" data-show-faces="true"></div>
+      <div id="fb-root" style="display: inline-block;"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=394037200611376";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- twitter -->
+      <a data-url="http://www.newavenuehomes.com" class="twitter-share-button" data-lang="en" data-count="none" data-text="New Avenue makes it easy to build a small home, in-law suite, or cottage!">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
     </div>
   </div>
 
