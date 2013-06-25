@@ -26,6 +26,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'syntax'
+  gem 'poltergeist'
 end
 
 group :test, :development do
@@ -88,3 +89,4 @@ gem 'fog' # cloud services
 gem 'foreigner' # foreign key support for migrations
 gem 'paranoia', :git => 'git://github.com/radar/paranoia.git' # soft delete
 gem 'will_paginate', '~> 3.0'
+gem 'acts-as-taggable-on'

@@ -16,4 +16,10 @@ describe "Album Item Model" do
     expect(Physical::Album::AlbumItem.find_by_id(album_item.id)).to be_nil
   end
 
+  it "should be taggable" do
+    expect(album_item).to respond_to(:tag_list)
+    album_item.tag_list.add(%w(red yellow green))
+    expect(album_item.tag_list).to include("red")
+  end
+
 end
