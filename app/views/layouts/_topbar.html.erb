@@ -13,8 +13,7 @@
               <% end %>
             </h1>
           </li>
-          <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+          <li class="toggle-topbar"><a href="#"><span class="menu-label">Menu</span></a></li>
         </ul>
 
         <section class="top-bar-section">
@@ -35,6 +34,7 @@
             <li class="divider"></li>
 
             <li><a href="#">Contact Us</a></li>
+            <li class="divider"></li>
             
           </ul>
 
@@ -43,7 +43,6 @@
           <ul class="right">
 
             <% if user_signed_in? %>
-
               <li>
                 <%= link_to user_profile_path(current_user.slug) do %>
                   <%=image_tag user_icon_for(current_user), :class=> "user-icon" %>
@@ -51,18 +50,19 @@
                 <% end %>
               </li>
               <li class="divider"></li>
-                  <% if current_user.has_role? :admin %>
-                  <li><%= link_to crm_path, :title => "CRM" do %><i class="general foundicon-website"></i> CRM<% end %></li>
-                  <% end %>
-              <li class="divider"></li>                  
+              
+              <% if current_user.has_role? :admin %>
+                <li><%= link_to crm_path, :title => "CRM" do %><i class="general foundicon-website"></i> CRM<% end %></li>
+                <li class="divider"></li>
+              <% end %>
+              
 
               <li class="has-dropdown settings-dropdown">
-                <a href="#" class="settings"><i class="general foundicon-settings"></i></a>
+                <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Settings</span></a>
                 <ul class="dropdown">
                   
                   <li><%= active_link_to 'Edit Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
                   <li><%=link_to "Settings", "#"%></li>
-                  
                   <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
                 </ul>
               </li>
