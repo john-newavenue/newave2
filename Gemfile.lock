@@ -89,6 +89,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (0.3.8)
+      capybara (>= 1.0, < 3)
     choice (0.1.6)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -295,6 +297,7 @@ DEPENDENCIES
   bourbon (~> 3.1.6)
   cancan
   capybara
+  capybara-screenshot
   coffee-rails (~> 4.0.0.beta1)
   cucumber-rails
   database_cleaner

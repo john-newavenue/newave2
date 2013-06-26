@@ -30,3 +30,15 @@ RSpec::Matchers.define :have_error_message do |message|
     expect(page).to have_selector('div.alert-box.alert', text: message)
   end
 end
+
+def take_screenshot
+  if false
+    meta = example.metadata
+    filename = File.basename(meta[:file_path])
+    line_number = meta[:line_number]
+    screenshot_name = "screenshot-#{filename}-#{line_number}.png"
+    screenshot_path = "#{Rails.root.join("tmp", "screenshots")}/#{screenshot_name}"
+    puts meta[:full_description] + "\n  Screenshot: #{screenshot_path}"
+    page.save_screenshot screenshot_path, :full => true
+  end
+end

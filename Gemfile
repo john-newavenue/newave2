@@ -25,8 +25,10 @@ group :test do
   gem 'database_cleaner'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'syntax'
   gem 'poltergeist'
+
 end
 
 group :test, :development do

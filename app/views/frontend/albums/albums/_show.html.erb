@@ -8,22 +8,33 @@
   <p><%= @album.description %></p>
 <% end %>
 
-<ul class="large-block-grid-3 small-block-grid-2">
+<ul class="large-block-grid-3 small-block-grid-1 album-items">
     <% @album.items.each do |item| %>
         <% if item.asset %>
         <li class="item item-<%= item.id %>">
             <div class="item-contents-wrapper">
-              <p>
-                <%= link_to item.asset.image.url do %>
-                  <%= image_tag item.asset.image(:medium_square), :data => {:caption => item.asset.image.url} %>
-                <% end %>
-              </p>
+              
+              <%= link_to item.asset.image.url do %>
+                <%= image_tag item.asset.image(:medium_square), :class => "item-thumb", :data => {:caption => item.asset.image.url} %>
+              <% end %>
+              
             
-              <p><%= !item.title.blank? ? truncate(item.title,:length => 30) : simple_format("&nbsp;") %></p>
+              <h6 class="title"><%= !item.title.blank? ? truncate(item.title,:length => 30) : "Untitled"  %></h6>
 
-              <ul class="button-group">
-                <li><%= link_to "#", :class => "button small neutral icon-only" do %><i class="general foundicon-heart"></i><% end %></li>
+              <ul class="button-group radius">
+                <li><%= link_to "#", :class => "button tiny neutral icon-only" do %><i class="general foundicon-heart"></i><% end %></li>
               </ul>
+
+              <div class="item-tags-wrapper show-for-small">
+                <%= image_tag "tag-green-icon.png", :class => "tag-list-icon", :alt => "Tags", :title => "Tags" %>
+                <ul class="item-tags">
+                  <% item.tag_list.each do |tag| %>
+                    <li><%= link_to tag, "#" %></li>
+                  <% end %>
+                </ul>
+
+              </div>
+
             </div>
         </li>
         <% end %>

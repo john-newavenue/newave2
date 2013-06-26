@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require tag-it.min
 //= require foundation
 //= require turbolinks
 

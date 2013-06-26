@@ -26,6 +26,9 @@
           <% end %>
             <%= item.input :title, :label => false, :placeholder => "Title" %>
             <%= item.input :description, :as => :text, :input_html => { :rows => 2 }, :label => false, :placeholder => "Description"  %>
+            <%= item.input :tag_list, :label => "Tags, comma-separated", :input_html => { :rows => 2, :class => "taggable tagit", :value => item.object.tag_list } %>
+
+            <br>
 
             <li class="radio input optional" id="album_cover_image_input">
               <ol class="choices-group">
@@ -45,7 +48,7 @@
 
             <%= item.input :position, :as => :hidden, :class => "item-position-input" %>
 
-            <%= link_to "Delete", item_path(item.object), :method => :delete, :class => "button warning small delete-item", :remote => true %>
+            <%= link_to "Delete Forever", item_path(item.object), :method => :delete, :class => "button warning small delete-item", :remote => true %>
           <% end %>
       </li>
     <% end %>
@@ -75,6 +78,11 @@ $(document).ready( function () {
       })
     }
   })
+
+  $('.taggable').tagit({
+    caseSensitive: false,
+    placeholderText : 'Type new tag'
+  });
 
 });
 </script>

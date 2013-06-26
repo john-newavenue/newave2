@@ -1071,6 +1071,8 @@ table { width: 100%; }
 
 .center-text { text-align: center;}
 
+
+
 //
 // Topbar
 //
@@ -1252,6 +1254,11 @@ section.footer {
 .vendor.tile { height: 300px; }
 
 
+.album-items {
+  .title { padding: .2em 0; }
+  .item_thumb { display: block; }
+}
+
 //
 // profiles, staff
 //
@@ -1329,6 +1336,20 @@ fieldset fieldset {
   cursor: move; 
 }
 
+.tagit, .tagit input, .tagit-new {
+  font-size: .7em;
+  padding: 0 !important;
+  margin: 0 !important;
+  .tagit-choice { font-size: .7em; }
+}
+
+li.tagit-choice { max-width: 150px; overflow: hidden; }
+
+ul.tagit { 
+  height: 80px;
+  li.tagit-new input { width: 80px; display: inline-block; }
+}
+
 //
 // Buttons
 //
@@ -1361,3 +1382,33 @@ fieldset fieldset {
 
 .button-group { margin-bottom: 1em; }
 
+//
+// Items, Assets
+//
+
+ul.item-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  
+
+  li { margin: 0; padding: 0; display: inline-block; }
+  li:not(:last-child):after { content: ", "; }
+
+}
+
+.item-tags-wrapper {
+  font-size: .8em; 
+}
+
+.tag-list-icon {
+  width: 16px;
+  height: 16px;
+  float: left;
+}
+
+
+
+
+.button-group, .button-group .button { margin-bottom: 0; }
