@@ -1,0 +1,100 @@
+<% provide(:title, "Press") %>
+
+<h3><%= yield(:title) %></h3>
+
+<ul class="large-block-grid-4 small-block-grid-2">
+
+<%
+
+[
+ ["http://blog.newavenuehomes.com/index.php/2013/04/18/new-avenue-honored-as-best-for-the-world-for-creating-most-overall-positive-social-and-environmental-impact/",
+  "New Avenue Honored as ‘Best for the World’ for Creating Most Overall Positive Social and Environmental Impact",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2013/04/Best-for-the-World-Overall-LG-150x150.png"],
+ ["http://blog.newavenuehomes.com/index.php/2012/09/05/builderlink-with-new-avenue-building-very-little-houses/",
+  "BuilderLink with New Avenue: Building (Very) Small Homes",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/09/builderlink_logo-150x61.gif"],
+ ["http://blog.newavenuehomes.com/index.php/2012/05/10/yes-in-my-backyard/",
+  "Yes, in My Backyard",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/sierra_club.png"],
+ ["http://blog.newavenuehomes.com/index.php/2012/01/18/downsizing-to-an-eco-friendly-home/",
+  "Downsizing to an eco-friendly home",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Smartplanet-150x150.jpg"],
+ ["http://blog.newavenuehomes.com/index.php/2011/09/12/homes-by-the-backyard/",
+  "Homes by the (back)yard",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/09/real_story.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/09/03/episode-10-building-in-the-backyard/",
+  "Episode 10 – Building in the Backyard",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/09/kalx.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/08/12/second-units-for-stronger-communities-b-the-change-new-avenue/",
+  "Second Units for Stronger Communities: B the Change New Avenue",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/08/certified_b_corp.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/08/05/clean-tech-tiny-house-in-san-jose/",
+  "Clean Tech Tiny House in San Jose",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Jetson-Green-150x150.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/07/22/get-income-from-accessory-dwelling-units/",
+  "Get income from accessory dwelling units",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/07/bankrate.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/05/14/new-avenue-homes-going-big-with-small/",
+  "New Avenue Homes: Going Big with Small",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/East-Bay-Green-Corridor-150x150.jpg"],
+ ["http://blog.newavenuehomes.com/index.php/2011/05/01/wins-for-providing-eco-chic-housing-without-building-up-or-sprawling-out/",
+  "Wins for: Providing eco-chic housing, without building up or sprawling out.",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/06/diablo_square-150x150.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/04/15/new-avenue-builds-infill-model/",
+  "New Avenue builds infill model",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/SF-Business-Times.jpg"],
+ ["http://blog.newavenuehomes.com/index.php/2011/02/18/could-there-be-a-boom-of-backyard-in-law-cottages/",
+  "Could There Be a Boom of Backyard In-law Cottages?",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/02/fine_homebuilding.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/02/11/a-new-path-of-building-with-new-avenue-homes/",
+  "A New Path of Building with New Avenue Homes",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/02/triple_pundit.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/19/sustainable-consumption-the-challenge-and-opportunity/",
+  "Sustainable Consumption: The Challenge and Opportunity",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/01/haas.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/13/backyard-solutions-to-urban-planning-issues/",
+  "Backyard solutions to urban planning issues",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/01/uc_berkeley_news_center.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/11/a-professors-tiny-house-is-a-model-for-different-living/",
+  "A Professor’s Tiny House Is a Model for Different Living",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/01/chronicle_of_highered.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/11/berkeley-zero-net-energy-cottage-deserves-study/",
+  "Berkeley zero net energy cottage deserves study",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2011/01/sf_chronicle.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/11/a-berkeley-professors-tiny-backyard-cottage/",
+  "A Berkeley Professor’s Tiny Backyard Cottage",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Apartment-Therapy-141x150.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/09/little-house-could-mean-big-environmental-and-housing-gains/",
+  "Little House Could Mean Big Environmental and Housing Gains",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/El-Cerritto-Patch.jpg"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/07/tiny-houses/",
+  "Tiny Houses",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Curbed-SF.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/07/a-city-looks-for-big-solutions-in-little-very-little-houses/",
+  "A city looks for big solutions in little – very little – houses",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Berkeleyside-Blog.png"],
+ ["http://blog.newavenuehomes.com/index.php/2011/01/01/clinton-global-initiative/",
+  "Clinton Global Initiative",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Clinton-Global-Initiative.jpg"],
+ ["http://blog.newavenuehomes.com/index.php/2010/10/15/greenbelt-alliance/",
+  "Greenbelt Alliance",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2010/10/greenbelt_square.png"],
+ ["http://blog.newavenuehomes.com/index.php/2010/08/15/small-homes-make-for-great-and-green-neighbors/",
+  "Small Homes Make for Great (and Green) Neighbors",
+  "http://0a0ba5ca2e775bb6b845-e7f38ab18111ddee0b4d07aa945234ca.r98.cf1.rackcdn.com/2012/05/Lester-Center-Logo.jpg"]
+].each do |article| 
+    link_url = article[0]
+    link_title = article[1]
+    image_url = article[2]
+%>
+    
+    <li>
+        <div style="height: 174px; display: table-cell; vertical-align: middle;">
+            <%= link_to link_url, :title => link_title, :target => "_blank" do %>
+                <%= image_tag image_url, :alt => link_title %>
+            <% end %>
+        </div>
+    </li>
+
+<% end %>
+</ul>

@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="large-3 columns push-9">
+    <p><%= image_tag(image_url, :alt => name, :class => "hide-for-small") if image_url %></p>
+  </div>
+  <div class="large-9 columns pull-3">
+    <h5><%= name %></h5
+    <p><%= image_tag image_url, :alt => name, :class => "show-for-small", :style => "float: left; margin: .5em; " %></p>
+    <%= raw(bio) %>
+  </div>
+</div>

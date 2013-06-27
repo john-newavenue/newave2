@@ -30,6 +30,9 @@ module Frontend
     def jobs
     end
 
+    def press
+    end
+
     private
 
       def resolve_layout

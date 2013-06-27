@@ -141,7 +141,7 @@ $header-font-weight: normal;
 $paragraph-font-family: Arial, sans-serif;
 // $paragraph-font-weight: normal;
 // $paragraph-font-size: 1em;
-$paragraph-font-size: emCalc(14px);
+$paragraph-font-size: emCalc(12px);
 // $paragraph-line-height: 1.6;
 $paragraph-line-height: 1.5;
 // $paragraph-margin-bottom: emCalc(20px);
@@ -855,7 +855,7 @@ $list-style-position: inside;
 // $side-nav-link-color: $primary-color;
 // $side-nav-link-color-active: lighten(#000, 30%);
 // $side-nav-font-size: emCalc(14px);
-$side-nav-font-size: emCalc(16px);
+$side-nav-font-size: emCalc(16px); 
 // $side-nav-font-weight: bold;
 
 // We use these to control border styles

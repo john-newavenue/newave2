@@ -10,21 +10,14 @@
         <section>
           <p class="title" data-section-title><a href="#">About Menu <i class="icon-dropdown" style="float: right;"></i></a></p>
           <div class="content" data-section-content>
-            <ul>
-              <%= render :partial => 'layouts/about_links' %>
-            </ul>
-          </nav>
+            <%= render :partial => 'layouts/about_links' %>
           </div>
         </section>
       </div>
 
       <div class="hide-for-small">
-        <nav>
-          <h5>About New Avenue</h5>
-          <ul class="side-nav">
-            <%= render :partial => 'layouts/about_links' %>
-          </ul>
-        </nav>
+        <h5>About</h5>
+        <%= render :partial => 'layouts/about_links' %>
       </div>
 
     </div>

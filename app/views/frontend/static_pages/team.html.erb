@@ -1,0 +1,99 @@
+<% provide(:title, "The New Avenue Team") %>
+
+<h3><%= yield(:title) %></h3>
+
+<%
+[
+  ["Kevin Casey", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/kevin_casey.jpg",
+    <<-BIO
+      <p>Kevin Casey is the CEO of New Avenue, and his primary role is to figure out how to make it easy for homeowners to remodel their home or build a new second unit. The company's mission is to give every homeowner the opportunity to convert their single-family property for shared, multigenerational living and, thus, better serve changing social, financial and emotional needs over the course of their lifetime. New Avenue's research found that over 30% of homeowners want to build a second unit but don't know how to do so. The company's innovative model for integrating technology, architecture, construction and finance into one simple process has made New Avenue the leader in this growing trend.</p>
+      <p>Casey’s experience includes various roles in community development, technology and finance. He obtained an MBA from the Haas School of Business at UC Berkeley, researched economic and community development as a Fulbright Scholar in Indonesia, and holds a B.A. in Economics and Anthropology from Fordham University. Early in his career he was a Vice President responsible for the design and project management of Oracle business intelligence systems for US Trust and Charles Schwab.</p>
+      <p>The anthropologist in him believes that our homes and our communities should address our emotional and social needs, and he founded New Avenue to offer an alternative to the broken financial and home building industries that have lost touch with this mission (and also happened to create the biggest financial crisis since the Great Depression). With a father who is an urban planner, a grandfather who was a modular builder, and having worked construction for an uncle during college, he learned enough to build his own home from scratch and that the greatest challenges in development are education, communication, and planning. He also grew up in a pre-fab Sears Catalog home built in 1908."</p>
+    BIO
+  ],
+  ["Townsend Brown", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/townsend_brown.jpg",
+    <<-BIO
+      <p>Townsend Brown, CE, LEED AP brings 6 years of architectural engineering experience to New Avenue, with expertise in high-end residential design and green building techniques. Townsend works as a senior engineer at GFDS Engineers (San Francisco, CA), a firm that serves California’s most elite clients and holds the region’s highest standards for engineering quality. He is also an active member of the Sustainable Design Committee for the Structural Engineers Association of Northern California, a thought leader on sustainable materials and green building practices. Townsend’s commitment to excellence in design ensures that New Avenue will delight consumers with an esthetically pleasing, durable, and sustainable product, capable of withstands California’s unique seismic conditions.</p>
+    BIO
+  ],
+  ["Justin Martinez", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/justin_martinez.jpg",
+    <<-BIO
+      <p>Justin Martinez has a Civil Engineering B.S. and a Structural Engineering M.S. from UC Berkeley. With an interest in systems engineering and programming, he has worked with professors and researchers in developing and deploying cloud infrastructures and servers through his undergraduate and graduate education. He is self-taught in frontend, middleware, and backend web development and has experience with WordPress, Drupal, Django and Rails. Justin leverages open source software and custom modules to create AJAX applications, interact with cloud services and APIs, and craft and improve user interfaces and experiences. Justin's ongoing work with New Avenue involves integrating and organizing the company's business logic and systems in the cloud, providing and exploring technical solutions, and designing interfaces for not just New Avenue but also homeowners, designers, and builders.</p>
+    BIO
+  ]
+].each do |member| %>
+<%= render :partial => 'team_entry', :locals => { :name => member[0], :image_url => member[1], :bio => member[2] } %>
+<% end %>
+
+<hr>
+
+<h3>Board of Directors</h3>
+
+<%
+[
+  ["Richard Banks", nil, # no image
+    <<-BIO
+      <p>Richard is the former President of the West Division of Archstone-Smith, one of the largest multifamily housing developers and the former President and COO of Mercy Housing, one of the largest non profit affordable housing developers. Richard also managed a 70,000 unit housing portfolio in Germany for Cerberus/Goldman Sachs.</p>
+    BIO
+  ],
+  ["Ryan Bermudez", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/ryan_bermudez.jpg",
+    <<-BIO
+      <p>Mr. Bermudez has experience ranging across the full spectrum of real estate product types. He currently works in the Asset Management group at Equity Office Properties, where he helps oversee a 55 million square foot office portfolio. Ryan previously worked at Carmel Partners, a multifamily investment firm based in San Francisco. At Carmel Partners, he spent a significant portion of his time performing due diligence for the potential acquisition of a low-income housing development firm. Bermudez graduated with Honors from the University of California, Berkeley's Haas School of Business. Prior to business school, Mr. Bermudez worked in Gap's Real Estate Finance division, where he was responsible for making lease action decisions for its retail locations in the Western U.S. and Canadian regions. Ryan is a LEED Accredited Professional and an Urban Land Institute Fellow.</p>
+    BIO
+  ],
+  ["Kaan Ersun", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/kaan_ersun.jpg",
+    <<-BIO
+      <p>Kaan has been involved in several technology startups. He is currently the VP of Sales and Marketing at Dealkat, a venture-backed startup in the social media marketing space. Previously, Kaan was Monetization and Business Development Manager at Lolapps, a Facebook game developer. Kaan helped Lolapps acquire millions of users, monetized games & developed partnerships to bring intellectual property to Lolapps's platform on Facebook. Prior to Lolapps, Kaan worked in marketing and business development at AdMob. He has also worked as a management consultant at BearingPoint. Kaan holds an MBA from UC Berkeley, a BS in Electrical Engineering (Phi Beta Kappa) from Stanford, and dual MS degrees in Electrical Engineering/Management Science from Stanford.</p>
+    BIO
+  ],
+  ["Scott Kucirek", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/scott_kucirek.jpg",
+    <<-BIO
+      <p>Scott is a Partner in Five Star Organics, was formerly the Head of MLS Initiative at California Association of Realtors and served as General Manager of Prudential California Realty. He Co Founded ZipRealty Inc. the first full-service web-based real estate firm. Mr. Kucirek served 9 years in the U. S. Navy as a Naval Aviator. Mr. Kucirek has an MBA from the Haas School of Business, and a Bachelor of Science in Bioengineering from the University of California at Berkeley</p>
+    BIO
+  ]
+].each do |member| %>
+<%= render :partial => 'team_entry', :locals => { :name => member[0], :image_url => member[1], :bio => member[2] } %>
+<% end %>
+
+<hr>
+
+<h3>Strategic Partners and Advisors</h3>
+
+<%
+[
+  ["Mark Creedon", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/mark_creedon.jpg",
+    <<-BIO
+      <p>Born in Cambridge Massachusetts and graduating with top awards from Rhode Island School of Design and the American Institute of Architects, spent the next 16 years working as a designer, associate principal, project director, project architect, senior project manager, and senior account manager at a number of national and local firms in Providence, Boston, Chicago, and San Francisco, before starting M2 Studio in 2000.</p>
+    BIO
+  ],
+  ["Ann Edminster", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/ann_edminster.jpg",
+    <<-BIO
+      <p>Ann Edminster was a former Chair of LEED for Homes and is a leading author on sustainability and green building.</p>
+
+      <p>---</p>
+
+      <p>
+      “Ann Edminster is one of those professionals that has been ahead of the curve for years. She contributed the initial writings that resulted in the LEED for Homes rating system. Her thinking is out in front. If your intention is to be at the proven cutting edge of the green building wave instead of just trying to keep up, Ann will give you the knowledge you need.”
+      <br />
+      – Marjory Gentsch, Education Chair<br />
+      USGBC, Balcones Chapter
+      </p>
+
+      <p>From: <a href="http://annedminster.com/media-resources/" target="_blank">http://annedminster.com/media-resources/</a></p>
+    BIO
+  ],
+  ["Matt Hoffman", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/matt_hoffman.jpg",
+    <<-BIO
+      <p>Matt Hoffman directs Enterprise’s efforts to remain on the leading edge of delivering new products, programs and policies to address the challenges facing the affordable housing and community development industry. His responsibilities include fostering a culture of innovation at Enterprise, providing research and development capacities to evaluate ideas that are advanced by employees and partners, providing business planning structure and discipline to the exploration of innovations, evaluating outcomes and taking successful innovations to scale</p>
+      <p>Matt joined Enterprise in 2008 after spending five years developing residential and commercial real estate in downtown Baltimore at a firm he co-founded. Prior to that, he spent seven years working with senior executives in the public and private sectors addressing business and policy issues critical to their organizations. After serving as a policy advisor to U.S. Secretary of Commerce William Daley and directing the U.S. Secretariat for Electronic Commerce, Matt directed a trade association of the chief technology officers from the country’s largest computer technology companies (including IBM, HP, Dell and Intel) and advised start-up companies on business and policy issues as the vice president of e-commerce for Infotech Strategies, Inc. Matt was a founding executive and vice president for strategy and business development at BeyondGuide, a cell phone content company that developed interactive audio tours of the world’s greatest cities delivered to a user’s cell phone. Before attending graduate school, Matt taught elementary school in southern California and worked for the Council of Chief State School Officers on technology policy issues.</p>
+      <p>He graduated with degrees in public policy from Brown University in 1991 and Harvard University’s Kennedy School of Government in 1996.</p>
+    BIO
+  ],
+  ["David Charron", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/david_charron.jpg",
+    <<-BIO
+      <p>David Charron is Senior Fellow and Lecturer in Entrepreneurship at the Haas School of Business, teaching courses in the MBA, EWMBA and executive programs. He has served as Executive Director of Lester Center for Entrepreneurship and Innovation and the Berkeley Innovative Leader Development effort. He is an entrepreneur, investor, mentor and consultant in the Silicon Valley and has 25 years of focus on technology commercialization and entrepreneurship with Stanford, MIT and Xerox PARC among others. He frequently travels internationally as a professional educator and business consultant. He holds a BS in Mechanical Engineering from Stanford and an MBA from Berkeley.</p>
+    BIO
+  ]
+].each do |member| %>
+<%= render :partial => 'team_entry', :locals => { :name => member[0], :image_url => member[1], :bio => member[2] } %>
+<% end %>

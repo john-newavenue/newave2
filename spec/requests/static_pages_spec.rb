@@ -26,7 +26,7 @@ describe "Static pages" do
 
   describe "team" do
     before { visit team_path }
-    it { should have_title('The Team')}
+    it { should have_title('Team')}
   end
 
   describe "faqs" do
@@ -37,6 +37,11 @@ describe "Static pages" do
   describe "investors" do
     before { visit investors_path }
     it { should have_title('Investors')}
+  end
+
+  describe "press" do
+    before { visit press_path }
+    it { should have_title('Press')}
   end
 
 end

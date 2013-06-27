@@ -16,6 +16,12 @@ Newave2::Application.routes.draw do
   scope :module => 'frontend' do
 
     #
+    # old routes, redirects
+    #
+
+    match '/model' => redirect('/'), :via => 'get'
+
+    #
     # static pages
     #
 
@@ -27,6 +33,7 @@ Newave2::Application.routes.draw do
     match '/faqs' => 'static_pages#faqs', :as => 'faqs', :via => 'get'
     match '/investors' => 'static_pages#investors', :as => 'investors', :via => 'get'
     match '/jobs' => 'static_pages#jobs', :as => 'jobs', :via => 'get'
+    match '/press' => 'static_pages#press', :as => 'press', :via => 'get'
 
     # old paths, redirect
     match '/about/how-it-works' => redirect('/how'), :via => 'get'
