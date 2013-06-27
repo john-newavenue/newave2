@@ -20,16 +20,20 @@ Newave2::Application.routes.draw do
     #
 
     match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
-
+    match '/how' => 'static_pages#how', :as => 'how', :via => 'get'
     match '/terms' => 'static_pages#terms', :as => 'terms', :via => 'get'
-    %w(/about/terms /about/tos /tos).each do |p|
-      match p => redirect('/terms'), :via => 'get'
-    end
-
     match '/privacy' => 'static_pages#privacy', :as => 'privacy', :via => 'get'
-    %w(/about/privacy /privacy-policy /about/privacy-policy).each do |p|
-      match p => redirect('/privacy'), :via => 'get'
-    end
+    match '/team' => 'static_pages#team', :as => 'team', :via => 'get'
+    match '/faqs' => 'static_pages#faqs', :as => 'faqs', :via => 'get'
+    match '/investors' => 'static_pages#investors', :as => 'investors', :via => 'get'
+    match '/jobs' => 'static_pages#jobs', :as => 'jobs', :via => 'get'
+
+    # old paths, redirect
+    match '/about/how-it-works' => redirect('/how'), :via => 'get'
+    match '/about/terms' => redirect('/terms'), :via => 'get'
+    match '/about/privacy' => redirect('/privacy'), :via => 'get'
+    match '/company/team' => redirect('/team'), :via => 'get'
+
 
     #
     # Static Pages

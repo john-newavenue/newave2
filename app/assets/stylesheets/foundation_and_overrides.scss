@@ -1413,6 +1413,18 @@ ul.tagit {
 .button-group { margin-bottom: 1em; }
 
 //
+// Icons
+//
+
+i.icon-dropdown {
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFpJREFUeNpidHFx+c9AAWBioBBQbAALEpsRiP9DaWLAf3QD/qPRoy4YkukAF8AXJv+JccF5pLD5jxRG92EuIDbUPwCxAJQGAUVSw0AQjYb47/9/inIzA0CAAQAyWRjQ9rZj1QAAAABJRU5ErkJggg==);
+  display: inline-block;
+}
+
+//
 // Items, Assets
 //
 

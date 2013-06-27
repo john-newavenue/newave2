@@ -29,13 +29,13 @@
       <ul class="small-block-grid-3 large-block-grid-6">
         <li><%= link_to "#" do %>Featured in:<% end %></li>
       <% [
-        ['https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/bcorp-bwsmall.png', "Source"],
-        ['https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/greenbelt-bwsmall.png', "Source"],
-        ['https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/san_francisco_chronicle-bwsmall.png', "Source"],
-        ['https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/smartplanet-bwsmall.png', "Source"],
-        ['https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/wsjournal-bwsmall.png', "Source"],
+        ['bcorp-bwsmall.png', "Source"],
+        ['greenbelt-bwsmall.png', "Source"],
+        ['san_francisco_chronicle-bwsmall.png', "Source"],
+        ['smartplanet-bwsmall.png', "Source"],
+        ['wsjournal-bwsmall.png', "Source"],
       ].each do |source| %>
-        <li><%= link_to "#" do %><%= image_tag source[0], :alt => source[1] %><% end %></li>
+        <li><%= link_to "#" do %><%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/#{source[0]}", :alt => source[1] %><% end %></li>
       <% end %>
       </ul>
     </div>

@@ -24,4 +24,19 @@ describe "Static pages" do
     it { should have_title('Privacy Policy')}
   end
 
+  describe "team" do
+    before { visit team_path }
+    it { should have_title('The Team')}
+  end
+
+  describe "faqs" do
+    before { visit faqs_path }
+    it { should have_title('Frequently Asked Questions')}
+  end
+
+  describe "investors" do
+    before { visit investors_path }
+    it { should have_title('Investors')}
+  end
+
 end

@@ -15,14 +15,29 @@ module Frontend
     def privacy
     end
 
+    def team
+    end
+
+    def faqs
+    end
+
+    def investors
+    end
+
+    def how
+    end
+
+    def jobs
+    end
+
     private
 
       def resolve_layout
         case action_name
-        when 'about','terms','privacy'
-          'about'
-        else 
+        when 'home'
           'application'
+        else 
+          'about'
         end
       end
 

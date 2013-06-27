@@ -1,0 +1,25 @@
+<% provide(:title, "Investors") %>
+
+<h3><%= yield(:title) %></h3>
+
+<ul class="large-block-grid-3 small-block-grid-2"  style="text-align: center;">
+<%
+  [
+    ["bcorp.jpg", "http://www.bcorporation.net/", "B Corporation"],
+    ["wcvc.jpg", "http://www.vilcap.com/", "West Coast Village"],
+    ["svt.jpg", "http://www.svtgroup.net/", "SVT Group"],
+    ["pacific.jpg", "http://www.pacificcommunityventures.org/", "Pacific Community Ventures"],
+    ["grayghost.jpg", "http://www.grayghostventures.com/", "Gray Ghost Ventures"],
+    ["clinton.jpg", "http://www.cgiu.org/commitments/featured_commitments/Net_Zero_Homes.asp", "Clinton Global Initiative"],
+    ["cleantech.jpg", "http://www.cleantechopen.com/app.cgi/teams/859/info", "Californaia Clean Tech Open"],
+    ["bplan.jpg", "http://bplan.berkeley.edu/", "UC Berkeley Busines Plan Competition"]
+  ].each do |inv| %>
+    <li>
+      <div class="tile">
+        <%= link_to inv[1], :title => inv[2], :target => "_blank" do %>
+          <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/investors/#{inv[0]}", :alt => inv[2] %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>
