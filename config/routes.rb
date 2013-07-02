@@ -78,6 +78,7 @@ Newave2::Application.routes.draw do
     match '/media/:id/upload' => "albums/albums#upload", :as => "media_upload", :via => 'get'
 
     resources :album_items, :controller => "albums/album_items", :as => "item", :path => "item"
+    match '/item/:id(/:slug)' => "albums/album_items#show", :as => "item2", :via => 'get'
     resources :uploads, :controller => "assets/uploads", :as => "uploads", :path => "uploads"
 
   end

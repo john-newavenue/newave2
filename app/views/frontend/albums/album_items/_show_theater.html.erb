@@ -1,0 +1,43 @@
+<div class="screen">
+  <div class="screen-content-wrapper">
+    <div class="screen-content-centerer loading-container">
+    <%= image_tag @item.asset.image(:original), :class => "screen-featured-image", :data => {:caption => @item.asset.image.url} %>
+    </div>
+  </div>
+</div>
+
+<% p = @item.get_image_position_info %>
+<div class="previous nav-button <%= p[:previous_id] ? "" : "hidden" %>">
+  <% if p[:previous_id] %>
+    <%= link_to item2_path(:id => p[:previous_id], :slug => p[:previous_slug]), :remote => true, :class => "display-theater" do %><i class="previous-theater-button"></i><% end %>
+  <% end %>
+</div>
+<div class="next nav-button <%= p[:next_id] ? "" : "hidden" %>">
+  <% if p[:next_id] %>
+    <%= link_to item2_path(:id => p[:next_id], :slug => p[:next_slug]), :remote => true, :class => "display-theater" do %><i class="next-theater-button"></i><% end %>
+  <% end %>
+</div>
+
+<div class="screen-footer">
+  <div class="screen-footer-content-wrapper blank-loader pad">
+    <%= link_to "#", :class => "button small radius" do %><i class="general foundicon-heart"></i>Save to my project<% end %>
+    <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %>
+    <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %>
+    <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %>
+  </div>
+</div>
+
+<div class="screen-sidebar">
+  <div class="screen-sidebar-content-wrapper pad blank-loader">
+    <h4><%= @item.title %></h4>
+    
+    <p><% if not @item.description.blank? %><%= @item.description %><% end %></p>
+    
+    <p><% if @item.tag_list %><%= @item.tag_list %><% end %></p>
+  </div>
+
+</div>
+
+<div class="screen-sidebar-footer">
+  <div class="screen-sidebar-footer-wrapper pad blank-loader"></div>
+</div>

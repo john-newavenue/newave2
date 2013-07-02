@@ -17,7 +17,7 @@
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application-prereqs" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -33,7 +33,11 @@
 
     <%= render "layouts/footer" %>
 
+    <%= render "layouts/modals" %>
+
     <%= yield(:modals) if content_for?(:modals) %>
+
+    <%= javascript_include_tag "application" %>
 
   </body>
 </html>

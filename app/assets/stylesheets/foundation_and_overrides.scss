@@ -798,9 +798,11 @@ $list-style-position: inside;
 
 // We use these to control the style of the modal itself.
 // $reveal-modal-bg: #fff;
+// $reveal-modal-bg: #fff;
 // $reveal-position-top: 50px;
 // $reveal-default-width: 80%;
 // $reveal-modal-padding: emCalc(20px);
+$reveal-modal-padding: emCalc(12px) !important;
 // $reveal-box-shadow: 0 0 10px rgba(#000,.4);
 
 // We use these to style the reveal close button
@@ -1313,6 +1315,41 @@ section.footer {
   .user-info { height: 64px; }
 }
 
+// Theater
+
+
+#theater-modal  { 
+
+  &.reveal-modal { 
+    padding: 0 !important;
+    @include reveal-modal-style(#fff, 0, false, false, false, false, false, inherit);
+    position: absolute;
+    margin-left: 0;
+  }
+
+  .screen, .screen-footer, .screen-sidebar, .screen-sidebar-footer, .nav-button { position: absolute; }
+
+  .screen { text-align: center; background: black; }
+  .screen-content-wrapper { display: table; width: 100%; height: 100%; }
+  .screen-content-centerer { display: table-cell; vertical-align: middle; text-align: center; }
+  .screen, .screen-content-wrapper, .screen-content-centerer, .screen-featured-image { max-height: inherit; }
+
+  .screen-sidebar, .screen-sidebar-footer { background: white; }
+  .screen-footer { @include linear-gradient(to top, darken($NA-color-dark-grey,30), black); text-align: center;  }
+
+  .nav-button { 
+    cursor: pointer;
+    opacity: 0.5;
+    
+    &:hover { 
+      opacity: 1.0;
+      @include transition (all 0.25s ease-in-out);
+    }
+  }
+  
+  .pad { padding: 0.2em; }
+
+}
 
 //
 // Forms
@@ -1405,6 +1442,12 @@ ul.tagit {
 .button { margin-bottom: 0; }
 .button.icon-only i { padding: 0; }
 
+.small.button.icon-only { 
+  padding-top: .49em;
+  padding-bottom: .30em;
+  i { font-size: 1.5em; }
+}
+
 .item-contents-wrapper { 
   padding: 1.25em; 
   border: solid 1px #dddddd ;
@@ -1423,6 +1466,8 @@ i.icon-dropdown {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFpJREFUeNpidHFx+c9AAWBioBBQbAALEpsRiP9DaWLAf3QD/qPRoy4YkukAF8AXJv+JccF5pLD5jxRG92EuIDbUPwCxAJQGAUVSw0AQjYb47/9/inIzA0CAAQAyWRjQ9rZj1QAAAABJRU5ErkJggg==);
   display: inline-block;
 }
+
+#hteater
 
 //
 // Items, Assets

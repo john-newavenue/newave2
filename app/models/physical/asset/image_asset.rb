@@ -12,7 +12,7 @@ module Physical
           # :large_square => "500x500#",
           # :small => "166x166",
           # :medium => "334x334",
-          # :large => "500x500"
+          :large => "1440x960"
         }
 
       validates_with AttachmentContentTypeValidator, :attributes => :image, :content_type => /^image\/(png|gif|jpeg|jpg)/
@@ -23,7 +23,7 @@ module Physical
         {
           'url' => image.url,
           'name' => image.original_filename,
-          'thumbnail_url' => image(:small)
+          'thumbnail_url' => image(:medium_square)
         }
       end
 

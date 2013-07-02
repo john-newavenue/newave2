@@ -14,10 +14,13 @@
         <li class="item item-<%= item.id %>">
             <div class="item-contents-wrapper">
               
-              <%= link_to item.asset.image.url do %>
+              <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater hide-for-small" do %>
                 <%= image_tag item.asset.image(:medium_square), :class => "item-thumb", :data => {:caption => item.asset.image.url} %>
               <% end %>
-              
+
+              <%= link_to item2_path(:id => item.id, :slug => item.slug), :class => "show-for-small" do %>
+                <%= image_tag item.asset.image(:medium_square), :class => "item-thumb", :data => {:caption => item.asset.image.url} %>
+              <% end %>
             
               <h6 class="title"><%= !item.title.blank? ? truncate(item.title,:length => 30) : "Untitled"  %></h6>
 
