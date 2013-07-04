@@ -141,7 +141,7 @@ $header-font-weight: normal;
 $paragraph-font-family: Arial, sans-serif;
 // $paragraph-font-weight: normal;
 // $paragraph-font-size: 1em;
-$paragraph-font-size: emCalc(12px);
+$paragraph-font-size: .9em;
 // $paragraph-line-height: 1.6;
 $paragraph-line-height: 1.5;
 // $paragraph-margin-bottom: emCalc(20px);
@@ -1066,6 +1066,8 @@ $topbar-breakpoint: emCalc(900px); // Change to 9999px for always mobile layout
   box-shadow: 0 0 1px 2px $NA-color-light-grey;
 }
 
+.bold { font-weight: bold; }
+
 table td { vertical-align: top; }
 table { width: 100%; }
 
@@ -1335,6 +1337,7 @@ section.footer {
   .screen, .screen-content-wrapper, .screen-content-centerer, .screen-featured-image { max-height: inherit; }
 
   .screen-sidebar, .screen-sidebar-footer { background: white; }
+  .screen-sidebar { overflow-y: scroll; overflow-x: hidden; }
   .screen-footer { @include linear-gradient(to top, darken($NA-color-dark-grey,30), black); text-align: center;  }
 
   .nav-button { 
@@ -1349,15 +1352,31 @@ section.footer {
   
   .pad { padding: 0.2em; }
 
+  .image-collection {
+    li {
+      padding: .5em;
+      .tile { 
+        padding: .2em; 
+        margin: 0;
+        img { max-width: 46px; }
+        &.active { 
+          box-shadow: 0px 0px 6px 1px $NA-color-light-green;
+        }
+      }
+    }
+  }
+
 }
 
 //
 // Forms
 //
 
+form { margin: 0; }
+
 .formtastic {
   ol { margin-bottom: 0; }
-  ol li { list-style: none; display: inline; }
+  ol li, > li { list-style: none; display: inline; }
   fieldset.nested ol { margin: 0; }
   li.button_action button { margin-bottom: 0; }
   input[type="checkbox"] { margin: 0; }
@@ -1369,6 +1388,8 @@ section.footer {
 
 p.inline-hints { color: #999; }
 
+legend span, label, input, textarea, select { font-size: 1em;}
+
 textarea { height: auto; }
 
 i[class*="foundicon"] {
@@ -1378,6 +1399,7 @@ i[class*="foundicon"] {
 
 .error label, .inline-errors {
   color: $NA-error-label-color;
+  font-size: inherit;
 }
 
 fieldset fieldset { 

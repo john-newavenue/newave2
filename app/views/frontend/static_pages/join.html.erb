@@ -1,0 +1,26 @@
+<% provide(:title, "Join to get started") %>
+
+<section id="home-features" style="padding: 2em 0;">
+
+  <div class="row stage">
+    <div class="large-6 large-offset-3 columns" style="text-align: center;">
+      
+      <h3>We are small home and backyard cottage pros. Create a project, clip design ideas, and consult us!</h3>
+
+      <h5>We connect you with the design, construction, financing, and all the resources you need to build your project.</h5>
+      <p>
+        <%= link_to "Learn more", about_path %>
+      </p>
+
+      <p style="margin-top: 2em; ">
+        <%= link_to "Sign up to get started", new_user_registration_path, :class => "button large primary" %>
+      </p>
+
+      <p style="margin-top: 2em; ">
+        <%= link_to "Already have an account? Sign in here.", new_user_session_path %>
+      </p>
+
+    </div>
+  </div>
+
+</section>

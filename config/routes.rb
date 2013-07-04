@@ -2,8 +2,9 @@ Newave2::Application.routes.draw do
 
   get "project_type/index"
   get "project_type/edit"
-  # static pages
+
   root to: 'frontend/static_pages#home'
+  match '/join' => 'frontend/static_pages#join', :via => 'get'
 
   
   devise_for :users, :controllers => {
@@ -61,7 +62,9 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'projects' do
-      resources :projects, :path => "/project"
+      resources :projects, :path => "/project" do
+        resources :project_items, :path => 'item', :as => 'item'
+      end
     end
 
     scope :module => 'vendors' do

@@ -20,10 +20,19 @@
 
 <div class="screen-footer">
   <div class="screen-footer-content-wrapper blank-loader pad">
-    <%= link_to "#", :class => "button small radius" do %><i class="general foundicon-heart"></i>Save to my project<% end %>
+    <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => @item.id )), :class => "button small radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
+      <i class="general foundicon-heart"></i>Save to my project
+    <% end %>
+
+    <%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button small secondary radius" do %>
+      <i class="general foundicon-page"></i>Permalink
+    <% end %>
+  
+    <%- # TODO %>
     <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %>
     <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %>
     <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %>
+
   </div>
 </div>
 
@@ -31,9 +40,43 @@
   <div class="screen-sidebar-content-wrapper pad blank-loader">
     <h4><%= @item.title %></h4>
     
+    <p>
+      <% item_owner = @item.album.parent %>
+      
+      In <%= link_to @item.album.title, media_path(@item.album) %> by
+      <%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %>
+    </p>
+
+    <p>
+      <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
+        <%= image_tag item_owner.logo(:profile), :style => "max-width: 70px;", :alt => item_owner.name %>
+      <% end %>
+    </p>
+
     <p><% if not @item.description.blank? %><%= @item.description %><% end %></p>
-    
+
     <p><% if @item.tag_list %><%= @item.tag_list %><% end %></p>
+
+    <hr>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+        <ul class="large-block-grid-4 image-collection">
+          <% @item.album.images.each do |sibling| %>
+          <li>
+            <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
+            <%= link_to item2_path(:id => sibling.id, :slug => sibling.slug), :remote => true, :class => "display-theater" do %>
+              <%= image_tag sibling.asset.image(:small_square) %>
+            <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+
+      </div>
+    </div>
+
   </div>
 
 </div>

@@ -25,8 +25,14 @@
               <h6 class="title"><%= !item.title.blank? ? truncate(item.title,:length => 30) : "Untitled"  %></h6>
 
               <ul class="button-group radius">
-                <li><%= link_to "#", :class => "button tiny neutral icon-only" do %><i class="general foundicon-heart"></i><% end %></li>
+                <li>
+                  <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => item.id )), :class => "button small secondary radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
+                    <i class="general foundicon-heart"></i>
+                  <% end %>
+                </li>
               </ul>
+
+
 
               <div class="item-tags-wrapper show-for-small">
                 <%= image_tag "tag-green-icon.png", :class => "tag-list-icon", :alt => "Tags", :title => "Tags" %>

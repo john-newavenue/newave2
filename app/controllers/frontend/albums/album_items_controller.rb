@@ -5,9 +5,12 @@ module Frontend
       before_action :authorize_user, :only => [:edit, :update, :destroy, :delete]
       before_action :get_item, :except => [:new, :create]
 
+      layout 'one-column'
+
       def show
         respond_to do |format|
           format.js
+          format.html
         end
       end
 

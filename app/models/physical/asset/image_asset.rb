@@ -8,6 +8,7 @@ module Physical
 
       has_attached_file :image, :styles => { 
           # :small_square => "166x166#",
+          :small_square => "80x80#",
           :medium_square => "334x334#",
           # :large_square => "500x500#",
           # :small => "166x166",

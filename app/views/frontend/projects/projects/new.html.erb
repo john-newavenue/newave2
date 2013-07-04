@@ -1,10 +1,11 @@
 <% provide(:title, 'Start Your Project') %>
 
-<h1><%= yield(:title) %></h1>
+<h2><%= yield(:title) %></h2>
 
 <%= semantic_form_for @project, :as => :project, :url => projects_path do |f| %>
-<%= f.inputs "Tell us about yor project" do %>
-  <%= render 'frontend/projects/projects/project_title_description_input', :f => f%>
-<% end %>
-<%= f.actions %>
+  
+    <%= render 'frontend/projects/projects/project_title_description_input', :f => f%>
+  
+    <button type="submit" class="button large radius">Create</button>
+  
 <% end  %>

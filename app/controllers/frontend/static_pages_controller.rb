@@ -33,11 +33,14 @@ module Frontend
     def press
     end
 
+    def join
+    end
+
     private
 
       def resolve_layout
         case action_name
-        when 'home'
+        when 'home', 'join'
           'application'
         else 
           'about'

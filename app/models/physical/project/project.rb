@@ -2,21 +2,37 @@ module Physical
   module Project
     class Project < ActiveRecord::Base
 
-      resourcify # lets rolify attach roles to this class
 
+
+      #
+      # associations
+      #
+
+      belongs_to :address, :class_name => "Physical::General::Address"
+      has_many :memberships, :class_name => "Physical::Project::ProjectMember"
+      has_many :members, :through => :memberships, :source => :user, :class_name => "::User"
+      has_many :items, :class_name => "Physical::Project::ProjectItem", :after_add => proc { |p| p.touch }
+
+      #
+      # validations
+      #
       validates :title, :presence => true, :length => { :minimum => 1 }
       validates :description, :presence => true, :allow_blank => false, :length => { :maximum => 1000 }
 
-      belongs_to :address, :class_name => "Physical::General::Address"
-
-      has_many :memberships, :class_name => "Physical::Project::ProjectMember"
-      has_many :members, :through => :memberships, :source => :user, :class_name => "::User"
+      #
+      # behaviors
+      #
 
       after_create :build_associated_models
-
+      resourcify # lets rolify attach roles to this class
       accepts_nested_attributes_for :address
 
+      #
+      # scopes
+      #
+
       default_scope order('created_at DESC')
+      scope :by_recency, order('updated_at DESC')
 
       def method_missing name, *args, &block
 

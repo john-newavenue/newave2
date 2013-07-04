@@ -1,0 +1,34 @@
+<%= semantic_form_for @project_item, :as => 'project_item', :url => project_item_index_path(:project_id => -1), :remote => true do |f| %>
+  <h4>Save to my project</h4>
+
+  <% if @album_item %>
+    <div class="panel" style="text-align:center;">
+      <%= image_tag @album_item.asset.image(:medium_square), :style => 'max-height: 150px;' %>
+      <h6><%= @album_item.title %></h6>
+      <p>From: <%= @album_item.album.title %></p>
+    </div>
+    <%= f.semantic_fields_for :project_item_assets_attributes do |album_item| %>
+      <div class="hidden">
+        <%= album_item.input :album_item_id, :as => :number, :input_html => { :value => @album_item.id } %> 
+      </div>
+    <% end %>
+  <% end %>
+
+  <%
+    projects = current_user.projects
+    project_options = projects.map { |p| [p.title, p.id] }
+    project_selected = projects.first.id
+  %>
+  <%= f.input :project,
+    :label => false,
+    :as => :select,
+    :collection => options_for_select( project_options, project_selected)
+    # :collection => options_for_select( current_user.projects.map(&:title), 'asdfsdf')
+  %>
+  <%= f.input :body, 
+    :label => false,
+    :placeholder => 'What do you like about this? What is on your mind?',
+    :input_html => { :rows => 2, :class => 'large-font' }
+  %>
+  <button class="radius button display-prompt-modal" type="submit" style="width: 100%; ">Post</button>
+<% end %>

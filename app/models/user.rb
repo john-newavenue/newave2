@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   #
 
   has_many :project_memberships, :class_name => "Physical::Project::ProjectMember"
-  has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project"
+  has_many :projects, :through => :project_memberships, :class_name => "Physical::Project::Project", :order => "projects.updated_at DESC"
   belongs_to :address, :class_name => "Physical::General::Address"
   has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
   has_many :vendors, :through => :vendor_memberships
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   scope :invited, lambda { where("users.invitation_token IS NOT NULL") }
   scope :not_invited, lambda { where("users.invitation_token IS NULL") }
   scope :active, lambda { where("users.invitation_token IS NULL OR users.invitation_accepted_at IS NOT NULL")}
-  default_scope { order('created_at DESC') }
+  default_scope { order('users.created_at DESC') }
 
   #
   # methods

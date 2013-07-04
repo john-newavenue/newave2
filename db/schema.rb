@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130625035318) do
+ActiveRecord::Schema.define(version: 20130702214210) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -69,6 +69,26 @@ ActiveRecord::Schema.define(version: 20130625035318) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  create_table "project_item_assets", force: true do |t|
+    t.integer  "project_item_id"
+    t.integer  "album_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_item_assets", ["project_item_id"], name: "index_project_item_assets_on_project_item_id", using: :btree
+
+  create_table "project_items", force: true do |t|
+    t.integer  "project_id"
+    t.text     "body"
+    t.integer  "type"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_items", ["project_id"], name: "index_project_items_on_project_id", using: :btree
 
   create_table "project_members", force: true do |t|
     t.integer  "project_role_id", null: false
@@ -219,6 +239,11 @@ ActiveRecord::Schema.define(version: 20130625035318) do
   add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true, using: :btree
 
   add_foreign_key "assets", "album_items", :name => "assets_origin_album_item_id_fk", :column => "origin_album_item_id"
+
+  add_foreign_key "project_item_assets", "album_items", :name => "project_item_assets_album_item_id_fk"
+  add_foreign_key "project_item_assets", "project_items", :name => "project_item_assets_project_item_id_fk", :dependent => :delete
+
+  add_foreign_key "project_items", "projects", :name => "project_items_project_id_fk", :dependent => :delete
 
   add_foreign_key "user_profiles", "addresses", :name => "user_profiles_address_id_fk", :dependent => :delete
 
