@@ -1,9 +1,22 @@
-<% provide(:title, @album.title) %>
+<% if @album %>
 
-<% if can? :update, @album.parent %>
-  <%= render :partial => 'frontend/albums/albums/toolbar' %>
+  <% provide(:title, @album.title) %>
+
+  <% if can? :update, @album.parent %>
+    <%= render :partial => 'frontend/albums/albums/toolbar' %>
+  <% end %>
+
+  <div id="album_container">
+  <%= render :partial => 'frontend/albums/albums/show' %>
+  </div>
+
+<% else %>
+
+
+<% provide(:title, "Album not found") %>
+
+<h3><%= yield(:title) %></h3>
+
+<p>The album you are trying to access could not be found. It may have been deleted by its owner.</p>
+
 <% end %>
-
-<div id="album_container">
-<%= render :partial => 'frontend/albums/albums/show' %>
-</div>

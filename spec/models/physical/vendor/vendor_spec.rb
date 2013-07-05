@@ -51,4 +51,22 @@ describe Physical::Vendor::Vendor do
     expect(Physical::Vendor::Vendor.architects.include? vendor).to be_true
   end
 
+  it "should be soft deleted along with its albums" do
+    # create a vendor and some albums
+    vendor_to_destroy = FactoryGirl.create(:vendor)
+    albums_to_destroy = []
+    3.times.each do
+      albums_to_destroy.push(FactoryGirl.create(:album, :parent => vendor_to_destroy))
+    end
+    # soft delete vendor and its albums
+    vendor_to_destroy.destroy
+    expect(Physical::Vendor::Vendor.with_deleted.find_by(:id => vendor_to_destroy.id)).to_not be_nil
+    expect(Physical::Vendor::Vendor.find_by(:id => vendor_to_destroy.id)).to be_nil
+    albums_to_destroy.each do |album|
+      expect(Physical::Album::Album.with_deleted.find_by(:id => album.id)).to_not be_nil
+      expect(Physical::Album::Album.find_by(:id => album.id)).to be_nil
+    end
+
+  end
+
 end

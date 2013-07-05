@@ -29,10 +29,14 @@ module Frontend
 
       def show
         @album = Physical::Album::Album.find_by_id(params[:id])
-        case @album.parent_type
-        when "Physical::Vendor::Vendor"
-          @vendor = @album.parent.decorate
+        if @album
+          case @album.parent_type
+          when "Physical::Vendor::Vendor"
+            @vendor = @album.parent.decorate
+          end
         end
+
+        # if @album == nil, show will render an "album not found" message
       end
 
       def edit
@@ -75,6 +79,14 @@ module Frontend
 
       def destroy
         # debugger
+        @album.destroy
+        flash[:notice] = "Album deleted successfully."
+        debugger
+        if @album.parent.class == Physical::Vendor::Vendor
+          redirect_to vendor_profile_path(:slug => @album.parent.slug)
+        else
+          redirect_to user_profile_path(:username_slug => current_user.slug)
+        end
       end
 
       private

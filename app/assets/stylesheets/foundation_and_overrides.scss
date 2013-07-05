@@ -141,7 +141,6 @@ $header-font-weight: normal;
 $paragraph-font-family: Arial, sans-serif;
 // $paragraph-font-weight: normal;
 // $paragraph-font-size: 1em;
-$paragraph-font-size: .9em;
 // $paragraph-line-height: 1.6;
 $paragraph-line-height: 1.5;
 // $paragraph-margin-bottom: emCalc(20px);
@@ -1079,6 +1078,8 @@ table { width: 100%; }
 
 .page-content { margin-bottom: 1.5em; }
 
+.alert-box p:last-child { margin-bottom: 0; }
+
 //
 // Topbar
 //
@@ -1461,6 +1462,12 @@ ul.tagit {
   @include button-style($NA-color-orange, 0, false);
 }
 
+.button.danger {
+  @include button-base;
+  @include inset-shadow;
+  @include button-style(red, 0, false);
+}
+
 .button { margin-bottom: 0; }
 .button.icon-only i { padding: 0; }
 
@@ -1475,6 +1482,7 @@ ul.tagit {
   border: solid 1px #dddddd ;
 }
 
+.button { margin-bottom: 0 !important;}
 .button-group { margin-bottom: 1em; }
 
 //
@@ -1489,7 +1497,6 @@ i.icon-dropdown {
   display: inline-block;
 }
 
-#hteater
 
 //
 // Items, Assets
