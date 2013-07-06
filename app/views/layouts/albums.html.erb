@@ -11,7 +11,9 @@
     </div>
 
     <div class="large-3 pull-9 columns">
-      <%= render(:partial => 'frontend/vendors/vendors/vendor_profile_sidebar', :locals => {:vendor => @vendor}) if @vendor %>
+      <div class="hide-for-small">
+        <%= render(:partial => 'frontend/vendors/vendors/vendor_profile_sidebar', :locals => {:vendor => @vendor}) if @vendor %>
+      </div>
     </div>
 
   </div>

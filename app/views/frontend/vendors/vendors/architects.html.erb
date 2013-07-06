@@ -2,21 +2,20 @@
 
 <h1><%=yield(:title) %></h1>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin in lorem eget lobortis. Proin justo velit, tincidunt vitae hendrerit sit amet, ultrices eu velit. Integer sit amet felis vehicula, vestibulum felis eget, dapibus nisl. Donec pulvinar, nibh sed vehicula feugiat, diam erat semper neque, et imperdiet magna mi non mi. Proin vel elementum turpis. Quisque at laoreet felis. In placerat nisl eu semper euismod. Aliquam sagittis condimentum massa eget sollicitudin. Pellentesque vitae est tristique, gravida purus vel, fringilla nibh. Sed laoreet erat erat, sed venenatis odio suscipit placerat.</p>
+<p>
+  The architects featured here work closely with you and with New Avenue. We have partnered with them and they
+  have partnered with us to allow for a focused and streamlined design process in the design and delivery of
+  of our homes. As a client, you will coordinate with the architect to come up with design iterations for your project.
+</p>
 
-
-<div class="row">
+<ul class="large-block-grid-4 small-block-grid-2 architects">
   <% @vendors.each do |vendor| %>
-  <div class="columns large-3">
-    <div class="vendor tile">
-      <div class="logo-wrapper tile-image-wrapper">
-        <%= link_to vendor_profile_path(vendor.slug) do %>
-          <%= image_tag vendor_logo_for(vendor) %>
-        <% end %>
+    <li>
+      <div class="tile" style="background: url('<%= vendor_logo_for(vendor) %>')  no-repeat center center;">
+        <%= link_to "", vendor_profile_path(vendor.slug), :title => vendor.name, :class => "link-block" %>
       </div>
-      <h5><%= link_to "#{vendor.name}", vendor_profile_path(vendor.slug) %></h5>
-      <p><%= truncate(vendor.description, :length => 60) %></p>
-    </div>
-  </div>
+    </li>
   <% end %>
-</div>
+</ul>
+
+<br>

@@ -43,8 +43,8 @@
           <ul class="right">
 
             <% if user_signed_in? %>
-              <li>
-                <%= link_to user_profile_path(current_user.slug) do %>
+              <li class="pad-on-small">
+                <%= link_to user_profile_path(current_user.slug), :class => "user-profile-link" do %>
                   <%=image_tag user_icon_for(current_user), :class=> "user-icon" %>
                   <%="#{current_user.username}"%>
                 <% end %>
@@ -57,12 +57,19 @@
               <% end %>
               
 
-              <li class="has-dropdown settings-dropdown">
+              <li class="pad-on-small has-dropdown settings-dropdown">
                 <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Settings</span></a>
                 <ul class="dropdown">
                   
-                  <li><%= active_link_to 'Edit Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
-                  <li><%=link_to "Settings", "#"%></li>
+                  <li><%= active_link_to 'Edit My Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
+                  <% if current_user.has_role? :vendor %>
+                    <% current_user.vendors.each do |v| %>
+                      <li><%= link_to v.name, vendor_profile_path(:slug => v.slug) %></li>
+                    <% end %>
+                  <% end %>
+
+                  <li class="divider"></li>
+                  <li><%=link_to "Preferences", "#"%></li>
                   <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
                 </ul>
               </li>

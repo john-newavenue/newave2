@@ -5,10 +5,24 @@
 
 <p><%= @vendor.description %></p>
 
-<h4>Albums</h4>
 
-<ul>
+<ul class="large-block-grid-3 small-block-grid-2">
   <% @vendor.albums.each do |album| %>
-    <li><%= link_to medium_path(album) do %><%= "#{album.title}" %><% end %></li>
+    <li>
+      <div class="tile">
+        <%= link_to medium_path(album), :title => album.title do %>
+          <% if album.cover_image %>
+            <%= image_tag album.cover_image.image(:medium_square), :alt => album.title %>
+          <% else %>
+            <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/no-cover-image.png", :alt => "Upload some images and pick one!" %>
+          <% end %>
+        <% end %>
+        <br>
+        <h6 class="hide-for-small" style="height: 34px;"><%= truncate album.title, :length => 30 %></h6>
+        <h6 class="show-for-small" style="height: 34px;"><%= album.title %></h6>
+      </div>
+    </li>
   <% end %>  
 </ul>
+
+<br>

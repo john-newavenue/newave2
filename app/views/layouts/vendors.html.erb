@@ -6,15 +6,19 @@
 
   <div class="row">
 
+    <div class="large-12 columns show-for-small">
+      <%= render :partial => 'frontend/vendors/vendors/vendor_profile_logo', :locals => { :vendor => @vendor } %>
+      <br>
+    </div>
+
     <div class="large-9 push-3 columns">
 
-      <% if @vendor.object and can? :update, @vendor.object %>
-        <% if !content_for?(:toolbar)  %>
-          <%= render :partial => 'frontend/vendors/vendors/toolbar' %>
-        <% else %>
-          <%= yield(:toolbar) %>
-        <% end %>
+      <% if !content_for?(:toolbar)  %>
+        <%= render :partial => 'frontend/vendors/vendors/toolbar' %>
+      <% else %>
+        <%= yield(:toolbar) %>
       <% end %>
+        
       <%= yield %>
     </div>
 

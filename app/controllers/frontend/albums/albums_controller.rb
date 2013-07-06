@@ -24,7 +24,6 @@ module Frontend
             format.js { render :layout => false }
           end
         end
-        
       end
 
       def show
@@ -70,10 +69,10 @@ module Frontend
         @album.update_attributes(album_params)
         respond_to do |format|
           if @album.save
+            @album.after_update_callback
             format.js
           else
           end
-          
         end
       end
 
@@ -81,7 +80,6 @@ module Frontend
         # debugger
         @album.destroy
         flash[:notice] = "Album deleted successfully."
-        debugger
         if @album.parent.class == Physical::Vendor::Vendor
           redirect_to vendor_profile_path(:slug => @album.parent.slug)
         else

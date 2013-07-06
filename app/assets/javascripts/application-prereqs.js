@@ -15,7 +15,7 @@
 //= require jquery.ui.all
 //= require tag-it.min
 //= require foundation
-//= require turbolinks
+
 
 $(document).ready( function () {
   $(document).foundation();

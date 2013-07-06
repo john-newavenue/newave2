@@ -26,6 +26,14 @@ module Physical
       validate :parent, :check_parent_valid
       validate :cover_image, :check_cover_image
 
+      def after_upload_callback
+        set_cover_image
+      end
+
+      def after_update_callback
+        set_cover_image
+      end
+
       private
 
         def destroy_album_items
@@ -41,6 +49,34 @@ module Physical
           unless cover_image_id != nil and valid_ids.include? cover_image_id.to_i 
             cover_image = nil
           end
+        end
+
+        def set_cover_image
+          imgs = images
+          # cover_image points to image_assets, not album_items
+          # since the deletion of album_items does NOT mean the
+          # deletion of image_assets, nullify expired cover_image
+          ci = self.cover_image
+          if ci
+            valid_image_assets = imgs.map { |i| i.asset }
+            current_image_asset = cover_image
+            if not (valid_image_assets.include? current_image_asset)
+              ci = nil
+            end
+          end
+
+          # for first time uploading pictures or no cover_image
+          # selected when saving album, set cover image randomly
+          if ci == nil and imgs.count > 0
+            if not defined? valid_image_assets or valid_image_assets == nil
+              valid_image_assets = imgs.map { |i| i.asset }
+            end
+            if valid_image_assets != nil and valid_image_assets.count > 0
+              ci = valid_image_assets.sample
+            end
+          end
+          self.cover_image = ci
+          self.save
         end
 
     end

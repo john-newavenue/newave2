@@ -1,6 +1,17 @@
-<%= render :partial => 'frontend/vendors/vendors/vendor_profile_logo_and_actions', :locals => { :vendor => vendor } %>
+<div class="hide-for-small">
+  <%= render :partial => 'frontend/vendors/vendors/vendor_profile_logo', :locals => { :vendor => vendor } %>
+  <br />
+</div>
 
-<br />
+
+<br>
+
+<div class="hide-for-small">
+  <%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>
+  <br>
+  <%= render :partial => '/frontend/vendors/vendors/toolbar_links' %>
+  <br />
+</div>
 
 <h4>Team Members</h4>
 

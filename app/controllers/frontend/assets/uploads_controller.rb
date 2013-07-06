@@ -48,8 +48,10 @@ module Frontend
       def create
         begin
           @upload = Logical::Asset::Upload.new(:file => upload_params[0], :container => @container)
+          @container.touch
           respond_to do |format|
             if @upload.save
+              @container.after_upload_callback if @container.class.method_defined? 'after_upload_callback'
               format.html {
                 render :json => [@upload.to_jq_upload].to_json,
                 :content_type => 'text/html',

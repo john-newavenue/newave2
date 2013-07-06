@@ -53,8 +53,8 @@
                     <input type="radio" 
                       id="album_cover_image_id_<%= item.object.id %>" 
                       name="album[cover_image_id]" 
-                      value="<%= item.object.id %>"
-                      <%= (item.object.id == @album.cover_image_id) ? "checked='checked'" : "" %>
+                      value="<%= item.object.asset.id %>"
+                      <%= (item.object.asset.id == @album.cover_image_id) ? "checked='checked'" : "" %>
                     >
                     Make cover image
                   </label>
