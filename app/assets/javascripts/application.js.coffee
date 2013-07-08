@@ -72,7 +72,7 @@ $(document).ready( ()->
 
   $(window).resize(() ->
     # resize theater if it's open
-    position_and_size_theater() if $('#theater-modal.open').length == 1
+    position_and_size_theater() if $('#theater-modal.open').length == 1 
   )
 
   #

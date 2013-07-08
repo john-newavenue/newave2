@@ -13,6 +13,8 @@ group :assets do
   gem 'handlebars_assets'
 end
 
+gem 'coffee-rails', '~> 4.0.0.beta1'
+
 gem 'foundation-icons-sass-rails'
 gem "bourbon", "~> 3.1.6"
 gem 'zurb-foundation'

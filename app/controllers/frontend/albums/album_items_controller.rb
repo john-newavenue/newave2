@@ -9,7 +9,7 @@ module Frontend
 
       def show
         respond_to do |format|
-          format.js
+          format.js { render :layout => false }
           format.html
         end
       end
