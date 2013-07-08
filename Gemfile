@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.0.0.beta1'
 gem 'foundation-icons-sass-rails'
 gem "bourbon", "~> 3.1.6"
 gem 'zurb-foundation'
+gem 'therubyracer'
 
 group :test do
   gem 'cucumber-rails', :require => false
