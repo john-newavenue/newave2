@@ -17,7 +17,7 @@
         <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture profile-picture" %> 
       </div>
 
-      <div class="show-for-small">
+      <div class="show-for-small hidden">
         <br>
         <%= link_to "Send Message", "#", :class => "button light-blue show-for-small", :style => "width: 100%; " %>
       </div>
@@ -34,9 +34,11 @@
 
       <br>
 
+      <div class="hidden">
       <%= link_to "Send Message", "#", :class => "button light-blue hide-for-small", :style => "width: 100%; " %>
+      </div>
 
-      <ul class="side-nav">
+      <ul class="side-nav hidden">
         <li><%= active_link_to 'TODO: Follow user', '#', :wrap_tag => :li %></li>
         <li><%= active_link_to 'TODO: Send message', '#', :wrap_tag => :li %></li>
       </ul>

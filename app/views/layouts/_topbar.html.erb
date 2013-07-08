@@ -44,7 +44,7 @@
 
             <% if user_signed_in? %>
               <li class="pad-on-small">
-                <%= link_to user_profile_path(current_user.slug), :class => "user-profile-link" do %>
+                <%= link_to user_profile_path(current_user.slug), :class => "user-profile-link transition-buffer" do %>
                   <%=image_tag user_icon_for(current_user), :class=> "user-icon" %>
                   <%="#{current_user.username}"%>
                 <% end %>
@@ -52,7 +52,11 @@
               <li class="divider"></li>
               
               <% if current_user.has_role? :admin %>
-                <li><%= link_to crm_path, :title => "CRM" do %><i class="general foundicon-website"></i> CRM<% end %></li>
+                <li class="pad-on-small"><%= link_to crm_path, :title => "Administrator", :class => "transition-buffer" do %>
+                  <i class="general foundicon-website"></i>
+                  <span class="show-for-small-custom">Administrator</span>
+                  <% end %>
+                </li>
                 <li class="divider"></li>
               <% end %>
               
@@ -61,7 +65,7 @@
                 <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Settings</span></a>
                 <ul class="dropdown">
                   
-                  <li><%= active_link_to 'Edit My Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
+                  <li><%= active_link_to 'My Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
                   <% if current_user.has_role? :vendor %>
                     <% current_user.vendors.each do |v| %>
                       <li><%= link_to v.name, vendor_profile_path(:slug => v.slug) %></li>

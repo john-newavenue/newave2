@@ -4,7 +4,7 @@
   <%= f.inputs "Profile Info" do %>
     <%= f.input :avatar, :as => :file %>
     <br />
-    <%= image_tag user_picture_for(@user, :original), :class => "user-profile-picture" %>
+    <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture" %>
   <% end %>
 
   <%= f.inputs "Personal Info" do %>

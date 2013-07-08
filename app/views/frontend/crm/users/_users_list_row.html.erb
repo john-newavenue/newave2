@@ -1,7 +1,7 @@
 <tr>
   <td>
     <%= link_to user_profile_path(user.slug) do %>
-      <%= image_tag user_icon_for(user, :tiny), :class => "user-icon" %> <%= user.username %>
+      <%= image_tag user_icon_for(user, :tiny), :class => "user-avatar tiny" %> <%= user.username %>
     <% end %>
   </td>
   <td><%= user.created_at %></td>

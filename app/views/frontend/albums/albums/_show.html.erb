@@ -1,11 +1,11 @@
 <% provide(:title, @album.title) if not content_for?(:title) %>
 
-<h3><%= yield(:title) %></h3>
+<h4><%= yield(:title) %></h4>
 <% if @album.parent and @album.parent.name %>
   <p>by <%= link_to @album.parent.name, vendor_path(@album.parent) %></p>
 <% end %>
 <% if @album.description %>
-  <p><%= @album.description %></p>
+  <%= simple_format(@album.description) %>
 <% end %>
 
 <ul class="large-block-grid-3 small-block-grid-2 album-items">
