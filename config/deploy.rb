@@ -38,15 +38,15 @@ after "deploy", "deploy:cleanup"
 namespace :deploy do
 
   task :start do
-    run "cd #{current_path} && bundle exec thin -C #{current_path}/config/thin.yml start > /dev/null 2>&1 &"
+    run "cd #{current_path} && bundle exec thin -C #{current_path}/config/thin.yml start "
   end
 
   task :stop do
-    run "cd #{current_path} && bundle exec thin -C #{current_path}/config/thin.yml stop > /dev/null 2>&1 &"
+    run "cd #{current_path} && bundle exec thin -C #{current_path}/config/thin.yml stop "
   end
 
   task :restart do
-    run "cd #{current_path} && bundle exec thin -C #{current_path}/config/thin.yml restart > /dev/null 2>&1 &"
+    run "cd #{current_path} && bundle exec thin -C #{current_path}/config/thin.yml restart "
   end
 
   desc "Create symlinks to sensitive config files"
