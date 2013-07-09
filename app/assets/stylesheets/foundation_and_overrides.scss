@@ -1078,6 +1078,10 @@ table { width: 100%; }
 
 .center-text { text-align: center;}
 
+@media only screen and (max-width: 768px) {
+  .center-text-for-small { text-align: center; }
+}
+
 .page-content { margin-bottom: 1.5em; }
 
 .alert-box p:last-child { margin-bottom: 0; }
@@ -1189,15 +1193,20 @@ header {
 // Landing Page
 //
 
-header#home-splash-container { padding: 0; margin: 0; }
+header#home-splash-container { 
+  padding: 0; margin: 0; 
+  background: url(https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/hero-cover3.jpg) no-repeat center;
+  background-size: cover;
+  border-bottom: 1px solid #ccc;
+}
 
 section#home-splash { 
-  background: $NA-color-dark-green;
-  padding-top: 2em;
-  padding-bottom: 2em; 
+
+  padding: 2em 0 2em 0;
+
 
   h1, h2, h3, h4, h5, h6 { 
-    color: $NA-color-light-grey; 
+    color: $NA-color-dark-grey; 
     font-weight: normal; 
     font-family: 'Open Sans', sans-serif;
   }
@@ -1211,6 +1220,12 @@ section#home-splash {
   .push-text { display: none; }
   @media only screen and (min-width: 560px) and (max-width: 768px) { 
     .push-text { display: inherit !important;}
+  }
+
+  #home-orbiter {
+    .orbit-slide-number { display: none; }
+    .orbit-bullets li { border: 0; width: 5px; height: 5px; }
+    .orbit-next, .orbit-prev { background-color: rgba(0,0,0,0.1); }
   }
 
 }
@@ -1228,6 +1243,8 @@ section#home-features {
     background: white;
 
   }
+
+
 
 }
 
