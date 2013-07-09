@@ -44,6 +44,9 @@ group :development do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem "rails-erd"
+
+  gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 group :production do
@@ -74,9 +77,6 @@ gem 'rolify', :git => 'https://github.com/EppO/rolify.git'
 gem 'figaro'
 
 gem 'thin' # app server
-
-# Deploy with Capistrano
-# gem 'capistrano', group: :development
 
 # To use debugger
 # gem 'debugger'
