@@ -39,14 +39,25 @@ default_run_options[:pty] = true
 #   end
 # end
 
+after "deploy", "deploy:symlink_config_files"
+after "deploy", "deploy:restart"
+
 namespace :deploy do
+
   task :start do
     run "cd #{current_path} && bundle exec thin start -C #{current_path}/config/thin.yml"
   end
+
   task :stop do
     run "cd #{current_path} && bundle exec thin stop"
   end
+
   task :restart do
     run "cd #{current_path} && bundle exec thin restart -C #{current_path}/config/thin.yml"
   end
+
+  task :symlink_config_files do
+    run "#{try_sudo} ln -s #{deploy_to}/shared/config/application.yml #{current_path}/config/application.yml"
+  end
+  
 end

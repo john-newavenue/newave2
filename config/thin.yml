@@ -1,9 +1,7 @@
 pid: tmp/pids/thin.pid
-port: 4000
-max_conns: 1024
-
-log: /var/log/thin.log
-
+log: var/log/thin.log
 daemonize: true
 environment: production
 chdir: /var/www/beta.newavenuehomes.com/current
+port: 4000
+max_conns: 1024
