@@ -47,6 +47,7 @@ group :development do
 
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'capistrano-db-tasks', require: false
 end
 
 group :production do
