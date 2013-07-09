@@ -1,3 +1,4 @@
+pid: /tmp/pids/thin-newave2.pid
 port: 4000
 max_conns: 1024
 
