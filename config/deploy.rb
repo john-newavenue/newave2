@@ -40,8 +40,12 @@ default_run_options[:pty] = true
 # end
 
 namespace :deploy do
-  # task :start {}
-  # task :stop {}
+  task :start do
+    run "cd #{current_path} && bundle exec thin start -C #{current_path}/config/thin.yml"
+  end
+  task :stop do
+    run "cd #{current_path} && bundle exec thin stop"
+  end
   task :restart do
     run "cd #{current_path} && bundle exec thin restart -C #{current_path}/config/thin.yml"
   end
