@@ -3,7 +3,7 @@
   <ul class="side-nav">
     <li><%= link_to edit_vendor_path(@vendor) do %><i class='general foundicon-edit'></i>Edit Company Profile<% end %></li>
     <li><%= link_to vendor_staff_index_path(@vendor) do %><i class='general foundicon-address-book'></i>Manage Members<% end %></li>
-    <li><%= link_to "#", :'data-reveal-id' => 'new_album_modal' do %><i class='general foundicon-photo'></i>Create Album<% end %></</li>
+    <li><%= link_to "#", :'data-reveal-id' => 'new_album_modal' do %><i class='general foundicon-photo'></i>Create Album<% end %></li>
     <% if @vendor and can? :manage, @vendor %>
       <li><%= link_to 'Delete Vendor', "#" %></li>
     <% end %>

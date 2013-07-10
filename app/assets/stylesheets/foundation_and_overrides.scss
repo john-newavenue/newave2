@@ -36,7 +36,6 @@ $NA-error-label-color: red;
 // $body-bg: #fff;
 // $body-font-color: #222;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-$body-font-family: 'Open Sans', sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -141,9 +140,8 @@ $header-font-weight: normal;
 $paragraph-font-family: Arial, sans-serif;
 // $paragraph-font-weight: normal;
 // $paragraph-font-size: 1em;
-$paragraph-font-size: .9em;
+$paragraph-font-size: .85em;
 // $paragraph-line-height: 1.6;
-$paragraph-line-height: 1.5;
 // $paragraph-margin-bottom: emCalc(20px);
 // $paragraph-aside-font-size: emCalc(14px);
 // $paragraph-aside-line-height: 1.35;
@@ -1234,19 +1232,16 @@ section#home-splash {
 
 section#home-features {
   background: #ddd;
+}
 
-  .row.stage {
-    padding-top: 3em;
-    padding-bottom: 3em;
-    p { font-size: 1.2em; font-family: 'Open Sans', sans-serif }
-    @media only screen and (min-width: 768px) { h3 { margin-top: 1em; } }
-    border-top: 2px solid $NA-color-light-green;
-    box-shadow: 0 0 3px 1px #bbb;
-    background: white;
-
-  }
-
-
+.stage {
+  padding-top: 3em;
+  padding-bottom: 3em;
+  p { font-size: 1.2em; font-family: 'Open Sans', sans-serif }
+  @media only screen and (min-width: 768px) { h3 { margin-top: 1em; } }
+  border-top: 2px solid $NA-color-light-green;
+  box-shadow: 0 0 3px 1px #bbb;
+  background: white;
 
 }
 
@@ -1311,17 +1306,15 @@ section.footer {
   &:hover { 
     box-shadow: 0px 0px 6px 1px $NA-color-dark-grey;
   }
-  width: 100%; 
 
   margin: 0;
-  padding: 1em;
+  padding: .25em;
   overflow: hidden;
 
   .tile-image-wrapper {
     padding: 1em;
     text-align: center;
     height: 200px;
-    width: 100%;
     vertical-align: middle;
     display: table-cell;
   }
@@ -1333,12 +1326,6 @@ section.footer {
   margin: 0;
 }
 
-.architects {
-  .tile {
-    text-align: center; 
-    .link-block { display: block; height: 100%; width: 100%; }
-  }
-}
 
 
 .album-items {
@@ -1367,7 +1354,6 @@ section.footer {
   padding-bottom: .25em;
   margin-bottom: .25em;
   .user-avatar { width: 64px; }
-  .user-info { height: 64px; }
 }
 
 // Theater
@@ -1531,7 +1517,7 @@ ul.tagit {
 }
 
 .item-contents-wrapper { 
-  padding: 1.25em; 
+  padding: .25em; 
   border: solid 1px #dddddd ;
 }
 

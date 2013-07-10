@@ -1,12 +1,11 @@
 <% provide(:title, @vendor.name) %>
 
 <h2><%= @vendor.name %></h2>
-<p><%= @vendor.vendor_type.name %></p>
-
 <p><%= @vendor.description %></p>
 
+<hr>
 
-<ul class="large-block-grid-2 small-block-grid-2">
+<ul class="large-block-grid-3 small-block-grid-2">
   <% @vendor.albums.each do |album| %>
     <li>
       <div class="tile">
@@ -17,8 +16,6 @@
             <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/no-cover-image.png", :alt => "Upload some images and pick one!" %>
           <% end %>
         <% end %>
-        <br>
-        <h6 style="height: 34px;"><%= truncate album.title, :length => 40 %></h6>
       </div>
     </li>
   <% end %>  

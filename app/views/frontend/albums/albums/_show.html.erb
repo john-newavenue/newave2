@@ -8,41 +8,29 @@
   <%= simple_format(@album.description) %>
 <% end %>
 
+<hr>
+
 <ul class="large-block-grid-3 small-block-grid-2 album-items">
     <% @album.items.each do |item| %>
         <% if item.asset %>
         <li class="item item-<%= item.id %>">
             <div class="item-contents-wrapper">
               
-              <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :class => "display-theater hide-for-small" do %>
+              <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
                 <%= image_tag item.asset.image(:medium_square), :class => "item-thumb", :data => {:caption => item.asset.image.url} %>
               <% end %>
 
-              <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :class => "show-for-small" do %>
+              <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :title=> item.title, :class => "show-for-small" do %>
                 <%= image_tag item.asset.image(:medium_square), :class => "item-thumb", :data => {:caption => item.asset.image.url} %>
               <% end %>
             
-              <h6 class="title"><%= !item.title.blank? ? truncate(item.title,:length => 30) : "Untitled"  %></h6>
-
               <ul class="button-group radius">
                 <li>
-                  <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => item.id )), :class => "button small secondary radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
+                  <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => item.id )), :class => "button tiny secondary radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
                     <i class="general foundicon-heart"></i>
                   <% end %>
                 </li>
               </ul>
-
-
-
-              <div class="item-tags-wrapper show-for-small">
-                <%= image_tag "tag-green-icon.png", :class => "tag-list-icon", :alt => "Tags", :title => "Tags" %>
-                <ul class="item-tags">
-                  <% item.tag_list.each do |tag| %>
-                    <li><%= link_to tag, "#" %></li>
-                  <% end %>
-                </ul>
-
-              </div>
 
             </div>
         </li>

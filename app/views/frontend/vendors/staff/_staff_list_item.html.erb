@@ -1,4 +1,3 @@
-
 <div class="row staff-row">
   <div class="columns small-2 large-2 user-avatar">
     <div class="tiny tile">
@@ -8,6 +7,6 @@
     </div>
   </div>
   <div class="columns large-8 small-8 user-info">
-    <p><%= link_to vendor_member.username, user_profile_path(vendor_member.slug) %></p>
+    <%= link_to vendor_member.username, user_profile_path(vendor_member.slug) %>
   </div>
 </div>

@@ -9,8 +9,9 @@
   <% end %>
 </div>
 
-<h4>Team Members</h4>
-
+<h5>Team Members</h5>
 <% vendor.members.each do |vendor_member| %>
 <%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %>
 <% end %>
+
+<br>
