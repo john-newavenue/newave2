@@ -3,14 +3,10 @@
   <br />
 </div>
 
-
-<br>
-
 <div class="hide-for-small">
-  <%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>
-  <br>
+  <% if @vendor.object and can? :update, @vendor.object %>
   <%= render :partial => '/frontend/vendors/vendors/toolbar_links' %>
-  <br />
+  <% end %>
 </div>
 
 <h4>Team Members</h4>

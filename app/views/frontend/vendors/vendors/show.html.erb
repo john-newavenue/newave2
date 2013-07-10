@@ -6,7 +6,7 @@
 <p><%= @vendor.description %></p>
 
 
-<ul class="large-block-grid-3 small-block-grid-2">
+<ul class="large-block-grid-2 small-block-grid-2">
   <% @vendor.albums.each do |album| %>
     <li>
       <div class="tile">
@@ -18,7 +18,7 @@
           <% end %>
         <% end %>
         <br>
-        <h6 style="height: 34px;"><%= truncate album.title, :length => 50 %></h6>
+        <h6 style="height: 34px;"><%= truncate album.title, :length => 40 %></h6>
       </div>
     </li>
   <% end %>  

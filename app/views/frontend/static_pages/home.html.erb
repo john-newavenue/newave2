@@ -42,7 +42,7 @@
       <div class="large-3 columns call-to-action">
         <h1 class="show-for-medium-up" style="font-size: 2em;">New Avenue</h1>
         <h4 class="byline" style="font-size: 1em;">We help you build your small home or in-law unit and eliminate the stress of dealing with permits and contractors.</h4>
-        <a href="#" class="large button">Start My Project</a>
+        <%= link_to "Get Started", join_path, :class => "large button" %>
       </div>
     </div>
   </section>
@@ -161,7 +161,7 @@
 
     <div class="large-4 small-6 columns">
       <h4>What are you waiting for?</h4>
-      <%= link_to 'Get Started', '#', :class => 'button radius' %>
+      <%= link_to 'Get Started', join_path, :class => 'button' %>
     </div>
 
     <div class="large-4 small-6 columns">

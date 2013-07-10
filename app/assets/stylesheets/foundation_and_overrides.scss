@@ -1124,7 +1124,7 @@ table { width: 100%; }
   .transition-buffer { margin-top: 8px; }
   .show-for-small-custom { display: none; }
   @media only screen and (max-width: 768px) {
-    .transition-buffer { margin-top: 0; }
+    .transition-buffer { margin-top: 0; padding-top: 8px; }
     .show-for-small-custom { display: inline; }
   }
 

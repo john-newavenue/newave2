@@ -1,3 +1,4 @@
+<% if @vendor.object and can? :update, @vendor.object %>
 <div class="row">
   <div class="large-10 columns">
       <div class="section-container accordion show-for-small" data-section="accordion">
@@ -5,10 +6,10 @@
           <p class="title" data-section-title><a href="#">Menu <i class="icon-dropdown" style="float: right;"></i></a></p>
           <div class="content" data-section-content>
             <%= render :partial => 'toolbar_links' %>
-            <%= link_to "Send Message", "#", :class => "button light-blue", :style => "width: 100%; " %>
             <br>
           </div>
         </section>
       </div>
   </div>
 </div>  
+<% end %>
