@@ -11,19 +11,17 @@ module Frontend
       end
 
       def create
-        @invitation = Logical::Admin::Invitation.new(params[:invitation] ? params[:invitation] : {} )
+
+        # debugger
+
+        @invitation = Logical::Admin::Invitation.new(invitation_params)
+
         if @invitation.valid?
-          user = User.invite!(
-            {
-              :email => @invitation.email,
-              :username => /^[^@]+/.match(@invitation.email).to_s + 3.times.to_a.map{rand(0..5)}.join
-            }, current_user
-          )
-          project_role = Physical::Project::ProjectRole.find_by_id(params[:invitation][:project_role])
-          user.add_role project_role.to_user_role
+          @invitation.send!(current_user)
           flash[:notice] = "Invitation sent."
           redirect_to crm_invitations_path
         else
+          debugger
           flash[:alert] = "There was an error with the invitation."
           render 'new'
         end
@@ -56,7 +54,7 @@ module Frontend
       end
 
       def invitation_params
-        params.require(:invitation).permit(:email, :project_role)
+        params.require(:invitation).permit(:first_name, :last_name, :username, :email, :project_role, :message, :vendor, :is_new_vendor, :new_vendor_name, :new_vendor_type)
       end
 
     end

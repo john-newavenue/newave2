@@ -14,12 +14,13 @@ module Frontend
         end
 
         def resolve_layout
-          case action_name
-          when 'index'
-            'one-column'
-          else
-            'admin'
-          end
+          # case action_name
+          # when 'index'
+          #   'one-column'
+          # else
+          #   'admin'
+          # end
+          'admin'
         end
 
     end

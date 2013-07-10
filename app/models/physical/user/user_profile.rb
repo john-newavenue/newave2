@@ -7,7 +7,7 @@ module Physical
       # fields and associations
       #
 
-      has_attached_file :avatar, :styles => { :tiny => "24x24#", :small => "64x64#", :profile => "188x250#" }
+      has_attached_file :avatar, :styles => { :tiny => "24x24#", :small => "64x64#", :profile => "200x200#" }
       belongs_to :user
       belongs_to :address, :class_name => "Physical::General::Address"
 

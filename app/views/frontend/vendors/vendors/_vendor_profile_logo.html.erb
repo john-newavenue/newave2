@@ -1,7 +1,7 @@
 <div class="profile-picture-wrapper">
   <% if vendor %>
     <%= link_to vendor_path(vendor) do %>
-      <%= image_tag vendor.logo(:profile),:title => vendor.name, :alt => vendor.name, :class => "profile-picture" %>
+      <%= image_tag vendor_logo_for(vendor),:title => vendor.name, :alt => vendor.name, :class => "profile-picture" %>
     <% end %>
   <% end %>
 </div>

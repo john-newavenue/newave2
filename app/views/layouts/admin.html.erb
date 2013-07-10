@@ -5,19 +5,25 @@
 
   <div class="row">
 
-    <div class="large-9 push-3 columns">
-    <%= yield %>
+    <div class="large-12 columns">
+      <br>
+      <div class="section-container horizontal-nav" data-section="horizontal-nav" data-options="one_up: false;">
+        <section>
+          <p class="title" data-section-title><a href="#">Manage</a></p>
+          <div class="content" data-section-content>
+            <ul class="side-nav">
+              <li><%= active_link_to 'Users', crm_users_path, :wrap_tag => :li %></li>
+              <li><%= active_link_to 'Invitations', crm_invitations_path, :wrap_tag => :li %></li>
+              <li><%= active_link_to 'List Vendors', crm_vendors_path, :wrap_tag => :li %></li>
+              <li><%= active_link_to 'Create Vendor', new_vendor_path, :wrap_tag => :li %></li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </div>
 
-    <div class="large-3 pull-9 columns">
-      <h4>Manage</h4>
-      <ul class="side-nav">
-        <li><%= active_link_to 'Users', crm_users_path, :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Invitations', crm_invitations_path, :wrap_tag => :li %></li>
-        <li><%= active_link_to 'List Vendors', crm_vendors_path, :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Create Vendor', new_vendor_path, :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Somewhere 4', '#', :wrap_tag => :li %></li>
-      </ul>
+    <div class="large-12 columns">
+    <%= yield %>
     </div>
 
   </div>

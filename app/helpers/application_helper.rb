@@ -14,8 +14,8 @@ module ApplicationHelper
     # for sizes, see User model
     user = User.new if user == nil
     placeholders = {
-      :tiny => 'icons/user-default-icon.png',
-      :small => 'icons/user-default-icon.png',
+      :tiny => 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/blank_user.png',
+      :small => 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/blank_user.png',
       :profile => 'icons/user-default-icon-large.png'
     }
     user.profile.avatar.file? ? user.profile.avatar(size) : placeholders[size]
@@ -26,7 +26,7 @@ module ApplicationHelper
   def vendor_logo_for(vendor, size = :profile)
     vendor = Physical::Vendor::Vendor.new if vendor == nil
     placeholders = {
-      :profile => 'icons/misc-icon.png'
+      :profile => 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/blank_vendor.png'
     }
     vendor.logo.file? ? vendor.logo(size) : placeholders[size]
   end

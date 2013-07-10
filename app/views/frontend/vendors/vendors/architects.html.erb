@@ -11,8 +11,10 @@
 <ul class="large-block-grid-4 small-block-grid-2 architects">
   <% @vendors.each do |vendor| %>
     <li>
-      <div class="tile" style="background: url('<%= vendor_logo_for(vendor) %>')  no-repeat center center;">
-        <%= link_to "", vendor_profile_path(vendor.slug), :title => vendor.name, :class => "link-block" %>
+      <div class="tile">
+        <%= link_to vendor_profile_path(vendor.slug), :title => vendor.name, :class => "link-block" do %>
+          <%= image_tag vendor_logo_for(vendor),:title => vendor.name, :alt => vendor.name %>
+        <% end %>
       </div>
     </li>
   <% end %>
