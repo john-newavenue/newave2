@@ -38,20 +38,18 @@
 
 <div class="screen-sidebar">
   <div class="screen-sidebar-content-wrapper pad blank-loader">
-    <h4><%= @item.title %></h4>
-    
-    <p>
-      <% item_owner = @item.album.parent %>
-      
-      In <%= link_to @item.album.title, media_path(@item.album) %> by
-      <%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %>
-    </p>
+    <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
+    <% item_owner = @item.album.parent %>
+    <h6><%= link_to @item.album.title, media_path(@item.album) %></h6>
+    <h6><%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %></h6>
 
+    <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
     <p>
       <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
-        <%= image_tag item_owner.logo(:profile), :style => "max-width: 70px;", :alt => item_owner.name %>
+        <%= image_tag vendor_logo_for(item_owner), :style => "max-width: 70px;", :alt => item_owner.name %>
       <% end %>
     </p>
+    <% end %>
 
     <p><% if not @item.description.blank? %><%= @item.description %><% end %></p>
 

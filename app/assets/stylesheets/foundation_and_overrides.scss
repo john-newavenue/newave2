@@ -1375,9 +1375,13 @@ section.footer {
   .screen-content-centerer { display: table-cell; vertical-align: middle; text-align: center; }
   .screen, .screen-content-wrapper, .screen-content-centerer, .screen-featured-image { max-height: inherit; }
 
-  .screen-sidebar, .screen-sidebar-footer { background: white; }
+  .screen-sidebar, .screen-sidebar-footer { background: white; font-size: .8em; }
   .screen-sidebar { overflow-y: scroll; overflow-x: hidden; }
   .screen-footer { @include linear-gradient(to top, darken($NA-color-dark-grey,30), black); text-align: center;  }
+  .screen-sidebar {
+    h4 { font-weight: bold; }
+    h6 { margin: 0; }
+  }
 
   .nav-button { 
     cursor: pointer;
@@ -1395,7 +1399,8 @@ section.footer {
     li {
       padding: .5em;
       .tile { 
-        padding: .2em; 
+        text-align: center; 
+        padding: .25em; 
         margin: 0;
         img { max-width: 46px; }
         &.active { 

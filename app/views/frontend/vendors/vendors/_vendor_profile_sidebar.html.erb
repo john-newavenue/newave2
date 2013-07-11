@@ -3,13 +3,7 @@
   <br />
 </div>
 
-<div class="hide-for-small">
-  <% if @vendor.object and can? :update, @vendor.object %>
-  <%= render :partial => '/frontend/vendors/vendors/toolbar_links' %>
-  <% end %>
-</div>
-
-<h5>Team Members</h5>
+<h6>Company Team Members</h6>
 <% vendor.members.each do |vendor_member| %>
 <%= render :partial => 'frontend/vendors/staff/staff_list_item', :locals => { :vendor_member => vendor_member }  %>
 <% end %>

@@ -4,8 +4,10 @@
 <% if @album.parent and @album.parent.name %>
   <p>by <%= link_to @album.parent.name, vendor_path(@album.parent) %></p>
 <% end %>
-<% if @album.description %>
+<% if !@album.description.blank? %>
   <%= simple_format(@album.description) %>
+<% else %>
+  <p>No album information provided.</p>
 <% end %>
 
 <hr>

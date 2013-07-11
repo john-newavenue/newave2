@@ -65,7 +65,6 @@
                 <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Settings</span></a>
                 <ul class="dropdown">
                   
-                  <li><%= active_link_to 'My Profile', edit_profile_path(current_user), :wrap_tag => :li %></li>
                   <% if current_user.has_role? :vendor %>
                     <% current_user.vendors.each do |v| %>
                       <li><%= link_to v.name, vendor_profile_path(:slug => v.slug) %></li>
@@ -73,7 +72,7 @@
                   <% end %>
 
                   <li class="divider"></li>
-                  <li><%=link_to "Preferences", "#"%></li>
+                  <li><%= link_to "Preferences", "#" %></li>
                   <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
                 </ul>
               </li>

@@ -1,9 +1,19 @@
 <% provide(:title, @vendor.name) %>
 
 <h2><%= @vendor.name %></h2>
-<p><%= @vendor.description %></p>
+<% if !@vendor.description.blank? %>
+  <%= simple_format @vendor.description %>
+<% else %>
+  <p>No company information provided.</p>
+<% end %>
 
 <hr>
+
+<% if @vendor.object and can? :update, @vendor.object %>
+<%= link_to edit_vendor_path(@vendor), :class => 'button secondary tiny' do %><i class='general foundicon-edit'></i>Edit Company Profile<% end %>
+<%= link_to "#", :'data-reveal-id' => 'new_album_modal', :class => 'button secondary tiny' do %><i class='general foundicon-photo'></i>Create Album<% end %>
+<p></p>
+<% end %>
 
 <ul class="large-block-grid-3 small-block-grid-2">
   <% @vendor.albums.each do |album| %>
