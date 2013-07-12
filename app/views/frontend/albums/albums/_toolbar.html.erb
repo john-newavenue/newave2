@@ -1,10 +1,10 @@
 <ul class="button-group toolbar">
   <li>
-    <%= link_to edit_medium_path(@album), :remote => true, :class => "small button neutral edit-album-action" do %>
+    <%= link_to edit_medium_path(@album), :remote => true, :class => " button neutral edit-album-action" do %>
       <i class='general foundicon-edit'></i>Edit Album
     <% end %>
   </li>
-  <li><%= link_to media_upload_path(@album), :class => "small button neutral", :data => { :'no-turbolinks' => true } do %><i class='general foundicon-up-arrow'></i>Upload Images<% end %></li>
+  <li><%= link_to media_upload_path(@album), :class => " button neutral", :data => { :'no-turbolinks' => true } do %><i class='general foundicon-up-arrow'></i>Upload Images<% end %></li>
 </ul>
 
 <script>

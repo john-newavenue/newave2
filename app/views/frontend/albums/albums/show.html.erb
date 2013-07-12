@@ -2,10 +2,6 @@
 
   <% provide(:title, @album.title) %>
 
-  <% if can? :update, @album.parent %>
-    <%= render :partial => 'frontend/albums/albums/toolbar' %>
-  <% end %>
-
   <div id="album_container">
   <%= render :partial => 'frontend/albums/albums/show' %>
   </div>

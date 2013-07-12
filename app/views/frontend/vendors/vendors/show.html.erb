@@ -1,34 +1,115 @@
-<% provide(:title, @vendor.name) %>
-
-<h2><%= @vendor.name %></h2>
-<% if !@vendor.description.blank? %>
-  <%= simple_format @vendor.description %>
-<% else %>
-  <p>No company information provided.</p>
-<% end %>
-
-<hr>
-
-<% if @vendor.object and can? :update, @vendor.object %>
-<%= link_to edit_vendor_path(@vendor), :class => 'button secondary tiny' do %><i class='general foundicon-edit'></i>Edit Company Profile<% end %>
-<%= link_to "#", :'data-reveal-id' => 'new_album_modal', :class => 'button secondary tiny' do %><i class='general foundicon-photo'></i>Create Album<% end %>
-<p></p>
-<% end %>
-
-<ul class="large-block-grid-3 small-block-grid-2">
-  <% @vendor.albums.each do |album| %>
-    <li>
-      <div class="tile">
-        <%= link_to medium_path(album), :title => album.title do %>
-          <% if album.cover_image %>
-            <%= image_tag album.cover_image.image(:medium_square), :alt => album.title %>
-          <% else %>
-            <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/no-cover-image.png", :alt => "Upload some images and pick one!" %>
-          <% end %>
-        <% end %>
-      </div>
-    </li>
-  <% end %>  
-</ul>
+<% content_for :content do %>
 
 <br>
+
+<section class="vendor-profile">
+
+  <div class="row">
+
+    <div class="large-9 push-3 columns">    
+      <% provide(:title, @vendor.name) %>
+
+      <% provide(:logo) do %>
+        <%= link_to vendor_path(@vendor) do %>
+          <%= image_tag @vendor.logo(:square),:title => @vendor.name, :alt => @vendor.name %>
+        <% end %>
+      <% end %>
+
+      <% provide(:staff_list) do %>
+        <table class="vertical-middle">
+          <tbody>
+            <% @vendor.members.each do |vendor_member| %>
+            <tr>
+              <td>
+                <%= link_to user_profile_path(vendor_member.slug) do %>
+                  <%= image_tag vendor_member.profile.avatar(:tiny) %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to vendor_member.username, user_profile_path(vendor_member.slug) %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+      <% provide(:nav) do %>
+        <ul class="side-nav">
+          <% if @vendor.object and can? :update, @vendor.object %>
+          <li><%= link_to edit_vendor_path(@vendor) do %><i class='general foundicon-edit'></i>Edit Company Profile<% end %></li>
+          <li class="divider"></li>
+          <li><%= link_to "#", :'data-reveal-id' => 'new_album_modal' do %><i class='general foundicon-photo'></i>Create Album<% end %></li>
+          <li class="divider"></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <!-- logo -->
+      <div class="show-for-small center-text"><%= yield(:logo) %><p></p></div>
+
+      <!-- name -->
+      <div class="hide-for-small"><h3><%= @vendor.name %></h3></div>
+      <div class="show-for-small center-text"><h3><%= @vendor.name %></h3><hr></div>
+
+      <!-- nav -->
+      <div class="show-for-small"><%= yield(:nav) %></div>
+
+      <% if !@vendor.description.blank? %>
+        <%= simple_format @vendor.description %>
+      <% else %>
+        <p>No company information provided.</p>
+      <% end %>
+
+      <hr>
+
+
+
+      <ul class="large-block-grid-3 small-block-grid-2">
+        <% @vendor.albums.each do |album| %>
+          <li>
+            <div class="tile">
+              <%= link_to medium_path(album), :title => album.title do %>
+                <% if album.cover_image %>
+                  <%= image_tag album.cover_image.image(:medium_square), :alt => album.title %>
+                <% else %>
+                  <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/no-cover-image.png", :alt => "Upload some images and pick one!" %>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>  
+      </ul>
+
+      <br>
+
+    </div>
+
+    <!-- sidebar -->
+    <div class="large-3 pull-9 columns">
+
+      <!-- logo -->
+      <div class="hide-for-small center-text"><%= yield(:logo) %><p></p></div>
+
+
+      <!-- staff -->
+      <hr class="show-for-small">
+      <h6 class="show-for-small">Team Members</h6>
+      <%= yield(:staff_list) %>
+
+      <!-- nav -->
+      <div class="hide-for-small"><%= yield(:nav) %></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<% end %>
+
+<% provide :modals do %>
+<%= render :partial => 'frontend/albums/albums/new_modal' %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

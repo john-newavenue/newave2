@@ -23,7 +23,8 @@ module Physical
       has_many :vendor_members, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
       has_many :members, :through => :vendor_members, :source => :user, :class_name => "::User"
       has_many :albums, :class_name => 'Physical::Album::Album', :source => :parent, :foreign_key => "parent_id"
-      has_attached_file :logo, styles: { profile: "200x200#" }
+      has_attached_file :logo, :styles => { :tiny => "24x24#", :small => "64x64#", :square => "300x300#" }
+
 
       # 
       # behaviors

@@ -1,68 +1,133 @@
-<% provide :title do %>
-  <% if @user.has_role? :vendor %>
-    <h3>
-      <% if !@profile.full_name.blank? %>
-        <%= @profile.full_name %> (<%= @user.username %>)
+<% content_for :content do %>
+
+<br>
+
+<section class="user-profile">
+
+  <div class="row">
+
+    <!-- content -->
+    <div class="large-9 push-3 columns">
+
+      <% provide :title do %>
+        <% if @user.has_role? :vendor %>
+          <h3>
+            <% if !@profile.full_name.blank? %>
+              <%= @profile.full_name %> (<%= @user.username %>)
+            <% else %>
+              <%= @user.username %>
+            <% end %>
+          </h3>
+          <div class="hide-for-small"><p>of <% @user.vendors.each do |vendor| %><%= link_to vendor.name, vendor_profile_path(vendor.slug) %><% end %></p></div>
+        <% else %>
+          <h3><%= @user.username %></h3>
+        <% end %>
+      <% end %>
+
+      <% provide :companies do %>
+        <% if @user.has_role?(:vendor) and @user.vendors.count > 0 %>
+          <!-- companies -->
+          <table class="vertical-middle">
+            <tbody>
+              <% @user.vendors.each do |vendor| %>
+              <tr>
+                <td><%= link_to vendor_profile_path(:slug => vendor.slug) do %><%= image_tag vendor.logo(:tiny) %><% end %></td>
+                <td><%= link_to vendor_profile_path(:slug => vendor.slug) do %><%= vendor.name %><% end %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+
+      <% provide :nav do %>
+        <ul class="side-nav">
+          <% if can? :update, @user.profile %>
+            <li><%= link_to edit_profile_path(@user) do %><i class="general foundicon-edit"></i>Edit profile<% end %></li>
+            <li class="divider"></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <!-- profile picture @small -->
+      <div class="show-for-small center-text"><%= image_tag @user.profile.avatar(:square) %><p></p></div>
+
+      <!-- name -->
+      <div class="show-for-small center-text"><%= yield(:title )%></div>
+      <div class="hide-for-small"><%= yield(:title )%></div>
+
+      <!-- companies -->
+      <div class="show-for-small"><%= yield(:companies) %></div>
+
+      <!-- nav -->
+      <div class="show-for-small"><%= yield(:nav) %></div>
+
+      <% if !@profile.bio.blank? %>
+        <div><%= simple_format @profile.bio %></div>
       <% else %>
-        <%= @user.username %>
+        <p>No bio information provided.</p>
       <% end %>
-    </h3>
-    <p>of <% @user.vendors.each do |vendor| %><%= link_to vendor.name, vendor_profile_path(vendor.slug) %><% end %></p>
-  <% else %>
-    <h3><%= @user.username %></h3>
-  <% end %>
-<% end %>
 
-<%= yield(:title )%>
+      <% if false %>
 
-<% if !@profile.bio.blank? %>
-  <%= simple_format @profile.bio %>
-<% else %>
-  <p>No bio information provided.</p>
-<% end %>
+        <hr>
 
-<% if can? :update, @user.profile %>
-  <%= link_to "Edit Profile", edit_profile_path(@user), :class => "button secondary small" %>
-<% end %>
+        <!-- Project List -->
 
+        <% project_count = @user.object && @user.project_count | 0 %>
 
-<p></p>
+        <% if @user.object == current_user and current_user.has_role? :customer %>
 
-<% if false %>
+          <% if project_count == 0 %>
+            <%= link_to new_project_path, :class => 'button' do %>
+              <i class='general foundicon-plus'></i>Start Your First Project
+            <% end %>
+          <% else %>
+            
+            <ul class="large-block-grid-2">
+              <% @user.projects.each do |p| %>
+                <li>
+                  <h3><%= link_to p.title, project_path(p) %></h3>
+                  <p><%= truncate(p.description, :length => 50) %></p>
+                </li>
+              <% end %>      
+            </ul>
 
-  <hr>
+            <%= link_to new_project_path, :class => 'button' do %>
+              <i class='general foundicon-plus'></i>New Project
+            <% end %>
+            
+          <% end %>
+          
+        <% else %>
 
-  <!-- Project List -->
+          <p>No Projects.</p>
 
-  <% project_count = @user.object && @user.project_count | 0 %>
+        <% end %>
 
-  <% if @user.object == current_user and current_user.has_role? :customer %>
-
-    <% if project_count == 0 %>
-      <%= link_to new_project_path, :class => 'button' do %>
-        <i class='general foundicon-plus'></i>Start Your First Project
       <% end %>
-    <% else %>
-      
-      <ul class="large-block-grid-2">
-        <% @user.projects.each do |p| %>
-          <li>
-            <h3><%= link_to p.title, project_path(p) %></h3>
-            <p><%= truncate(p.description, :length => 50) %></p>
-          </li>
-        <% end %>      
-      </ul>
 
-      <%= link_to new_project_path, :class => 'button' do %>
-        <i class='general foundicon-plus'></i>New Project
-      <% end %>
-      
-    <% end %>
-    
-  <% else %>
 
-    <p>No Projects.</p>
+    </div>
 
-  <% end %>
+    <!-- sidebar -->
+    <div class="large-3 pull-9 columns">
+
+      <!-- profile picture -->
+      <div class="hide-for-small"><%= image_tag @user.profile.avatar(:square) %><p></p></div>
+
+      <!-- companies -->
+      <div class="hide-for-small"><%= yield(:companies) %></div>
+
+      <!-- nav -->
+      <div class="hide-for-small"><%= yield(:nav) %></div>
+
+    </div>
+
+  </div>
+
+</section>
 
 <% end %>
+
+<%= render :template => 'layouts/application' %>

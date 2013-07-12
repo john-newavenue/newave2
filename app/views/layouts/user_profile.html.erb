@@ -6,39 +6,52 @@
 
   <div class="row">
 
+    <!-- content -->
     <div class="large-9 push-3 columns">
 
-      <div class="profile-picture-wrapper show-for-small">
-        <%= image_tag user_picture_for(@user, :profile), :class => "profile-picture" %> 
-      </div>
-
-      <div class="show-for-small hidden">
-        <br>
-        <%= link_to "Send Message", "#", :class => "button light-blue show-for-small", :style => "width: 100%; " %>
+      <!-- profile picture @small -->
+      <div class="show-for-small center-text">
+        <%= image_tag @user.profile.avatar(:square) %> 
       </div>
       
       <%= yield %>
+
     </div>
 
+    <!-- sidebar -->
     <div class="large-3 pull-9 columns">
-      <div class="tile center-text hide-for-small">
-        <%= image_tag user_picture_for(@user, :profile) %> 
+
+      <!-- profile picture -->
+      <div class="hide-for-small">
+        <%= image_tag @user.profile.avatar(:square) %> 
       </div>
 
-      <br>
+      <% if @user.has_role?(:vendor) and @user.vendors.count > 0 %>
+        <!-- companies -->
+        <div class="show-for-small">
+          <h4>Team member of:</h4>
+        </div>
+        <table class="vertical-middle">
+          <tbody>
+            <% @user.vendors.each do |vendor| %>
+            <tr>
+              <td><%= link_to vendor_profile_path(:slug => vendor.slug) do %><%= image_tag vendor.logo(:tiny) %><% end %></td>
+              <td><%= link_to vendor_profile_path(:slug => vendor.slug) do %><%= vendor.name %><% end %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
 
-      <div class="hidden">
-      <%= link_to "Send Message", "#", :class => "button light-blue hide-for-small", :style => "width: 100%; " %>
-      </div>
-
-      <ul class="side-nav hidden">
-        <li><%= active_link_to 'TODO: Follow user', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'TODO: Send message', '#', :wrap_tag => :li %></li>
+      <!-- nav -->
+      <ul class="side-nav">
+        <% if can? :update, @user.profile %>
+          <li><%= link_to edit_profile_path(@user) do %><i class="general foundicon-edit"></i>Edit profile<% end %></li>
+          <li class="divider"></li>
+        <% end %>
       </ul>
 
     </div>
-
-
 
   </div>
 

@@ -16,7 +16,6 @@
 //= require tag-it.min
 //= require foundation
 
-
 $(document).ready( function () {
   $(document).foundation();
 })

@@ -140,8 +140,9 @@ $header-font-weight: normal;
 $paragraph-font-family: Arial, sans-serif;
 // $paragraph-font-weight: normal;
 // $paragraph-font-size: 1em;
-$paragraph-font-size: .85em;
+$paragraph-font-size: .8em;
 // $paragraph-line-height: 1.6;
+$paragraph-line-height: 1.3;
 // $paragraph-margin-bottom: emCalc(20px);
 // $paragraph-aside-font-size: emCalc(14px);
 // $paragraph-aside-line-height: 1.35;
@@ -221,6 +222,7 @@ $list-style-position: inside;
 // $input-font-family: inherit;
 // $input-font-color: rgba(0,0,0,0.75);
 // $input-font-size: emCalc(14px);
+$input-font-size: emCalc(16px);
 // $input-bg-color: #fff;
 // $input-focus-bg-color: darken(#fff, 2%);
 // $input-border-color: darken(#fff, 20%);
@@ -1067,8 +1069,11 @@ $topbar-breakpoint: emCalc(900px); // Change to 9999px for always mobile layout
 
 .bold { font-weight: bold; }
 
-table td { vertical-align: top; }
-table { width: 100%; }
+table {
+  width: 100%; 
+  &.vertical-middle td { vertical-align: middle; } 
+  td { vertical-align: top; }
+}
 
 .hidden { display: none; }
 

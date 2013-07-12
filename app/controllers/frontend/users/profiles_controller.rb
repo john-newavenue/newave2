@@ -1,7 +1,7 @@
 module Frontend
   module Users
     class ProfilesController < ApplicationController
-      layout 'user_profile'
+      layout 'application'
 
       before_filter :authenticate_user! => [:edit, :update]
       before_action :authorize_user, :only => [:edit, :update]

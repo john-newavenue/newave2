@@ -1,9 +1,15 @@
 <% provide(:title, @album.title) if not content_for?(:title) %>
 
-<h4><%= yield(:title) %></h4>
+<h3><%= yield(:title) %></h3>
 <% if @album.parent and @album.parent.name %>
   <p>by <%= link_to @album.parent.name, vendor_path(@album.parent) %></p>
 <% end %>
+
+<% if can? :update, @album.parent %>
+  <%= render :partial => 'frontend/albums/albums/toolbar' %>
+  <hr>
+<% end %>
+
 <% if !@album.description.blank? %>
   <%= simple_format(@album.description) %>
 <% else %>
@@ -47,9 +53,7 @@
 </div>
 <% end %>
 
-<div class="show-for-small">
-  <% if @album.parent and @album.parent.name %>
-    <hr>
-    <p>Learn more about <%= link_to @album.parent.name, vendor_path(@album.parent) %>.</p>
-  <% end %>
-</div>
+<% if @album.parent and @album.parent.name %>
+  <hr>
+  <p>See more from <%= link_to @album.parent.name, vendor_path(@album.parent) %>.</p>
+<% end %>

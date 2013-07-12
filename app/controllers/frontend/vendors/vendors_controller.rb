@@ -99,10 +99,12 @@ module Frontend
 
         def resolve_layout
           case action_name
-          when 'index'
+          when 'index', 'edit'
             'one-column'
           when 'new'
             'admin'
+          when 'show'
+            'application'
           else 
             'vendors'
           end

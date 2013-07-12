@@ -6,7 +6,7 @@
     <%= f.input :logo, :as => :file %>
     <%= f.input :description,
       :as => :text,
-      :input_html => { :rows => 6, :max_length => 2000 },
+      :input_html => { :rows => 12, :max_length => 2000 },
       :placeholder => "A description about the vendor. Max 5000 characters." 
     %>
     <%= f.input :vendor_type, :as => :radio, :collection => Physical::Vendor::VendorType.all %>
