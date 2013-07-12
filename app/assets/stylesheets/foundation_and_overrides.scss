@@ -1336,6 +1336,9 @@ section.footer {
 .album-items {
   .title { padding: .2em 0; }
   .item_thumb { display: block; }
+  @media only screen and (max-width: 768px) {
+    .item { padding: 0 3px 3px;}
+  }
 }
 
 //
@@ -1361,7 +1364,41 @@ section.footer {
   .user-avatar { width: 64px; }
 }
 
-// Theater
+// Theater and Items
+
+
+#theater-modal, #theater-page {
+  .image-collection {
+    li {
+      padding: 0 3px 3px;
+      .tile.active {
+        box-shadow: 0px 0px 6px 1px $NA-color-light-green;
+      }
+    }
+  }
+
+  .nav-button { 
+    cursor: pointer;
+    opacity: 0.5;
+    
+    &:hover { 
+      opacity: 1.0;
+      @include transition (all 0.25s ease-in-out);
+    }
+  }
+
+}
+
+#theater-page {
+  .nav-button {
+    position: absolute;
+    top: 40%;
+    @media only screen and (max-width: 768px) { top: 0; }
+    &.previous {  left: 0 }
+    &.next {  right: 0 }
+  }
+}
+
 
 
 #theater-modal  { 
@@ -1380,22 +1417,12 @@ section.footer {
   .screen-content-centerer { display: table-cell; vertical-align: middle; text-align: center; }
   .screen, .screen-content-wrapper, .screen-content-centerer, .screen-featured-image { max-height: inherit; }
 
-  .screen-sidebar, .screen-sidebar-footer { background: white; font-size: .8em; }
+  .screen-sidebar, .screen-sidebar-footer { background: white; }
   .screen-sidebar { overflow-y: scroll; overflow-x: hidden; }
   .screen-footer { @include linear-gradient(to top, darken($NA-color-dark-grey,30), black); text-align: center;  }
   .screen-sidebar {
     h4 { font-weight: bold; }
     h6 { margin: 0; }
-  }
-
-  .nav-button { 
-    cursor: pointer;
-    opacity: 0.5;
-    
-    &:hover { 
-      opacity: 1.0;
-      @include transition (all 0.25s ease-in-out);
-    }
   }
   
   .pad { padding: 0.2em; }
@@ -1408,9 +1435,6 @@ section.footer {
         padding: .25em; 
         margin: 0;
         img { max-width: 46px; }
-        &.active { 
-          box-shadow: 0px 0px 6px 1px $NA-color-light-green;
-        }
       }
     }
   }

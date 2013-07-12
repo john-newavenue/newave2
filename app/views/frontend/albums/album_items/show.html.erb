@@ -1,5 +1,102 @@
-<%- # TODO %>
+<% provide(:action_buttons) do %>
+<ul class="button-group" style="display: inline-block;">
+  <li>
+    <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => @item.id )), :class => "button small radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
+      <i class="general foundicon-heart"></i>Save to my project
+    <% end %>
+  </li>
+  <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %></li>
+  <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %></li>
+  <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %></li>
+</ul>
+<% end %>
 
-<script>
-  alert('test')
-</script>
+<br>
+<div class="section" id="theater-page" style="margin-bottom: 1em; ">
+
+  <div class="row">
+
+    <!-- screen -->
+    <div class="large-12 small-12 columns" style="margin-bottom: 1em; ">
+      <%= image_tag @item.asset.image(:original), :class => "screen-featured-image", :data => {:caption => @item.asset.image.url} %>
+
+      <!-- nav -->
+      <% p = @item.get_image_position_info %>
+      <div class="previous nav-button <%= p[:previous_id] ? "" : "hidden" %>">
+        <% if p[:previous_id] %>
+          <%= link_to item2_path(:id => p[:previous_id], :slug => p[:previous_slug]) do %><i class="previous-theater-button"></i><% end %>
+        <% end %>
+      </div>
+      <div class="next nav-button <%= p[:next_id] ? "" : "hidden" %>">
+        <% if p[:next_id] %>
+          <%= link_to item2_path(:id => p[:next_id], :slug => p[:next_slug]) do %><i class="next-theater-button"></i><% end %>
+        <% end %>
+      </div>
+
+    </div>
+    
+    <div class="large-6 small-12 columns">
+
+      <!-- action buttons -->
+      <div class="show-for-small" style="text-align: center;"><%= yield(:action_buttons) %></div>
+
+      <!-- title -->
+      <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
+      <% item_owner = @item.album.parent %>
+      <p>In <%= link_to @item.album.title, medium_path(@item.album) %></p>
+
+      <!-- vendor logo -->
+      <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
+        <table class="vertical-middle">
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
+                  <%= image_tag item_owner.logo(:tiny), :style => "max-width: 70px;", :alt => item_owner.name %>
+                <% end %>
+              </td>
+              <td>
+                <h6><%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %></h6>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+
+      <% if not @item.description.blank? %><%= simple_format @item.description %><% end %>
+
+    </div>
+    
+    <div class="large-6 small-12 columns">
+
+      <!-- action buttons -->
+      <div class="hide-for-small"><%= yield(:action_buttons) %></div>
+
+      <hr>
+
+      <!-- more images-->
+      <h6>More in this album:</h6>
+      <ul class="large-block-grid-5 small-block-grid-4 image-collection">
+        <% @item.album.images.each do |sibling| %>
+        <li>
+          <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
+          
+              <%= link_to item2_path(:id => sibling.id, :slug => sibling.slug), :title=> sibling.title do %>
+                <%= image_tag sibling.asset.image(:medium_square), :class => "item-thumb", :data => {:caption => sibling.asset.image.url} %>
+              <% end %>
+
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+    <!-- other info -->
+    <div class="span12">
+      
+    </div>
+
+  </div>
+
+</div>

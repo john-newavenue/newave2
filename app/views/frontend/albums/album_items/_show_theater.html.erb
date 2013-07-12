@@ -1,3 +1,4 @@
+<!-- item content -->
 <div class="screen">
   <div class="screen-content-wrapper">
     <div class="screen-content-centerer loading-container">
@@ -6,6 +7,7 @@
   </div>
 </div>
 
+<!-- nav -->
 <% p = @item.get_image_position_info %>
 <div class="previous nav-button <%= p[:previous_id] ? "" : "hidden" %>">
   <% if p[:previous_id] %>
@@ -18,48 +20,61 @@
   <% end %>
 </div>
 
+<!-- screen footer -->
 <div class="screen-footer">
-  <div class="screen-footer-content-wrapper blank-loader pad">
-    <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => @item.id )), :class => "button small radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
-      <i class="general foundicon-heart"></i>Save to my project
-    <% end %>
-
-    <%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button small secondary radius" do %>
-      <i class="general foundicon-page"></i>Permalink
-    <% end %>
-  
-    <%- # TODO %>
-    <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %>
-    <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %>
-    <%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %>
-
+  <div class="screen-footer-content-wrapper blank-loader pad center-text">
+    <ul class="button-group" style="display: inline-block;">
+      <li>
+        <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => @item.id )), :class => "button small radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
+          <i class="general foundicon-heart"></i>Save to my project
+        <% end %>
+      </li>
+      <li>
+        <%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button small secondary radius" do %>
+          <i class="general foundicon-page"></i>Permalink
+        <% end %>
+      </li>
+      <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %></li>
+      <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %></li>
+      <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %></li>
+    </ul>
   </div>
 </div>
 
+<!-- sidebar -->
 <div class="screen-sidebar">
   <div class="screen-sidebar-content-wrapper pad blank-loader">
+    <p></p>
     <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
     <% item_owner = @item.album.parent %>
     <h6><%= link_to @item.album.title, media_path(@item.album) %></h6>
-    <h6><%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %></h6>
 
-    <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
-    <p>
-      <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
-        <%= image_tag vendor_logo_for(item_owner), :style => "max-width: 70px;", :alt => item_owner.name %>
-      <% end %>
-    </p>
-    <% end %>
-
-    <p><% if not @item.description.blank? %><%= @item.description %><% end %></p>
+    <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
 
     <p><% if @item.tag_list %>Tags: <%= @item.tag_list %><% end %></p>
 
-    <hr>
+    <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
+      <table class="vertical-middle">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
+                <%= image_tag item_owner.logo(:tiny), :style => "max-width: 70px;", :alt => item_owner.name %>
+              <% end %>
+            </td>
+            <td>
+              <h6><%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %></h6>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
 
     <div class="row">
-      <div class="large-12 columns">
 
+      <!-- more images-->
+      <div class="large-12 columns">
+        <h6>More in this album:</h6>
         <ul class="large-block-grid-4 image-collection">
           <% @item.album.images.each do |sibling| %>
           <li>
@@ -71,14 +86,15 @@
           </li>
           <% end %>
         </ul>
-
       </div>
+
     </div>
 
   </div>
 
 </div>
 
+<!-- sidebar footer -->
 <div class="screen-sidebar-footer">
   <div class="screen-sidebar-footer-wrapper pad blank-loader"></div>
 </div>

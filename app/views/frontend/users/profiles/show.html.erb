@@ -43,7 +43,7 @@
       <% provide :nav do %>
         <ul class="side-nav">
           <% if can? :update, @user.profile %>
-            <li><%= link_to edit_profile_path(@user) do %><i class="general foundicon-edit"></i>Edit profile<% end %></li>
+            <li><%= link_to edit_profile_path(@user) do %><i class="general foundicon-edit"></i>Edit Personal Profile<% end %></li>
             <li class="divider"></li>
           <% end %>
         </ul>
