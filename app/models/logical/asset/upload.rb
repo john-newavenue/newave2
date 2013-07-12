@@ -27,7 +27,8 @@ module Logical
 
       def to_jq_upload
         output = @asset.to_jq_upload
-        output['delete_url'] = item_path(@album_item)
+        # output['delete_url'] = item_path(@album_item)
+        output['item_url'] = item_path(@album_item)
         output['item_id'] = @album_item.id
         output
       end

@@ -30,8 +30,8 @@
           <%= f.input :bio, :as => :text, :input_html => { :rows => 12 }, :label => "Bio" %>
         <% end %>
         <%= f.actions do %>
-          <%= f.action :submit, :as => :button, :label => 'Update', :class => "small success button" %>
-          <%= link_to "Cancel and go back", user_profile_path(@user.slug) %>
+          <%= f.action :submit, :as => :button, :label => 'Update', :class => "success button" %>
+          <%= link_to "Cancel and go back", user_profile_path(@user.slug), :class => "secondary button" %>
         <% end %>
       <% end %>
 

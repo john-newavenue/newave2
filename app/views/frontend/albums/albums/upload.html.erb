@@ -1,4 +1,4 @@
-<% provide(:title, "#{@album.title} : Upload") %>
+<% provide(:title, "Upload to #{@album.title}") %>
 
 <h3><%= yield(:title) %></h3>
 
@@ -7,6 +7,9 @@
     <!-- Redirect browsers with JavaScript disabled to the origin page -->
     <noscript><input type="hidden" name="redirect" value="http://blueimp.github.com/jQuery-File-Upload/"></noscript>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="alert-box success">
+        Please wait a little when progress bar reaches 100%. Thumbnails will be automatically generated!
+    </div>
     <div class="row fileupload-buttonbar" style="margin: 0;">
         <div class="large-10">
             <!-- The loading indicator is shown during file processing -->
@@ -40,7 +43,7 @@
             </span>
 
             <ul>
-                <li>The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
+                <li>The maximum file size for uploads in this demo is <strong>2.5 MB</strong> (default file size is unlimited).</li>
                 <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
                 <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage with Google Chrome, Mozilla Firefox and Apple Safari.</li>
             </ul>
@@ -94,6 +97,7 @@
         </td>
         <td>
             <p class="name">{%=file.name%}</p>
+
             {% if (file.error) { %}
                 <div><span class="label label-important">Error</span> {%=file.error%}</div>
             {% } %}
@@ -125,13 +129,16 @@
         <td>
             <span class="preview">
                 {% if (file.thumbnail_url) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}" style="width: 80px;"></a>
+                    <p><a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}" style="width: 80px;"></a></p>
                 {% } %}
             </span>
         </td>
         <td>
             <p class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+                <h6><a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a></h6>
+            </p>
+            <p class="delete">            
+                <a href="{%=file.item_url%}" title="Delete" class="button warning" data-method="delete" data-remote="true">Delete</a>
             </p>
             {% if (file.error) { %}
                 <div><span class="label label-important">Error</span> {%=file.error%}</div>

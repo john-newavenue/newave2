@@ -3,28 +3,19 @@
     <%= f.input :title %>
     <%= f.input :description, :as => :text, :input_html => { :rows => 5 }  %>
 
-    <% if false %>
-    <%= f.action :submit, :as => :button, :label => "Save Changes", :class => "success button" %>
-    <%= f.action :cancel, :as => :link, :label => "Go Back", :button_html => {:class => "neutral button"} %>
-    <% end %>
-
     <button type="submit" class="button">Save Changes</button>
     <%= link_to "Cancel and Go Back", medium_path(@album), :class => "neutral button" %>
     <a onClick="$('.confirm-delete-album-<%=@album.id%>').slideDown()" class="button warning">Delete Album</a>
 
-    <div class="alert-box alert hidden confirm-delete-album-<%=@album.id%>">
-      <p>You are about to DELETE this album. This cannot be undone. Are you sure you want to continue?</p>
+    <div class="alert-box alert hidden confirm-delete-album-<%=@album.id%>" style="margin-top: 1em; ">
+      <p style="font-size: 1.2em;">You are about to DELETE this album. This cannot be undone. Are you sure you want to continue?</p>
       <%= f.action :cancel, :as => :link, :label => "Confirm", :confirm => "This cannot be undone.", :button_html => {:class => "danger button", :method => :delete} %>
     </div>
   <% end %>
 
-  <div class="alert-box secondary">
-    <% if @album.items.count > 0 %>
-    <p>Deleting a picture from your album cannot be undone.</p>
-    <% else %>
-    <p>There are no pictures to display</p>
-    <% end %>
-  </div>
+  <% if @album.items.count == 0 %>
+  <p>There are no pictures to display</p>
+  <% end %>
 
   <ul class="large-block-grid-3 small-block-grid-2 sortable-album-items">
   
