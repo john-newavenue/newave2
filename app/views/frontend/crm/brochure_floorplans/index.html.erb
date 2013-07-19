@@ -1,0 +1,23 @@
+<% provide(:title, "Brochure Floor Plans") %>
+
+<h3><%=yield(:title)%></h3>
+
+<table>
+  <tbody>
+    <thead>
+      <td>ID</td>
+      <td>Title</td>
+      <td>Actions</td>
+    </thead>
+    <tbody>
+      <% @collection.each do |b| %>
+      <tr>
+        <td><%=b.id%></td>
+        <td><%=b.title%></td>
+        <td><%= link_to edit_crm_brochure_floorplan_path(:id => b.id), :title => "Edit" do %><i class="general foundicon-edit"></i><% end %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </tbody>
+</table>
+

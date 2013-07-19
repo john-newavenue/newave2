@@ -1,0 +1,31 @@
+<% provide(:title, "Floor Plan #{@brochure.title}" ) %>
+
+<section style="margin: 1em 0;">
+
+<div class="large-2 columns hide-for-small">
+  <!-- menu -->
+  lkj
+</div>
+
+<div class="large-10 columns">
+  <!-- brochure content -->
+  <h3><%= @brochure.title %></h3>
+  <ul>
+    <li>Area, sq. ft.: <%= @brochure.area %></li>
+    <li># Bed: <%= @brochure.number_of_bed %></li>
+    <li># Bath: <%= @brochure.number_of_bath %></li>
+    <li>Has loft? <%= @brochure.has_loft ? "Yes" : "No" %></li>
+  </ul>
+  <%= simple_format @brochure.short_description %>
+
+  <!-- album images -->
+  <%= render :partial => '/frontend/albums/album_items/show_grid', :locals => { :album => @brochure.album } %>
+
+</div>
+
+<div class="small-12 columns show-for-small">
+  <!-- go back, for small screens -->
+  <%= link_to "Back to Floor Plans", brochure_floorplan_path %>
+</div>
+
+</section>

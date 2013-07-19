@@ -1,27 +1,5 @@
-<% provide(:title, @album.title) if not content_for?(:title) %>
-
-<h3><%= yield(:title) %></h3>
-<% if @album.parent and @album.parent.name %>
-  <p>by <%= link_to @album.parent.name, vendor_path(@album.parent) %></p>
-<% end %>
-
-<% if can? :update, @album.parent %>
-  <%= render :partial => 'frontend/albums/albums/toolbar' %>
-  <hr>
-<% end %>
-
-<% if !@album.description.blank? %>
-  <%= simple_format(@album.description) %>
-<% else %>
-  <p>No album information provided.</p>
-<% end %>
-
-<hr>
-
-<%= render :partial => '/frontend/albums/album_items/show_grid', :locals => { :album => @album } %>
-
 <ul class="large-block-grid-3 small-block-grid-3 album-items">
-    <% @album.items.each do |item| %>
+    <% album.items.each do |item| %>
         <% if item.asset %>
         <li class="item item-<%= item.id %>">
             <div class="item-contents-wrapper">
@@ -49,15 +27,3 @@
         <% end %>
     <% end %>
 </ul>
-
-<% if @album.images.count == 0 %>
-<hr>
-<div class="alert-box secondary">
-  <h4>There are no images in this album.</h4>
-</div>
-<% end %>
-
-<% if @album.parent and @album.parent.name %>
-  <hr>
-  <p>See more from <%= link_to @album.parent.name, vendor_path(@album.parent) %>.</p>
-<% end %>

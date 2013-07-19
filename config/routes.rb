@@ -23,7 +23,7 @@ Newave2::Application.routes.draw do
     match '/model' => redirect('/'), :via => 'get'
 
     #
-    # static pages
+    # Static
     #
 
     match '/about' => 'static_pages#about', :as => 'about', :via => 'get'
@@ -36,6 +36,16 @@ Newave2::Application.routes.draw do
     match '/jobs' => 'static_pages#jobs', :as => 'jobs', :via => 'get'
     match '/press' => 'static_pages#press', :as => 'press', :via => 'get'
 
+    #
+    # Static > Brochure
+    #
+
+    match '/floorplans' => 'static_pages#brochure_floorplans', :as => 'brochure_floorplans', :via => 'get'
+    match '/floorplans/:slug' => 'static_pages#brochure_floorplan', :as => 'brochure_floorplan', :via => 'get'
+    match '/clients' => 'static_pages#brocure_clients', :as => 'brochure_clients', :via => 'get'
+    match '/clients/:slug' => 'static_pages#brochure_client', :as => 'brochure_client', :via => 'get'
+
+
     # old paths, redirect
     match '/about/how-it-works' => redirect('/how'), :via => 'get'
     match '/about/terms' => redirect('/terms'), :via => 'get'
@@ -44,7 +54,7 @@ Newave2::Application.routes.draw do
 
 
     #
-    # Static Pages
+    # Site Admin
     #
 
     match '/crm' => 'crm/crm#index', :as => 'crm', :via => 'get'
@@ -52,6 +62,9 @@ Newave2::Application.routes.draw do
       resources :users, :path => '/crm/users'
       resources :vendors, :path => '/crm/vendors'
       resources :projects, :path => '/crm/projects'
+      resources :albums, :path => '/crm/albums' 
+      resources :brochure_floorplans, :path => '/crm/floorplans', :except => [:show]
+      resources :brochure_clients, :path => '/crm/clients/', :except => [:show]
     end
 
     resources :invitations, :as => "crm_invitations", :path => '/crm/invitations', :module => "crm"

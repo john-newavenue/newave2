@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130705165400) do
+ActiveRecord::Schema.define(version: 20130718230150) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20130705165400) do
     t.datetime "updated_at"
     t.datetime "deleted_at"
     t.integer  "cover_image_id"
+    t.integer  "position",       default: 9999
   end
 
   add_index "albums", ["parent_id", "parent_type"], name: "index_albums_on_parent_id_and_parent_type", using: :btree
@@ -60,6 +61,28 @@ ActiveRecord::Schema.define(version: 20130705165400) do
   end
 
   add_index "assets", ["azzet_id", "azzet_type"], name: "index_assets_on_azzet_id_and_azzet_type", using: :btree
+
+  create_table "brochures", force: true do |t|
+    t.string   "title",                                                            null: false
+    t.integer  "position",                                         default: 9999
+    t.integer  "category",                                                         null: false
+    t.text     "short_description"
+    t.text     "long_description"
+    t.decimal  "area",                     precision: 7, scale: 2
+    t.decimal  "number_of_bath",           precision: 2, scale: 1
+    t.decimal  "number_of_bed",            precision: 2, scale: 1
+    t.boolean  "has_loft",                                         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "album_id"
+    t.string   "cover_image_file_name"
+    t.string   "cover_image_content_type"
+    t.integer  "cover_image_file_size"
+    t.datetime "cover_image_updated_at"
+    t.string   "slug"
+  end
+
+  add_index "brochures", ["album_id"], name: "index_brochures_on_album_id", using: :btree
 
   create_table "image_assets", force: true do |t|
     t.datetime "created_at"

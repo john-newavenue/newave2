@@ -1,0 +1,32 @@
+<% provide(:title, "Floor Plans") %>
+
+<h1><%=yield(:title) %></h1>
+
+<p>
+  The architects featured here work closely with you and with New Avenue. We have partnered with them and they
+  have partnered with us to allow for a focused and streamlined design process in the design and delivery of
+  of our homes. As a client, you will coordinate with the architect to come up with design iterations for your project.
+</p>
+
+<% @collection.each do |c| %>
+<% 3.times.each do %>
+  <div class="row">
+    <div class="large-3 columns small-12">
+      <%= link_to brochure_floorplan_path(:slug => c.slug), :title => c.title, :class => "link-block" do %>
+        <%= image_tag c.cover_image(:medium_square),:title => c.title, :alt => c.title %>
+      <% end %>
+    </div>
+    <div class="large-9 columns small-12">
+      <h4><%= link_to c.title, brochure_floorplan_path(:slug => c.slug) %></h4>
+      <ul>
+        <li>Area, sq. ft.: <%= c.area %></li>
+        <li># Bed: <%= c.number_of_bed %></li>
+        <li># Bath: <%= c.number_of_bath %></li>
+        <li>Has loft? <%= c.has_loft ? "Yes" : "No" %></li>
+      </ul>
+      <%= simple_format c.short_description %>
+    </div>
+  </div>
+  <hr> 
+<% end %>   
+<% end %>

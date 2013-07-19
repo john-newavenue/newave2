@@ -1458,6 +1458,7 @@ form { margin: 0; }
 .formtastic {
   ol { margin-bottom: 0; }
   ol li, > li { list-style: none; display: inline; }
+  p { font-size: 1em; }
   fieldset.nested ol { margin: 0; }
   li.button_action button { margin-bottom: 0; }
   input[type="checkbox"] { margin: 0; }

@@ -7,6 +7,8 @@ module Physical
       #
       acts_as_paranoid
       before_destroy :destroy_album_items
+      acts_as_taggable
+      acts_as_taggable_on :internal
 
       #
       # assocations

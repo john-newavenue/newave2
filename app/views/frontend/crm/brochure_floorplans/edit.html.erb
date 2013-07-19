@@ -1,0 +1,53 @@
+<% provide(:title, "Edit #{@brochure.title}") %>
+
+<h3><%=yield(:title)%></h3>
+
+<%= semantic_form_for @brochure, :url => crm_brochure_floorplan_path(@brochure.id), :as => 'brochure' do |f| %>
+  <%= f.inputs "Basic Information" do %>
+  <%= f.input :title %>
+  <%= f.input :slug, :hint => "Alphanumeric characters, underscores, and hyphens only. No spaces or special characters." %>
+
+  <%= f.input :cover_image, :hint => "Will be resized and smart-cropped to 80x80 and 334x344. PNG, GIF, JPG, 2.5 MB max." %>
+  <% if @brochure.cover_image(:original).index('/original/missing.png') == nil %>
+    <%= image_tag @brochure.cover_image(:medium_square), :style => "margin-bottom: 1em; " %>
+  <% end %>
+  
+  <div class="row">
+    <div class="large-4 columns">
+      <%= f.input :category, :as => :select,  :label => "Brochure Category", :collection => Physical::General::Brochure::CATEGORIES_DISPLAY %>
+    </div>
+    <div class="large-4 columns">
+      <%= f.input :album, :as => :select, :label => "Accompanying Album", :collection => Physical::Album::Album.all.map { |a| ["#{a.id} - #{a.title}", a.id] } %>
+    </div>
+    <div class="large-4 columns">
+      <% if @brochure.album %>
+        <%= link_to "View and Edit Album", medium_path(@brochure.album), :id=> "view_and_edit_album", :class => "secondary button", :style => "margin-top: .7em; ", :target => "_blank" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-3 columns"><%= f.input :area, :hint => "Square feet" %></div>
+    <div class="large-3 columns"><%= f.input :number_of_bed %></div>
+    <div class="large-3 columns"><%= f.input :number_of_bath %></div>
+    <div class="large-3 columns"><%= f.input :has_loft, :input_html => { :style => "margin-top: 1em;" } %></div>
+  </div>
+
+  <%= f.input :short_description, :hint => "Please try to keep it to the size of 3 tweets: 420 characters.", :input_html => { :rows => 2 } %>
+  <%= f.input :long_description, :input_html => { :rows => 10 } %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :class => "success button", :label => "Save" %>
+    <%= link_to "Cancel and Go Back to Floor Plans", crm_brochure_floorplans_path, :class => "small neutral button large" %>
+  <% end %>
+<% end %>
+
+<script language="JavaScript">
+  function update_button (evt) {
+    $('#view_and_edit_album').attr('href','/media/' + $('#brochure_album_id').val())
+  }
+
+  $(document).ready( function () {
+    $('#brochure_album_id').change( update_button )
+  })
+</script>

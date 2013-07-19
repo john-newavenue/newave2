@@ -1,0 +1,22 @@
+<% provide(:title, "Manage Albums") %>
+
+<h3><%= yield(:title) %></h3>
+
+<table>
+  <thead>
+    <td>ID</td>
+    <td>Title</td>
+  </thead>
+  <tbody>
+    <% @albums.each do |album| %>
+    <tr>
+      <td><%= album.id %></td>
+      <td>
+        <%= link_to album.title, medium_path(album) %>
+        <br>
+        Internal tags: <%= album.internal_list %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
