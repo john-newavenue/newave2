@@ -1,12 +1,11 @@
-<% provide(:title, "Edit #{@brochure.title}") %>
+<% provide(:title, "New Floor Plan") %>
 
 <h3><%=yield(:title)%></h3>
 
-<%= semantic_form_for @brochure, :url => crm_brochure_floorplan_path(@brochure.id), :as => 'brochure' do |f| %>
+<%= semantic_form_for @brochure, :url => crm_brochure_floorplans_path, :as => 'brochure' do |f| %>
   <%= f.inputs "Basic Information" do %>
   <%= f.input :title %>
   <%= f.input :slug, :hint => "Alphanumeric characters, underscores, and hyphens only. No spaces or special characters." %>
-  <%= f.input :position %>
 
   <%= f.input :cover_image, :hint => "Will be resized and smart-cropped to 80x80 and 334x344. PNG, GIF, JPG, 2.5 MB max." %>
   <% if @brochure.cover_image(:original).index('/original/missing.png') == nil %>
@@ -40,7 +39,6 @@
   <%= f.actions do %>
     <%= f.action :submit, :as => :button, :class => "success button", :label => "Save" %>
     <%= link_to "Cancel and Go Back to Floor Plans", crm_brochure_floorplans_path, :class => "small neutral button large" %>
-    <%= link_to "Delete", crm_brochure_floorplan_path(@brochure.id), :method => :destroy, :confirm => "Are you sure?", :class => "small warning button large" %>
   <% end %>
 <% end %>
 

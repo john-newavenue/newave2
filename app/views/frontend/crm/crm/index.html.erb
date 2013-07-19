@@ -6,7 +6,7 @@
 <%= render :partial => 'frontend/crm/users/users_list_block', :locals => { :users => User.limit(8) } %>
 
 <ul class="button-group">
-  <li><%= link_to crm_users_path, :class => "button small neutral" do %>Show Users<% end %></li>
+  <li><%= link_to crm_users_path, :class => "button neutral" do %>Show Users<% end %></li>
 </ul>
 
 <hr>

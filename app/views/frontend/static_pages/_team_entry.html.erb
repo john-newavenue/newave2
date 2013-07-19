@@ -1,10 +1,19 @@
 <div class="row">
   <div class="large-3 columns push-9">
-    <p><%= image_tag(image_url, :alt => name, :class => "hide-for-small") if image_url %></p>
+    <p>
+      <% if image_url %>
+      <%= image_tag(image_url, :alt => name, :class => "hide-for-small") if image_url %>
+      <% end %>
+    </p>
   </div>
   <div class="large-9 columns pull-3">
-    <h5><%= name %></h5
-    <p><%= image_tag image_url, :alt => name, :class => "show-for-small", :style => "float: left; margin: .5em; " %></p>
-    <%= raw(bio) %>
+    <h5><%= name %></h5>
+    <% if image_url %>
+    <div class="show-for-small">
+    <%= image_tag image_url, :alt => name, :class => "show-for-small", :style => "margin: .5em; max-width: 150px;" %>
+    </div>
+    <% end %>
+
+    <%= simple_format(bio) %>
   </div>
 </div>

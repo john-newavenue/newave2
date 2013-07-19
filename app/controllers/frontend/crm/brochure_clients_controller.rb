@@ -1,11 +1,11 @@
 module Frontend
   module Crm
-    class BrochureFloorplansController < BrochuresController
+    class BrochureClientsController < BrochuresController
 
       private
 
         def set_collection_category
-          @category = Physical::General::Brochure::FLOORPLAN_CATEGORY
+          @category = Physical::General::Brochure::CLIENT_CATEGORY
         end
 
     end

@@ -42,8 +42,9 @@ Newave2::Application.routes.draw do
 
     match '/floorplans' => 'static_pages#brochure_floorplans', :as => 'brochure_floorplans', :via => 'get'
     match '/floorplans/:slug' => 'static_pages#brochure_floorplan', :as => 'brochure_floorplan', :via => 'get'
-    match '/clients' => 'static_pages#brocure_clients', :as => 'brochure_clients', :via => 'get'
+    match '/clients' => 'static_pages#brochure_clients', :as => 'brochure_clients', :via => 'get'
     match '/clients/:slug' => 'static_pages#brochure_client', :as => 'brochure_client', :via => 'get'
+    match '/our-clients' => 'static_pages#brochure_clients', :via => 'get'
 
 
     # old paths, redirect

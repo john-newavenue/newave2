@@ -24,10 +24,10 @@
             <li><%= link_to 'About Us', about_path %></a></li>
             <li class="divider"></li>
 
-            <li ><a href="#">Floor Plans</a></li>
+            <li ><%=link_to "Floor Plans", brochure_floorplans_path%></li>
             <li class="divider"></li>
 
-            <li><a href="#">Clients</a></li>
+            <li ><%=link_to "Clients", brochure_clients_path %></li>
             <li class="divider"></li>
 
             <li><%= link_to 'Architects', architects_path %></li>
@@ -52,9 +52,9 @@
               <li class="divider"></li>
               
               <% if current_user.has_role? :admin %>
-                <li class="pad-on-small"><%= link_to crm_path, :title => "Administrator", :class => "transition-buffer" do %>
+                <li class="pad-on-small"><%= link_to crm_path, :title => "Admin and Settings", :class => "transition-buffer" do %>
                   <i class="general foundicon-website"></i>
-                  <span class="show-for-small-custom">Administrator</span>
+                  <span class="show-for-small-custom">Admin and Settings</span>
                   <% end %>
                 </li>
                 <li class="divider"></li>
@@ -62,7 +62,7 @@
               
 
               <li class="pad-on-small has-dropdown settings-dropdown">
-                <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Settings</span></a>
+                <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Preferences</span></a>
                 <ul class="dropdown">
                   
                   <% if current_user.has_role? :vendor %>

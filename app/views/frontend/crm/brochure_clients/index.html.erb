@@ -1,9 +1,9 @@
-<% provide(:title, "Floor Plans") %>
+<% provide(:title, "Clients") %>
 
 <h3><%=yield(:title)%></h3>
 
 <ul class="button-group" style="margin-bottom: 1em; ">
-  <li><%=link_to "New Floor Plan", new_crm_brochure_floorplan_path, :class => "button secondary" %></li>
+  <li><%=link_to "New Client", new_crm_brochure_client_path, :class => "button secondary" %></li>
 </ul>
 
 <table>
@@ -21,8 +21,8 @@
         <td><%=b.position%></td>
         <td><%=b.title%></td>
         <td>
-          <%= link_to brochure_floorplan_path(:slug => b.slug), :title => "View" do %><i class="general foundicon-page"></i><% end %>
-          <%= link_to edit_crm_brochure_floorplan_path(:id => b.id), :title => "Edit" do %><i class="general foundicon-edit"></i><% end %>
+          <%= link_to brochure_client_path(:slug => b.slug), :title => "View" do %><i class="general foundicon-page"></i><% end %>
+          <%= link_to edit_crm_brochure_client_path(:id => b.id), :title => "Edit" do %><i class="general foundicon-edit"></i><% end %>
         </td>
       </tr>
       <% end %>

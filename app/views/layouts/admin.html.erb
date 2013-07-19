@@ -5,7 +5,7 @@
 
   <div class="row">
 
-    <div class="large-12 columns">
+    <div class="large-12 columns hidden">
       <br>
       <div class="section-container horizontal-nav" data-section="horizontal-nav" data-options="one_up: false;">
         <section>
@@ -39,8 +39,40 @@
       </div>
     </div>
 
-    <div class="large-12 columns">
+
+    <div class="large-10 push-2 columns">
     <%= yield %>
+    </div>
+
+    <div class="large-2 pull-10 columns">
+
+      <hr class="show-for-small">
+      
+      <br>
+
+      <strong>Overview</strong>
+      <ul class="side-nav">
+        <li><%= active_link_to 'Dashboard', crm_path, :wrap_tag => :li, :active => :exclusive %></li>
+      </ul>
+
+      <strong>Relations</strong>
+      <ul class="side-nav">
+        <li><%= active_link_to 'Users', crm_users_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <li><%= active_link_to 'Invitations', crm_invitations_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <li><%= active_link_to 'List Vendors', crm_vendors_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <li><%= active_link_to 'Create Vendor', new_vendor_path, :wrap_tag => :li, :active => :exclusive %></li>
+      </ul>
+
+      <strong>Content</strong>
+      <ul class="side-nav">
+        <li><%= active_link_to 'Clients', crm_brochure_clients_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <li><%= active_link_to 'Floor Plans', crm_brochure_floorplans_path, :wrap_tag => :li, :active => :exclusive %></li>
+      </ul>
+
+      <strong>Resources</strong>
+      <ul class="side-nav">
+        <li><%= active_link_to 'Albums', crm_albums_path, :wrap_tag => :li, :active => :exclusive %></li>
+      </ul>
     </div>
 
   </div>
