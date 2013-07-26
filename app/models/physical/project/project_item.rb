@@ -3,6 +3,10 @@ module Physical
     class ProjectItem < ActiveRecord::Base
 
       #
+      # fields:
+      # id, body, deleted_at, created_at, updated_at
+
+      #
       # relations
       #
 
@@ -26,7 +30,8 @@ module Physical
       # scope
       #
 
-      scope :public, -> { where('project_items.public')}
+      scope :public, -> { where('project_items.private is false')}
+      scope :private, -> { where('project_items.private is true')}
       scope :none, -> { where('false') }
 
     end

@@ -34,12 +34,13 @@ module Physical
       default_scope order('created_at DESC')
       scope :by_recency, order('updated_at DESC')
 
-
-      def self.items_readable_for(user)
-        if user.has_role? :admin or self.members.include? user
+      def items_readable_for(user)
+        # project members can public and private items in a private project
+        # anonymous users can see only public items of public projects
+        if user and (user.has_role? :admin or self.members.include? user)
           self.items
         else
-          self.public ? self.items.public : self.items.none
+          self.private ? self.items.none : self.items.public
         end
       end
 

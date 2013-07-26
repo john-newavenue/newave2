@@ -69,7 +69,7 @@ namespace :migrate do
     old_social_relations = @db.query('select * from social_auth_usersocialauth')
     old_social_user_ids = []
     old_social_relations.each { |s| old_social_user_ids.push s["id"].to_i }
-    
+  
     # get old projects
     old_projects = @db.query('SELECT * FROM estate_project ORDER BY id asc;')
     old_projects_user_ids = []
@@ -136,7 +136,7 @@ namespace :migrate do
   desc "Imports project items"
   task :project_items => :environment do
 
-    # clean up
+    # clean up, delete everything
     # Rake::Task['migrate:purge_items'].invoke
     # Rake::Task['migrate:reset_sequences'].invoke
 
@@ -145,31 +145,17 @@ namespace :migrate do
     @db.establish_connection(DBConnectionManager::DJANGO_DB)
 
     # get old items
-    # old_original_images = @db.query('SELECT * FROM estate_item WHERE id < 10 and item_type=0 and parent_root_id is null ORDER BY id asc;')
-    # old_clipped_images = @db.query('SELECT * FROM estate_item WHERE id < 10 and item_type=0 and parent_root_id is not null ORDER BY id asc;')
-    # DONE
-    # old_original_images = @db.query('SELECT * FROM estate_item WHERE id >= 10 and id < 50 and item_type=0 and parent_root_id is null ORDER BY id asc;')
-    # old_clipped_images = @db.query('SELECT * FROM estate_item WHERE id >= 10 and id < 50 and item_type=0 and parent_root_id is not null ORDER BY id asc;')
-    # DONE
-    # old_original_images = @db.query('SELECT * FROM estate_item WHERE id >= 50 and id >= 231 and id < 300 and item_type=0 and parent_root_id is null ORDER BY id asc;')
-    # DONE
-    # old_original_images = @db.query('SELECT * FROM estate_item WHERE id >= 797 and id < 1000 and item_type=0 and parent_root_id is null ORDER BY id asc;')
-    # DONE
     # old_original_images = @db.query('SELECT * FROM estate_item WHERE id >= 6500 and id < 10000 and item_type=0 and parent_root_id is null ORDER BY id asc;')
     # DONE it all
-
     old_clipped_images = @db.query('SELECT * FROM estate_item WHERE id >= 2000 and item_type=0 and parent_root_id is not null ORDER BY id asc;')
     # DONE it all
 
     # connect to rails DB
     @db.establish_connection(DBConnectionManager::RAILS_DB)
 
-    OLD_CONTAINER_PATH = 'http://e106ce00de004b7393de-0058d95ebdf51c2bd9f43fd0921533e4.r92.cf1.rackcdn.com/'
     # # for each original item, create an image asset and album item
     # old_original_images_total = old_original_images.count
     # old_original_images.each_with_index do |item, index|
-      
-    #   # image_asset = Physical::Asset::ImageAsset.create(:image => URI.parse("#{OLD_CONTAINER_PATH}#{item['original_image']}"))
     #   local_image_file = File.new("#{Rails.root}/tmp/old_files/#{item['original_image']}")
     #   image_asset = Physical::Asset::ImageAsset.create(:image => local_image_file)
     #   local_image_file.close()
@@ -216,6 +202,38 @@ namespace :migrate do
     # reset indices
     Rake::Task['migrate:reset_sequences'].invoke
 
+  end
+
+  desc "Create project item activity"
+  task :project_item_activity => :environment do
+    @db = DBConnectionManager.new
+    @db.establish_connection(DBConnectionManager::RAILS_DB)
+
+    # Physical::Project::Project.where(:primary_album_id => nil).each do |project|
+    #   album = Physical::Album::Album.create(:parent => project, :title => "Project Album")
+    #   project.primary_album = album
+    #   project.save
+    #   puts "Created primary album for #{project.id}"
+    # end
+
+    # for each AlbumItem in a Project's Primary Album, create a ProjectItem activity and attached ProjectItemAsset
+    Physical::Project::Project.all.each do |project|
+      album = project.primary_album
+      Physical::Album::AlbumItem.where("album_id = #{project.id}").each do |album_item|
+        project_item = Physical::Project::ProjectItem.create(
+          :project => project,
+          :created_at => album_item.created_at,
+          :updated_at => album_item.updated_at
+        )
+        project_item_asset = Physical::Project::ProjectItemAsset.create(
+          :album_item => album_item,
+          :project_item => project_item,
+          :created_at => album_item.created_at,
+          :updated_at => album_item.updated_at
+        )
+        puts "Completed Project #{project.id} - Album Item #{album_item.id}"
+      end
+    end
   end
 
 end

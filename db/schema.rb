@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726182642) do
+ActiveRecord::Schema.define(version: 20130726222834) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -117,10 +117,10 @@ ActiveRecord::Schema.define(version: 20130726182642) do
   create_table "project_items", force: true do |t|
     t.integer  "project_id"
     t.text     "body"
-    t.integer  "type"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "private",    default: false
   end
 
   add_index "project_items", ["project_id"], name: "index_project_items_on_project_id", using: :btree

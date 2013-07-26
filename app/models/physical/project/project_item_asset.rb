@@ -3,6 +3,11 @@ module Physical
     class ProjectItemAsset < ActiveRecord::Base
 
       #
+      # fields
+      # project_item_id, album_item_id
+      #
+
+      #
       # relations
       #
 

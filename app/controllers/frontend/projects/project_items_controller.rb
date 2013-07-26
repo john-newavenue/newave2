@@ -8,9 +8,12 @@ module Frontend
       before_action :authorize_user, :except => [:new, :create]
 
       def index
-        @project = params[:project_id]
+        @project = Physical::Project::Project.find_by(:id => params[:project_id])
         page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
         @project_items = @project.items_readable_for(current_user).page(page)
+        respond_to do |format|
+          format.js
+        end
       end
 
       def new 
@@ -63,7 +66,7 @@ module Frontend
         def authorize_user
           case params[:action]
           when 'view', 'index'
-            forbidden unless can? :view, @project
+            # forbidden unless can? :view, @project
           else
             forbidden unless can? :update, @project
           end
