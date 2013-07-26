@@ -14,7 +14,9 @@ module Physical
           # :small => "166x166",
           # :medium => "334x334",
           :large => "1440x960"
-        }
+        }, 
+        :path => 'image_assets/:id/:style/:filename',
+        :fog_directory => 'newave2'
 
       validates_with AttachmentContentTypeValidator, :attributes => :image, :content_type => /^image\/(png|gif|jpeg|jpg)/
       validates_with AttachmentPresenceValidator, :attributes => :image

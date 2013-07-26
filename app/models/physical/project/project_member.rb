@@ -11,6 +11,10 @@ module Physical
       belongs_to :project, :class_name => 'Physical::Project::Project'
       belongs_to :user, :class_name => 'User'
 
+      def <<(user)
+        raise "Method Disabled. Please use project.add_user_as_[role]"
+      end
+
     end
   end
 end

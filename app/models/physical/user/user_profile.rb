@@ -10,7 +10,7 @@ module Physical
       has_attached_file :avatar, 
         :styles => { :tiny => "24x24#", :small => "64x64#", :square => "300x300#" }, 
         :default_url => 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/blank_user.png'
-      
+              
       belongs_to :user
       belongs_to :address, :class_name => "Physical::General::Address"
 

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :vendor_memberships, :class_name => "Physical::Vendor::VendorMember", :dependent => :destroy
   has_many :vendors, :through => :vendor_memberships
   has_one :profile, :class_name => "Physical::User::UserProfile"
+  has_many :authentications
   accepts_nested_attributes_for :profile
 
   #
@@ -30,7 +31,7 @@ class User < ActiveRecord::Base
   #
 
   rolify
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable, :omniauthable
   after_create :build_associated_models
   acts_as_url :username, :sync_url => true, :url_attribute => :slug
 
@@ -48,6 +49,18 @@ class User < ActiveRecord::Base
   #
   # methods
   #
+
+  def apply_omniauth(omni)
+    authentications.build(
+      :provider => omni['provider'],
+      :uid => omni['uid'],
+      :token => omni['credentials'].token,
+      :token_secret => omni['credentials'].secret)
+  end
+
+  def password_required?
+    (authentications.empty? || !password.blank?) && super
+  end
 
   private
 

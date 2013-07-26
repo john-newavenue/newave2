@@ -22,6 +22,13 @@ module Physical
 
       acts_as_paranoid
 
+      #
+      # scope
+      #
+
+      scope :public, -> { where('project_items.public')}
+      scope :none, -> { where('false') }
+
     end
   end
 end

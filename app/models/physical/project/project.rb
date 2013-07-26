@@ -2,13 +2,12 @@ module Physical
   module Project
     class Project < ActiveRecord::Base
 
-
-
       #
       # associations
       #
 
       belongs_to :address, :class_name => "Physical::General::Address"
+      belongs_to :primary_album, :class_name => "Physical::Album::Album"
       has_many :memberships, :class_name => "Physical::Project::ProjectMember"
       has_many :members, :through => :memberships, :source => :user, :class_name => "::User"
       has_many :items, :class_name => "Physical::Project::ProjectItem", :after_add => proc { |p| p.touch }
@@ -16,8 +15,9 @@ module Physical
       #
       # validations
       #
+
       validates :title, :presence => true, :length => { :minimum => 1 }
-      validates :description, :presence => true, :allow_blank => false, :length => { :maximum => 1000 }
+      validates :description, :presence => true, :allow_blank => true, :length => { :maximum => 1000 }
 
       #
       # behaviors
@@ -34,10 +34,23 @@ module Physical
       default_scope order('created_at DESC')
       scope :by_recency, order('updated_at DESC')
 
+
+      def self.items_readable_for(user)
+        if user.has_role? :admin or self.members.include? user
+          self.items
+        else
+          self.public ? self.items.public : self.items.none
+        end
+      end
+
+      #
+      # other
+      #
+
       def method_missing name, *args, &block
 
         name = name.to_s.downcase
-
+        
         # def add_user_as_PROJECTROLE(user_instance)
         add_user_as_match = /^add_user_as_([a-z]+)$/.match name
         if add_user_as_match
@@ -55,15 +68,16 @@ module Physical
             p.save
             return true
           end
+        else
+          super name, *args, &block
         end
-
-        super name, *args, &block
       end
 
       private
 
         def build_associated_models
           self.build_address
+          self.build_primary_album(:parent => self, :title => "Project Album")
           self.save(:validate => false)
         end
     end

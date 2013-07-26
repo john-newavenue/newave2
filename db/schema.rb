@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718230150) do
+ActiveRecord::Schema.define(version: 20130726182642) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20130718230150) do
     t.integer  "asset_id"
     t.string   "asset_type"
     t.integer  "position",    default: 9999, null: false
+    t.integer  "parent_id"
+    t.integer  "root_id"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
@@ -61,6 +63,16 @@ ActiveRecord::Schema.define(version: 20130718230150) do
   end
 
   add_index "assets", ["azzet_id", "azzet_type"], name: "index_assets_on_azzet_id_and_azzet_type", using: :btree
+
+  create_table "authentications", force: true do |t|
+    t.string   "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "token_secret"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "brochures", force: true do |t|
     t.string   "title",                                                            null: false
@@ -137,11 +149,14 @@ ActiveRecord::Schema.define(version: 20130718230150) do
   add_index "project_types", ["title"], name: "index_project_types_on_title", unique: true, using: :btree
 
   create_table "projects", force: true do |t|
-    t.string   "title",                    null: false
-    t.string   "description", default: ""
+    t.string   "title",                            null: false
+    t.string   "description",      default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "address_id"
+    t.datetime "deleted_at"
+    t.boolean  "private",          default: false, null: false
+    t.integer  "primary_album_id"
   end
 
   add_index "projects", ["title"], name: "index_projects_on_title", using: :btree
@@ -262,12 +277,17 @@ ActiveRecord::Schema.define(version: 20130718230150) do
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true, using: :btree
 
+  add_foreign_key "album_items", "album_items", :name => "album_items_parent_id_fk", :column => "parent_id"
+  add_foreign_key "album_items", "album_items", :name => "album_items_root_id_fk", :column => "root_id"
+
   add_foreign_key "assets", "album_items", :name => "assets_origin_album_item_id_fk", :column => "origin_album_item_id"
 
   add_foreign_key "project_item_assets", "album_items", :name => "project_item_assets_album_item_id_fk"
   add_foreign_key "project_item_assets", "project_items", :name => "project_item_assets_project_item_id_fk", :dependent => :delete
 
   add_foreign_key "project_items", "projects", :name => "project_items_project_id_fk", :dependent => :delete
+
+  add_foreign_key "projects", "albums", :name => "projects_primary_album_id_fk", :column => "primary_album_id"
 
   add_foreign_key "user_profiles", "addresses", :name => "user_profiles_address_id_fk", :dependent => :delete
 

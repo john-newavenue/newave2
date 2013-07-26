@@ -9,7 +9,8 @@ Newave2::Application.routes.draw do
   
   devise_for :users, :controllers => {
     :registrations => 'frontend/devise_custom/registrations',
-    :invitations => "frontend/users/invitations"
+    :invitations => "frontend/users/invitations",
+    :omniauth_callbacks => "frontend/users/authentications"
   }
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_patch", :via => "patch"
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_put", :via => "put"

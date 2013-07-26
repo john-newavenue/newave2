@@ -27,9 +27,24 @@ module Frontend
           @resource = resource
           respond_with @resource
         end
+        session[:omniauth] = nil unless @user.new_record?
+
+      end
+
+
+      def build_resource(*args)
+        super
+        if !session[:omniauth].nil?
+          @user.apply_omniauth(session[:omniauth])
+          @user.username = session[:omniauth][:info][:nickname]
+          @user.email = session[:omniauth][:info][:email]
+          @user.valid?
+        end
+        self.resource
       end
 
       private
+
 
         def assign_user_role
           # if current_user is nil, there was an error in registration

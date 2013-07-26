@@ -45,7 +45,8 @@ Newave2::Application.configure do
     :fog_credentials => {
       :provider => "Rackspace",
       :rackspace_username => ENV['RACKSPACE_USERNAME'],
-      :rackspace_api_key => ENV['RACKSPACE_API_KEY']
+      :rackspace_api_key => ENV['RACKSPACE_API_KEY'],
+      :persistent => false
     }, 
     :fog_directory => ENV['RACKSPACE_FILES_CONTAINER'],
     :fog_host => ENV['RACKSPACE_FILES_CDN']

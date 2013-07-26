@@ -74,6 +74,12 @@ gem 'devise', :git => 'https://github.com/plataformatec/devise.git', :branch => 
 gem 'devise_invitable', :git => 'https://github.com/scambra/devise_invitable.git', :branch => 'rails4'
 gem 'cancan'
 gem 'rolify', :git => 'https://github.com/EppO/rolify.git'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'twitter'
+gem 'fb_graph'
+gem 'omniauth'
+
 
 # Configuration helper
 gem 'figaro'

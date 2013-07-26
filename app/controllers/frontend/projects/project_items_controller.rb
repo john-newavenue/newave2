@@ -8,6 +8,9 @@ module Frontend
       before_action :authorize_user, :except => [:new, :create]
 
       def index
+        @project = params[:project_id]
+        page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
+        @project_items = @project.items_readable_for(current_user).page(page)
       end
 
       def new 
