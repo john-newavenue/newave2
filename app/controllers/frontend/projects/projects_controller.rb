@@ -45,6 +45,7 @@ module Frontend
       def show
         @project = Physical::Project::Project.find(params[:id])
         @address = @project.address.decorate
+        @project_items = @project.items.paginate(:page => params[:page], :per_page => 10)
       end
 
       def edit

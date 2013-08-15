@@ -1,24 +1,22 @@
 <% content_for :content do %>
 
-<section>
+<section id="content">
 
   <div class="row">
 
-    <div class="large-10 push-2 columns">
+    <div class="large-9 push-3 columns">
       <%= yield %>
     </div>
 
-    <div class="large-2 pull-10 columns">
+    <div class="large-3 pull-9 columns">
       <img src="http://placehold.it/137x150" alt="TODO: Project cover photo">
 
+      <% if false %>
       <ul class="side-nav">
         <li><%= active_link_to 'Newsfeed', project_path(@project.id), :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Status', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Contracts', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Invoices', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Contacts', '#', :wrap_tag => :li %></li>
-        <li><%= active_link_to 'Notes', '#', :wrap_tag => :li %></li>
       </ul>
+      <% end %>
+
     </div>
 
   </div>

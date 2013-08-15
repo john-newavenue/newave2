@@ -1089,6 +1089,8 @@ table {
 
 .alert-box p:last-child { margin-bottom: 0; }
 
+body > section#content { margin: 1em 0; }
+
 //
 // Topbar
 //
@@ -1606,7 +1608,8 @@ ul.item-tags {
   float: left;
 }
 
-
-
-
 .button-group, .button-group .button { margin-bottom: 0; }
+
+.project-item-feed {
+  hr { border-color: #efefef; }
+}

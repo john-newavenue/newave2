@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726222834) do
+ActiveRecord::Schema.define(version: 20130808230443) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20130726222834) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "private",    default: false
+    t.integer  "user_id"
   end
 
   add_index "project_items", ["project_id"], name: "index_project_items_on_project_id", using: :btree
@@ -286,6 +287,7 @@ ActiveRecord::Schema.define(version: 20130726222834) do
   add_foreign_key "project_item_assets", "project_items", :name => "project_item_assets_project_item_id_fk", :dependent => :delete
 
   add_foreign_key "project_items", "projects", :name => "project_items_project_id_fk", :dependent => :delete
+  add_foreign_key "project_items", "users", :name => "project_items_user_id_fk"
 
   add_foreign_key "projects", "albums", :name => "projects_primary_album_id_fk", :column => "primary_album_id"
 

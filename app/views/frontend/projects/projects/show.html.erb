@@ -16,8 +16,5 @@
 
 <hr />
 
-<h4>Activity</h4>
 
-<p>No recent activity.</p>
-
-<p>TODO: Recent project activity</p>
+<%= render :partial => 'frontend/projects/project_items/project_feed', :locals => { :project_items => @project_items } %>

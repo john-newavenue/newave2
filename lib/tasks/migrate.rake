@@ -236,4 +236,51 @@ namespace :migrate do
     end
   end
 
+  desc "Check stuff out..."
+  task :checker => :environment do
+    # is there an album for every project item asset?
+    Physical::Project::ProjectItemAsset.all.each do |pia|
+      puts "#{pia.id} => #{pia.album_item.id} => #{pia.album_item.album}" if pia.album_item.album == nil
+      Physical::Album::Album.create(:parent => pia.project_item.project, :title => "Primary Album") if pia.album_item.album == nil
+    end
+  end
+
+  desc "Fix albums"
+  task :fix_albums => :environment do
+    # get all django projects
+    # make sure there is an album for every project (match IDs)
+    @db = DBConnectionManager.new
+    @db.establish_connection(DBConnectionManager::DJANGO_DB)
+    old_projects = @db.query('SELECT * FROM estate_project ORDER BY id asc;')
+    @db.establish_connection(DBConnectionManager::RAILS_DB)
+    # debugger
+    old_projects.each do |old_project|
+      album = Physical::Album::Album.find_by(:id => old_project["id"].to_i)
+      if album
+        album.title = "Primary Album"
+        album.parent = Physical::Project::Project.find_by(:id => old_project["id"].to_i)
+        album.save
+      end
+    end
+  end
+
+  desc "Add meta info"
+  task :fix_meta => :environment do
+    # add description
+    # add comment
+    # add credit name
+    # add credit URL
+
+    # create fields for credits
+
+    # get all django old original items
+    # find all original items
+      # fill out credit name and url
+
+    # get all items
+      # fill out description
+      # fill out comment
+
+  end
+
 end

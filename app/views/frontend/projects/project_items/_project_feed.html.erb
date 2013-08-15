@@ -1,0 +1,8 @@
+
+<div class="project-feed">
+
+  <% project_items.each do |project_item| %>
+    <%= render :partial => 'frontend/projects/project_items/project_feed_item', :locals => { :project_item => project_item } %>
+  <% end %>
+
+</div>

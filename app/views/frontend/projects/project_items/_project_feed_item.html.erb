@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="large-1 columns">
+    <%= link_to user_profile_path(:username_slug => project_item.user.username) do %>
+      <%= image_tag user_icon_for(project_item.user, :small), :class => "user-avatar tiny" %> 
+    <% end %>
+  </div>
+  <div class="large-11 columns">
+    <p><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></p>
+    <p><%= project_item.body %></p>
+
+    <% project_item.project_item_assets.each do |pia| %>
+      <% item = pia.album_item %>
+
+      <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
+        <%= image_tag item.asset.image(:medium_square) if item.asset %>
+      <% end %>
+
+      <p>
+        Like &middot; Share &middot; Blah &middot;
+
+        <% if item.root %>
+          Clipped from <%= link_to item.root.album.parent.title, medium_path(:id => item.root.album.parent.id) %> on <%= item.created_at %>
+        <% else %>
+          Uploaded on <%= item.created_at %>
+        <% end %>
+      </p>
+    <% end %>
+
+  </div>
+</div>
+<hr>

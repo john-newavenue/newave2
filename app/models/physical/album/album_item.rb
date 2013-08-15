@@ -6,6 +6,8 @@ module Physical
       #
       belongs_to :album, :class_name => "Physical::Album::Album"
       belongs_to :asset, :polymorphic => true
+      belongs_to :parent, :class_name => "Physical::Album::AlbumItem"
+      belongs_to :root, :class_name => "Physical::Album::AlbumItem"
 
       #
       # scopes
