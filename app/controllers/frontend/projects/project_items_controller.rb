@@ -2,6 +2,8 @@ module Frontend
   module Projects
     class ProjectItemsController < FrontendBaseController
 
+      clipped_album_item_id = nil
+
       layout 'application'
 
       before_action :authenticate_user!, :only => [:new, :create, :destroy, :edit, :update]
@@ -38,6 +40,7 @@ module Frontend
       def create
         @modal = 'new_save_album_item'
         @project_item = Physical::Project::ProjectItem.new(project_item_params)
+        @project_item.user = current_user
 
         if can?(:update, @project_item.project) and @project_item.save
           @modal = 'new_save_album_item_success'
@@ -73,18 +76,13 @@ module Frontend
         end
 
         def project_item_params
-          r = params.require(:project_item).permit(:body, :project_id, :project_item_assets_attributes => [:album_item_id])
+          r = params.require(:project_item).permit(:body, :project_id, :project_item_assets_attributes => [ :album_item_attributes => [ :parent_id ] ])        
           
-          # convert some IDs from strings to integers
-          if r.has_key?("project_item_assets_attributes") and r["project_item_assets_attributes"].has_key?("album_item_id")
-            r["project_item_assets_attributes"]["album_item_id"] = r["project_item_assets_attributes"]["album_item_id"].to_i
+          # put things in arrays for rails nested attributes to digest
+          if r["project_item_assets_attributes"] and r["project_item_assets_attributes"].is_a? Hash
+            r["project_item_assets_attributes"] = [ r["project_item_assets_attributes"] ] 
           end
-          r["project_id"] = r["project_id"].to_i
           
-          # put singular nested asset into an array
-          piaa = r["project_item_assets_attributes"]
-          r["project_item_assets_attributes"] = [ piaa ] if piaa.is_a? Hash
-
           r
         end
 

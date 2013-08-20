@@ -2,6 +2,13 @@ module Physical
   module Album
     class AlbumItem < ActiveRecord::Base
       #
+      # callbacks
+      #
+      before_save :assign_ancestry
+      before_save :assign_ancestral_asset
+
+
+      #
       # assocations
       #
       belongs_to :album, :class_name => "Physical::Album::Album"
@@ -49,6 +56,18 @@ module Physical
         # but it's nice to see /item/183/nice-redwood-siding
         title.blank? ? created_at.strftime("%Y%m%d") : title.parameterize
       end
+
+      private
+
+        def assign_ancestry
+          self.root = self.parent if self.parent
+        end
+
+        def assign_ancestral_asset
+          self.asset = self.root.asset if self.root
+        end
+
+
 
     end
   end

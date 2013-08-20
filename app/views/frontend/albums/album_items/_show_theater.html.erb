@@ -77,6 +77,7 @@
         <h6>More in this album:</h6>
         <ul class="large-block-grid-4 image-collection">
           <% @item.album.images.each do |sibling| %>
+          <% if sibling.asset %>
           <li>
             <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
             <%= link_to item2_path(:id => sibling.id, :slug => sibling.slug), :remote => true, :class => "display-theater" do %>
@@ -84,6 +85,9 @@
             <% end %>
             </div>
           </li>
+          <% else %>
+          <li><%= sibling.id %></li>
+          <% end %>
           <% end %>
         </ul>
       </div>

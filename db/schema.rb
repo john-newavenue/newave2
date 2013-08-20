@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808230443) do
+ActiveRecord::Schema.define(version: 20130816174301) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20130808230443) do
     t.datetime "updated_at"
     t.boolean  "private",    default: false
     t.integer  "user_id"
+    t.string   "category",   default: "text", null: false
+    t.boolean  "has_assets", default: false,  null: false
   end
 
   add_index "project_items", ["project_id"], name: "index_project_items_on_project_id", using: :btree

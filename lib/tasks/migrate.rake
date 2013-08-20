@@ -158,7 +158,7 @@ namespace :migrate do
     # old_original_images.each_with_index do |item, index|
     #   local_image_file = File.new("#{Rails.root}/tmp/old_files/#{item['original_image']}")
     #   image_asset = Physical::Asset::ImageAsset.create(:image => local_image_file)
-    #   local_image_file.close()
+    #   local_image_file.close()  
     #   album_item = Physical::Album::AlbumItem.create(
     #     :id => item["id"].to_i,
     #     :album_id => item["project_id"].to_i,
@@ -264,6 +264,145 @@ namespace :migrate do
     end
   end
 
+  desc "Fix broken image assets"
+  task :fix_broken_image_assets => :environment do
+    @db = DBConnectionManager.new
+    # album items with asset_type Physical::Asset::ImageAsset but asset_id is null
+    # broken_album_items = "(11, 84, 95, 99, 101, 102, 1441, 1445, 1446, 2764, 3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500, 3501, 4120, 4378, 4484, 4533, 4534, 4535, 4536, 4537, 4538, 4539, 4540, 4541, 4543, 4544, 4545, 4550, 5078, 5661, 5666, 5667, 5669, 5676, 5685, 5691, 5694, 5706, 5708, 5939, 5940, 6366, 6462, 6465, 6467, 6468, 6472, 6473, 6476)"
+    # broken_album_items = "(11, 84, 95, 99, 101, 102)"
+    # broken_album_items = "(1441, 1445, 1446, 2764, 3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500, 3501, 4120, 4378, 4484, 4533, 4534, 4535, 4536, 4537, 4538, 4539, 4540, 4541, 4543, 4544, 4545, 4550, 5078, 5661, 5666, 5667, 5669, 5676, 5685, 5691, 5694, 5706, 5708, 5939, 5940, 6366, 6462, 6465, 6467, 6468, 6472, 6473, 6476)"
+    broken_album_items = "(5078, 2764, 3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500, 3501)"
+
+    # unsavable
+    broken_album_items = "(3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500, 3501, 5078)"
+
+    # get the django items
+    @db.establish_connection(DBConnectionManager::DJANGO_DB)
+    old_items = {}
+    old_items_list = @db.query("SELECT * FROM estate_item WHERE id IN #{broken_album_items}")
+    old_items_list.each {|old_item| old_items[old_item["id"].to_i] = old_item }
+    # get the rails album items
+    @db.establish_connection(DBConnectionManager::RAILS_DB)
+    # for each rail record, create the image asset and correct the album item
+    Physical::Album::AlbumItem.where("id IN #{broken_album_items}").each do |album_item|
+      item = old_items[album_item.id]
+      puts "Processing: #{item['id']}"
+      local_image_file = File.new("#{Rails.root}/tmp/old_files/#{item['original_image']}")
+      image_asset = Physical::Asset::ImageAsset.create(:image => local_image_file)
+      if image_asset.save
+        local_image_file.close()  
+        album_item.update_attributes(
+          :album_id => item["project_id"].to_i,
+          :title => item["title"],
+          :description => "#{item['description']}\n\n#{item['comment']}\n\n#{item['credit_name']}",
+          :asset => image_asset,
+          :deleted_at => item["deleted"] == "t" ? Time.now() : nil,
+          :position => item["project_position"].to_i,
+          :created_at => Time.parse(item["date_added"]),
+          :updated_at => Time.parse(item["date_modified"])
+        )
+        if album_item.save
+          puts "Saved #{album_item.asset_id} - #{album_item.asset_type} "
+        else
+          puts "Error with album_item #{album_item.id}"
+          puts album_item.errors
+        end
+      else
+        puts "Error with image_asset"
+        puts image_asset.errors.messages
+        puts item
+        puts local_image_file.inspect
+
+      end
+      # puts "Processed Original #{index+1} of #{old_original_images_total}: Item ID #{album_item.id}"
+    end
+  end
+
+  desc "Fix broken image assets 2"
+  task :fix_broken_image_assets2 => :environment do
+    @db = DBConnectionManager.new
+    # album items with asset_type Physical::Asset::ImageAsset but asset_id is null
+    broken_album_items = "(195, 224, 494, 501, 668, 821, 829, 847, 1125, 1287, 1300, 1396, 1403, 1422, 1669, 1671, 1813, 1857, 1875, 2010, 2041, 2194, 2455, 2466, 2467, 2468, 2481, 2482, 2501, 2573, 2815, 3476, 3569, 3596, 3612, 3799, 3851, 4004, 4005, 4056, 4132, 4219, 4220, 4221, 4222, 4223, 4224, 4225, 4226, 4227, 4228, 4229, 4230, 4492, 4500, 4530, 4572, 4596, 4680, 4718, 4749, 4854, 4924, 4951, 4952, 4978, 5219, 5590, 5726, 5965, 5996, 6135, 6318, 6386, 6398, 6420)"
+
+    # get the django items
+    @db.establish_connection(DBConnectionManager::DJANGO_DB)
+    old_items = {}
+    old_items_list = @db.query("SELECT * FROM estate_item WHERE id IN #{broken_album_items}")
+    old_items_list.each {|old_item| old_items[old_item["id"].to_i] = old_item }
+    # get the rails album items
+    @db.establish_connection(DBConnectionManager::RAILS_DB)
+    # for each rail record, create the image asset and correct the album item
+    old_items_list.each do |old_item|
+      s = Physical::Album::AlbumItem.with_deleted.where("id = #{old_item["id"].to_i}")
+
+      if s.count == 0
+        local_image_file = File.new("#{Rails.root}/tmp/old_files/#{item['original_image']}")
+        image_asset = Physical::Asset::ImageAsset.new(:image => local_image_file)
+        puts "#{local_image_file.inspect}"
+        if image_asset.save
+          a = Physical::Album::AlbumItem.create(
+            :id => old_item["id"].to_i,
+            :album_id => item["project_id"].to_i,
+            :title => item["title"],
+            :description => "#{item['description']}\n\n#{item['comment']}\n\n#{item['credit_name']}",
+            :asset => image_asset,
+            :deleted_at => item["deleted"] == "t" ? Time.now() : nil,
+            :position => item["project_position"].to_i,
+            :created_at => Time.parse(item["date_added"]),
+            :updated_at => Time.parse(item["date_modified"])
+          )
+        else
+          puts "error image #{local_image_file.inspect}"
+        end
+      else 
+        a = s.first
+        parent = Physical::Album::AlbumItem.with_deleted.find(a.parent_id)
+        parent.deleted_at = nil
+        debugger
+        parent.save
+      end
+      if a.save
+        puts "completed #{a.id}"
+      else
+        puts "ERROR #{a.id}"
+      end
+    end
+
+
+
+    # Physical::Album::AlbumItem.where("id IN #{broken_album_items}").each do |album_item|
+    #   item = old_items[album_item.id]
+    #   puts "Processing: #{item['id']}"
+    #   local_image_file = File.new("#{Rails.root}/tmp/old_files/#{item['original_image']}")
+    #   image_asset = Physical::Asset::ImageAsset.create(:image => local_image_file)
+    #   if image_asset.save
+    #     local_image_file.close()  
+    #     album_item.update_attributes(
+    #       :album_id => item["project_id"].to_i,
+    #       :title => item["title"],
+    #       :description => "#{item['description']}\n\n#{item['comment']}\n\n#{item['credit_name']}",
+    #       :asset => image_asset,
+    #       :deleted_at => item["deleted"] == "t" ? Time.now() : nil,
+    #       :position => item["project_position"].to_i,
+    #       :created_at => Time.parse(item["date_added"]),
+    #       :updated_at => Time.parse(item["date_modified"])
+    #     )
+    #     if album_item.save
+    #       puts "Saved #{album_item.asset_id} - #{album_item.asset_type} "
+    #     else
+    #       puts "Error with album_item #{album_item.id}"
+    #       puts album_item.errors
+    #     end
+    #   else
+    #     puts "Error with image_asset"
+    #     puts image_asset.errors.messages
+    #     puts item
+    #     puts local_image_file.inspect
+
+    #   end
+    #   # puts "Processed Original #{index+1} of #{old_original_images_total}: Item ID #{album_item.id}"
+  end
+
   desc "Add meta info"
   task :fix_meta => :environment do
     # add description
@@ -282,5 +421,6 @@ namespace :migrate do
       # fill out comment
 
   end
+
 
 end

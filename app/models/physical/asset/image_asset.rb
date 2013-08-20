@@ -18,9 +18,10 @@ module Physical
         :path => 'image_assets/:id/:style/:filename',
         :fog_directory => 'newave2'
 
-      validates_with AttachmentContentTypeValidator, :attributes => :image, :content_type => /^image\/(png|gif|jpeg|jpg)/
+      validates_with AttachmentContentTypeValidator, :attributes => :image, :content_type => /^image\/(png|gif|jpeg|jpg|bmp)/
       validates_with AttachmentPresenceValidator, :attributes => :image
-      validates_with AttachmentSizeValidator, :attributes => :image, :in => (1.kilobytes..(2.5).megabytes)
+      # validates_with AttachmentSizeValidator, :attributes => :image, :in => (1.kilobytes..(2.5).megabytes)
+      validates_with AttachmentSizeValidator, :attributes => :image, :in => (1.kilobytes..(5).megabytes)
 
       def to_jq_upload
         {
