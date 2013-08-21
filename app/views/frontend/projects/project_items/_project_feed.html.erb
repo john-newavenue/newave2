@@ -1,5 +1,5 @@
 
-<div class="project-feed">
+<div class="project-feed" data-project-id="<%= project.id %>">
 
   <% project_items.each do |project_item| %>
     <%= render :partial => 'frontend/projects/project_items/project_feed_item', :locals => { :project_item => project_item } %>

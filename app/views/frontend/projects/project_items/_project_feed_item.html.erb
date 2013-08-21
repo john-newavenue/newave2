@@ -1,15 +1,25 @@
-<div class="row">
-  <div class="large-1 columns">
+<% if project_item.id %>
+
+<div class="row project-feed-item" data-project-feed-item-id="<%= project_item.id %>">
+  <div class="large-1 small-2 columns">
     <%= link_to user_profile_path(:username_slug => project_item.user.username) do %>
-      <%= image_tag user_icon_for(project_item.user, :small), :class => "user-avatar tiny" %> 
+      <%= image_tag user_icon_for(project_item.user, :small), :class => "user-avatar small" %> 
     <% end %>
   </div>
-  <div class="large-11 columns">
+  <div class="large-11 small-10 columns">
 
     <% case project_item.category %>
       <% when "text" %>
 
+        <p>
+          <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
+        </p>
+        
         <p><%= project_item.body %></p>
+
+        <p>
+          Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
+        </p>
 
       <% when "clipped_picture", "uploaded_picture" %>
 
@@ -27,14 +37,20 @@
 
           <p><%= project_item.body %></p>
 
+          <%-# if screen large enough, show modal. otherwise, show standalone page -%>
+
           <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
+            <%= image_tag item.asset.image(:medium_square) if item.asset %>
+          <% end %>
+
+          <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :html), :title=> item.title, :class => "show-for-small" do %>
             <%= image_tag item.asset.image(:medium_square) if item.asset %>
           <% end %>
 
         <% end %>
 
         <p>
-          Like &middot; Share &middot; Save &middot; <%= project_item.created_at %>
+          Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
         </p>
 
       <% when "milestone" %>
@@ -46,3 +62,5 @@
   </div>
 </div>
 <hr>
+
+<% end %>

@@ -38,17 +38,31 @@ module Frontend
       end
 
       def create
+
         @modal = 'new_save_album_item'
         @project_item = Physical::Project::ProjectItem.new(project_item_params)
         @project_item.user = current_user
 
+
+        # handle modal response for clipping pictures, which happen in modal dialogs
         if can?(:update, @project_item.project) and @project_item.save
-          @modal = 'new_save_album_item_success'
-          @project_item.project.touch
+          @project_item.reload
+          if @project_item.category == "clipped_picture"
+            @modal = 'new_save_album_item_success'
+          end
+        else
+          @modal = 'new_save_album_item_error'
         end
 
+
         respond_to do |format|
-          format.js { render :partial => 'frontend/prompt_modal.js.coffee', :layout => false, :locals => { :modal => @modal } }
+          case @project_item.category
+          when "clipped_picture"
+            format.js { render :partial => 'frontend/prompt_modal.js.coffee', :layout => false, :locals => { :modal => @modal } }
+          when "text"
+            format.js { render :partial => 'frontend/projects/project_items/new_post.js.coffee', :layout => false, :locals => { :project_item => @project_item } }
+          end
+
         end
       end
 

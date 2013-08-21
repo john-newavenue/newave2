@@ -16,5 +16,9 @@
 
 <hr />
 
+<%= render :partial => 'frontend/projects/project_items/new_post', :locals => { :project_item => Physical::Project::ProjectItem.new(:project => @project) } %>
 
-<%= render :partial => 'frontend/projects/project_items/project_feed', :locals => { :project_items => @project_items } %>
+<br />
+<hr />
+
+<%= render :partial => 'frontend/projects/project_items/project_feed', :locals => { :project_items => @project_items, :project => @project } %>

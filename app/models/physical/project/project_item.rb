@@ -81,6 +81,8 @@ module Physical
         end
         
         super
+        
+        project.touch
 
       end
 
