@@ -11,11 +11,17 @@
     <div class="large-3 pull-9 columns">
       <img src="http://placehold.it/137x150" alt="TODO: Project cover photo">
 
-      <% if false %>
-      <ul class="side-nav">
-        <li><%= active_link_to 'Newsfeed', project_path(@project.id), :wrap_tag => :li %></li>
+      <ul class="side-nav project-menu">
+        <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-home"></i> My Project Story<% end %>
+        <%= active_link_to project_path(@project.id), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-tasks"></i> Timeline<% end %>
+        <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-signal"></i> Budget and Progress<% end %>
+        <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-briefcase"></i> Documents and Files<% end %>
+        <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-shopping-cart"></i> Shopping List<% end %>
+        <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-money"></i> Billing<% end %>
+        <% if false %>
+        <%= active_link_to edit_project_path(@project), :wrap_tag => :li do %><i class='general foundicon-edit'></i> Edit Project<% end %>
+        <% end %>
       </ul>
-      <% end %>
 
     </div>
 

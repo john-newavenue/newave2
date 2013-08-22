@@ -45,7 +45,7 @@ module Frontend
       def show
         @project = Physical::Project::Project.find(params[:id])
         @address = @project.address.decorate
-        @project_items = @project.items.paginate(:page => params[:page], :per_page => 30)
+        @project_items = @project.items.paginate(:page => params[:page], :per_page => 15)
         respond_to do |format|
           if params[:layout] == false
             format.html { render 'show', :layout => false }
