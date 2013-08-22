@@ -1,66 +1,62 @@
-<% if project_item.id %>
+<div class="project-feed-item-wrapper">
+  <div class="row project-feed-item infinite-item" data-project-feed-item-id="<%= project_item.id %>">
+    <div class="large-1 small-2 columns">
+      <%= link_to user_profile_path(:username_slug => project_item.user.username) do %>
+        <%= image_tag user_icon_for(project_item.user, :small), :class => "user-avatar small" %> 
+      <% end %>
+    </div>
+    <div class="large-11 small-10 columns">
 
-<div class="row project-feed-item" data-project-feed-item-id="<%= project_item.id %>">
-  <div class="large-1 small-2 columns">
-    <%= link_to user_profile_path(:username_slug => project_item.user.username) do %>
-      <%= image_tag user_icon_for(project_item.user, :small), :class => "user-avatar small" %> 
-    <% end %>
-  </div>
-  <div class="large-11 small-10 columns">
-
-    <% case project_item.category %>
-      <% when "text" %>
-
-        <p>
-          <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
-        </p>
-        
-        <p><%= project_item.body %></p>
-
-        <p>
-          Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
-        </p>
-
-      <% when "clipped_picture", "uploaded_picture" %>
-
-        <% project_item.project_item_assets.each do |pia| %>
-          <% item = pia.album_item %>
+      <% case project_item.category %>
+        <% when "text" %>
 
           <p>
             <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
-            <% if project_item.category == "clipped_picture" %>
-              clipped a picture from <%= link_to item.root.album.parent.title, medium_path(:id => item.root.album.parent.id) %>.
-            <% else %>
-              uploaded a picture.
-            <% end %>
           </p>
-
+          
           <p><%= project_item.body %></p>
 
-          <%-# if screen large enough, show modal. otherwise, show standalone page -%>
+          <p>
+            Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
+          </p>
 
-          <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
-            <%= image_tag item.asset.image(:medium_square) if item.asset %>
+        <% when "clipped_picture", "uploaded_picture" %>
+
+          <% project_item.project_item_assets.each do |pia| %>
+            <% item = pia.album_item %>
+
+            <p>
+              <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
+              <% if project_item.category == "clipped_picture" %>
+                clipped a picture from <%= link_to item.root.album.parent.title, medium_path(:id => item.root.album.parent.id) %>.
+              <% else %>
+                uploaded a picture.
+              <% end %>
+            </p>
+
+            <p><%= project_item.body %></p>
+
+            <%-# if screen large enough, show modal. otherwise, show standalone page -%>
+
+            <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
+              <%= image_tag item.asset.image(:medium_square) if item.asset %>
+            <% end %>
+
+            <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :html), :title=> item.title, :class => "show-for-small" do %>
+              <%= image_tag item.asset.image(:medium_square) if item.asset %>
+            <% end %>
+
           <% end %>
 
-          <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :html), :title=> item.title, :class => "show-for-small" do %>
-            <%= image_tag item.asset.image(:medium_square) if item.asset %>
-          <% end %>
+          <p>
+            Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
+          </p>
 
-        <% end %>
+        <% when "milestone" %>
 
-        <p>
-          Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
-        </p>
+      <% end %>
 
-      <% when "milestone" %>
-
-    <% end %>
-
-
-
+    </div>
+    <hr>
   </div>
 </div>
-<hr>
-
-<% end %>

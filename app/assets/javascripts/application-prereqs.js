@@ -15,6 +15,9 @@
 //= require jquery.ui.all
 //= require tag-it.min
 //= require foundation
+//= require waypoints.min
+//= require waypoints-infinite
+
 
 $(document).ready( function () {
   $(document).foundation();

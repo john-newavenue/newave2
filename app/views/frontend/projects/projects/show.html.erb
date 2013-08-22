@@ -19,6 +19,25 @@
 <%= render :partial => 'frontend/projects/project_items/new_post', :locals => { :project_item => Physical::Project::ProjectItem.new(:project => @project) } %>
 
 <br />
+
 <hr />
 
-<%= render :partial => 'frontend/projects/project_items/project_feed', :locals => { :project_items => @project_items, :project => @project } %>
+<%= render :partial => 'frontend/projects/project_items/project_feed_with_container', :locals => { :project_items => @project_items, :project => @project, :page => 1 } %>
+
+<script language="JavaScript">
+$(document).ready( function () {
+  $('.infinite-container').waypoint('infinite', {
+    container: '.infinite-container',
+    items: '.infinite-item',
+    more: '.infinite-more-link',
+    offset: 'bottom-in-view',
+    loadingClass: 'infinite-loading',
+    onBeforePageLoad: function () { 
+      $('.infinite-load-container').fadeIn()
+    },
+    onAfterPageLoad: function () {
+      $('.infinite-load-container').fadeOut()
+    }
+  });
+})
+</script>

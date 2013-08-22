@@ -11,10 +11,11 @@ module Frontend
 
       def index
         @project = Physical::Project::Project.find_by(:id => params[:project_id])
-        page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
-        @project_items = @project.items_readable_for(current_user).page(page)
+        @page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
+        @project_items = @project.items_readable_for(current_user).page(@page)
         respond_to do |format|
           format.js
+          format.html { render :partial => 'project_feed', :layout => false, :locals => {:project_items => @project_items, :page => @page, :project => @project} }
         end
       end
 
