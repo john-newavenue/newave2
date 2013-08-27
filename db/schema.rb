@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130816174301) do
+ActiveRecord::Schema.define(version: 20130827175148) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -103,6 +103,20 @@ ActiveRecord::Schema.define(version: 20130816174301) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "inquiries", force: true do |t|
+    t.string   "category",           default: "contact_form", null: false
+    t.text     "submitted_from_url",                          null: false
+    t.integer  "user_id"
+    t.string   "first_name",                                  null: false
+    t.string   "last_name",                                   null: false
+    t.string   "phone_number"
+    t.string   "email",                                       null: false
+    t.text     "message",                                     null: false
+    t.string   "referral"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "project_item_assets", force: true do |t|
@@ -284,6 +298,8 @@ ActiveRecord::Schema.define(version: 20130816174301) do
   add_foreign_key "album_items", "album_items", :name => "album_items_root_id_fk", :column => "root_id"
 
   add_foreign_key "assets", "album_items", :name => "assets_origin_album_item_id_fk", :column => "origin_album_item_id"
+
+  add_foreign_key "inquiries", "users", :name => "inquiries_user_id_fk"
 
   add_foreign_key "project_item_assets", "album_items", :name => "project_item_assets_album_item_id_fk"
   add_foreign_key "project_item_assets", "project_items", :name => "project_item_assets_project_item_id_fk", :dependent => :delete

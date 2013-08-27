@@ -1,0 +1,45 @@
+<% provide(:title, "Contact Us") %>
+
+<section class="page-content">
+
+  <div class="large-9 columns">
+    
+    <h3>Contact Us</h3>
+
+    <hr>
+
+    
+    <p>
+      New Avenue <br />
+      36 Panoramic Way <br />
+      Berkeley, CA 94720 <br />
+      (510) 621-8679
+    </p>
+
+    <hr>
+    
+    <p>Send us a message and we'll get back to you to discuss your goals and opportunities:</p>
+
+    <%= semantic_form_for @inquiry, :url => inquiry_index_path, :as => 'inquiry', :html => { :class => "no-list" } do |f| %>
+      <div class="row">
+        <div class="large-6 columns"><%= f.input :first_name, :required => true %></div>
+        <div class="large-6 columns"><%= f.input :last_name, :required => true %></div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns"><%= f.input :email, :as => :email, :required => true %></div>
+        <div class="large-6 columns"><%= f.input :phone_number %></div>
+      </div>
+      <%= f.input :message, :input_html => { :rows => 5, :max_length => 10000 } %>
+      <%= f.action :submit, :label => "Send", :button_html => { :class => "button" } %>
+    <% end %>
+  </div>
+
+  <div class="large-3 columns"></div>
+
+
+
+</div>
+
+</section>
+
+<br />

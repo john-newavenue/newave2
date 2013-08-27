@@ -38,6 +38,15 @@ Newave2::Application.routes.draw do
     match '/press' => 'static_pages#press', :as => 'press', :via => 'get'
 
     #
+    # Inquiry
+    #
+
+    match '/contact' => "inquiries#new", :as => "new_inquiry", :via => 'get' # is also the contact info page
+    match '/contact' => "inquiries#new", :as => "contact", :via => 'get' # is also the contact info page
+    match '/contact/success' => "inquiries#success", :as => "inquiry_success", :via => 'get'
+    resources :inquiries, :path => "/contact", :only => [:create], :as => 'inquiry'
+
+    #
     # Static > Brochure
     #
 

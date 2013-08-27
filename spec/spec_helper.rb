@@ -51,7 +51,7 @@ RSpec.configure do |config|
 
     # create some files for testing
     large_file_path = Rails.root.join('spec','fixtures','large_file.txt')
-    system("dd if=/dev/zero of=#{large_file_path} bs=1M count=3") unless File.exist?(large_file_path)
+    system("dd if=/dev/zero of=#{large_file_path} bs=6M count=3") unless File.exist?(large_file_path)
     fake_image_path = Rails.root.join('spec','fixtures','fake_image.jpg')
     system("dd if=/dev/zero of=#{fake_image_path} bs=1K count=50") unless File.exist?(fake_image_path)
   end

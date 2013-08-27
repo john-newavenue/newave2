@@ -16,7 +16,7 @@ describe "Image Asset Model" do
     end
   end
 
-  it "accepts only images of < 2.5 MB" do
+  it "accepts only images of < 5 MB", :slow => true do
     image_asset = FactoryGirl.build(:image_asset, :image => fixture_file_upload('large_file.txt') )
     image_asset.valid?
     expect(image_asset).to_not have(:no).errors_on(:image_content_type)
