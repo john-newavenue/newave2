@@ -4,29 +4,17 @@
 
   <div class="row">
 
-    <div class="large-3 columns sidebar">
-
-      <div class="section-container accordion show-for-small" data-section="accordion">
-        <section>
-          <p class="title" data-section-title><a href="#">About Menu <i class="icon-dropdown" style="float: right;"></i></a></p>
-          <div class="content" data-section-content>
-            <%= render :partial => 'layouts/about_links' %>
-          </div>
-        </section>
-      </div>
-
-      <div class="hide-for-small">
-        <h5>About</h5>
-        <%= render :partial => 'layouts/about_links' %>
-      </div>
-
-    </div>
-
-
-    <div class="large-9 columns">
+    <div class="large-9 push-3 columns">
     <%= yield %>
     </div>
 
+    <div class="large-3 pull-9 columns sidebar">
+
+      <hr class="show-for-small">
+
+      <h5>About Us</h5>
+      <%= render :partial => 'layouts/about_links' %>
+      </div>
 
   </div>
 

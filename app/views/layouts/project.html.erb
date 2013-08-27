@@ -11,7 +11,7 @@
     <div class="large-3 pull-9 columns">
       <img src="http://placehold.it/137x150" alt="TODO: Project cover photo">
 
-      <ul class="side-nav project-menu">
+      <ul class="side-nav project-menu fancy-menu">
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-home"></i> My Project Story<% end %>
         <%= active_link_to project_path(@project.id), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-tasks"></i> Timeline<% end %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-signal"></i> Budget and Progress<% end %>

@@ -1,13 +1,13 @@
 <nav>
-    <ul class="side-nav">
-      <li><%= active_link_to 'What is New Avenue?', about_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'How We Work with You', how_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'The Team', team_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'Investors & Partners', investors_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'Press', press_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'FAQs', faqs_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'Jobs', jobs_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'Privacy Policy', privacy_path, :wrap_tag => :li %></li>
-      <li><%= active_link_to 'Terms of Service', terms_path, :wrap_tag => :li %></li>
+    <ul class="side-nav fancy-menu no-icons">
+      <%= active_link_to about_path, :wrap_tag => :li do %>What is New Avenue?<% end %>
+      <%= active_link_to how_path, :wrap_tag => :li do %> How We Work with You<% end %>
+      <%= active_link_to team_path, :wrap_tag => :li do %> The Team<% end %>
+      <%= active_link_to investors_path, :wrap_tag => :li do %> Investors and Partners<% end %>
+      <%= active_link_to press_path, :wrap_tag => :li do %> Press<% end %>
+      <%= active_link_to faqs_path, :wrap_tag => :li do %> FAQs<% end %>
+      <%= active_link_to jobs_path, :wrap_tag => :li do %> Jobs<% end %>
+      <%= active_link_to privacy_path, :wrap_tag => :li do %> Privacy Policy<% end %>
+      <%= active_link_to terms_path, :wrap_tag => :li do %> Terms of Service<% end %>
     </ul>
 </nav>
