@@ -100,3 +100,4 @@ gem 'paranoia', :git => 'git://github.com/radar/paranoia.git' # soft delete
 gem 'will_paginate', '~> 3.0'
 gem 'acts-as-taggable-on'
 gem 'font-awesome-rails'
+gem 'httparty'
