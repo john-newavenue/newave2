@@ -10,7 +10,6 @@ group :assets do
   gem 'sass-rails',   '~> 4.0.0.beta1'
   gem 'coffee-rails', '~> 4.0.0.beta1'
   gem 'uglifier', '>= 1.0.3'
-  gem "font-awesome-rails"
   gem 'handlebars_assets'
 end
 
@@ -100,3 +99,4 @@ gem 'foreigner' # foreign key support for migrations
 gem 'paranoia', :git => 'git://github.com/radar/paranoia.git' # soft delete
 gem 'will_paginate', '~> 3.0'
 gem 'acts-as-taggable-on'
+gem 'font-awesome-rails'
