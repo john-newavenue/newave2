@@ -15,7 +15,7 @@ set :rvm_ruby_string, 'ruby-2.0.0-p247@newave2'
 set :rvm_type, :system
 
 set :user, "root"
-set :rails_env, "production"
+set :rails_env, "staging"
 set :keep_releases, 5
 
 default_run_options[:pty] = true

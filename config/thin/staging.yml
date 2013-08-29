@@ -1,7 +1,7 @@
 pid: /tmp/pids/thin-staging.pid
 log: /var/log/thin-staging.log
 daemonize: false
-environment: production
+environment: staging
 chdir: /var/www/dev.newavenuehomes.com/current
 port: 4000
 max_conns: 1024
