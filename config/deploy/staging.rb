@@ -11,7 +11,7 @@ role :web, "dev.newavenuehomes.com"                          # Your HTTP server,
 role :app, "dev.newavenuehomes.com"                          # This may be the same as your `Web` server
 role :db,  "dev.newavenuehomes.com", :primary => true        # This is where Rails migrations will run
 
-set :rvm_ruby_string, 'ruby-2.0.0-p247@newave2'
+set :rvm_ruby_string, 'ruby-2.0.0-p247@newave2-staging'
 set :rvm_type, :system
 
 set :user, "root"
@@ -24,7 +24,7 @@ default_run_options[:pty] = true
 
 set :db_local_clean, true # capistrano-db-tasks, remove dump file after loading
 
-after "deploy", "deploy:symlink_config_files"
+after "deploy:create_symlink", "deploy:symlink_config_files"
 after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
