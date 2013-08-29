@@ -19,10 +19,12 @@ Newave2::Application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'example.com',
-    user_name:            ENV['GMAIL_TEST_USERNAME'],
-    password:             ENV['GMAIL_TEST_PASSWORD'],
+    user_name:            ENV['NOREPLY_EMAIL_USERNAME'],
+    password:             ENV['NOREPLY_EMAIL_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+  config.inquiry_recipients = ENV['INQUIRY_RECIPIENTS_STG']
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -54,7 +56,7 @@ Newave2::Application.configure do
 
   # zoho
   config.zoho_settings = {
-    :authtoken => ENV['ZOHO_AUTHTOKEN_DEV']
+    :authtoken => ENV['ZOHO_AUTHTOKEN_STG']
   }
 
 end

@@ -71,11 +71,13 @@ Newave2::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'example.com',
-    user_name:            ENV['GMAIL_TEST_USERNAME'],
-    password:             ENV['GMAIL_TEST_PASSWORD'],
+    domain:               'newavenuehomes.com',
+    user_name:            ENV['NOREPLY_EMAIL_USERNAME'],
+    password:             ENV['NOREPLY_EMAIL_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+  config.inquiry_recipients = ENV['INQUIRY_RECIPIENTS_PRD']
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -106,5 +108,5 @@ Newave2::Application.configure do
   config.zoho_settings = {
     :authtoken => ENV['ZOHO_AUTHTOKEN_PRD']
   }
-  
+
 end

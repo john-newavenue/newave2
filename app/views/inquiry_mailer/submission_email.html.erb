@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Timestamp: <%= @inquiry.created_at %><br />
+      First Name: <%= @inquiry.first_name %><br />
+      Last Name: <%= @inquiry.last_name %><br />
+      User: <%= @inquiry.user ? @inquiry.user : '(Visitor was not logged in.)' %><br />
+      Phone Number: <%= @inquiry.phone_number %><br />
+      Email: <%= @inquiry.email %>
+    </p>
+    <p>Message:</p>
+    <p><%= @inquiry.compose_message %></p>
+  </body>
+</html>

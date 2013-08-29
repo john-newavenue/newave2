@@ -1,8 +1,10 @@
+require 'httparty'
+
 module Physical
   module General
     class Inquiry < ActiveRecord::Base
 
-      # fields: category, submitted_form_url, user, first_name, last_name, phone_number, email, message, referral
+      # fields: category, submitted_from_url, user, first_name, last_name, phone_number, email, message, referral
 
       #
       # behaviors
@@ -41,14 +43,27 @@ My name is #{first_name} #{last_name}. My phone number is #{phone_number}
         self.message
       end
 
-      private
-
       def send_to_zoho
-        raise 'Not implemented'
+        data = <<-XMLSTRING
+          <Leads>
+          <row no="1">
+          <FL val="First Name">#{first_name}</FL>
+          <FL val="Last Name">#{last_name}</FL>
+          <FL val="Email">#{email}</FL>
+          <FL val="Phone">#{phone_number}</FL>
+          <FL val="Description">#{compose_message}</FL>
+          </row>
+          </Leads>
+        XMLSTRING
+        authtoken = Rails.application.config.zoho_settings[:authtoken]
+        zoho_url = "https://crm.zoho.com/crm/private/xml/Leads/insertRecords"
+        response = HTTParty.post(zoho_url, :body => {:newFormat => '1', :authtoken => authtoken, :scope => 'crmapi', :xmlData => data})
+        return false if response.to_h['response'].has_key? 'error'
+        return true
       end
 
       def send_to_staff
-        raise 'Not implemented'
+        ::InquiryMailer.submission_email(self).deliver
       end
 
     end

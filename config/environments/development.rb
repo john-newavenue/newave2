@@ -18,11 +18,13 @@ Newave2::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'example.com',
-    user_name:            ENV['GMAIL_TEST_USERNAME'],
-    password:             ENV['GMAIL_TEST_PASSWORD'],
+    domain:               'newavenuehomes.com',
+    user_name:            ENV['NOREPLY_EMAIL_USERNAME'],
+    password:             ENV['NOREPLY_EMAIL_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+  config.inquiry_recipients = ENV['INQUIRY_RECIPIENTS_DEV']
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

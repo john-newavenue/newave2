@@ -63,7 +63,33 @@ describe "Inquiry model" do
     expect(inquiry.compose_message).to include("My name is Jon Snow.", "My phone number is 123-456-7890")
   end
 
-  pending "Can send to zoho"
-  pending "Can send to staff"
+  it "can send to zoho" do
+    inquiry = Physical::General::Inquiry.create(
+      :first_name => Faker::Name.first_name,
+      :last_name => Faker::Name.last_name,
+      :phone_number => "123-456-7890",
+      :message => Faker::Lorem.sentences(1)[0],
+      :submitted_from_url => '/test',
+      :email => Faker::Internet.email,
+      :category => 'mad_lib_form'
+    )
+    puts "Created inquiry: #{inquiry.first_name} #{inquiry.last_name} with message:: #{inquiry.compose_message}"
+    expect(inquiry.send_to_zoho).to be_true
+  end
+
+  it "can send to staff" do
+    inquiry = Physical::General::Inquiry.create(
+      :first_name => Faker::Name.first_name,
+      :last_name => Faker::Name.last_name,
+      :phone_number => "123-456-7890",
+      :message => Faker::Lorem.sentences(1)[0],
+      :submitted_from_url => '/test',
+      :email => Faker::Internet.email,
+      :category => 'mad_lib_form'
+    )
+    puts "Created inquiry: #{inquiry.first_name} #{inquiry.last_name} with message:: #{inquiry.compose_message}"
+    inquiry.send_to_staff
+    pending "This needs to be confirmed manually. Check email."
+  end
 
 end
