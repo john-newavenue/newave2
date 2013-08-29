@@ -98,7 +98,13 @@ Newave2::Application.configure do
       :rackspace_username => ENV['RACKSPACE_USERNAME'],
       :rackspace_api_key => ENV['RACKSPACE_API_KEY']
     }, 
-    :fog_directory => ENV['RACKSPACE_FILES_CONTAINER'],
-    :fog_host => ENV['RACKSPACE_FILES_CDN']
+    :fog_directory => ENV['RACKSPACE_FILES_CONTAINER_PRD'],
+    :fog_host => ENV['RACKSPACE_FILES_CDN_PRD']
   }
+
+  # zoho
+  config.zoho_settings = {
+    :authtoken => ENV['ZOHO_AUTHTOKEN_PRD']
+  }
+  
 end

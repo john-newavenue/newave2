@@ -1,5 +1,5 @@
-pid: tmp/pids/thin.pid
-log: var/log/thin.log
+pid: tmp/pids/thin-staging.pid
+log: var/log/thin-staging.log
 daemonize: true
 environment: production
 chdir: /var/www/dev.newavenuehomes.com/current

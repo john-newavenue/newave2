@@ -42,7 +42,13 @@ Newave2::Application.configure do
       :rackspace_username => ENV['RACKSPACE_USERNAME'],
       :rackspace_api_key => ENV['RACKSPACE_API_KEY']
     }, 
-    :fog_directory => 'newave2-test',
-    :fog_host => 'https://fdd6dceb757964ee42ea-822f2935e8d3aeed7eed31ff7058ee85.ssl.cf1.rackcdn.com'
+    :fog_directory => ENV['RACKSPACE_FILES_CONTAINER_TST'],
+    :fog_host => ENV['RACKSPACE_FILES_CDN_TST']
   }
+
+  # zoho
+  config.zoho_settings = {
+    :authtoken => ENV['ZOHO_AUTHTOKEN_TST']
+  }
+
 end
