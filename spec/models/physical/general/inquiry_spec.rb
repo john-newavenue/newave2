@@ -4,7 +4,7 @@ describe "Inquiry model" do
 
   it "responds to certain fields" do
     inquiry = Physical::General::Inquiry.new
-    %w(category user first_name last_name phone_number email message referral).each do |attr|
+    %w(category user first_name last_name phone_number email message referral location interested_in).each do |attr|
       expect(inquiry).to respond_to(attr.to_sym)
     end
   end

@@ -59,7 +59,7 @@ module Frontend
         when 'home', 'join'
           'application'
         when 'brochure_floorplans', 'brochure_clients','brochure_floorplan', 'brochure_client'
-          'one-column'
+          'columns-75-25'
         else 
           'about'
         end

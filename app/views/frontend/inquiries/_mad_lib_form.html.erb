@@ -1,0 +1,33 @@
+<div class="panel">
+
+  <h4>I'm interested</h4>
+  <% @inquiry = Physical::General::Inquiry.new if @inquiry.nil? %>
+
+  <%= semantic_form_for @inquiry, :url => inquiry_mad_lib_submit_path, :as => 'inquiry', :html => { :class => "mad-lib-form inline" } do |f| %>
+
+    <%= f.input  :category, :as => :hidden, :value => "mad_lib_form" %>
+
+    <%= f.input  :submitted_from_url, :as => :hidden, :value => @inquiry.submitted_from_url ? @inquiry.submitted_from_url : request.original_url %>
+
+    Hi there. My name is 
+    <%= f.input :first_name, :label => false, :placeholder => "first name", :input_html => { :style => "display: inline-block; "} %>
+    <%= f.input :last_name, :label => false, :placeholder => "last name", :input_html => { :style => "display: inline-block; "} %>,
+    and I am interested in 
+    <%= f.input :interested_in, :label => false, :placeholder => "a small house", :input_html => { :style => "display: inline-block; "} %>.
+    I want to build in
+    <%= f.input :location, :label => false, :placeholder => "Berkeley, CA", :input_html => { :style => "display: inline-block; "} %>.
+    I heard about New Avenue through
+    <%= f.input :referral, :label => false, :placeholder => "a friend", :input_html => { :style => "display: inline-block; "} %>.
+    You can reach me with my email 
+    <%= f.input :email, :label => false, :placeholder => "your@email.com", :input_html => { :style => "display: inline-block; "} %>.
+    or my phone number
+    <%= f.input :phone_number, :label => false, :placeholder => "123-456-7890", :input_html => { :style => "display: inline-block; "} %>.
+    Please contact me to discuss my opportunities!
+    
+    <h5>
+      <%= f.action :submit, :label => "Send", :button_html => { :class => "button"} %>
+    </h5>
+
+  <% end %>
+
+</div>

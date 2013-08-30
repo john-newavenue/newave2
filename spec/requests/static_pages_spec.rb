@@ -44,4 +44,28 @@ describe "Static pages" do
     it { should have_title('Press')}
   end
 
+  describe "client stories" do
+    before { visit client_stories_path} 
+    it "should show mad lib form" do
+      expect(page).to have_button("Send")
+      expect(page).to have_field("inquiry[first_name]")
+      # and so on...
+    end
+    
+  end
+
+  pending "list of clients in client stories"
+
+  describe "design examples" do
+    before { visit design_examples_path} 
+    it "should show mad lib form" do
+      expect(page).to have_button("Send")
+      expect(page).to have_field("inquiry[first_name]")
+      # and so on...
+    end
+    
+  end
+
+  pending "list of design examples in design examples page"
+
 end

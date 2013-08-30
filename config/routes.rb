@@ -44,16 +44,20 @@ Newave2::Application.routes.draw do
     match '/contact' => "inquiries#new", :as => "new_inquiry", :via => 'get' # is also the contact info page
     match '/contact' => "inquiries#new", :as => "contact", :via => 'get' # is also the contact info page
     match '/contact/success' => "inquiries#success", :as => "inquiry_success", :via => 'get'
+
+    match '/contact/a' => "inquiries#mad_lib_submit", :as => "inquiry_mad_lib_submit", :via => 'post'
+    match '/contact/a/success' => "inquiries#mad_lib_success", :as => "inquiry_mad_lib_success", :via => 'get'
+    
     resources :inquiries, :path => "/contact", :only => [:create], :as => 'inquiry'
 
     #
     # Static > Brochure
     #
 
-    match '/floorplans' => 'static_pages#brochure_floorplans', :as => 'brochure_floorplans', :via => 'get'
-    match '/floorplans/:slug' => 'static_pages#brochure_floorplan', :as => 'brochure_floorplan', :via => 'get'
-    match '/clients' => 'static_pages#brochure_clients', :as => 'brochure_clients', :via => 'get'
-    match '/clients/:slug' => 'static_pages#brochure_client', :as => 'brochure_client', :via => 'get'
+    match '/designs' => 'static_pages#brochure_floorplans', :as => 'design_examples', :via => 'get'
+    match '/designs/:slug' => 'static_pages#brochure_floorplan', :as => 'design_example', :via => 'get'
+    match '/clients' => 'static_pages#brochure_clients', :as => 'client_stories', :via => 'get'
+    match '/clients/:slug' => 'static_pages#brochure_client', :as => 'client_story', :via => 'get'
     match '/our-clients' => 'static_pages#brochure_clients', :via => 'get'
 
 

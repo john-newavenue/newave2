@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130827175148) do
+ActiveRecord::Schema.define(version: 20130830175222) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 20130827175148) do
     t.string   "referral"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "interested_in"
+    t.string   "location"
   end
 
   create_table "project_item_assets", force: true do |t|

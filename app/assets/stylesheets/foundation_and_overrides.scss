@@ -1093,7 +1093,7 @@ table {
 
 .alert-box p:last-child { margin-bottom: 0; }
 
-body > section#content { margin: 1em 0; }
+body > section#content, section.margin-top-bottom { margin: 1em 0; }
 
 //
 // Topbar
@@ -1543,6 +1543,34 @@ li.tagit-choice { max-width: 150px; overflow: hidden; }
 ul.tagit { 
   height: 80px;
   li.tagit-new input { width: 80px; display: inline-block; }
+}
+
+// Mad-Lib Form
+
+form.mad-lib-form {
+  font-size: 12px;
+  line-height: 30px; 
+
+  input[type='text'], input[type='email'], input[type='tel'] { 
+    display: inline-block; 
+    width: inherit; 
+    font-size: 11px; 
+    padding: 3px; 
+    margin: 0; 
+    width: 80px;
+    border: 0;
+    box-shadow: none;
+    background: lightyellow;
+    border-bottom: 1px dashed #aaa;
+  }
+
+  .inline-errors { 
+    display: inline-block;
+    color: red;
+    font-size: inherit
+  }
+
+  li { margin: 0; padding: 0; display: inline-block; }
 }
 
 //

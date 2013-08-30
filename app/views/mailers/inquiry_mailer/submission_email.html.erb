@@ -6,11 +6,15 @@
   <body>
     <p>
       Timestamp: <%= @inquiry.created_at %><br />
+      Category: <%= @inquiry.category %><br />
+      Submitted from: <%= @inquiry.submitted_from_url %>
+    </p>
+    <p>
       First Name: <%= @inquiry.first_name %><br />
       Last Name: <%= @inquiry.last_name %><br />
-      User: <%= @inquiry.user ? @inquiry.user : '(Visitor was not logged in.)' %><br />
+      User: <%= @inquiry.user ? @inquiry.user.username : '(Visitor was not logged in.)' %><br />
       Phone Number: <%= @inquiry.phone_number %><br />
-      Email: <%= @inquiry.email %>
+      Email: <%= @inquiry.email %><br />
     </p>
     <p>Message:</p>
     <p><%= @inquiry.compose_message %></p>

@@ -1,0 +1,19 @@
+<% content_for :content do %>
+
+<section id="content">
+
+  <div class="row">
+
+    <div class="large-9 columns">
+      <%= yield(:main) if content_for?(:main) %>
+    </div>
+
+    <div class="large-3 columns">
+      <%= yield(:sidebar) if content_for?(:sidebar) %>
+    </div>
+
+</section>
+
+<% end %>
+
+<%= render :template => 'layouts/application' %>

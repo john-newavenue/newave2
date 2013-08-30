@@ -4,7 +4,7 @@ module Physical
   module General
     class Inquiry < ActiveRecord::Base
 
-      # fields: category, submitted_from_url, user, first_name, last_name, phone_number, email, message, referral
+      # fields: category, submitted_from_url, user, first_name, last_name, phone_number, email, message, referral, interested_in, location
 
       #
       # behaviors
@@ -20,8 +20,9 @@ module Physical
       validates :message, :allow_blank => false, :allow_nil => false, :presence => true
 
       before_validation :compose_message
-      # after_create :send_to_zoho
-      # after_create :send_to_staff
+
+      after_create :send_to_zoho
+      after_create :send_to_staff
 
       #
       # relations
@@ -37,7 +38,13 @@ module Physical
       def compose_message
         if category == "mad_lib_form"
           self.message = <<-HEREDOC
-My name is #{first_name} #{last_name}. My phone number is #{phone_number}
+
+Hi there. My name is #{first_name} #{last_name}, and I am interested
+in #{interested_in}. I want to build in #{location}. I heard about
+New Avenue through #{referral}. You can reach me with my email
+#{email} or my phone number #{phone_number}. Please contact me to
+discuss my opportunities!
+
           HEREDOC
         end
         self.message
@@ -63,7 +70,7 @@ My name is #{first_name} #{last_name}. My phone number is #{phone_number}
       end
 
       def send_to_staff
-        ::InquiryMailer.submission_email(self).deliver
+        Mailers::InquiryMailer.submission_email(self).deliver
       end
 
     end
