@@ -45,25 +45,31 @@ describe "Static pages" do
   end
 
   describe "client stories" do
-    before { visit client_stories_path} 
     it "should show mad lib form" do
+      visit client_stories_path
       expect(page).to have_button("Send")
       expect(page).to have_field("inquiry[first_name]")
       # and so on...
     end
-    
+    it "should redirect legacy URL" do
+      visit '/our-clients'
+      expect(page).to have_title("Client Stories")
+    end
   end
 
   pending "list of clients in client stories"
 
   describe "design examples" do
-    before { visit design_examples_path} 
     it "should show mad lib form" do
+      visit design_examples_path
       expect(page).to have_button("Send")
       expect(page).to have_field("inquiry[first_name]")
       # and so on...
     end
-    
+    it "should redirect legacy URL" do
+      visit '/ideas/floorplans'
+      expect(page).to have_title("Design Examples")
+    end
   end
 
   pending "list of design examples in design examples page"

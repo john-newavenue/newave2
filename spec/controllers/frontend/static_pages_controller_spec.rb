@@ -30,4 +30,6 @@ describe Frontend::StaticPagesController do
     end
   end
 
+
+
 end

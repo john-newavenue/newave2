@@ -18,12 +18,6 @@ Newave2::Application.routes.draw do
   scope :module => 'frontend' do
 
     #
-    # old routes, redirects
-    #
-
-    match '/model' => redirect('/'), :via => 'get'
-
-    #
     # Static
     #
 
@@ -36,37 +30,37 @@ Newave2::Application.routes.draw do
     match '/investors' => 'static_pages#investors', :as => 'investors', :via => 'get'
     match '/jobs' => 'static_pages#jobs', :as => 'jobs', :via => 'get'
     match '/press' => 'static_pages#press', :as => 'press', :via => 'get'
+    # legacy
+    match '/about/how-it-works' => redirect('/how'), :via => 'get'
+    match '/about/terms' => redirect('/terms'), :via => 'get'
+    match '/about/privacy' => redirect('/privacy'), :via => 'get'
+    match '/company/team' => redirect('/team'), :via => 'get'
 
     #
-    # Inquiry
+    # Inquiries
     #
 
     match '/contact' => "inquiries#new", :as => "new_inquiry", :via => 'get' # is also the contact info page
     match '/contact' => "inquiries#new", :as => "contact", :via => 'get' # is also the contact info page
     match '/contact/success' => "inquiries#success", :as => "inquiry_success", :via => 'get'
-
     match '/contact/a' => "inquiries#mad_lib_submit", :as => "inquiry_mad_lib_submit", :via => 'post'
     match '/contact/a/success' => "inquiries#mad_lib_success", :as => "inquiry_mad_lib_success", :via => 'get'
-    
     resources :inquiries, :path => "/contact", :only => [:create], :as => 'inquiry'
 
     #
-    # Static > Brochure
+    # Client Stories and Design Ideas
     #
 
     match '/designs' => 'static_pages#brochure_floorplans', :as => 'design_examples', :via => 'get'
     match '/designs/:slug' => 'static_pages#brochure_floorplan', :as => 'design_example', :via => 'get'
     match '/clients' => 'static_pages#brochure_clients', :as => 'client_stories', :via => 'get'
     match '/clients/:slug' => 'static_pages#brochure_client', :as => 'client_story', :via => 'get'
-    match '/our-clients' => 'static_pages#brochure_clients', :via => 'get'
-
-
-    # old paths, redirect
-    match '/about/how-it-works' => redirect('/how'), :via => 'get'
-    match '/about/terms' => redirect('/terms'), :via => 'get'
-    match '/about/privacy' => redirect('/privacy'), :via => 'get'
-    match '/company/team' => redirect('/team'), :via => 'get'
-
+    # legacy
+    get '/model', to: redirect('/designs')
+    get '/ideas/floorplans', to: redirect('/designs')
+    get '/ideas/floorplans/:slug', to: redirect('/designs/%{slug}')
+    get '/our-clients',  to: redirect('/clients')
+    get '/our-clients/:slug', to: redirect('/clients/%{slug}')
 
     #
     # Site Admin
@@ -98,7 +92,6 @@ Newave2::Application.routes.draw do
     scope :module => 'vendors' do
       resources :vendors, :path => "/v/" do
         resources :staff
-        
       end
       match '/architects' => 'vendors#index', :as => 'architects', :via => 'get', :vendor_type => 'Architect'
       match '/pro/:slug' => 'vendors#show', :as => 'vendor_profile', :via => 'get'
