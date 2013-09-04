@@ -1,0 +1,37 @@
+<%
+# VARIABLES
+# => item
+# => size: :small_square, :medium_square, :large, :original
+# => klass
+# => standalone_link (if false, triggers show theater)
+# => disable_link (if true, show only the image)
+
+# EXAMPLE USAGE
+# render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => @item, :size => :small_square, :klass => "item-thumb", :standalone_link => true, :disable_link => false}
+
+disable_link = false if not defined? disable_link
+klass = '' if not defined? klass
+
+%>
+
+<% if disable_link != true %>
+
+  <% if standalone_link %>
+
+    <%= link_to item2_path(:id => item.id, :slug => item.slug), :title=> item.title do %>
+      <%= image_tag item.attachment(size), :class => klass %>
+    <% end %>
+
+  <% else %>
+
+    <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
+      <%= image_tag item.attachment(size), :class => klass %>
+    <% end %>
+
+  <% end %>
+
+<% else %>
+  
+  <%= image_tag item.attachment(size), :class => klass %>
+
+<% end %>

@@ -39,11 +39,11 @@
             <%-# if screen large enough, show modal. otherwise, show standalone page -%>
 
             <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
-              <%= image_tag item.asset.image(:medium_square) if item.asset %>
+              <%= image_tag item.attachment(:medium_square) if item.attachment_type == "image" %>
             <% end %>
 
             <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :html), :title=> item.title, :class => "show-for-small" do %>
-              <%= image_tag item.asset.image(:medium_square) if item.asset %>
+              <%= image_tag item.attachment(:medium_square) if item.attachment_type == "image" %>
             <% end %>
 
           <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130830175222) do
+ActiveRecord::Schema.define(version: 20130831001614) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -32,9 +32,15 @@ ActiveRecord::Schema.define(version: 20130830175222) do
     t.datetime "deleted_at"
     t.integer  "asset_id"
     t.string   "asset_type"
-    t.integer  "position",    default: 9999, null: false
+    t.integer  "position",                default: 9999, null: false
     t.integer  "parent_id"
     t.integer  "root_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.string   "attachment_type"
+    t.integer  "legacy_asset_id"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree

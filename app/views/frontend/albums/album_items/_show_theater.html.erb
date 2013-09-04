@@ -2,7 +2,7 @@
 <div class="screen">
   <div class="screen-content-wrapper">
     <div class="screen-content-centerer loading-container">
-    <%= image_tag @item.asset.image(:original), :class => "screen-featured-image", :data => {:caption => @item.asset.image.url} %>
+    <%= image_tag @item.attachment(:original), :class => "screen-featured-image" %>
     </div>
   </div>
 </div>
@@ -72,22 +72,16 @@
 
     <div class="row">
 
-      <!-- more images-->
+      <!-- neighboring images-->
       <div class="large-12 columns">
         <h6>More in this album:</h6>
         <ul class="large-block-grid-4 image-collection">
-          <% @item.album.images.each do |sibling| %>
-          <% if sibling.asset %>
+          <% @item.get_neighboring_images(8).each do |sibling| %>
           <li>
             <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
-            <%= link_to item2_path(:id => sibling.id, :slug => sibling.slug), :remote => true, :class => "display-theater" do %>
-              <%= image_tag sibling.asset.image(:small_square) %>
-            <% end %>
+              <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :standalone_link => false} %>
             </div>
           </li>
-          <% else %>
-          <li><%= sibling.id %></li>
-          <% end %>
           <% end %>
         </ul>
       </div>

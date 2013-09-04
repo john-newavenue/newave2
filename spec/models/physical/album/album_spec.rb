@@ -32,4 +32,11 @@ describe "Album Model" do
     pending "this"
   end
 
+  it "should be able to retrieve images", :slow => true do
+    img1 = FactoryGirl.create(:album_item_with_image_attachment, :album => album)
+    img2 = FactoryGirl.create(:album_item_with_image_attachment, :album => album)
+    img3 = FactoryGirl.create(:album_item_with_image_attachment, :album => album)
+    expect(album.images.map(&:id)).to include(img1.id, img2.id, img3.id)
+  end
+
 end

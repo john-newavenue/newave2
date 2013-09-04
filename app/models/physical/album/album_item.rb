@@ -1,12 +1,15 @@
 module Physical
   module Album
     class AlbumItem < ActiveRecord::Base
+
+
       #
       # callbacks
       #
-      before_save :assign_ancestry
-      before_save :assign_ancestral_asset
 
+      before_save :assign_ancestry
+      before_save :assign_ancestral_attachment
+      before_save :assign_attachment_type
 
       #
       # assocations
@@ -16,10 +19,40 @@ module Physical
       belongs_to :parent, :class_name => "Physical::Album::AlbumItem"
       belongs_to :root, :class_name => "Physical::Album::AlbumItem"
 
+
+      #
+      # Paperclip
+      #
+
+      # resolves migration mismatch of asset ids
+      Paperclip.interpolates :id_or_legacy_id do |attachment, style|
+        attachment.instance.legacy_asset_id ? attachment.instance.legacy_asset_id : id
+      end
+
+      has_attached_file :attachment, 
+        :styles => { 
+          # :small_square => "166x166#",
+          :small_square => "80x80#",
+          :medium_square => "334x334#",
+          # :large_square => "500x500#",
+          # :small => "166x166",
+          # :medium => "334x334",
+          :large => "1440x960"
+        }, 
+        :path => 'assets/:id_or_legacy_id/:style/:filename'
+
+      before_post_process :skip_for_nonimage
+
+      # validates_with AttachmentContentTypeValidator, :attributes => :attachment, :content_type => /^image\/(png|gif|jpeg|jpg|bmp)/
+      # validates_with AttachmentPresenceValidator, :attributes => :attachment
+      # validates_with AttachmentSizeValidator, :attributes => :attachment, :in => (1.kilobytes..(2.5).megabytes)
+      validates_with AttachmentSizeValidator, :attributes => :attachment, :in => (1.kilobytes..(5).megabytes)
+
       #
       # scopes
       #
-      default_scope order('position ASC')
+
+      default_scope order('position ASC, id DESC')
 
       #
       # behaviors
@@ -33,7 +66,7 @@ module Physical
 
       def get_image_position_info
         # check if this is an image
-        if asset.class.to_s == "Physical::Asset::ImageAsset"
+        if attachment_type == "image"
           collection = album.images
           position = collection.index(self) + 1
           total = collection.length
@@ -43,10 +76,49 @@ module Physical
             :next_id => position + 1 > total ? nil : collection[position].id,
             :next_slug => position + 1 > total ? nil : collection[position].slug,
             :previous_id => position - 1 == 0 ? nil : collection[position-2].id,
-            :previous_slug => position - 1 == 0 ? nil : collection[position-2].slug,
+            :previous_slug => position - 1 == 0 ? nil : collection[position-2].slug
           }
         else
-          false
+          nil
+        end
+      end
+
+      def get_neighboring_images(max_neighbors = 4)
+        if attachment_type == "image"
+          collection = album.images
+          position = collection.index(self)
+          total = collection.length
+          # neighbors = [collection][(position-max_neighbors)..(position+max_neighbors)]
+          
+          # do_pop = true
+          # if neighbors.count > max_neighbors + 1
+          #   while 
+          # end
+
+          if max_neighbors + 1 >= total
+            neighbors = collection
+          else
+            look = 1
+            where = 1
+            neighbors = [ collection[position] ]
+            while max_neighbors > neighbors.count
+              puts "Look #{look} - #{position} - #{total}"
+              if where == 1
+                neighbors.push(collection[position + look])
+              else
+                neighbors.unshift(collection[position - look]) if position - look > -1 # negatives index arrays backwards, negate them
+              end
+              neighbors.compact!
+              look = look + 1 if where == -1
+              where = -1*where
+            end
+          end
+
+          puts "Collection retrieved: #{collection.map(&:id)}"
+          puts "Neighbors retrieved: #{neighbors.map(&:id)}"
+
+          neighbors = [] if neighbors == nil
+          neighbors
         end
       end
 
@@ -60,13 +132,40 @@ module Physical
       private
 
         def assign_ancestry
-          self.root = self.parent if self.parent
+          if self.parent
+            if self.parent.root
+              self.root = self.parent.root
+            else
+              self.root = self.parent
+            end
+          end
         end
 
-        def assign_ancestral_asset
-          self.asset = self.root.asset if self.root
+        def assign_ancestral_attachment
+          # copy over root's attachment info
+          if self.root
+            self.attachment_file_name = self.root.attachment_file_name
+            self.attachment_content_type = self.root.attachment_content_type
+            self.attachment_file_size = self.root.attachment_file_size
+            self.attachment_updated_at = self.root.attachment_updated_at
+          end
         end
 
+        def assign_attachment_type
+          case attachment_content_type
+          when /^image\/(png|gif|jpeg|jpg|bmp)/
+            self.attachment_type = "image"
+          when /^text\//
+            self.attachment_type = "text"
+          when /^application\/pdf/
+            self.attachment_type = "pdf"
+          end
+        end
+
+        def skip_for_nonimage
+          # don't let paperclip create thumbnails for non images
+          nil != (/^image\/(png|gif|jpeg|jpg|bmp)/.match attachment_content_type)
+        end
 
 
     end

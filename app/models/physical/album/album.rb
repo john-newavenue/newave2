@@ -16,7 +16,8 @@ module Physical
       belongs_to :parent, :polymorphic => true
       belongs_to :cover_image, :class_name => "Physical::Asset::ImageAsset"
       has_many :items, :class_name => "::Physical::Album::AlbumItem", :source => :asset
-      has_many :images, :class_name => "::Physical::Album::AlbumItem", :source => :asset, :conditions => { :asset_type => "Physical::Asset::ImageAsset" }
+      # has_many :images, :class_name => "::Physical::Album::AlbumItem", :source => :asset, :conditions => { :asset_type => "Physical::Asset::ImageAsset" }
+      has_many :images, :class_name => "::Physical::Album::AlbumItem", :conditions => { :attachment_type => "image" }
       accepts_nested_attributes_for :items
 
       #
