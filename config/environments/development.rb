@@ -19,8 +19,8 @@ Newave2::Application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'newavenuehomes.com',
-    user_name:            ENV['NOREPLY_EMAIL_USERNAME'],
-    password:             ENV['NOREPLY_EMAIL_PASSWORD'],
+    user_name:            ENV['GMAIL_TEST_USERNAME'],
+    password:             ENV['GMAIL_TEST_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true  }
 

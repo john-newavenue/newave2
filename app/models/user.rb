@@ -32,9 +32,13 @@ class User < ActiveRecord::Base
 
   rolify
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable, :omniauthable
+
+  #
+  # callbacks
+  #
+
   after_create :build_associated_models
   acts_as_url :username, :sync_url => true, :url_attribute => :slug
-
 
 
   #

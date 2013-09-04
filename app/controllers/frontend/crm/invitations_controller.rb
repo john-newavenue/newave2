@@ -21,7 +21,6 @@ module Frontend
           flash[:notice] = "Invitation sent."
           redirect_to crm_invitations_path
         else
-          debugger
           flash[:alert] = "There was an error with the invitation."
           render 'new'
         end

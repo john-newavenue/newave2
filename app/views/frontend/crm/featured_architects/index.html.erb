@@ -1,0 +1,26 @@
+<%= provide(:title, "Featured Architects") %>
+
+<h3><%= yield(:title) %></h3>
+
+<p>To feature an architect, send an email invitation with role Vendor. When the vendor accepts it, their featured architect profile can be enabled and configured here.</p>
+
+<table>
+  <thead>
+    <th>Vendor Name</th>
+    <th>Feature As Architect</th>
+    <th>Position</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @profiles.each do |profile| %>
+      <% user = profile.user %>
+      <tr>
+        <td><%= link_to "#{profile.first_name} #{profile.last_name} (#{user.username})", user.slug.blank? ? profile_path(user) : user_profile_path(:username_slug => user.slug) %></td>
+        <td><%= profile.is_featured_architect == true %></td>
+        <td><%= profile.featured_architect_position %></td>
+        <td><%= link_to "Edit", edit_crm_featured_architect_path(profile), :class => "button small" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

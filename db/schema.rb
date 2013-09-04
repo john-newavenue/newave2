@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130831001614) do
+ActiveRecord::Schema.define(version: 20130904024141) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -227,6 +227,8 @@ ActiveRecord::Schema.define(version: 20130831001614) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "is_featured_architect"
+    t.integer  "featured_architect_position", default: 0
   end
 
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree

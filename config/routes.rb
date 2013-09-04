@@ -74,6 +74,7 @@ Newave2::Application.routes.draw do
       resources :albums, :path => '/crm/albums' 
       resources :brochure_floorplans, :path => '/crm/floorplans', :except => [:show]
       resources :brochure_clients, :path => '/crm/clients/', :except => [:show]
+      resources :featured_architects, :path => '/crm/featured-architects/', :except => [:show, :delete, :destroy, :new]
     end
 
     resources :invitations, :as => "crm_invitations", :path => '/crm/invitations', :module => "crm"

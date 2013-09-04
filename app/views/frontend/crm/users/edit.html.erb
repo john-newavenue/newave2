@@ -19,6 +19,7 @@
       <%= profile.input :first_name %>
       <%= profile.input :middle_name %>
       <%= profile.input :last_name %>
+      <%= profile.input :bio %>
       <%= profile.input :avatar, :as => :file, :required => false %>
       <p>
         <%= image_tag user_picture_for(@user, :profile) %>

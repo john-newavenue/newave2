@@ -16,55 +16,13 @@
     <%= f.input :project_role,
       :as => :radio,
       :label => "Role",
+      :hint => "If you are inviting an Architect (a vendor), you can set them to be featured under Content > Architects.",
       :collection => Physical::Project::ProjectRole.all
     %>
-    <div id="vendor-options" style="display: none; margin-top: 1em; margin-bottom: 1em;">
-      <fieldset class="inputs">
-        <legend><span style="font-weight: normal;">Vendor Options</span></legend>
-        <% if @invitation.errors[:is_new_vendor] %>
-        <div class="row">
-          <div class="large-12 columns">
-            <%= render :partial => 'frontend/forms/errors_list', :locals => { :errors => @invitation.errors[:is_new_vendor] } %>
-          </div>
-        </div>
-        <% end %>
-        <div class="row" id="is_new_vendor_input">
-          <div class="large-6 columns">
-            <label for="is_new_vendor_1"><input type="radio" id="is_new_vendor_1" value="1" name="invitation[is_new_vendor]" <%= "checked='checked'" if @invitation.is_new_vendor == "1" %>>New  Vendor</label>
-            <div id="new-vendor-options">
-              <%= render :partial => 'frontend/forms/errors_list', :locals => { :errors => @invitation.errors[:new_vendor_options] } %>
-              <%= f.input :new_vendor_name, :input_html =>{ :disabled => @invitation.is_new_vendor != "1" } %>
-              <%= f.input :new_vendor_type,
-                :as => :select,
-                :label => "Type of vendor",
-                :input_html => { :disabled => @invitation.is_new_vendor !="1"  },
-                :collection => Physical::Vendor::VendorType.all.map { |vt| [vt.name, vt.id] }
-              %>
-            </div>
-          </div>
-          <div class="large-6 columns">
-            <label for="is_new_vendor_0"><input type="radio" id="is_new_vendor_0" value="0" name="invitation[is_new_vendor]" <%= "checked='checked'" if @invitation.is_new_vendor == "0" %>>Existing Vendor</label>
-            <div id="existing-vendor-options">
-              <%= render :partial => 'frontend/forms/errors_list', :locals => { :errors => @invitation.errors[:existing_vendor_options] } %>
-              <%= f.input :vendor,
-                :as => :select,
-                :label => "Select vendor",
-                :input_html => { :disabled => @invitation.is_new_vendor != "0" },
-                :collection => Physical::Vendor::Vendor.all.map { |v| [v.name, v.id] }
-              %>
-            </div>
-          </div>
-        </div>
 
-
-
-
-      </fieldset>
-    </div>
   <% end %>
   <%= f.actions do %>
     <%= f.action :submit, :as => :button, :class => "small success button", :label => "Send" %>
   <% end %>
 <% end %>
 
-<%= javascript_include_tag "crm/invitations" %>

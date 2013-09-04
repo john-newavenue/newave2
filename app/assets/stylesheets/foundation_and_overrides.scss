@@ -107,7 +107,8 @@ $alert-color: lighten(#c60f13, 50%);
 
 // We use these to control header font styles
 // $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-$header-font-family: 'Open Sans', sans-serif;
+// $header-font-family: 'Open Sans', sans-serif;
+$header-font-family: Arial, sans-serif;
 // $header-font-weight: bold;
 $header-font-weight: normal;
 // $header-font-style: normal;
@@ -952,6 +953,7 @@ $side-nav-font-size: emCalc(16px);
 // $table-row-padding: emCalc(9px) emCalc(10px);
 $table-row-padding: emCalc(4px) emCalc(4px);
 // $table-row-font-size: emCalc(14px);
+$table-row-font-size: emCalc(12px);
 // $table-row-font-color: #222;
 // $table-line-height: emCalc(18px);
 
@@ -1210,6 +1212,8 @@ header {
   margin-bottom: $em-base;
   h1, h2, h3, h4, h5, h6 { color: $NA-color-light-grey; }
 }
+
+h1.small { font-size: emCalc(27px); } // same size as h3
 
 
 .vendor-header { 
@@ -1479,7 +1483,7 @@ section.footer {
 form { margin: 0; font-family: Arial, sans-serif; }
 
 .formtastic {
-  ol { margin-bottom: 0; }
+  ol { margin-bottom: 0; font-size: inherit;}
   ol li, > li { list-style: none; display: inline; }
   fieldset.nested ol { margin: 0; }
   li.button_action button { margin-bottom: 0; }
@@ -1492,9 +1496,9 @@ form { margin: 0; font-family: Arial, sans-serif; }
   fieldset { margin: 0; }
 }
 
-p.inline-hints { color: #999; }
+p.inline-hints { color: #999; font-size: inherit;}
 
-legend span, label, input, textarea, select { font-size: 12px;}
+legend span, label, input, textarea, select { font-size: .8em;}
 
 textarea { height: auto; }
 

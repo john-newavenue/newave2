@@ -1,7 +1,7 @@
 <% content_for :content do %>
 
 
-<section>
+<section class="page-content">
 
   <div class="row">
 
@@ -52,26 +52,27 @@
 
       <strong>Overview</strong>
       <ul class="side-nav">
-        <li><%= active_link_to 'Dashboard', crm_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <%= active_link_to 'Dashboard', crm_path, :wrap_tag => :li, :active => :exclusive %>
       </ul>
 
       <strong>Relations</strong>
       <ul class="side-nav">
-        <li><%= active_link_to 'Users', crm_users_path, :wrap_tag => :li, :active => :exclusive %></li>
-        <li><%= active_link_to 'Invitations', crm_invitations_path, :wrap_tag => :li, :active => :exclusive %></li>
-        <li><%= active_link_to 'List Vendors', crm_vendors_path, :wrap_tag => :li, :active => :exclusive %></li>
-        <li><%= active_link_to 'Create Vendor', new_vendor_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <%= active_link_to 'Users', crm_users_path, :wrap_tag => :li, :active => :exclusive %>
+        <%= active_link_to 'Invitations', crm_invitations_path, :wrap_tag => :li, :active => :exclusive %>
+        <%= active_link_to 'List Vendors', crm_vendors_path, :wrap_tag => :li, :active => :exclusive %>
+        <%= active_link_to 'Create Vendor', new_vendor_path, :wrap_tag => :li, :active => :exclusive %>
       </ul>
 
       <strong>Content</strong>
       <ul class="side-nav">
-        <li><%= active_link_to 'Clients', crm_brochure_clients_path, :wrap_tag => :li, :active => :exclusive %></li>
-        <li><%= active_link_to 'Floor Plans', crm_brochure_floorplans_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <%= active_link_to 'Client Stories', crm_brochure_clients_path, :wrap_tag => :li %>
+        <%= active_link_to 'Design Examples', crm_brochure_floorplans_path, :wrap_tag => :li %>
+        <%= active_link_to 'Featured Architects', crm_featured_architects_path, :wrap_tag => :li %>
       </ul>
 
       <strong>Resources</strong>
       <ul class="side-nav">
-        <li><%= active_link_to 'Albums', crm_albums_path, :wrap_tag => :li, :active => :exclusive %></li>
+        <%= active_link_to 'Albums', crm_albums_path, :wrap_tag => :li, :active => :exclusive %>
       </ul>
     </div>
 
