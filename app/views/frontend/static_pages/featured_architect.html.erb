@@ -1,0 +1,49 @@
+<% provide(:title, "#{@profile.first_name} #{@profile.last_name} | Featured Architect" ) %>
+
+<% content_for :sidebar do %>
+
+<div class="tile center-text">
+  <%= image_tag @profile.avatar, :alt => "#{@profile.first_name} #{@profile.last_name}"  %>
+</div>
+
+<br>
+
+<div class="center-text">
+  <%= link_to "Edit Profile", "#", :class => "button secondary small" %>
+</div>
+
+<br>
+
+<ul class="lined-list">
+<li><strong>Featured Architect</strong></li>
+<li>Joined <%= @profile.user.created_at.strftime("%B %d, %Y") %></li>
+</ul>
+
+<% end %>
+
+
+<% content_for :main do %>
+
+<h1 style="margin-bottom: .1em;"><%= "#{@profile.first_name} #{@profile.last_name}" %></h1>
+<h3><%= "#{@profile.user.username}" %></h3>
+
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tel</p>
+
+<hr>
+
+  <div class="row">
+    <div class="large-8 columns"><h2>Featured Work</h2></div>
+    <div class="large-4 columns" style="text-align: right;"><%= link_to "Edit Work", "#", :class => "button light-blue small" %></div>
+  </div>
+
+  <ul class="large-block-grid-3">
+    <% 6.times do %>
+    <li>
+      <div class="tile">
+      <%= image_tag "http://lorempixel.com/400/400/" %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+
+<% end %>

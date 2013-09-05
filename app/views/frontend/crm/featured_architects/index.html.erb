@@ -1,8 +1,8 @@
 <%= provide(:title, "Featured Architects") %>
 
-<h3><%= yield(:title) %></h3>
+<h1><%= yield(:title) %></h1>
 
-<p>To feature an architect, send an email invitation with role Vendor. When the vendor accepts it, their featured architect profile can be enabled and configured here.</p>
+<p>To feature an architect, send an <%= link_to "invitation", new_crm_invitation_path %> with user role set to <b>vendor</b>. When the vendor user accepts the invitation and sets a password for th eaccount, the user will appear here. Click on <b>Edit</b> to enable an Architect Profile for that user.</p>
 
 <table>
   <thead>

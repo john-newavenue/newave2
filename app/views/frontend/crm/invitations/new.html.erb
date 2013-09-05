@@ -1,3 +1,4 @@
+
 <% provide(:title, "Send Invitation") %>
 
 <h3><%= yield(:title) %></h3>
@@ -16,7 +17,7 @@
     <%= f.input :project_role,
       :as => :radio,
       :label => "Role",
-      :hint => "If you are inviting an Architect (a vendor), you can set them to be featured under Content > Architects.",
+      :hint => "If you are inviting an Architect (a vendor), you can set them to be featured under Content &gt; Featured Architects.",
       :collection => Physical::Project::ProjectRole.all
     %>
 

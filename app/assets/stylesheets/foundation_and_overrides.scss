@@ -126,6 +126,15 @@ $header-font-weight: normal;
 // $h5-font-size: emCalc(18px);
 // $h6-font-size: 1em;
 
+// reduced everything by ~25%
+$h1-font-size: emCalc(27px);
+$h2-font-size: emCalc(22px);
+$h3-font-size: emCalc(17px);
+$h4-font-size: emCalc(14px);
+$h5-font-size: emCalc(13px);
+$h6-font-size: 1em;
+
+
 // These control how subheaders are styled.
 // $subheader-line-height: 1.4;
 // $subheader-font-color: lighten($header-font-color, 30%);
@@ -1213,9 +1222,6 @@ header {
   h1, h2, h3, h4, h5, h6 { color: $NA-color-light-grey; }
 }
 
-h1.small { font-size: emCalc(27px); } // same size as h3
-
-
 .vendor-header { 
   margin-bottom: 1.5em !important;
 
@@ -1391,6 +1397,16 @@ section.footer {
   .user-avatar { width: 64px; }
 }
 
+.lined-list {
+  li { 
+    border-top: 1px solid #ddd;
+    list-style: none;
+    padding: .5em 0;
+  }
+  li:last-child { border-bottom: 1px solid #ddd; }
+
+}
+
 // Theater and Items
 
 
@@ -1496,7 +1512,7 @@ form { margin: 0; font-family: Arial, sans-serif; }
   fieldset { margin: 0; }
 }
 
-p.inline-hints { color: #999; font-size: inherit;}
+p.inline-hints { color: #999;}
 
 legend span, label, input, textarea, select { font-size: .8em;}
 
@@ -1666,6 +1682,12 @@ ul.item-tags {
 .project-item-feed {
   hr { border-color: #efefef; }
 }
+
+//
+// Panels
+//
+
+.panel-compact { @include panel(#efefef, .25em)}
 
 //
 // Page-Specific

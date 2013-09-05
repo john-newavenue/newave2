@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Fetaured Architects' do
+describe 'Managing Featured Architects' do
 
   let(:admin_user) { FactoryGirl.create(:admin_user)}
   let!(:vendor_users) { 

@@ -48,13 +48,17 @@ Newave2::Application.routes.draw do
     resources :inquiries, :path => "/contact", :only => [:create], :as => 'inquiry'
 
     #
-    # Client Stories and Design Ideas
+    # Brochure Content
     #
 
     match '/designs' => 'static_pages#brochure_floorplans', :as => 'design_examples', :via => 'get'
     match '/designs/:slug' => 'static_pages#brochure_floorplan', :as => 'design_example', :via => 'get'
     match '/clients' => 'static_pages#brochure_clients', :as => 'client_stories', :via => 'get'
     match '/clients/:slug' => 'static_pages#brochure_client', :as => 'client_story', :via => 'get'
+    match '/architects' => 'static_pages#featured_architects', :as => 'featured_architects', :via => 'get'
+    match '/architects/:slug' => 'static_pages#featured_architect', :as => 'featured_architect', :via => 'get'
+
+
     # legacy
     get '/model', to: redirect('/designs')
     get '/ideas/floorplans', to: redirect('/designs')
@@ -88,14 +92,6 @@ Newave2::Application.routes.draw do
       resources :projects, :path => "/project" do
         resources :project_items, :path => 'item', :as => 'item'
       end
-    end
-
-    scope :module => 'vendors' do
-      resources :vendors, :path => "/v/" do
-        resources :staff
-      end
-      match '/architects' => 'vendors#index', :as => 'architects', :via => 'get', :vendor_type => 'Architect'
-      match '/pro/:slug' => 'vendors#show', :as => 'vendor_profile', :via => 'get'
     end
 
     resources :albums, :controller => "albums/albums", :as => "media", :path => "media"

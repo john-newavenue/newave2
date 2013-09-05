@@ -52,14 +52,26 @@ module Frontend
         @brochure = Physical::General::Brochure.find_by(:slug => params[:slug])
     end
 
+    def featured_architects
+        @featured_architect_profiles = Physical::User::UserProfile.includes(:user).where('is_featured_architect IS TRUE').order('featured_architect_position ASC, id DESC')
+    end
+
+    def featured_architect
+        profiles = Physical::User::UserProfile.includes(:user).where("is_featured_architect IS TRUE AND users.slug='#{params[:slug]}'").references(:user).limit(1)
+        return not_found if profiles.count == 0
+        @profile = profiles.first
+    end
+
     private
 
       def resolve_layout
         case action_name
         when 'home', 'join'
           'application'
-        when 'brochure_floorplans', 'brochure_clients','brochure_floorplan', 'brochure_client'
+        when 'brochure_floorplans', 'brochure_clients','brochure_floorplan', 'brochure_client', 'featured_architects'
           'columns-75-25'
+        when 'featured_architect'
+          'columns-25-75'
         else 
           'about'
         end
