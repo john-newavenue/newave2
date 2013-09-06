@@ -32,7 +32,7 @@ describe "Featured Architects" do
     it "featured architects page should display architects in order" do
       expect(page).to have_content "Featured Architects"
       f = Physical::User::UserProfile.includes(:user).where('is_featured_architect IS TRUE').order('featured_architect_position ASC, id DESC')
-      f.each_with_index { |item, index| 
+      f.each_with_index { |item, index|
         expect(page).to have_selector("ul.featured-architects li:nth-child(#{index+1})", text: item.first_name)
       }
     end

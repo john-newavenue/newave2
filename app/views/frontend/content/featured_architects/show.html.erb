@@ -1,0 +1,55 @@
+<% provide(:title, "#{@profile.first_name} #{@profile.last_name} | Featured Architect" ) %>
+
+<% content_for :sidebar do %>
+
+<div class="tile center-text">
+  <%= image_tag @profile.avatar(:square), :alt => "#{@profile.first_name} #{@profile.last_name}"  %>
+</div>
+
+<br>
+
+<div class="center-text">
+  <% if can?( :update, @profile) %>
+    <%= link_to "Edit Profile", edit_featured_architect_path(@profile), :class => "button secondary small" %>
+  <% end %>
+</div>
+
+<br>
+
+<ul class="lined-list">
+<li><strong>Featured Architect</strong></li>
+<li>Joined <%= @profile.user.created_at.strftime("%B %d, %Y") %></li>
+</ul>
+
+<% end %>
+
+
+<% content_for :main do %>
+
+<h1 style="margin-bottom: .1em;"><%= "#{@profile.first_name} #{@profile.last_name}" %></h1>
+<h3><%= "#{@profile.user.username}" %></h3>
+
+<%= simple_format @profile.bio %>
+
+<hr>
+
+<div class="row">
+  <div class="large-6 columns">
+    <h2>Featured Work</h2>
+  </div>
+  <div class="large-6 columns" style="text-align:right;">
+    <%= link_to "Edit Work", edit_featured_architect_work_path(@profile), :class => "button small lightblue" %>
+  </div>
+</div>
+
+<ul class="large-block-grid-3">
+  <% 6.times do %>
+  <li>
+    <div class="tile">
+    <%= image_tag "http://lorempixel.com/400/400/" %>
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+<% end %>

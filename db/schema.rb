@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130904024141) do
+ActiveRecord::Schema.define(version: 20130905193923) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -229,8 +229,10 @@ ActiveRecord::Schema.define(version: 20130904024141) do
     t.datetime "avatar_updated_at"
     t.boolean  "is_featured_architect"
     t.integer  "featured_architect_position", default: 0
+    t.integer  "featured_work_album_id"
   end
 
+  add_index "user_profiles", ["featured_work_album_id"], name: "index_user_profiles_on_featured_work_album_id", using: :btree
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
@@ -320,5 +322,6 @@ ActiveRecord::Schema.define(version: 20130904024141) do
   add_foreign_key "projects", "albums", :name => "projects_primary_album_id_fk", :column => "primary_album_id"
 
   add_foreign_key "user_profiles", "addresses", :name => "user_profiles_address_id_fk", :dependent => :delete
+  add_foreign_key "user_profiles", "albums", :name => "user_profiles_featured_work_album_id_fk", :column => "featured_work_album_id"
 
 end

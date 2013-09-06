@@ -10,7 +10,7 @@
 <% @featured_architect_profiles.each do |p| %>
   <li>
     <div class="tile center-text">
-      <%= link_to featured_architect_path(:slug => p.user.slug), :title => "#{p.first_name} #{p.last_name}" do %>
+      <%= link_to featured_architect_with_slug_path(:slug => p.user.slug), :title => "#{p.first_name} #{p.last_name}" do %>
         <%= image_tag p.avatar, :alt => "#{p.first_name} #{p.last_name}" %>
       <% end %>
       <h3><%="#{p.first_name} #{p.last_name}"%></h3>

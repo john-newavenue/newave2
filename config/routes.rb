@@ -55,8 +55,6 @@ Newave2::Application.routes.draw do
     match '/designs/:slug' => 'static_pages#brochure_floorplan', :as => 'design_example', :via => 'get'
     match '/clients' => 'static_pages#brochure_clients', :as => 'client_stories', :via => 'get'
     match '/clients/:slug' => 'static_pages#brochure_client', :as => 'client_story', :via => 'get'
-    match '/architects' => 'static_pages#featured_architects', :as => 'featured_architects', :via => 'get'
-    match '/architects/:slug' => 'static_pages#featured_architect', :as => 'featured_architect', :via => 'get'
 
 
     # legacy
@@ -65,6 +63,15 @@ Newave2::Application.routes.draw do
     get '/ideas/floorplans/:slug', to: redirect('/designs/%{slug}')
     get '/our-clients',  to: redirect('/clients')
     get '/our-clients/:slug', to: redirect('/clients/%{slug}')
+
+    scope :module => 'content' do
+      match '/architect/:slug' => 'featured_architects#show', :as => 'featured_architect_with_slug', :via => 'get'
+      resources :featured_architects, :path => '/architects', :as => 'featured_architects' do
+        resource :architect_works, :path => '/featured-work', :as => 'work', :only => [:update, :edit, :index]
+        match '/featured-work/new' => "architect_works#new_images", :as => 'new_images', :via => 'get'
+        match '/featured-work/upload' => "architect_works#upload_images", :as => 'upload_images', :via => 'post'
+      end
+    end
 
     #
     # Site Admin

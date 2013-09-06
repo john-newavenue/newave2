@@ -101,3 +101,4 @@ gem 'will_paginate', '~> 3.0'
 gem 'acts-as-taggable-on'
 gem 'font-awesome-rails'
 gem 'httparty'
+gem "cocoon"

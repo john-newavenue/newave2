@@ -26,7 +26,7 @@ module Physical
 
       # resolves migration mismatch of asset ids
       Paperclip.interpolates :id_or_legacy_id do |attachment, style|
-        attachment.instance.legacy_asset_id ? attachment.instance.legacy_asset_id : id
+        attachment.instance.legacy_asset_id ? attachment.instance.legacy_asset_id : attachment.instance.id
       end
 
       has_attached_file :attachment, 

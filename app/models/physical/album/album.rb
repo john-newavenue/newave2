@@ -19,6 +19,7 @@ module Physical
       # has_many :images, :class_name => "::Physical::Album::AlbumItem", :source => :asset, :conditions => { :asset_type => "Physical::Asset::ImageAsset" }
       has_many :images, :class_name => "::Physical::Album::AlbumItem", :conditions => { :attachment_type => "image" }
       accepts_nested_attributes_for :items
+      accepts_nested_attributes_for :images, allow_destroy: true
 
       #
       # validations

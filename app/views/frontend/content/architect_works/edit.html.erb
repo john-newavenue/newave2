@@ -1,0 +1,55 @@
+<% provide(:title, "Edit Featured Work" ) %>
+
+<% content_for :main do %>
+
+  <h1>Edit Featured Work</h1>
+
+  <%= semantic_form_for @album, :as => 'album', :url => featured_architect_work_path(:id => @profile.id), :html => { 'data-album-id' => @album.id, :id => "edit-album" } do |f| %>
+
+     <%= f.inputs do %>
+
+      <%= link_to "Upload Images", featured_architect_new_images_path(@profile, :redirect_uri => request.path), :class => "button small light-blue" %>
+
+      <hr>
+
+      <ul class="large-block-grid-3 small-block-grid-2">
+        <% 3.times do %>
+        <li>
+          <%= image_tag "http://lorempixel.com/200/200" %>
+        </li>
+        <% end %>
+      </ul>
+
+      <% if false %>
+
+        <%= f.semantic_fields_for :images do |image| %>
+          <%= render :partial => 'frontend/albums/album_items/add_image_fields', :f => image %>
+        <% end %>
+
+        <%= link_to_add_association 'Add', f, :images, :partial => 'frontend/albums/album_items/add_image_fields', :class => 'button small light-blue' %>
+
+      <% end %>
+
+      <hr>
+
+      <%= f.action :submit, :as => :button, :label => 'Update', :class => "success button" %>
+      <%= link_to "Cancel and go back", "#" %>
+
+    <% end %>
+
+  <% end %>
+
+<% if false %>
+
+<script language="JavaScript">
+  $(document).ready(function () {
+    $('#edit-album .add_fields')
+      .data('association-insertion-method', 'before')
+      .data('association-insertion-node', 'this')
+  })
+</script>
+
+<% end %>
+
+<% end %>
+

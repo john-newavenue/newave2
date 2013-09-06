@@ -21,6 +21,15 @@ describe Physical::User::UserProfile do
     end    
   end
 
+  context "vendor users" do
+
+    let!(:vendor_user) { FactoryGirl.create(:vendor_user)}
+
+    it "should automatically create a featured work album for vendors" do
+      expect(vendor_user.profile.featured_work_album.id).to_not be_nil
+    end
+  end
+
 
 
 end

@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   # other
   #
 
-  rolify
+  rolify :after_add => :build_associated_role_models
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :invitable, :omniauthable
 
   #
@@ -71,6 +71,13 @@ class User < ActiveRecord::Base
     def build_associated_models
       self.build_profile
       self.save(:validate => false)
+    end
+
+    def build_associated_role_models(role)
+      if self.has_role? :vendor and profile.featured_work_album == nil
+        profile.build_featured_work_album(:parent => profile, :title => "Featured Work") 
+        profile.save
+      end
     end
 
 end

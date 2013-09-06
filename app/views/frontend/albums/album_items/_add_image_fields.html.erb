@@ -1,0 +1,14 @@
+<div class="row no-lists nested-fields">
+  <div class="large-8 columns">
+    <%= f.input :title %>
+    <%= f.input :description, :input_html => { :rows => 2 } %>
+    <%= link_to_remove_association "Remove", f, :class => "button tiny warning" %>
+  </div>
+  <div class="large-4 columns">
+    <%= f.input :attachment %>
+  </div>
+  <div class="large-12 columns">
+    <hr>
+  </div>
+</div>
+
