@@ -14,21 +14,34 @@ module Frontend
       end
 
       def update
-        # @profile.update_attributes(profile_params)
-        # if @profile.save
-        #   flash[:notice] = "Changes saved."
-        #   redirect_to featured_architect_with_slug_path(:slug => @profile.user.slug)
-        # else
-        #   flash[:alert] = "Something went wrong."
-        #   render 'edit'
-        # end
+        @album.update_attributes(album_params)
+        respond_to do |format|
+          if @album.save
+            # destroy marked objects
+            params['album']['images_attributes'].keys.each do |n|
+              if params['album']['images_attributes']["#{n}"]['mark_for_deletion'].in? ["on",true,1] 
+                s = @album.items.where(:id => params['album']['images_attributes']["#{n}"]['id'])
+                s[0].destroy if s.count == 1
+              end
+            end
+            
+            format.html {
+              flash[:notice] = "Featured work updated."
+              redirect_to featured_architect_with_slug_path(:slug => @album.parent.user.slug) # parent is a user profile
+            }
+          else
+            format.html {
+              flash[:alert] = "Something went wrong."
+              render 'edit'
+            }
+          end
+        end
       end
 
       def new_images
       end
 
       def upload_images
-        puts "hi"
         @image = @album.images.build(:attachment => upload_images_params[0])
         respond_to do |format|
           if @image.save
@@ -76,7 +89,7 @@ module Frontend
         end
 
         def album_params
-          params.require(:album).permit(images: [:id, :title, :description, :position, :_destroy, :attachment])
+          params.require(:album).permit(:title, :description, :cover_image_id, :images_attributes => [:id, :title, :description, :position, :tag_list])
         end
 
         def upload_images_params

@@ -34,12 +34,13 @@ module Physical
           # :small_square => "166x166#",
           :small_square => "80x80#",
           :medium_square => "334x334#",
-          # :large_square => "500x500#",
+          :large_square => "500x500#",
           # :small => "166x166",
           # :medium => "334x334",
           :large => "1440x960"
         }, 
-        :path => 'assets/:id_or_legacy_id/:style/:filename'
+        :path => 'assets/:id_or_legacy_id/:style/:filename',
+        :preserve_files => true
 
       before_post_process :skip_for_nonimage
 

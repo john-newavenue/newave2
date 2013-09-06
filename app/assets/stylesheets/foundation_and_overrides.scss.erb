@@ -1349,12 +1349,21 @@ section.footer {
   padding: .25em;
   overflow: hidden;
 
+  p { font-size: inherit; }
+
   .tile-image-wrapper {
     padding: 1em;
     text-align: center;
     height: 200px;
     vertical-align: middle;
     display: table-cell;
+  }
+
+  &.light { box-shadow: 0 0 1px 1px #efefef;  }
+
+  .large-image-caption {
+    height: 75px;
+    overflow: hidden;
   }
 
 }

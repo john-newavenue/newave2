@@ -42,11 +42,11 @@
   </div>
 </div>
 
-<ul class="large-block-grid-3">
-  <% 6.times do %>
+<ul class="large-block-grid-3 image-collection">
+  <% @profile.featured_work_album.images.each do  |item| %>
   <li>
-    <div class="tile">
-    <%= image_tag "http://lorempixel.com/400/400/" %>
+    <div class="tile <%= item.id == item.id ? "active" : "" %>">
+      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :medium_square, :standalone_link => false} %>
     </div>
   </li>
   <% end %>
