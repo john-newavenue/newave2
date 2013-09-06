@@ -1,0 +1,19 @@
+<%= f.input :title %>
+<%= f.input :slug, :hint =>  "A URL-friendly string. For example, if the Title is \"Green Mod Large\", a good slug is \"green-mod-large\". If the title is \"Karen's Cottage\", a good slug is \"karens-cottage\""  %>
+
+<div class="row">
+    <div class="large-6 columns"><%= f.input :number_of_bed, :as => :number %></div>
+    <div class="large-6 columns"><%= f.input :number_of_bath, :as => :number %></div>
+    <div class="large-6 columns"><%= f.input :area, :as => :number, :hint => "Square Feet" %></div>
+    <div class="large-6 columns"><%= f.input :has_loft, :as => :boolean, :label => "Has loft?" %></div>
+</div>
+
+<%= f.input :short_description, :label => 'Subtitle or Byline', :hint => 'For example, "elegant, modern, and minimal,"', :input_html => { :rows => 3 } %>
+<%= f.input :long_description, :input_html => { :rows => 6 } %>
+<%= f.input :ideal_for, :input_html => { :rows => 3 } %>
+
+<%= f.input :cover_image, :as => :file, :hint => "High resolution image works best." %>
+<%= f.input :attachment, :as => :file, :hint => "For example, a PDF of floor plans and/or budget. Only one file slot available." %>
+<%= f.input :is_published, :as => :boolean, :hint => "This will not show up in the listing unless this is checked." %>
+
+<%= f.input :position, :hint => "Used for ordering in the listing." %>
