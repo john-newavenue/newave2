@@ -75,16 +75,18 @@ Newave2::Application.routes.draw do
 
       match '/small-home-design/:slug' => 'brochure_floorplans#show', :as => 'brochure_floorplan_with_slug', :via => 'get', :constraint => { :slug => /[A-Za-z]+/}
       resources :brochure_floorplans, :path => '/small-home-designs', :as => 'brochure_floorplans' do
-        match '/album/new' => "brochure_floorplans#new_images", :as => 'new_images', :via => 'get'
-        match '/album/upload' => "brochure_floorplans#upload_images", :as => 'upload_images', :via => 'post'
+        resource :brochure_floorplan_album, :path => '/album', :as => 'album', :only => [:update, :edit, :index]
+        match '/album/new' => "brochure_floorplan_albums#new_images", :as => 'new_images', :via => 'get'
+        match '/album/upload' => "brochure_floorplan_albums#upload_images", :as => 'upload_images', :via => 'post'
       end
 
       # Client Stories
 
       match '/small-home-client/:slug' => 'brochure_clients#show', :as => 'brochure_client_with_slug', :via => 'get'
       resources :brochure_clients, :path => '/small-home-clients', :as => 'brochure_clients' do
-        match '/album/new' => "brochure_clients#new_images", :as => 'new_images', :via => 'get'
-        match '/album/upload' => "brochure_clients#upload_images", :as => 'upload_images', :via => 'post'
+        resource :brochure_client_album, :path => '/album', :as => 'album', :only => [:update, :edit, :index]
+        match '/album/new' => "brochure_client_albums#new_images", :as => 'new_images', :via => 'get'
+        match '/album/upload' => "brochure_client_albums#upload_images", :as => 'upload_images', :via => 'post'
       end
 
     end

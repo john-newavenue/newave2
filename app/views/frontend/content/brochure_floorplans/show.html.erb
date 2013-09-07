@@ -6,7 +6,8 @@
 
   <% if current_user.has_role? :admin %>
     <hr>
-      <%= link_to "Edit", edit_brochure_floorplan_path(@brochure), :class => "button small lightblue" %>
+      <%= link_to "Edit Info", edit_brochure_floorplan_path(@brochure), :class => "button small lightblue" %>
+      <%= link_to "Edit Album", edit_album_brochure_floorplan_path(@brochure), :class => "button small lightblue" %>
     <hr>
   <% end %>
 
@@ -23,7 +24,7 @@
 
       <%= simple_format @brochure.long_description %>
 
-      <h3>Ideal for</h3>
+      <h3>Ideal for...</h3>
 
       <%= simple_format @brochure.ideal_for %>
     </div>
