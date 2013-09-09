@@ -7,10 +7,12 @@ describe "Album Item Model", :slow => true do
   let(:album_item_with_text_file) { FactoryGirl.create(:album_item_with_text_attachment )}
 
   it "should respond to properties" do
-    %w(album title description deleted_at position parent root attachment).each do |att| 
+    %w(album title description deleted_at position parent root attachment comment credit_name credit_url).each do |att| 
       expect(album_item).to respond_to(att.to_sym)
     end
   end
+
+  pending "should validate credit_name/credit_URL"
 
   it "should be soft deleted" do
     album_item.destroy
@@ -76,6 +78,12 @@ describe "Album Item Model", :slow => true do
     expect(b1).to eql([img4, img3, img2].map(&:id))
     expect(b2).to eql([img4, img3, img2, img1].map(&:id))
     # puts "hi"
+  end
+
+  it "should create project timeline activity for uploading an image" do
+    project = FactoryGirl.create(:project)
+    album_item = FactoryGirl.create(:album_item_with_image_attachment, :album => project.primary_album)
+    expect(project.items.map(&:id)).to include(album_item.id)
   end
 
   it "should note its ancestry and copy ancestral attachment" do

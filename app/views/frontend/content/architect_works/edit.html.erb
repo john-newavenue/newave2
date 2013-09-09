@@ -36,15 +36,6 @@
           <% end %>
           </ul>
 
-      <% if false %>
-
-        <%= f.semantic_fields_for :images do |image| %>
-          <%= render :partial => 'frontend/albums/album_items/add_image_fields', :f => image %>
-        <% end %>
-
-        <%= link_to_add_association 'Add', f, :images, :partial => 'frontend/albums/album_items/add_image_fields', :class => 'button small light-blue' %>
-
-      <% end %>
 
       <hr>
 
@@ -54,18 +45,6 @@
     <% end %>
 
   <% end %>
-
-<% if false %>
-
-<script language="JavaScript">
-  $(document).ready(function () {
-    $('#edit-album .add_fields')
-      .data('association-insertion-method', 'before')
-      .data('association-insertion-node', 'this')
-  })
-</script>
-
-<% end %>
 
 
 

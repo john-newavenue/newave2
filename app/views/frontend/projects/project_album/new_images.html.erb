@@ -1,0 +1,9 @@
+<% provide(:title, "Upload Photo") %>
+
+<% content_for :main do %>
+
+<h1><%= yield(:title) %></h1>
+
+<%= new_images_upload_form(project_upload_images_path(@album.parent), project_path(@album.parent)) %>
+
+<% end %> 

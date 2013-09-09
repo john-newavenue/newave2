@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906232253) do
+ActiveRecord::Schema.define(version: 20130909223107) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(version: 20130906232253) do
     t.datetime "attachment_updated_at"
     t.string   "attachment_type"
     t.integer  "legacy_asset_id"
+    t.text     "comment"
+    t.string   "credit_name"
+    t.string   "credit_url"
+    t.integer  "user_id"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
@@ -314,6 +318,7 @@ ActiveRecord::Schema.define(version: 20130906232253) do
 
   add_foreign_key "album_items", "album_items", :name => "album_items_parent_id_fk", :column => "parent_id"
   add_foreign_key "album_items", "album_items", :name => "album_items_root_id_fk", :column => "root_id"
+  add_foreign_key "album_items", "users", :name => "album_items_user_id_fk"
 
   add_foreign_key "assets", "album_items", :name => "assets_origin_album_item_id_fk", :column => "origin_album_item_id"
 

@@ -10,15 +10,17 @@ module Physical
       before_save :assign_ancestry
       before_save :assign_ancestral_attachment
       before_save :assign_attachment_type
+      after_create :add_to_project_timeline
 
       #
       # assocations
       #
+
       belongs_to :album, :class_name => "Physical::Album::Album"
       belongs_to :asset, :polymorphic => true
       belongs_to :parent, :class_name => "Physical::Album::AlbumItem"
       belongs_to :root, :class_name => "Physical::Album::AlbumItem"
-
+      belongs_to :user, :class_name => "::User"
 
       #
       # Paperclip
@@ -43,6 +45,12 @@ module Physical
         # :preserve_files => true
 
       before_post_process :skip_for_nonimage
+
+
+      #
+      # validations
+      #
+
 
       # validates_with AttachmentContentTypeValidator, :attributes => :attachment, :content_type => /^image\/(png|gif|jpeg|jpg|bmp)/
       # validates_with AttachmentPresenceValidator, :attributes => :attachment
@@ -166,6 +174,17 @@ module Physical
         def skip_for_nonimage
           # don't let paperclip create thumbnails for non images
           nil != (/^image\/(png|gif|jpeg|jpg|bmp)/.match attachment_content_type)
+        end
+
+        def add_to_project_timeline
+          if album.parent_type == "Physical::Project::Project"
+            project = album.parent
+            project_item = project.items.build(:user => user)
+            project_item.project_item_assets.build(
+              :album_item => self,
+            )
+            project_item.save
+          end
         end
 
 

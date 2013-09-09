@@ -42,7 +42,8 @@ module Frontend
       end
 
       def upload_images
-        @image = @album.images.build(:attachment => upload_images_params[0])
+        debugger
+        @image = @album.images.build(:attachment => upload_images_params[0], :user => current_user)
         respond_to do |format|
           if @image.save
             format.html {
