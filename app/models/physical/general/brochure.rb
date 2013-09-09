@@ -10,7 +10,7 @@ module Physical
       # callbacks
       #
 
-      after_create :build_associations
+      before_create :build_associations
       
       #
       # assocations

@@ -8,7 +8,7 @@
     <%= f.inputs do %>
       <%= render :partial => 'frontend/content/brochure/form_fields', :locals => { :f => f } %>
       <%= f.action :submit, :as => :button, :label => 'Save Changes', :class => "success button" %>
-      <%= link_to "Cancel and go back", brochure_floorplans_path %>
+      <%= link_to "Cancel and go back", brochure_floorplan_with_slug_path(:slug => @brochure.slug) %>
     <% end %>
   <% end %>
 

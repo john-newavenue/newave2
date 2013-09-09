@@ -5,7 +5,7 @@ module Frontend
       private
 
         def set_category
-          @category = "Floor Plan" #alternatively, "Client", "Floor Plan"
+          @category = "Floor Plan"
         end
 
         def get_show_url_with_slug

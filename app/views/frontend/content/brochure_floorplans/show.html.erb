@@ -7,7 +7,7 @@
   <% if current_user.has_role? :admin %>
     <hr>
       <%= link_to "Edit Info", edit_brochure_floorplan_path(@brochure), :class => "button small lightblue" %>
-      <%= link_to "Edit Album", edit_album_brochure_floorplan_path(@brochure), :class => "button small lightblue" %>
+      <%= link_to "Edit Album", edit_brochure_floorplan_album_path(@brochure), :class => "button small lightblue" %>
     <hr>
   <% end %>
 

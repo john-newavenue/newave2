@@ -27,7 +27,7 @@ module Frontend
             
             format.html {
               flash[:notice] = "Album Updated."
-              redirect_to get_update_success_return_path
+              redirect_to get_update_success_return_url
             }
           else
             format.html {
