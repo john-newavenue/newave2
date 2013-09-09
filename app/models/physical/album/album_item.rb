@@ -39,8 +39,8 @@ module Physical
           # :medium => "334x334",
           :large => "1440x960"
         }, 
-        :path => 'assets/:id_or_legacy_id/:style/:filename',
-        :preserve_files => true
+        :path => 'assets/:id_or_legacy_id/:style/:filename'
+        # :preserve_files => true
 
       before_post_process :skip_for_nonimage
 

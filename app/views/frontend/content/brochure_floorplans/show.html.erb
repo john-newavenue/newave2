@@ -1,0 +1,56 @@
+<% provide(:title, "Design Example: #{@brochure.title}") %>
+
+<% content_for :main do %>
+
+  <h1><%= @brochure.title %></h1>
+
+  <% if current_user.has_role? :admin %>
+    <hr>
+      <%= link_to "Edit Info", edit_brochure_floorplan_path(@brochure), :class => "button small lightblue" %>
+      <%= link_to "Edit Album", edit_brochure_floorplan_album_path(@brochure), :class => "button small lightblue" %>
+    <hr>
+  <% end %>
+
+  <div class="row">
+    <div class="large-8 columns">
+      <h2 class="byline"><%= @brochure.short_description %></h2>
+
+      <ul>
+        <li>Area (Square Feet): <%= @brochure.area %></li>
+        <li>Number of Bed: <%= @brochure.number_of_bed %></li>
+        <li>Number of Bath: <%= @brochure.number_of_bath %></li>
+        <li>Has loft?: <%= @brochure.has_loft == true ? 'Yes' : 'No' %></li>
+      </ul>
+
+      <%= simple_format @brochure.long_description %>
+
+      <h3>Ideal for...</h3>
+
+      <%= simple_format @brochure.ideal_for %>
+    </div>
+    <div class="large-4 columns">
+      <% if @brochure.attachment %>
+        <%= link_to "Download PDF", @brochure.attachment(:original), :class => "button light-blue small" %>
+      <% end %>
+      <hr>
+
+      <h3>Share this design!</h3>
+      <ul>
+        <li>Twitter Icon</li>
+        <li>Facebook Icon</li>
+        <li>Pinterest Icon</li>
+      </ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'frontend/inquiries/mad_lib_form' %>
+<% end %>

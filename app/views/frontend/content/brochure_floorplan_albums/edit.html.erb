@@ -1,0 +1,27 @@
+<% provide(:title, "Edit Featured Images" ) %>
+
+<% content_for :main do %>
+
+  <h1>Edit Featured Images</h1>
+
+  <%= semantic_form_for @album, :as => 'album', :url => brochure_floorplan_album_path(:id => @album.parent), :html => { 'data-album-id' => @album.id, :id => "edit-album" } do |f| %>
+
+     <%= f.inputs do %>
+
+      <%= link_to "Upload Images", brochure_floorplan_new_images_path(:id => @album.parent, :redirect_uri => request.path), :class => "button small light-blue" %>
+
+      <hr>
+
+          <%= render :partial => 'frontend/albums/album_items/edit_images_inline_fields', :locals => { :f => f } %>
+
+      <hr>
+
+      <%= f.action :submit, :as => :button, :label => 'Update', :class => "success button" %>
+      <%= link_to "Cancel and go back", brochure_floorplan_with_slug_path(:slug => @album.parent.slug) %>
+
+    <% end %>
+
+  <% end %>
+
+<% end %>
+

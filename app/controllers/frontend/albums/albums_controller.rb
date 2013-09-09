@@ -2,103 +2,102 @@ module Frontend
   module Albums
     class AlbumsController < ApplicationController
 
-      layout 'albums'
-      
-      before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-      before_action :authorize_user, :only => [:new, :create, :edit, :update, :destroy]
-
-      def index
-      end
-
-      def new
-        @album = Physical::Album::Album.new
-      end
-
-      def create
-        @album = Physical::Album::Album.new(album_params)
-        respond_to do |format|
-          if @album.save
-            flash[:notice] = "Album created successfully."
-            format.js
-          else
-            format.js { render :layout => false }
-          end
-        end
-      end
+      layout :resolve_layout
+      before_action :get_album
+      before_action :authorize_user, :only => [:edit, :update, :upload_images]
+      protect_from_forgery :except => [:upload_images]
 
       def show
-        @album = Physical::Album::Album.find_by_id(params[:id])
-        if @album
-          case @album.parent_type
-          when "Physical::Vendor::Vendor"
-            @vendor = @album.parent.decorate
-          end
-        end
-
-        # if @album == nil, show will render an "album not found" message
       end
 
       def edit
-        @album = Physical::Album::Album.find_by_id(params[:id])
-        respond_to do |format|
-          format.js
-        end
-      end
-
-      def upload
-        @album = Physical::Album::Album.find_by_id(params[:id])
-        # page variables dependent on the album owner
-        case @album.parent_type
-        when "Physical::Vendor::Vendor"
-          @vendor = @album.parent.decorate
-        else
-        end
       end
 
       def update
-        # @vendor = get_vendor
-        # @vendor.update_attributes(vendor_params)
-        # if @vendor.save
-        #   flash[:notice] = "Your profile was updated successfully."
-        #   redirect_to vendor_path(:slug => @vendor.slug)
-        # else
-        #   flash[:alert] = "Something went wrong. Please fix any errors."
-        #   render 'edit'
-        # end
-        @album = Physical::Album::Album.find_by_id(params[:id])
         @album.update_attributes(album_params)
         respond_to do |format|
           if @album.save
-            @album.after_update_callback
-            format.js
+            # destroy objects marked for deletion
+            params['album']['images_attributes'].keys.each do |n|
+              if params['album']['images_attributes']["#{n}"]['mark_for_deletion'].in? ["on",true,1] 
+                s = @album.items.where(:id => params['album']['images_attributes']["#{n}"]['id'])
+                s[0].destroy if s.count == 1
+              end
+            end
+            
+            format.html {
+              flash[:notice] = "Album Updated."
+              redirect_to get_update_success_return_url
+            }
           else
+            format.html {
+              flash[:alert] = "Something went wrong."
+              render 'edit'
+            }
           end
         end
       end
 
-      def destroy
-        # debugger
-        @album.destroy
-        flash[:notice] = "Album deleted successfully."
-        if @album.parent.class == Physical::Vendor::Vendor
-          redirect_to vendor_profile_path(:slug => @album.parent.slug)
-        else
-          redirect_to user_profile_path(:username_slug => current_user.slug)
+      def new_images
+      end
+
+      def upload_images
+        @image = @album.images.build(:attachment => upload_images_params[0])
+        respond_to do |format|
+          if @image.save
+            format.html {
+              render :json => compile_return_params(@image).to_json,
+                :content_type => 'text/html',
+                :layout => false
+            }
+            format.json {
+              render :json => {
+                :files => [compile_return_params(@image)],
+                :status => :created,
+                :location => compile_return_params(@image)[:url]
+              }
+            }
+          else
+            format.json { render json: @image.errors, status: :unprocessable_entity }
+          end
         end
+
       end
 
       private
 
+        def compile_return_params(album_item)
+          {
+            'url' => album_item.attachment(:original),
+            'name' =>  album_item.attachment_file_name,
+            'thumbnail_url' => album_item.attachment(:small_square)
+            # 'item_url'
+            # 'item_id'
+          }
+        end
+
         def authorize_user
-          @album = params[:id] ? Physical::Album::Album.find_by_id(params[:id]) : Physical::Album::Album.new
-          case params[:action]
-          when 'create'
-            forbidden unless can? :create, @album
-          end
+          forbidden unless can? :update, @album
+        end
+
+        def get_album
+          raise 'Not implemented. Need to define @album.'
+        end
+
+        def get_update_success_return_url
+          raise 'Not implemented.'
         end
 
         def album_params
-          params.require(:album).permit(:title, :parent_id, :parent_type, :description, :cover_image_id, :items_attributes => [:id, :title, :description, :mark_delete, :position, :tag_list])
+          params.require(:album).permit(:title, :description, :cover_image_id, :images_attributes => [:id, :title, :description, :position, :tag_list])
+        end
+
+        def upload_images_params
+          params.require(:files)
+        end
+
+        def resolve_layout
+          'columns-75-25'
         end
 
     end

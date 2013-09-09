@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130905193923) do
+ActiveRecord::Schema.define(version: 20130906232253) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20130905193923) do
   create_table "brochures", force: true do |t|
     t.string   "title",                                                            null: false
     t.integer  "position",                                         default: 9999
-    t.integer  "category",                                                         null: false
+    t.string   "category",                                                         null: false
     t.text     "short_description"
     t.text     "long_description"
     t.decimal  "area",                     precision: 7, scale: 2
@@ -98,6 +98,12 @@ ActiveRecord::Schema.define(version: 20130905193923) do
     t.integer  "cover_image_file_size"
     t.datetime "cover_image_updated_at"
     t.string   "slug"
+    t.boolean  "is_published",                                     default: true,  null: false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.text     "ideal_for"
   end
 
   add_index "brochures", ["album_id"], name: "index_brochures_on_album_id", using: :btree

@@ -47,15 +47,6 @@ Newave2::Application.routes.draw do
     match '/contact/a/success' => "inquiries#mad_lib_success", :as => "inquiry_mad_lib_success", :via => 'get'
     resources :inquiries, :path => "/contact", :only => [:create], :as => 'inquiry'
 
-    #
-    # Brochure Content
-    #
-
-    match '/designs' => 'static_pages#brochure_floorplans', :as => 'design_examples', :via => 'get'
-    match '/designs/:slug' => 'static_pages#brochure_floorplan', :as => 'design_example', :via => 'get'
-    match '/clients' => 'static_pages#brochure_clients', :as => 'client_stories', :via => 'get'
-    match '/clients/:slug' => 'static_pages#brochure_client', :as => 'client_story', :via => 'get'
-
 
     # legacy
     get '/model', to: redirect('/designs')
@@ -64,13 +55,40 @@ Newave2::Application.routes.draw do
     get '/our-clients',  to: redirect('/clients')
     get '/our-clients/:slug', to: redirect('/clients/%{slug}')
 
+
+    #
+    # Marketing Pages, Mostly Static
+    #
+
     scope :module => 'content' do
+
+      # Architects
+
       match '/architect/:slug' => 'featured_architects#show', :as => 'featured_architect_with_slug', :via => 'get'
       resources :featured_architects, :path => '/architects', :as => 'featured_architects' do
         resource :architect_works, :path => '/featured-work', :as => 'work', :only => [:update, :edit, :index]
         match '/featured-work/new' => "architect_works#new_images", :as => 'new_images', :via => 'get'
         match '/featured-work/upload' => "architect_works#upload_images", :as => 'upload_images', :via => 'post'
       end
+
+      # Design Examples
+
+      match '/small-home-design/:slug' => 'brochure_floorplans#show', :as => 'brochure_floorplan_with_slug', :via => 'get', :constraint => { :slug => /[A-Za-z]+/}
+      resources :brochure_floorplans, :path => '/small-home-designs', :as => 'brochure_floorplans' do
+        resource :brochure_floorplan_album, :path => '/album', :as => 'album', :only => [:update, :edit, :index]
+        match '/album/new' => "brochure_floorplan_albums#new_images", :as => 'new_images', :via => 'get'
+        match '/album/upload' => "brochure_floorplan_albums#upload_images", :as => 'upload_images', :via => 'post'
+      end
+
+      # Client Stories
+
+      match '/small-home-client/:slug' => 'brochure_clients#show', :as => 'brochure_client_with_slug', :via => 'get'
+      resources :brochure_clients, :path => '/small-home-clients', :as => 'brochure_clients' do
+        resource :brochure_client_album, :path => '/album', :as => 'album', :only => [:update, :edit, :index]
+        match '/album/new' => "brochure_client_albums#new_images", :as => 'new_images', :via => 'get'
+        match '/album/upload' => "brochure_client_albums#upload_images", :as => 'upload_images', :via => 'post'
+      end
+
     end
 
     #
