@@ -103,7 +103,13 @@ describe "Album Item Model", :slow => true do
     expect(img3.attachment_file_name).to eql(img1.attachment_file_name)
   end
 
-
+  it "should allow an optional valid category to be assigned" do
+    album_item_no_file.category = FactoryGirl.create(:album_item_category)
+    expect(album_item_no_file.valid?).to be_true
+    album_item_no_file.category_id = -1
+    # the assigned category_id is invalid, so this just evaluates to nil, which is allowed
+    expect(album_item_no_file.valid?).to be_true 
+  end
 
 
 end

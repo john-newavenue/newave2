@@ -21,6 +21,7 @@ module Physical
       belongs_to :parent, :class_name => "Physical::Album::AlbumItem"
       belongs_to :root, :class_name => "Physical::Album::AlbumItem"
       belongs_to :user, :class_name => "::User"
+      belongs_to :category, :class_name => "Physical::Album::AlbumItemCategory"
 
       #
       # Paperclip
@@ -60,6 +61,8 @@ module Physical
       # validates_with AttachmentPresenceValidator, :attributes => :attachment
       # validates_with AttachmentSizeValidator, :attributes => :attachment, :in => (1.kilobytes..(2.5).megabytes)
       validates_with AttachmentSizeValidator, :attributes => :attachment, :in => (1.kilobytes..(5).megabytes)
+
+      validates :category, :inclusion => { :in => Proc.new { Physical::Album::AlbumItemCategory.all }, :allow_nil => true }
 
       #
       # scopes

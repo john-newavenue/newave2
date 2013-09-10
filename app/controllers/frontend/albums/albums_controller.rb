@@ -42,8 +42,9 @@ module Frontend
       end
 
       def upload_images
-        debugger
         @image = @album.images.build(:attachment => upload_images_params[0], :user => current_user)
+        @image.update_attributes(album_item_params)
+        debugger
         respond_to do |format|
           if @image.save
             format.html {
@@ -91,6 +92,10 @@ module Frontend
 
         def album_params
           params.require(:album).permit(:title, :description, :cover_image_id, :images_attributes => [:id, :title, :description, :position, :tag_list])
+        end
+
+        def album_item_params
+          params.require(:album_item).permit(:category_id, :description)
         end
 
         def upload_images_params

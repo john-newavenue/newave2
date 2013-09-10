@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130909223107) do
+ActiveRecord::Schema.define(version: 20130910164607) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20130909223107) do
     t.string "zip_or_postal_code"
     t.string "country"
     t.string "other_details"
+  end
+
+  create_table "album_item_categories", force: true do |t|
+    t.string   "name",                   null: false
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "position",   default: 0
   end
 
   create_table "album_items", force: true do |t|
@@ -45,6 +53,7 @@ ActiveRecord::Schema.define(version: 20130909223107) do
     t.string   "credit_name"
     t.string   "credit_url"
     t.integer  "user_id"
+    t.integer  "category_id"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
@@ -316,6 +325,9 @@ ActiveRecord::Schema.define(version: 20130909223107) do
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["slug"], name: "index_vendors_on_slug", unique: true, using: :btree
 
+  add_foreign_key "album_item_categories", "album_item_categories", :name => "album_item_categories_parent_id_fk", :column => "parent_id"
+
+  add_foreign_key "album_items", "album_item_categories", :name => "album_items_category_id_fk", :column => "category_id"
   add_foreign_key "album_items", "album_items", :name => "album_items_parent_id_fk", :column => "parent_id"
   add_foreign_key "album_items", "album_items", :name => "album_items_root_id_fk", :column => "root_id"
   add_foreign_key "album_items", "users", :name => "album_items_user_id_fk"

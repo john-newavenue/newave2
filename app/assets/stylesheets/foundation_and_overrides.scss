@@ -227,7 +227,6 @@ $list-style-position: inside;
 // We use these to style the labels in different ways
 // $label-pointer: pointer;
 // $label-font-size: emCalc(14px);
-$label-font-size: emCalc(12px);
 // $label-font-weight: 500;
 // $label-font-color: lighten(#000, 30%);
 // $label-bottom-margin: emCalc(3px);
@@ -1087,7 +1086,6 @@ table {
   width: 100%; 
   &.vertical-middle td { vertical-align: middle; } 
   td { vertical-align: top; }
-  p { font-size: .85em; }
 }
 
 .hidden { display: none; }
@@ -1509,7 +1507,13 @@ section.footer {
 // Forms
 //
 
-form { margin: 0; font-family: Arial, sans-serif; }
+form { 
+  margin: 0; 
+  font-family: Arial, sans-serif; 
+
+  p { font-size: 1em; }
+  label { font-size: 1em; }
+}
 
 .formtastic {
   ol { margin-bottom: 0; font-size: inherit;}
@@ -1527,9 +1531,7 @@ form { margin: 0; font-family: Arial, sans-serif; }
 
 p.inline-hints { color: #999;}
 
-legend span, label, input, textarea, select { font-size: .8em;}
-
-textarea { height: auto; }
+textarea { height: auto; font-size: 1em; }
 
 i[class*="foundicon"] {
   vertical-align: middle;
@@ -1543,7 +1545,6 @@ i[class*="foundicon"] {
 fieldset fieldset { 
   margin: 0;
 
-  .label { font-size: .9em !important }
 
   input[type="radio"] { margin: .5em; }
 
@@ -1742,3 +1743,10 @@ ul.item-tags {
   }
 }
 
+// 
+// File Upload
+//
+
+.template-upload {
+  .progress-note { color: $NA-color-light-green; }
+}

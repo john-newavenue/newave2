@@ -21,4 +21,8 @@ FactoryGirl.define do
 
   end
 
+  factory :album_item_category, :class => Physical::Album::AlbumItemCategory do |f|
+    f.name { Faker::Lorem.word }
+  end
+
 end

@@ -94,8 +94,20 @@
         <span class="preview"></span>
     </td>
     <td>
-        <p class="name">{%=file.name%}</p>
+        <p class="name">File: {%=file.name%}</p>
         <p class="progress-note"></p>
+
+        <label for="category">Select a category:
+            <select name="album_item[category_id]">
+                <%= Physical::Album::AlbumItemCategory.all.each do |c| %>
+                    <%= raw "<option value='#{c.id}'>#{c.name}</option>" %>
+                <% end %>
+            </select>
+        </label>
+
+        <label for="description"><span class="hidden">Description</span>
+        <textarea name="album_item[description]" placeholder="Say something about this. Add a description, title, or comment." rows="3" required></textarea>
+        </label>
 
         {% if (file.error) { %}
             <div><span class="label label-important">Error</span> {%=file.error%}</div>
@@ -133,16 +145,20 @@
         </span>
     </td>
     <td>
-        <p class="name">
+
+        <p class="name hidden">
             <h6><a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a></h6>
         </p>
         {% if (file.error) { %}
             <div><span class="label label-important">Error</span> {%=file.error%}</div>
+        {% } else { %}
+            <p>Upload complete.</p>
         {% } %}
     </td>
     <td>
         <span class="size">{%=o.formatFileSize(file.size)%}</span>
     </td>
+    <td></td>
 </tr>
 {% } %}
 </script>
@@ -179,7 +195,7 @@ $('#fileupload').fileupload({
                 );
             if (progress == 100) {
               data.context.find('.progress-note')
-                .html("<i class='icon-loading-green-circle'></i> Validating and processing thumbnails...")
+                .html("<img src='/assets/icons/loading-green-circle.gif' /> Validating and processing thumbnails...")
             }
         }
     }
