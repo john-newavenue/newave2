@@ -63,12 +63,12 @@ module Physical
 
               if number_of_assets == 1
                 self.has_assets = true
-                # if the album item came from a different project, it was clipped
+                # if the album item came from a different album, it was clipped
                 # check what kind of asset is involved and assign the category
                 image_regex = /^image\/(png|gif|jpeg|jpg|bmp)/
                 attachment_content_type = project_item_asset.album_item.attachment_content_type
-
-                if project_item_asset.album_item.parent and project_item_asset.album_item.parent.album != project.primary_album
+                # if project_item_asset.album_item.parent and (project_item_asset.album_item.parent.album != project.primary_album and project_item_asset.album_item.root_id)
+                if project_item_asset.album_item.parent_id
                   if image_regex.match attachment_content_type
                     self.category = "clipped_picture"
                   end

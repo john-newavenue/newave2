@@ -7,6 +7,26 @@ module Frontend
 
       layout 'one-column'
 
+      def new
+        @parent = Physical::Album::AlbumItem.find_by(:id => params[:album_item_id].to_i )
+        @album_item = Physical::Album::AlbumItem.new(
+          :parent => @parent,
+          :root => @parent.root ? @parent.root : @parent
+        )
+
+        @modal = 'frontend/albums/album_items/save_image_modal'
+        if current_user.has_role?(:customer)
+          @modal = 'frontend/projects/projects/prompt_create_first_project' if current_user.projects.count < 1
+        elsif current_user.has_role?(:vendor)
+          @modal = 'frontend/projects/projects/prompt_no_assigned_project' if current_user.projects.count < 1
+        end
+
+        respond_to do |format|
+          format.js { render :partial => 'frontend/prompt_modal.js.coffee', :layout => false, :locals => { :modal => @modal } }
+        end
+
+      end
+
       def show
         respond_to do |format|
           format.js { render :layout => false }

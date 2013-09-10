@@ -28,7 +28,11 @@ module Physical
 
       # resolves migration mismatch of asset ids
       Paperclip.interpolates :id_or_legacy_id do |attachment, style|
-        attachment.instance.legacy_asset_id ? attachment.instance.legacy_asset_id : attachment.instance.id
+        if attachment.instance.root_id
+          attachment.instance.legacy_asset_id ? attachment.instance.legacy_asset_id : attachment.instance.root_id
+        else
+          attachment.instance.legacy_asset_id ? attachment.instance.legacy_asset_id : attachment.instance.id
+        end
       end
 
       has_attached_file :attachment, 
@@ -181,7 +185,7 @@ module Physical
             project = album.parent
             project_item = project.items.build(:user => user)
             project_item.project_item_assets.build(
-              :album_item => self,
+              :album_item => self
             )
             project_item.save
           end

@@ -116,6 +116,8 @@ Newave2::Application.routes.draw do
     scope :module => 'projects' do
       resources :projects, :path => "/project" do
         resources :project_items, :path => 'item', :as => 'item'
+        match '/photos/new_clip' => "project_album#new_clip_image", :as => 'new_clip_image', :via => 'get'
+        match '/photos/save_clip' => "project_album#save_clip_image", :as => 'save_clip_image', :via => 'post'
         match '/photos/new' => "project_album#new_images", :as => 'new_images', :via => 'get'
         match '/photos/upload' => "project_album#upload_images", :as => 'upload_images', :via => 'post'
       end

@@ -28,7 +28,7 @@
             <p>
               <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
               <% if project_item.category == "clipped_picture" %>
-                clipped a picture from <%= link_to item.root.album.parent.title, medium_path(:id => item.root.album.parent.id) %>.
+                clipped a picture from <%= link_to item.parent.album.parent.title, medium_path(:id => item.parent.album.parent.id) %>.
               <% else %>
                 uploaded a picture.
               <% end %>
@@ -49,7 +49,7 @@
           <% end %>
 
           <p>
-            Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
+            <%= time_ago_in_words project_item.created_at %> ago
           </p>
 
         <% when "milestone" %>

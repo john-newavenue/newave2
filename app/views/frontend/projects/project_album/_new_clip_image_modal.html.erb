@@ -1,0 +1,38 @@
+<%= semantic_form_for @album_item, :as => 'album_item', :url => project_save_clip_image_path(:project_id => -1), :remote => true do |f| %>
+  <h4>Save to my project</h4>
+
+  <% if @album_item %>
+    <div class="panel" style="text-align:center;">
+      <%= image_tag @album_item.parent.attachment(:medium_square), :style => 'max-height: 150px;' %>
+      <h6><%= @album_item.title %></h6>
+      
+      <% if @album_item.parent.album.parent.class == "Physical::Project::Project" %>
+      <p>From: <%= @album_item.parent.album.parent.title %></p>
+      <% end %>
+
+    </div>
+
+    <div class="hidden">
+      <%= f.input :parent_id, :as => :number, :input_html => { :value => @album_item.parent.id } %> 
+    </div>
+
+  <% end %>
+
+  <%
+    projects = current_user.projects
+    project_options = projects.map { |p| [p.title, p.primary_album_id] }
+    project_selected = projects.first.primary_album_id
+  %>
+  <%= f.input :album_id,
+    :label => false,
+    :as => :select,
+    :collection => options_for_select( project_options, project_selected)
+    # :collection => options_for_select( current_user.projects.map(&:title), 'asdfsdf')
+  %>
+  <%= f.input :comment, 
+    :label => false,
+    :placeholder => 'Add a comment! What do you like about this?',
+    :input_html => { :rows => 2, :class => 'large-font' }
+  %>
+  <button class="radius button display-prompt-modal" type="submit" style="width: 100%; ">Post</button>
+<% end %>
