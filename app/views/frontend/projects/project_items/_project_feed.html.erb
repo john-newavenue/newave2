@@ -1,4 +1,40 @@
-<% project_items.each do |project_item| %>
-    <%= render :partial => 'frontend/projects/project_items/project_feed_item', :locals => { :project_item => project_item } %>
-<% end %>
+<div class="project-feed infinite-container" <% if defined?(project) and project != nil %>data-project-id="<%= project.id %>"<% end %> >
+  <% project_items.each do |project_item| %>
+      <%= render :partial => 'frontend/projects/project_items/project_feed_item', :locals => { :project_item => project_item } %>
+  <% end %>
+</div>
 
+<div class="infinite-load-container hidden">
+  Loading...
+</div>
+
+<div class="project-feed-nav">
+  <% if project_items.total_pages > project_items.current_page.to_i %>
+    <%= link_to "More", 
+      (defined?(next_page_url) ? next_page_url : project_path(:id => project.id, :page => project_items.current_page.to_i + 1, :layout => false) ),
+      :class => "infinite-more-link next hidden"
+    %>
+  <% end %>
+</div>
+
+<% if infinite %>
+
+<script language="JavaScript">
+$(document).ready( function () {
+  $('.infinite-container').waypoint('infinite', {
+    container: '.infinite-container',
+    items: '.infinite-item',
+    more: '.infinite-more-link',
+    offset: 'bottom-in-view',
+    loadingClass: 'infinite-loading',
+    onBeforePageLoad: function () { 
+      $('.infinite-load-container').fadeIn()
+    },
+    onAfterPageLoad: function () {
+      $('.infinite-load-container').fadeOut()
+    }
+  });
+})
+</script>
+
+<% end %>

@@ -29,6 +29,9 @@
               <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
               <% if project_item.category == "clipped_picture" %>
                 clipped a picture from <%= link_to item.parent.album.parent.title, medium_path(:id => item.parent.album.parent.id) %><% if item.description.blank? %>.<% end %>
+                
+
+
               <% else %>
                 uploaded a picture<% if item.description.blank? %>.<% end %>
               <% end %>

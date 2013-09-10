@@ -7,6 +7,10 @@ module Frontend
 
       layout 'one-column'
 
+      def index_ideas
+        
+      end
+
       def new
         @parent = Physical::Album::AlbumItem.find_by(:id => params[:album_item_id].to_i )
         @album_item = Physical::Album::AlbumItem.new(

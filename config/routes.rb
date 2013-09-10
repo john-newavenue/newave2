@@ -114,6 +114,9 @@ Newave2::Application.routes.draw do
     end
 
     scope :module => 'projects' do
+      
+      match "/news" => "project_items#index_public_feed", :as => "news", :via => 'get'
+
       resources :projects, :path => "/project" do
         resources :project_items, :path => 'item', :as => 'item'
         match '/photos/new_clip' => "project_album#new_clip_image", :as => 'new_clip_image', :via => 'get'
@@ -126,6 +129,8 @@ Newave2::Application.routes.draw do
     resources :albums, :controller => "albums/albums", :as => "media", :path => "media"
     resources :albums, :controller => "albums/albums", :as => "medium", :path => "media"
     match '/media/:id/upload' => "albums/albums#upload", :as => "media_upload", :via => 'get'
+
+    match "/ideas" => "albums/album_items#index_ideas", :as => "ideas", :via => 'get'
 
     resources :album_items, :controller => "albums/album_items", :as => "item", :path => "item"
     match '/item/:id(/:slug)' => "albums/album_items#show", :as => "item2", :via => 'get'

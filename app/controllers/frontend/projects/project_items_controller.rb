@@ -4,10 +4,15 @@ module Frontend
 
       clipped_album_item_id = nil
 
-      layout 'application'
+      layout :resolve_layout
 
-      before_action :authenticate_user!, :only => [:new, :create, :destroy, :edit, :update]
-      before_action :authorize_user, :except => [:new, :create]
+      before_action :authenticate_user!, :only => [:new, :create, :destroy, :edit, :update, :index_public_feed]
+      before_action :authorize_user, :except => [:new, :create, :index_public_feed]
+
+      def index_public_feed
+        page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
+        @project_items = Physical::Project::ProjectItem.joins(:project).where('projects.private IS FALSE').order('created_at DESC').page(page)
+      end
 
       def index
         @project = Physical::Project::Project.find_by(:id => params[:project_id])
@@ -99,6 +104,15 @@ module Frontend
           end
           
           r
+        end
+
+        def resolve_layout
+          case action_name
+          when 'index_public_feed'
+            'columns-25-75'
+          else
+            'application'
+          end
         end
 
     end

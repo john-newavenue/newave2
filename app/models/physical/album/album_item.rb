@@ -118,7 +118,6 @@ module Physical
             where = 1
             neighbors = [ collection[position] ]
             while max_neighbors > neighbors.count
-              puts "Look #{look} - #{position} - #{total}"
               if where == 1
                 neighbors.push(collection[position + look])
               else
@@ -130,8 +129,8 @@ module Physical
             end
           end
 
-          puts "Collection retrieved: #{collection.map(&:id)}"
-          puts "Neighbors retrieved: #{neighbors.map(&:id)}"
+          # puts "Collection retrieved: #{collection.map(&:id)}"
+          # puts "Neighbors retrieved: #{neighbors.map(&:id)}"
 
           neighbors = [] if neighbors == nil
           neighbors
