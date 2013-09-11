@@ -1,0 +1,29 @@
+<% provide(:title, "Design Ideas") %>
+
+<% content_for :main do %>
+
+  <%= 
+    render :partial => 'frontend/albums/album_items/album_items_feed', 
+        :locals => { 
+          :items => @album_items,
+          # :next_page_url => ideas_path(:page => (@album_items.current_page.to_i + 1), :category => (params[:category] ? params[:category] : 'all'), :layout => false),
+          :next_page_url => ideas_path + "?page=#{@album_items.current_page.to_i + 1}&category=#{params[:category] ? params[:category] : 'all'}",
+          :context => "global",
+          :endless => false
+        }
+  %>
+
+<% end %>
+
+<% content_for :sidebar do %>
+  
+  
+  <h3>Filter By Category</h3>
+
+  <ul class="side-nav">
+    <% Physical::Album::AlbumItemCategory.all.each do |c| %>
+      <li><%= link_to c.name, ideas_path(:category => c.name.parameterize) %></li>
+    <% end %>
+  </ul>
+
+<% end %>

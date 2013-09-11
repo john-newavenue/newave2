@@ -3,12 +3,23 @@ module Frontend
     class AlbumItemsController < ApplicationController
       before_filter :authenticate_user! => [:edit, :update, :destroy, :delete]
       before_action :authorize_user, :only => [:edit, :update, :destroy, :delete]
-      before_action :get_item, :except => [:new, :create]
+      before_action :get_item, :except => [:new, :create, :index_ideas]
+      before_action :get_category_id_from_param, :only => [:index_ideas]
 
-      layout 'one-column'
+      layout :resolve_layout
 
       def index_ideas
         
+        category_id = get_category_id_from_param
+
+        q = "albums.parent_type = 'Physical::Project::Project' AND projects.private IS FALSE AND album_items.kind = 'picture'"
+        q = "#{q} AND album_items.category_id = #{category_id}" if category_id
+
+        @album_items = Physical::Album::AlbumItem.joins(:project, :album)
+          .where(q)
+          .order('id DESC')
+          .page(get_page_param)
+
       end
 
       def new
@@ -55,8 +66,27 @@ module Frontend
           @item = ::Physical::Album::AlbumItem.find_by_id(params[:id])
         end
 
+        def get_category_id_from_param
+          if params.has_key?(:category)
+            s = params[:category]
+            Physical::Album::AlbumItemCategory.all.each do |c|
+              return c.id if c.name.parameterize == s
+            end
+          end
+          return nil
+        end
+
         def item_params
           params.require(:item).permit('id')
+        end
+
+        def resolve_layout
+          case action_name
+          when 'index_ideas'
+            'columns-25-75'
+          else
+            'one-column'
+          end
         end
 
 

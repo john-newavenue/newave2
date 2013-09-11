@@ -2,6 +2,7 @@ module Physical
   module Album
     class AlbumItem < ActiveRecord::Base
 
+      # :kind => picture, product, etc.
 
       #
       # callbacks
@@ -22,6 +23,8 @@ module Physical
       belongs_to :root, :class_name => "Physical::Album::AlbumItem"
       belongs_to :user, :class_name => "::User"
       belongs_to :category, :class_name => "Physical::Album::AlbumItemCategory"
+
+      has_one :project, :through => :album, :class_name => "Physical::Project::Project", :source => :parent, :source_type => "Physical::Project::Project"
 
       #
       # Paperclip

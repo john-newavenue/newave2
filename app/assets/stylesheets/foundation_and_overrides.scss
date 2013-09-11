@@ -1212,6 +1212,8 @@ body > section#content, section.margin-top-bottom { margin: 1em 0; }
 // Header
 //
 
+.top-bar-section li a:not(.button) { padding-left: 5px; padding-right: 5px; }
+
 
 header {
   background: $NA-color-light-green;
@@ -1740,6 +1742,16 @@ ul.item-tags {
   .phase-title { 
     font-size: 1.2em; 
     &.show-for-small { color: $NA-color-light-green; }
+  }
+}
+
+//
+// Ideas
+//
+
+.extra-large-tiles {
+  .tile {
+    margin-bottom: 1.25em; 
   }
 }
 

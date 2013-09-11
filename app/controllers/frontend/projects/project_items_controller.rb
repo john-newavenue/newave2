@@ -10,8 +10,7 @@ module Frontend
       before_action :authorize_user, :except => [:new, :create, :index_public_feed]
 
       def index_public_feed
-        page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
-        @project_items = Physical::Project::ProjectItem.joins(:project).where('projects.private IS FALSE').order('created_at DESC').page(page)
+        @project_items = Physical::Project::ProjectItem.joins(:project).where('projects.private IS FALSE').order('created_at DESC').page(get_page_param)
       end
 
       def index

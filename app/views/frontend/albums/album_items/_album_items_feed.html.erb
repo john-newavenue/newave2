@@ -1,0 +1,71 @@
+<div class="ideas-feed infinite-container extra-large-tiles" <% if defined?(album) and album != nil %>data-album-id="<%= album.id %>"<% end %> >
+    <% items.each do |item| %>
+      <div class="tile">
+        <div class="row">
+            <div class="columns large-9">
+              <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false} %>
+            </div>
+            <div class="columns large-3">
+              
+            </div>
+        </div>
+      </div>
+    <% end %>
+</div>
+
+<div class="infinite-load-container hidden">
+  Loading...
+</div>
+
+<div class="project-feed-nav">
+  <% if endless %>
+    <% if items.total_pages > items.current_page.to_i %>
+      <%= link_to "More", 
+        next_page_url,
+        :class => "infinite-more-link next hidden"
+      %>
+    <% end %>
+
+    <script language="JavaScript">
+    $(document).ready( function () {
+      $('.infinite-container').waypoint('infinite', {
+        container: '.infinite-container',
+        items: '.infinite-item',
+        more: '.infinite-more-link',
+        offset: 'bottom-in-view',
+        loadingClass: 'infinite-loading',
+        onBeforePageLoad: function () { 
+          $('.infinite-load-container').fadeIn()
+        },
+        onAfterPageLoad: function () {
+          $('.infinite-load-container').fadeOut()
+        }
+      });
+    })
+    </script>
+
+  <% else %>
+
+    <ul class="pagination">
+      <% if items.previous_page %>
+        <li class="arrow"><%= link_to raw("&laquo;"), ideas_path + "?page=#{items.previous_page.to_i}&category=#{params[:category] ? params[:category] : 'all'}" %></li>
+      <% end %>
+
+      <% if items.total_pages > 1 %>
+        <% (1..(items.total_pages)).each do |p| %>
+          <% if p == items.current_page.to_i %>
+            <li class="current"><%= p.to_i %></li>
+          <% else %>
+            <li><%= link_to p.to_i, ideas_path + "?page=#{p}&category=#{params[:category] ? params[:category] : 'all'}" %></li>
+          <% end %>
+
+        <% end %>
+      <% end %>
+
+      <% if items.next_page %>
+        <li class="arrow"><%= link_to raw("&raquo;"), ideas_path + "?page=#{items.next_page.to_i}&category=#{params[:category] ? params[:category] : 'all'}" %></li>
+      <% end %>
+    </ul>
+
+  <% end %>
+</div>

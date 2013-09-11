@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
+  def get_page_param
+    page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
+  end
+
   def after_sign_in_path_for(resource_or_scope)
     user = resource_or_scope
     if user.has_role? :admin

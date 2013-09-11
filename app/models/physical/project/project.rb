@@ -2,6 +2,8 @@ module Physical
   module Project
     class Project < ActiveRecord::Base
 
+      acts_as_paranoid
+
       #
       # associations
       #

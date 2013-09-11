@@ -30,5 +30,5 @@ admin.add_role :admin
 end
 
 s = Physical::Album::AlbumItemCategory.where(:name => 'Uncategorized').first
-s.position = -1
+s.position = 9999
 s.save
