@@ -44,14 +44,13 @@
 <!-- sidebar -->
 <div class="screen-sidebar">
   <div class="screen-sidebar-content-wrapper pad blank-loader">
-    <p></p>
     <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
     <% item_owner = @item.album.parent %>
-    <h6><%= link_to @item.album.title, media_path(@item.album) %></h6>
+    <h6><%= link_to @item.album.get_title, media_path(@item.album) %></h6>
 
     <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
 
-    <p><% if @item.tag_list %>Tags: <%= @item.tag_list %><% end %></p>
+    <p class="hidden"><% if @item.tag_list %>Tags: <%= @item.tag_list %><% end %></p>
 
     <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
       <table class="vertical-middle">
@@ -70,11 +69,11 @@
       </table>
     <% end %>
 
-    <div class="row">
+    <h6>More:</h6>
 
+    <div class="row">
       <!-- neighboring images-->
       <div class="large-12 columns">
-        <h6>More in this album:</h6>
         <ul class="large-block-grid-4 image-collection">
           <% @item.get_neighboring_images(8).each do |sibling| %>
           <li>
@@ -85,9 +84,7 @@
           <% end %>
         </ul>
       </div>
-
     </div>
-
   </div>
 
 </div>

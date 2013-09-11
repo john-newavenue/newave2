@@ -2,12 +2,15 @@
     <% items.each do |item| %>
       <div class="tile">
         <div class="row">
-            <div class="columns large-9">
+            <div class="columns large-8">
               <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false} %>
             </div>
-            <div class="columns large-3">
-              <p>item id: <%= item.id %></p>
-              <p>item parent id: <%= item.parent_id %></p>
+            <div class="columns large-4">
+              <p><%= item.description.html_safe if item.description %></p>
+              <hr>
+              <%= link_to item.album.get_parent_uri do %>
+                <i class="icon-archive"></i> <%= item.album.get_title %>
+              <% end %>
             </div>
         </div>
       </div>

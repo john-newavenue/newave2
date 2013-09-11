@@ -2,6 +2,9 @@ module Physical
   module Album
     class Album < ActiveRecord::Base
 
+      include Rails.application.routes.url_helpers
+
+
       #
       # behaviors
       #
@@ -36,6 +39,23 @@ module Physical
 
       def after_update_callback
         set_cover_image
+      end
+
+      def get_title
+        # grab more meaningful titles than Project Album or Featured Work
+        if parent_type == "Physical::Project::Project"
+          return parent.title
+        end
+        #TOOD: turn this into a case, account for parent_type = vendor_user
+        title
+      end
+
+      def get_parent_uri
+        if parent_type == "Physical::Project::Project"
+          project_path(parent)
+        else
+          return '/'
+        end
       end
 
       private
