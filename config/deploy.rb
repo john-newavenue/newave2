@@ -3,6 +3,8 @@ require 'bundler/capistrano'
 require 'capistrano-db-tasks'
 require 'capistrano/ext/multistage'
 
+load 'lib/deploy/seed'
+
 set :stages, %w(production staging)
 set :default_stage, "staging"
 
