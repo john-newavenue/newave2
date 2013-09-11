@@ -6,7 +6,8 @@
               <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false} %>
             </div>
             <div class="columns large-3">
-              
+              <p>item id: <%= item.id %></p>
+              <p>item parent id: <%= item.parent_id %></p>
             </div>
         </div>
       </div>

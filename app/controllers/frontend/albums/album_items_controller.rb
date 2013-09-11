@@ -29,6 +29,8 @@ module Frontend
           :root => @parent.root ? @parent.root : @parent
         )
 
+        debugger
+
         @modal = 'frontend/albums/album_items/save_image_modal'
         if current_user.has_role?(:customer)
           @modal = 'frontend/projects/projects/prompt_create_first_project' if current_user.projects.count < 1

@@ -20,16 +20,16 @@
 
   <%
     projects = current_user.projects
-    project_options = projects.map { |p| [p.title, p.primary_album_id] }
-    project_selected = projects.first.primary_album_id
+    album_options = projects.map { |p| [p.title, p.primary_album_id] }
+    album_selected = projects.first.primary_album_id
   %>
   <%= f.input :album_id,
     :label => false,
     :as => :select,
-    :collection => options_for_select( project_options, project_selected)
+    :collection => options_for_select( album_options, album_selected)
     # :collection => options_for_select( current_user.projects.map(&:title), 'asdfsdf')
   %>
-  <%= f.input :comment, 
+  <%= f.input :description, 
     :label => false,
     :placeholder => 'Add a comment! What do you like about this?',
     :input_html => { :rows => 2, :class => 'large-font' }

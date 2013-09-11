@@ -58,7 +58,7 @@ module Frontend
       private
 
         def save_clip_image_params 
-          params.require(:album_item).permit(:parent_id, :album_id, :comment)
+          params.require(:album_item).permit(:parent_id, :album_id, :description)
         end
 
     end
