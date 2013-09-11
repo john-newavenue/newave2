@@ -115,7 +115,7 @@ Newave2::Application.routes.draw do
 
     scope :module => 'projects' do
       
-      match "/news" => "project_items#index_public_feed", :as => "news", :via => 'get'
+      match "/community" => "project_items#index_public_feed", :as => "community", :via => 'get'
 
       resources :projects, :path => "/project" do
         resources :project_items, :path => 'item', :as => 'item'

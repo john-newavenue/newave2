@@ -18,6 +18,7 @@ class Ability
 
     # user's projects
     can :update, Physical::Project::Project, :id => user.projects.map(&:id)
+    can :update, Physical::Album::Album, :id => user.projects.map(&:primary_album_id)
   
 
     # vendors

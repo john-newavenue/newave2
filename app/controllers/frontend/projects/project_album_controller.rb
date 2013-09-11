@@ -55,6 +55,11 @@ module Frontend
         @album = projects.first.primary_album
       end
 
+      def authorize_user
+        @album = get_album if @album == nil
+        forbidden unless can? :update, @album
+      end
+
       private
 
         def save_clip_image_params 

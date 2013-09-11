@@ -117,41 +117,25 @@
 
   <hr>
 
-  <div class="row stage" style="padding-top: 0; padding-bottom: 0; ">
-    <div class="large-12 columns" style="text-align: center;">
-      <h3>Explore New Avenue</h3>
+  <div class="row" style="padding-top: 0; padding-bottom: 0; background: white;">
+    <div class="large-12 columns">
+      <h2 style="padding: 1em 0;">What's Happening</h2>
     </div>
-    <div class="large-3 small-6 columns">
-      <ul class="side-nav">
-        <li><a href="#">Somewhere 1 </a></li>
-        <li><a href="#">Somewhere 2</a></li>
-        <li><a href="#">Somewhere 3</a></li>
-        <li><a href="#">Somewhere 4</a></li>
-      </ul>
+    <div class="large-12 columns">
+      <% @project_items = Physical::Project::ProjectItem.joins(:project).where('projects.private IS FALSE').order('created_at DESC').page(1).limit(10) %>
+      <%= 
+        render :partial => 'frontend/projects/project_items/project_feed', 
+            :locals => { 
+              :project => nil,
+              :project_items => @project_items,
+              :next_page_url => community_path(:page => @project_items.current_page.to_i + 1, :layout => false),
+              :context => "global",
+              :infinite => false
+            }
+      %>
     </div>
-    <div class="large-3 small-6 columns">
-      <ul class="side-nav">
-        <li><a href="#">Somewhere 1 </a></li>
-        <li><a href="#">Somewhere 2</a></li>
-        <li><a href="#">Somewhere 3</a></li>
-        <li><a href="#">Somewhere 4</a></li>
-      </ul>
-    </div>
-    <div class="large-3 small-6 columns">
-      <ul class="side-nav">
-        <li><a href="#">Somewhere 1 </a></li>
-        <li><a href="#">Somewhere 2</a></li>
-        <li><a href="#">Somewhere 3</a></li>
-        <li><a href="#">Somewhere 4</a></li>
-      </ul>
-    </div>
-    <div class="large-3 small-6 columns">
-      <ul class="side-nav">
-        <li><a href="#">Somewhere 1 </a></li>
-        <li><a href="#">Somewhere 2</a></li>
-        <li><a href="#">Somewhere 3</a></li>
-        <li><a href="#">Somewhere 4</a></li>
-      </ul>
+    <div class="large-12 columns">
+      <h3><%= link_to raw("See more &raquo;"), community_path %></h3>
     </div>
   </div>
 

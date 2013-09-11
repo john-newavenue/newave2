@@ -44,7 +44,6 @@ module Frontend
       def upload_images
         @image = @album.images.build(:attachment => upload_images_params[0], :user => current_user)
         @image.update_attributes(album_item_params)
-        debugger
         respond_to do |format|
           if @image.save
             format.html {
