@@ -1,183 +1,180 @@
 <% provide(:title, 'Home') %>
 <% provide(:yield_only, true) %>
 
-<header id="home-splash-container">
-  <section id="home-splash">
-    <div class="row center-text-for-small">
-      <div class="large-9 columns">
-        <h1 class="hide-for-medium-up" style="text-align:center; margin-top: 0;">New Avenue</h1>
-        <div class="house-sketch-wrapper hidden" style="text-align: center; ">
-          <%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/house-sketch.jpg', :style => "max-height: 376px;" %>
-        </div>
-
-        <div id="home-orbiter">
-          <ul class="features" data-orbit>
-            <li>
-              <%= link_to "#", :title => "Karen's Cottage - East Bay, CA" do %><%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-orbiter-b-01.jpg' %><% end %>
-              <div class="orbit-caption">Karen's Cottage - East Bay, CA</div>
-            </li>
-            <li>
-              <%= link_to "#", :title => "Spring's Cottage, Orinda, CA" do %><%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-orbiter-b-02.jpg' %><% end %>
-              <div class="orbit-caption">Spring's Cottage, Orinda, CA</div>
-            </li>
-            <li>
-              <%= link_to "#", :title => "Poppy's Place, Berkeley, CA" do %><%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-orbiter-b-03.jpg' %><% end %>
-              <div class="orbit-caption">Poppy's Place, Berkeley, CA</div>
-            </li>
-            <li>
-              <table style="width: 100%; height: 100%; margin: 0 auto;">
-                <tbody>
-                  <tr>
-                    <td style="text-align: center; vertical-align: middle;">
-                      <h3>Learn about us and start your project!</h3>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </li>
-          </ul>
-        </div>
-
+<div id="home-orbiter">
+  <ul data-orbit>
+    <li style="background: url('http://lorempixel.com/1440/600/cats') no-repeat center;">
+      <div class="orbit-caption">
+        <h3 class="jumbo">Jingle Bells, Jingle Bells</h3>
+        <p class="large">We are the champions, my friends.</p>
       </div>
-      <div class="large-3 columns call-to-action">
-        <h1 class="show-for-medium-up" style="font-size: 2em;">New Avenue</h1>
-        <h4 class="byline" style="font-size: 1em;">Imagine 30 or even 50 years surrounded by the people you love.   A small home, backyard cottage or in-law apartment increases the value of your home while creating freedom, flexibility and independence for you and your family.  </h4>
-        <%= link_to "Get Started", join_path, :class => "large button" %>
+    </li>
+    <li style="background: url('http://lorempixel.com/1440/600/people') no-repeat center;">
+      <div class="orbit-caption">
+        <h3 class="jumbo">Jingle all the way</h3>
+        <p class="large">We'll keep on fighting, 'til the end.</p>
       </div>
-    </div>
-  </section>
-</header>
+    </li>
+    <li style="background: url('http://lorempixel.com/1440/600/city') no-repeat center;">
+      <div class="orbit-caption">
+        <h3 class="jumbo">Oh what fun, it is to ride</h3>
+        <p class="large">We are the champions</p>
+      </div>
+    </li>
+    <li style="background: url('http://lorempixel.com/1440/600/business') no-repeat center;">
+      <div class="orbit-caption">
+        <h3 class="jumbo">In a one horse open sleigh</h3>
+        <p class="large">We are the champions</p>
+      </div>
+    </li>
+    <li style="background: url('http://lorempixel.com/1440/600/sports') no-repeat center;">
+      <div class="orbit-caption">
+        <h3 class="jumbo">Yaba-daba doooo!</h3>
+        <p class="large">Of the world.......</p>
+      </div>
+    </li>
+  </ul>
+</div>
 
+<div class="row stage" style="padding: 1em 0 0 0; margin-top: 2em; margin-bottom: 2em; ">
+  <div class="large-12 columns center-text">
+    <ul class="small-block-grid-3 large-block-grid-6">
+      <li><%= link_to press_path do %>Featured in:<% end %></li>
+    <% [
+      ['bcorp-bwsmall.png', "Source"],
+      ['greenbelt-bwsmall.png', "Source"],
+      ['san_francisco_chronicle-bwsmall.png', "Source"],
+      ['smartplanet-bwsmall.png', "Source"],
+      ['wsjournal-bwsmall.png', "Source"],
+    ].each do |source| %>
+      <li><%= link_to press_path do %><%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/#{source[0]}", :alt => source[1] %><% end %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
 
-<section id="home-features">
+<div class="row">
+  <div class="columns large-6">
+    <h2>Build the life you want to live</h2>
+    <p>Enjoy independence, privacy and financial security while sharing your home with family for 30 years or more.  A small home, backyard cottage or guest house increases the value of your home while creating flexibility and the opportunity to keep  your home in your family for generations.</p>
+  </div>
+  <div class="columns large-6">
+    <h2>Small Homes Build Family</h2>
+    <p>Our clients care deeply about family and being close together, which is why we focus on small home and backyard cottage projects that maximize family living space. Small accessory dwelling units (ADU) can be added to almost any property to ensure your loved ones are spending more time together. And when family isn’t using your beautiful new tiny house, there are plenty of ways to share it with other people to earn money on your investment.</p>
+  </div>
+  <div class="columns large-12"><hr /></div>
+</div>
 
-  <br>
-
-  <div class="row stage" style="padding: 1em 0 0 0;">
-    <div class="large-12 columns center-text">
-      <ul class="small-block-grid-3 large-block-grid-6">
-        <li><%= link_to press_path do %>Featured in:<% end %></li>
-      <% [
-        ['bcorp-bwsmall.png', "Source"],
-        ['greenbelt-bwsmall.png', "Source"],
-        ['san_francisco_chronicle-bwsmall.png', "Source"],
-        ['smartplanet-bwsmall.png', "Source"],
-        ['wsjournal-bwsmall.png', "Source"],
-      ].each do |source| %>
-        <li><%= link_to press_path do %><%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/press/#{source[0]}", :alt => source[1] %><% end %></li>
-      <% end %>
-      </ul>
+<div class="row" id="home-teasers">
+  <div class="columns large-4 small-6">
+    <div class="tile">
+      <%= image_tag "http://lorempixel.com/350/350/abstract"%>
+      <h3>Learn about us</h3>
+      <p>New Avenue is a - the quick brown fox jumps over the lazy dog</p>
     </div>
   </div>
-
-  <hr>
-
-  <div class="row stage">
-    <div class="large-6 columns center-for-small">
-      <h3>Improve your livelihood</h3>
-      <p>New Avenue makes it easy to build an accessory dwelling unit, au-pair suite, backyard cottage, micro unit, in-law suite, or garage remodel - anything that makes a sustainable, smaller home. </p>
-      <%= link_to "Read about our clients", '#', :class => 'button neutral small radius' %>
-    </div>
-    <div class="large-5 large-offset-1 columns center-text">
-      <br class="show-for-small">
-      <%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/marketing/stock-photo-14328435-portrait-of-extended-family-group-in-park.jpg
-' %>
+  <div class="columns large-4 small-6">
+    <div class="tile">
+      <%= image_tag "http://lorempixel.com/350/350/city"%>
+      <h3>Meet a client: Spring and her Cottage</h3>
+      <p>New Avenue is a - the quick brown fox jumps over the lazy dog</p>
     </div>
   </div>
-
-  <hr>
-
-  <div class="row stage">
-
-    <div class="large-6 large-offset-1 push-5 columns center-for-small">
-      <h3>Why New Avenue?</h3>
-      <p>New Avenue is the leading backyard cottage and small home expert. Our structured project management process brings order to a creative and exhilarating process of building a new home. We minimize the risks and hassles of dealing with permits and general contractors. </p>
-      <%= link_to "See what we're about", '#', :class => 'button neutral small radius' %>
-    </div>
-    <div class="large-5 pull-6 columns center-text">
-      <br class="show-for-small">
-      <%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/front-box-why-newave-01.jpg' %>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row stage">
-    <div class="large-6 columns center-for-small">
-      <h3>We make it easy</h3>
-      <p>Adding to your home or building a small home is a walk in the park with New Avenue. Because our process makes building more efficient, both homeowners like you and the best architects and builders work with us.  By recruiting the best partners in each community where we work everybody wins.  </p>
-      <%= link_to "Understand our process", '#', :class => 'button neutral small radius' %>
-    </div>
-    <div class="large-5 large-offset-1 columns center-text">
-      <br class="show-for-small">
-      <%= image_tag 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/front-box-make-it-easy-01.jpg' %>
+  <div class="columns large-4 small-6">
+    <div class="tile">
+      <%= image_tag "http://lorempixel.com/350/350/people"%>
+      <h3>See a design example: The Mansion</h3>
+      <p>New Avenue is a - the quick brown fox jumps over the lazy dog</p>
     </div>
   </div>
-
-  <hr>
-
-  <div class="row" style="padding-top: 0; padding-bottom: 0; background: white;">
-    <div class="large-12 columns">
-      <h2 style="padding: 1em 0;">What's Happening</h2>
-    </div>
-    <div class="large-12 columns">
-      <% @project_items = Physical::Project::ProjectItem.joins(:project).where('projects.private IS FALSE').order('created_at DESC').page(1).limit(10) %>
-      <%= 
-        render :partial => 'frontend/projects/project_items/project_feed', 
-            :locals => { 
-              :project => nil,
-              :project_items => @project_items,
-              :next_page_url => community_path(:page => @project_items.current_page.to_i + 1, :layout => false),
-              :context => "global",
-              :infinite => false
-            }
-      %>
-    </div>
-    <div class="large-12 columns">
-      <h3><%= link_to raw("See more &raquo;"), community_path %></h3>
+  <div class="columns large-4 small-6">
+    <div class="tile">
+      <%= image_tag "http://lorempixel.com/350/350/transportation"%>
+      <h3>Meet a client: Karen and her Cottage</h3>
+      <p>New Avenue is a - the quick brown fox jumps over the lazy dog</p>
     </div>
   </div>
-
-  <hr>
-
-  <div class="row center-text stage">
-
-    <div class="large-4 small-6 columns">
-      <h4>What are you waiting for?</h4>
-      <%= link_to 'Get Started', join_path, :class => 'button' %>
-    </div>
-
-    <div class="large-4 small-6 columns">
-      <h4>Want to learn more?</h4>
-      <ul class="side-nav">
-        <li><%= link_to "Visit the Help Center", "#" %></li>
-      </ul>
-    </div>
-
-    <br class="show-for-small">
-
-    <div class="large-4 small-12 columns">
-      <h4>Recommend New Avenue</h4>
-
-      <!-- facebook --> 
-      <div class="fb-like" data-href="https://www.facebook.com/NewAvenueHomes" data-send="true" data-layout="button_count" data-width="300" data-show-faces="true"></div>
-      <div id="fb-root" style="display: inline-block;"></div>
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=394037200611376";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- twitter -->
-      <a data-url="http://www.newavenuehomes.com" class="twitter-share-button" data-lang="en" data-count="none" data-text="New Avenue makes it easy to build a small home, in-law suite, or cottage!">Tweet</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+  <div class="columns large-4 small-6">
+    <div class="tile">
+      <%= image_tag "http://lorempixel.com/350/350/food"%>
+      <h3>Meet an architect: John Doe</h3>
+      <p>New Avenue is a - the quick brown fox jumps over the lazy dog</p>
     </div>
   </div>
+  <div class="columns large-4 small-6">
+    <div class="tile">
+      <%= image_tag "http://lorempixel.com/350/350/nature"%>
+      <h3>Something else</h3>
+      <p>New Avenue is a - the quick brown fox jumps over the lazy dog</p>
+    </div>
+  </div>
+</div>
 
-  <br>
+<div class="row">
+  <div class="large-12 columns"><hr></div>
 
-</section>
+  <div class="large-8 columns push-4">
+    <h3>What's Happening</h3>
+    <% @project_items = Physical::Project::ProjectItem.joins(:project).where('projects.private IS FALSE').order('created_at DESC').page(1).limit(5) %>
+    <%= 
+      render :partial => 'frontend/projects/project_items/project_feed', 
+          :locals => { 
+            :project => nil,
+            :project_items => @project_items,
+            :next_page_url => community_path(:page => @project_items.current_page.to_i + 1, :layout => false),
+            :context => "global",
+            :infinite => false
+          }
+    %>
+    <hr>
+    <%= link_to raw("See more &raquo;"), community_path %>
+  </div>
+
+  <div class="large-4 columns pull-8">
+    <h3>Browse Design Ideas</h3>
+    <%= render :partial => 'frontend/albums/album_items/index_ideas_categories_nav' %>
+  </div>
+
+</div>
+
+<% if false %>
+
+<hr>
+
+<div class="row center-text stage">
+
+  <div class="large-4 small-6 columns">
+    <h4>What are you waiting for?</h4>
+    <%= link_to 'Get Started', join_path, :class => 'button' %>
+  </div>
+
+  <div class="large-4 small-6 columns">
+    <h4>Want to learn more?</h4>
+    <ul class="side-nav">
+      <li><%= link_to "Visit the Help Center", "#" %></li>
+    </ul>
+  </div>
+
+  <br class="show-for-small">
+
+  <div class="large-4 small-12 columns">
+    <h4>Recommend New Avenue</h4>
+
+    <!-- facebook --> 
+    <div class="fb-like" data-href="https://www.facebook.com/NewAvenueHomes" data-send="true" data-layout="button_count" data-width="300" data-show-faces="true"></div>
+    <div id="fb-root" style="display: inline-block;"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=394037200611376";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- twitter -->
+    <a data-url="http://www.newavenuehomes.com" class="twitter-share-button" data-lang="en" data-count="none" data-text="New Avenue makes it easy to build a small home, in-law suite, or cottage!">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </div>
+</div>
+<% end %>

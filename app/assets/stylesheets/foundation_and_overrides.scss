@@ -1074,6 +1074,8 @@ $topbar-breakpoint: emCalc(900px); // Change to 9999px for always mobile layout
 // Global
 //
 
+p { font-size: 12px; }
+
 [class*="column"] + [class*="column"]:last-child { float: left; }
 
 @mixin NA-shadow {
@@ -1264,16 +1266,29 @@ section#home-splash {
     .push-text { display: inherit !important;}
   }
 
-  #home-orbiter {
-    .orbit-slide-number { display: none; }
-    .orbit-bullets li { border: 0; width: 5px; height: 5px; }
-    .orbit-next, .orbit-prev { background-color: rgba(0,0,0,0.1); }
+}
+
+#home-orbiter {
+  .orbit-slide-number, .orbit-progress, .orbit-bullets, .orbit-timer { display: none; }
+  .orbit-next, .orbit-prev { background-color: rgba(0,0,0,0.1); }
+  .orbit-caption { background-color: rgba(0, 0, 0, 0.1); text-align: center; }
+
+  li { 
+    background-size: cover;
+    height: 400px; 
+
+    h3.jumbo { font-size: 4em; font-family: 'Open Sans', sans-serif; }
+    p.large { font-size: 2em; font-family: 'Open Sans', sans-serif; }
   }
 
 }
 
 section#home-features {
   background: #ddd;
+}
+
+#home-teasers {
+  .tile { margin-bottom: 2em; }
 }
 
 .stage {
@@ -1352,8 +1367,6 @@ section.footer {
   margin: 0;
   padding: .25em;
   overflow: hidden;
-
-  p { font-size: inherit; }
 
   .tile-image-wrapper {
     padding: 1em;

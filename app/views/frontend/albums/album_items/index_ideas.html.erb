@@ -15,15 +15,10 @@
 
 <% end %>
 
-<% content_for :sidebar do %>
-  
+<% content_for :sidebar do %>  
   
   <h3>Filter By Category</h3>
 
-  <ul class="side-nav">
-    <% Physical::Album::AlbumItemCategory.all.each do |c| %>
-      <li><%= link_to c.name, ideas_path(:category => c.name.parameterize) %></li>
-    <% end %>
-  </ul>
+  <%= render :partial => 'frontend/albums/album_items/index_ideas_categories_nav' %>
 
 <% end %>
