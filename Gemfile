@@ -31,7 +31,7 @@ group :test do
 
 end
 
-group :test, :development do
+group :test, :development, :staging do
   gem "rspec-rails", "~> 2.0"
   gem 'pg'
   gem 'debugger'
