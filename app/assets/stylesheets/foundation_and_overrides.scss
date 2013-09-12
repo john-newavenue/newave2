@@ -1288,7 +1288,11 @@ section#home-features {
 }
 
 #home-teasers {
+  h3 { text-transform: uppercase; font-size: 12px; font-weight: bold; }
+
   .tile { margin-bottom: 2em; }
+  .caption-container { padding: .5em; }
+
 }
 
 .stage {
