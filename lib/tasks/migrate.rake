@@ -1,57 +1,301 @@
 namespace :migrate do
+
+  require 'debugger'
+
   class DBConnectionManager
+
     DJANGO_DB = {:adapter=>"postgresql", :host => "localhost", "database" => "newave", :username => "postgres"}
-    RAILS_DB = {:adapter=>"postgresql", :host => "localhost", "database" => "newave2_development", :username => "newave2"}
+    RAILS_DB = {:adapter=>"postgresql", :host => "localhost", "database" => "newave2_production", :username => "newave2"}
+    
+    @which_db = nil
+    @connection = nil
 
     def establish_connection(which)
-      @connection = ActiveRecord::Base.establish_connection(which)
+      puts "DBConnectionManager > Establishing connection to: #{which}"
+      @which_db = which
+      @connection = ActiveRecord::Base.establish_connection(@which_db)
     end
 
-    def query(sql, db = nil)
+    def query(sql, db = @which_db)
+      puts "DBConnectionManager > Executing query: #{sql} "
       unless db == nil
         @connection = ActiveRecord::Base.establish_connection(db)
       end
       @connection.connection.execute(sql)
     end
 
+    def get_django_resource(resource)
+      r = nil
+      establish_connection(DJANGO_DB)
+
+      case resource
+      when 'users'
+        r = query('
+          SELECT 
+            "user"."id" AS "user_id",
+            "user"."username" AS "user_username",
+            "user"."email" AS "user_email",
+            "user"."password" AS "user_password",
+            "user"."date_joined" AS "user_created_at",
+            "socialauth"."id" AS "socialauth_id",
+            "socialauth"."provider" AS "socialauth_provider",
+            "socialauth"."uid" AS "socialauth_uid",
+            "socialauth"."extra_data" AS "socialauth_extra_data"
+          FROM
+            "auth_user" AS "user"
+          LEFT JOIN 
+            "social_auth_usersocialauth" AS "socialauth"
+          ON
+            "user"."id" = "socialauth"."user_id"
+          WHERE
+            "user"."id" > 0
+          ORDER BY
+            "user"."id" ASC
+        ')
+      # when 'socialauths'
+      #   r = query('select * from social_auth_usersocialauth')
+      when 'design_books'
+        r = query('SELECT * FROM estate_project ORDER BY id asc;')
+      when 'estate_items'
+        r = query('
+          SELECT 
+            "item"."id" AS "item_id",
+            "item"."id" AS "item_id",
+            "item"."user_id" AS "item_user_id",
+            "item"."space_id" AS "item_space_id",
+            "item"."project_id" AS "item_project_id",
+            "item"."title" AS "item_title",
+            "item"."private" AS "item_private",
+            "item"."deleted" AS "item_deleted",
+            "item"."cloned" AS "item_cloned",
+            "item"."position" AS "item_position",
+            "item"."date_added" AS "item_date_added",
+            "item"."date_modified" AS "item_date_modified",
+            "item"."item_type" AS "item_item_type",
+            "item"."description" AS "item_description",
+            "item"."comment" AS "item_comment",
+            "item"."parent_id" AS "item_parent_id",
+            "item"."original_image" AS "item_original_image",
+            "item"."attachment" AS "item_attachment",
+            "item"."url" AS "item_url",
+            "item"."credit_url" AS "item_credit_url",
+            "item"."credit_name" AS "item_credit_name",
+            "item"."parent_root_id" AS "item_parent_root_id",
+            "item"."thumbnail_span3_url" AS "item_thumbnail_span3_url",
+            "item"."display_image_url" AS "item_display_image_url",
+            "item"."imagekit_ttl" AS "item_imagekit_ttl",
+            "item"."exhibit_mode" AS "item_exhibit_mode",
+            "item"."cover_image" AS "item_cover_image",
+            "item"."valid_image" AS "item_valid_image",
+            "item"."original_image_width" AS "item_original_image_width",
+            "item"."original_image_height" AS "item_original_image_height",
+            "item"."original_image_url" AS "item_original_image_url",
+            "item"."display_image2_url" AS "item_display_image2_url",
+            "item"."project_position" AS "item_project_position",
+            "item"."space_position" AS "item_space_position",
+            "space"."id" AS "space_id",
+            "space"."user_id" AS "space_user_id",
+            "space"."title" AS "space_title",
+            "space"."description" AS "space_description",
+            "space"."private" AS "space_private",
+            "space"."deleted" AS "space_deleted",
+            "space"."cloned" AS "space_cloned",
+            "space"."parent_id" AS "space_parent_id",
+            "space"."position" AS "space_position",
+            "space"."project_id" AS "space_project_id",
+            "space"."space_type_id" AS "space_space_type_id",
+            "space"."date_added" AS "space_date_added",
+            "space"."date_modified" AS "space_date_modified",
+            "space"."exhibit_mode" AS "space_exhibit_mode"
+          FROM
+            "estate_item" AS "item"
+          LEFT JOIN
+            "estate_space" AS "space"
+          ON
+            "item"."space_id" = "space"."id"
+          ORDER BY
+            "item"."parent_id" DESC,
+            "item"."parent_root_id" DESC;
+          ')
+      end
+      establish_connection(RAILS_DB)
+      r
+    end
+
   end
 
-  desc "Deletes all Rails users and projects"
-  task :purge => :environment do 
-    @db = DBConnectionManager.new
-    @db.establish_connection(DBConnectionManager::RAILS_DB)
-    User.delete_all
-    Authentication.delete_all
-    Physical::Project::Project.delete_all
-    Physical::Album::Album.delete_all
-    Rake::Task['migrate:purge_items'].invoke
+  @dbm = DBConnectionManager.new
+
+  desc "Run all migration procedures"
+  task :run => :environment do
+    puts "MIGRATION > Running everything. Here goes!"
+    Rake::Task['migrate:setup_rails_db'].invoke
+    Rake::Task['migrate:create_users'].invoke
+    Rake::Task['migrate:create_projects'].invoke
   end
 
-  task :purge_items => :environment do
-    @db = DBConnectionManager.new
-    @db.establish_connection(DBConnectionManager::RAILS_DB)
-    Physical::Asset::Asset.delete_all
-    Physical::Asset::ImageAsset.delete_all
-    Physical::Album::AlbumItem.with_deleted.delete_all
+  desc "Set up a clean Rails environment database using the schema"
+  task :setup_rails_db => :environment do 
+    puts "MIGRATION > Setting up Rails database"
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:schema:load'].invoke
   end
 
-
-  desc "Resets database sequences"
-  task :reset_sequences => :environment do
-    @db = DBConnectionManager.new
-    @db.establish_connection(DBConnectionManager::RAILS_DB)
-    ActiveRecord::Base.connection.reset_pk_sequence!('users')
-    ActiveRecord::Base.connection.reset_pk_sequence!('authentications')
-    ActiveRecord::Base.connection.reset_pk_sequence!('projects')
-    ActiveRecord::Base.connection.reset_pk_sequence!('albums')
-    ActiveRecord::Base.connection.reset_pk_sequence!('album_items')
-    ActiveRecord::Base.connection.reset_pk_sequence!('assets')
-    ActiveRecord::Base.connection.reset_pk_sequence!('image_assets')
-  end
+  # desc "Resets database sequences"
+  # task :reset_sequences => :environment do
+  #   @db = DBConnectionManager.new
+  #   @db.establish_connection(DBConnectionManager::RAILS_DB)
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('users')
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('authentications')
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('projects')
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('albums')
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('album_items')
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('assets')
+  #   ActiveRecord::Base.connection.reset_pk_sequence!('image_assets')
+  # end
 
 
   desc "Migrate users and projects from Django to Rails"
-  task :users_and_projects => :environment do
+  task :create_users => :environment do
+    
+    User.delete_all
+    Authentication.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('users')
+    ActiveRecord::Base.connection.reset_pk_sequence!('authentications')
+
+    django_users = @dbm.get_django_resource('users')
+
+    i = 1
+    total = django_users.count
+
+    django_users.each do |u|
+      puts "Processing user #{i} of #{total}"
+      # create Rails user
+      user = User.new(
+        :id => u["user_id"].to_i,
+        :username => u["user_username"].length > 2 ? u["user_username"] : u["user_username"] + "1", # fix imported emails short
+        :email => ( u["user_email"].blank? or not Devise.email_regexp.match(u["user_email"]) ) ? Devise.friendly_token[0,10] + "@email.com" : u["user_email"],
+        :password => u["user_password"].length < 6 ? (0...8).map { (65 + rand(26)).chr }.join : u["user_password"], # fix imported passwords too short
+        :encrypted_password => u["user_password"],
+        :created_at => Time.parse(u["user_created_at"]),
+        :slug => u["user_username"].parameterize
+      )
+      if user.save
+        puts "Successfully saved user #{user.id}"
+      else
+        debugger
+        puts "Error with user #{user.id}"
+      end
+       
+      user.add_role :customer
+      # if needed, create Authentication association
+      unless u["socialauth_uid"] == nil
+        token = /"([A-Za-z0-9]{30,})"/.match(u["socialauth_extra_data"])
+        auth = Authentication.new(
+          :user_id => u["user_id"],
+          :provider => u["socialauth_provider"],
+          :uid => u["socialauth_uid"],
+          :token => token ? token.captures[0] : nil
+        )
+        if auth.save
+          puts "Successfully saved auth #{auth.id}"
+        else
+          debugger
+          puts "Error with auth #{auth.id}"
+        end
+      end
+      i = i + 1
+    end
+  end
+
+  desc "Create Rails projects (albums created with project after_create)"
+  task :create_projects => :environment do
+    Physical::Project::Project.with_deleted.delete_all
+    Physical::Album::Album.with_deleted.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('projects')
+    ActiveRecord::Base.connection.reset_pk_sequence!('albums')
+
+    django_projects = @dbm.get_django_resource('design_books')
+    i = 1
+    total = django_projects.count
+    django_projects.each do |p|
+      puts "Processing project #{i} of #{total}"
+      project = Physical::Project::Project.new(
+        :id => p["id"].to_i,
+        :title => p["title"],
+        :created_at => Time.parse(p["date_added"]),
+        :updated_at => Time.parse(p["date_modified"]),
+        :deleted_at => p["deleted"] == "t" ? Time.now() : nil,
+        :private => p["private"] == "t" ? true : false
+      )
+        if User.where(:id => p["user_id"].to_i).count == 1 and project.save
+          project.add_user_as_customer()
+          puts "Successfully saved project #{project.id} with album #{project.primary_album_id}"
+        else
+          debugger
+          puts "Error with project #{project.id}"
+        end
+      i = i + 1
+    end
+  end
+
+  desc "Create Rails Album Items"
+  task :create_album_items => :environment do
+    Physical::Album::AlbumItem.with_deleted.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('album_items')
+    items = @dbm.get_django_resource('estate_items')
+    i = 1
+    total = items.count
+
+    
+    
+    # items.each do |i|
+    #   puts "Processing estate_item #{i} of #{total}"
+    #   album_item = Physical::Album::AlbumItem.new(
+    #     :title =>
+    #     :description =>
+    #     :album_id => i["project_id"].to_i,
+    #     :created_at => 
+    #     :updated_at => 
+    #     :deleted_at => 
+    #     :position =>
+    #     :parent_id => 
+    #     :root_id =>
+    #     :credit_name => 
+    #     :credit_url =>
+    #     :user_id =>
+    #     :category_id => nil
+    #     :kind => 
+
+    # t.integer  "asset_id"   <=== should drop column
+    # t.string   "asset_type" <=== should drop column
+
+    # t.string   "attachment_file_name"
+    # t.string   "attachment_content_type"
+    # t.integer  "attachment_file_size"
+    # t.datetime "attachment_updated_at"
+    # t.string   "attachment_type"
+    # t.integer  "legacy_asset_id"
+    # t.text     "comment"
+    # t.string   "kind",                    default: "picture", null: false
+
+    #   )
+    #   if album_item.save
+
+    #   else
+    #     debugger
+    #     puts "Error with album_item"
+    #   end
+    #   i = i + 1
+    # end
+
+  end
+
+# ==================
+
+  desc "Migrate users and projects from Django to Rails"
+  task :users_and_projects_old => :environment do
 
     # clean everything up
     Rake::Task['migrate:purge'].invoke
@@ -91,7 +335,7 @@ namespace :migrate do
         :created_at => Time.parse(u["date_joined"]),
         :slug => u["username"].parameterize
       )
-      user.save(:validate => false)
+      user.save
       
       # create social authentication if available
       old_social_relation_index = old_social_user_ids.index(user.id)

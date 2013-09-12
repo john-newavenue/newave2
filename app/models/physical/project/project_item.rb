@@ -85,7 +85,7 @@ module Physical
         
         super
         
-        project.touch
+        project.touch if project
 
       end
 

@@ -1,6 +1,6 @@
 module Frontend
   module Content
-    class ArchitectWorksController < AlbumsController
+    class ArchitectWorksController < Frontend::Albums::AlbumsController
 
       layout :resolve_layout
       before_action :get_album

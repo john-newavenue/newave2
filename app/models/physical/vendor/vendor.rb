@@ -39,7 +39,7 @@ module Physical
       #
 
       default_scope order('name ASC')
-      scope :architects, where(:vendor_type => Physical::Vendor::VendorType.find_by_name('Architect'))
+      scope :architects, Proc.new  { where(:vendor_type => Physical::Vendor::VendorType.find_by_name('Architect')) }
 
 
       #
