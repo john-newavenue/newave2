@@ -34,7 +34,7 @@ end
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'pg'
-  # gem 'debugger'
+  gem 'debugger'
   gem 'faker'
   gem 'factory_girl_rails'
 end
@@ -86,7 +86,7 @@ gem 'figaro'
 gem 'thin' # app server
 
 # To use debugger
-gem 'debugger'
+# gem 'debugger'
 
 # helpers
 gem 'active_link_to' # https://github.com/twg/active_link_to

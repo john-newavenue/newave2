@@ -1,6 +1,6 @@
 namespace :migrate do
 
-  require 'debugger'
+  # require 'debugger'
 
   class DBConnectionManager
 
