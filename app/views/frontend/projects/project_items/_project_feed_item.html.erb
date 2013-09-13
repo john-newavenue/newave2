@@ -1,7 +1,7 @@
 <div class="project-feed-item-wrapper">
   <div class="row project-feed-item infinite-item" data-project-feed-item-id="<%= project_item.id %>">
     <div class="large-1 small-2 columns">
-      <%= link_to user_profile_path(:username_slug => project_item.user.username) do %>
+      <%= link_to user_profile_path(:username_slug => project_item.user.slug) do %>
         <%= image_tag user_icon_for(project_item.user, :small), :class => "user-avatar small" %> 
       <% end %>
     </div>
@@ -24,9 +24,10 @@
 
           <% project_item.project_item_assets.each do |pia| %>
             <% item = pia.album_item %>
+            <% if item %>
 
             <p>
-              <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %></b>
+              <b><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.slug) %></b>
               <% if project_item.category == "clipped_picture" %>
                 <% if item.parent.album.parent %>
                   clipped a picture from <%= link_to item.parent.album.parent.title, project_path(:id => item.parent.album.parent.id) %><% if item.description.blank? %>.<% end %>
@@ -43,14 +44,23 @@
 
             <%-# if screen large enough, show modal. otherwise, show standalone page -%>
 
+            <%= item.get_attachment2(:small_square) %>
+            <%= item.get_attachment2(:medium_square) %>
+            <%= item.get_attachment2(:large_square) %>
+            <%= item.get_attachment2(:small_rectangle) %>
+            <%= item.get_attachment2(:medium_rectangle) %>
+            <%= item.get_attachment2(:tall_large_rectangle) %>
+            <%= item.get_attachment2(:large) %>
+
             <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
-              <%= image_tag item.attachment(:medium_square) if item.attachment_type == "image" %>
+              <%= image_tag item.get_attachment2(:medium_square) if item.attachment_type == "image" %>
             <% end %>
 
             <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :html), :title=> item.title, :class => "show-for-small" do %>
-              <%= image_tag item.attachment(:medium_square) if item.attachment_type == "image" %>
+              <%= image_tag item.get_attachment2(:medium_square) if item.attachment_type == "image" %>
             <% end %>
 
+            <% end %>
           <% end %>
 
           <p>

@@ -41,12 +41,12 @@ module Physical
 
       has_attached_file :attachment, 
         :styles => { 
-          # :small_square => "166x166#",
           :small_square => "80x80#",
           :medium_square => "334x334#",
           :large_square => "500x500#",
-          # :small => "166x166",
-          # :medium => "334x334",
+          :small_rectangle => "260x180#",  # size of legacy_thumbnail_span3 
+          :medium_rectangle => "800x600#", # size of legacy_display_image 
+          :tall_large_rectangle => "1000x2000#", # size of legacy_display_image2 
           :large => "1440x960"
         }, 
         :path => 'assets/:id_or_legacy_id/:style/:filename'
@@ -76,12 +76,28 @@ module Physical
       #
       # behaviors
       #
-      acts_as_paranoid # soft delete
+      # acts_as_paranoid # soft delete
       acts_as_taggable
 
       #
       # public methods
       #
+
+      def get_attachment2(size)
+        if legacy_original_image_url
+          return { 
+            :small_square => legacy_thumbnail_span3_url,
+            :medium_square => legacy_display_image_url,
+            :large_square => legacy_display_image_url,
+            :small_rectangle => legacy_thumbnail_span3_url,  # size of legacy_thumbnail_span3 
+            :medium_rectangle => legacy_display_image_url, # size of legacy_display_image 
+            :tall_large_rectangle => legacy_display_image2_url, # size of legacy_display_image2 
+            :large => legacy_display_image2_url
+          }[size]
+        else
+          return attachment(size)
+        end
+      end
 
       def get_image_position_info
         # check if this is an image

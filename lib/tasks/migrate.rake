@@ -1,6 +1,6 @@
 namespace :migrate do
 
-  # require 'debugger'
+  require 'debugger'
 
   class DBConnectionManager
 
@@ -60,7 +60,6 @@ namespace :migrate do
         r = query('
           SELECT 
             "item"."id" AS "item_id",
-            "item"."id" AS "item_id",
             "item"."user_id" AS "item_user_id",
             "item"."space_id" AS "item_space_id",
             "item"."project_id" AS "item_project_id",
@@ -115,7 +114,8 @@ namespace :migrate do
             "item"."space_id" = "space"."id"
           ORDER BY
             "item"."parent_id" DESC,
-            "item"."parent_root_id" DESC;
+            "item"."parent_root_id" DESC,
+            "item"."id" ASC
           ')
       end
       establish_connection(RAILS_DB)
@@ -129,9 +129,11 @@ namespace :migrate do
   desc "Run all migration procedures"
   task :run => :environment do
     puts "MIGRATION > Running everything. Here goes!"
+    s = Time.now
     Rake::Task['migrate:setup_rails_db'].invoke
     Rake::Task['migrate:create_users'].invoke
     Rake::Task['migrate:create_projects'].invoke
+    puts "MIGRATION > Took #{Time.now - s} seconds"
   end
 
   desc "Set up a clean Rails environment database using the schema"
@@ -140,6 +142,7 @@ namespace :migrate do
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].invoke
     Rake::Task['db:schema:load'].invoke
+    Rake::Task['db:seed'].invoke
   end
 
   # desc "Resets database sequences"
@@ -211,8 +214,8 @@ namespace :migrate do
 
   desc "Create Rails projects (albums created with project after_create)"
   task :create_projects => :environment do
-    Physical::Project::Project.with_deleted.delete_all
-    Physical::Album::Album.with_deleted.delete_all
+    Physical::Project::Project.delete_all
+    Physical::Album::Album.delete_all
     ActiveRecord::Base.connection.reset_pk_sequence!('projects')
     ActiveRecord::Base.connection.reset_pk_sequence!('albums')
 
@@ -229,9 +232,17 @@ namespace :migrate do
         :deleted_at => p["deleted"] == "t" ? Time.now() : nil,
         :private => p["private"] == "t" ? true : false
       )
-        if User.where(:id => p["user_id"].to_i).count == 1 and project.save
-          project.add_user_as_customer()
+        if User.where(:id => p["user_id"].to_i).count == 1 and project.valid? and project.save
+          project.add_user_as_customer(User.find(p["user_id"].to_i))
           puts "Successfully saved project #{project.id} with album #{project.primary_album_id}"
+          # if project.primary_album_id != p["id"].to_i
+          #   project.primary_album = Physical::Album::Album.create(
+          #     :id => p["id"].to_i,
+          #     :parent => project,
+          #     :title => "Primary Album"
+          #   )
+          #   project.save
+          # end
         else
           debugger
           puts "Error with project #{project.id}"
@@ -242,31 +253,128 @@ namespace :migrate do
 
   desc "Create Rails Album Items"
   task :create_album_items => :environment do
-    Physical::Album::AlbumItem.with_deleted.delete_all
-    ActiveRecord::Base.connection.reset_pk_sequence!('album_items')
-    items = @dbm.get_django_resource('estate_items')
-    i = 1
-    total = items.count
 
-    
-    
-    # items.each do |i|
-    #   puts "Processing estate_item #{i} of #{total}"
-    #   album_item = Physical::Album::AlbumItem.new(
-    #     :title =>
-    #     :description =>
-    #     :album_id => i["project_id"].to_i,
-    #     :created_at => 
-    #     :updated_at => 
-    #     :deleted_at => 
-    #     :position =>
-    #     :parent_id => 
-    #     :root_id =>
-    #     :credit_name => 
-    #     :credit_url =>
-    #     :user_id =>
-    #     :category_id => nil
-    #     :kind => 
+    Physical::Album::AlbumItem.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('album_items')
+
+    Physical::Project::ProjectItemAsset.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('project_item_assets')
+
+    Physical::Project::ProjectItem.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('project_items')
+
+    items = @dbm.get_django_resource('estate_items')
+    j = 1
+    total = items.count
+    legacy_cdn_url = "http://e106ce00de004b7393de-0058d95ebdf51c2bd9f43fd0921533e4.r92.cf1.rackcdn.com/"
+
+    def resolve_description(item)
+      desc = item["item_description"]
+      comm = item["item_comment"]
+      result = ""
+      if not desc.blank?
+        result = desc
+      end
+      if not comm.blank?
+        result = result.blank? ? comm : result + "\n\n Comment: #{comm}"
+      end
+      result
+    end
+
+    def resolve_category(item)
+
+     # SELECT DISTINCT("space"."title") as "space_title" FROM "estate_item" AS "item" LEFT JOIN "estate_space" AS "space" ON "item"."space_id" = "space"."id";
+     # Office
+     # Guest House
+     # Architectural Style
+     # Living Room
+     # 1000 sq. foot cottage
+     # Loft
+     # Floor Plans
+     # Systems and Sustainability
+     # Living Space
+     # Construction
+     # Kitchen
+     # Bathroom
+     # Private Bathroom
+     # Windows and Doors
+     # Workshop
+     # Kitty's Bedroom
+     # Entry and Outdoor Space
+     # Breezeway and Greenhouse
+     # Art Studio  - The Old Garage
+     # Bedroom
+
+     # [
+     #  'Architectural Style', 1
+     #  'Floor Plans', 2
+     #  'Construction', 3
+     #  'Kitchen', 4
+     #  'Bathroom', 5
+     #  'Bedroom', 6
+     #  'Living Room', 7
+     #  'Dining Room', 8
+     #  'Entry and Outdoors', 9
+     #  'Kids', 10
+     #  'Office', 11
+     #  'Storage', 12
+     #  'Systems and Sustainability', 13
+     #  'Uncategorized' 14
+     # ]
+
+     item_space = item["space_title"]
+     possibilities = {
+       "Office" => 11,
+       "Guest House" => 1,
+       "Architectural Style" => 1,
+       "Living Room" => 7,
+       "1000 sq. foot cottage" => 1,
+       "Loft" => 6,
+       "Floor Plans" => 2,
+       "Systems and Sustainability" => 13,
+       "Living Space" => 7,
+       "Construction" => 3,
+       "Kitchen" => 4,
+       "Bathroom" => 5,
+       "Private Bathroom" => 5,
+       "Windows and Doors" => 1,
+       "Workshop" => 1,
+       "Kitty's Bedroom" => 6,
+       "Entry and Outdoor Space" => 9,
+       "Breezeway and Greenhouse" => 9,
+       "Art Studio  - The Old Garage" => 11,
+       "Bedroom" => 6
+     }
+
+     r = possibilities[item_space]
+     return r if r
+     return 14
+    end
+
+    items.each do |i|
+      puts "Processing estate_item #{j} of #{total}"
+      album_item = Physical::Album::AlbumItem.new(
+        :id => i["item_id"],
+        :title => i["item_title"],
+        :description =>  resolve_description(i),
+        :album_id => i["item_project_id"].to_i == 0 ? 1 : i["item_project_id"].to_i,
+        :created_at => Time.parse(i["item_date_added"]),
+        :updated_at => Time.parse(i["item_date_modified"]),
+        :deleted_at => i["item_deleted"] == "t" ? Time.now() : nil,
+        :position => i["space_position"].to_i,
+        :parent_id => i["item_parent_id"].to_i == 0 ? nil : i["item_parent_id"].to_i,
+        :root_id => i["item_parent_root_id"].to_i == 0 ? nil : i["item_parent_root_id"].to_i,
+        :credit_name => i["item_credit_name"],
+        :credit_url => i["item_credit_url"],
+        :user_id => i["item_user_id"].to_i,
+        :category_id => resolve_category(i),
+        :kind => (i["item_item_type"].to_i == 0 ? "picture" : "other"),
+        :attachment_type => (i["item_item_type"].to_i == 0 ? "image" : "other"),
+        :legacy_original_image_url => i["item_original_image_url"] ? i["item_original_image_url"] : nil ,
+        :legacy_thumbnail_span3_url => i["item_original_image_url"] ? i["item_thumbnail_span3_url"] : nil ,
+        :legacy_display_image_url => i["item_original_image_url"] ? i["item_display_image_url"]  : nil ,
+        :legacy_display_image2_url => i["item_original_image_url"] ? i["item_display_image2_url"] : nil
+      )
 
     # t.integer  "asset_id"   <=== should drop column
     # t.string   "asset_type" <=== should drop column
@@ -278,17 +386,45 @@ namespace :migrate do
     # t.string   "attachment_type"
     # t.integer  "legacy_asset_id"
     # t.text     "comment"
-    # t.string   "kind",                    default: "picture", null: false
 
-    #   )
-    #   if album_item.save
+      begin
+        if album_item.valid? and album_item.save(:validate => false)
+          puts "Successfully saved album_item #{album_item.id}"
+          
+          # rectify timeline activity, which was created last
+          p = Physical::Project::ProjectItem.order('id DESC').first
+          p.created_at = Time.parse(i["item_date_added"])
+          p.updated_at = Time.parse(i["item_date_modified"])
+          p.deleted_at = album_item.deleted_at
+          
+          p.category = "uploaded_picture" if i["item_parent_id"].to_i == 0
+          p.category = "clipped_picture" if i["item_parent_id"].to_i > 0
+          p.category = "text" if not p.category
+          
+          p.user_id = (i["item_user_id"].to_i == 0 or i["item_user_id"].nil?) ? 1 : i["item_user_id"].to_i
+          p.project_id = (i["item_project_id"].to_i == 0 or i["item_project_id"].nil?) ? 1 : i["item_project_id"].to_i
 
-    #   else
-    #     debugger
-    #     puts "Error with album_item"
-    #   end
-    #   i = i + 1
-    # end
+          if p.valid? and p.save(:validate => false)
+
+          else
+            puts p.errors
+            debugger
+
+          end
+        else
+          debugger
+          puts album_item.errors
+          puts "Error with album_item"
+        end
+      rescue
+        puts "MIGRATION > Rescue"
+        debugger
+        puts "Rescue ended"
+      end
+
+
+      j = j + 1
+    end
 
   end
 

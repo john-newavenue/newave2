@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911003038) do
+ActiveRecord::Schema.define(version: 20130912225300) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20130911003038) do
     t.datetime "deleted_at"
     t.integer  "asset_id"
     t.string   "asset_type"
-    t.integer  "position",                default: 9999,      null: false
+    t.integer  "position",                   default: 9999,      null: false
     t.integer  "parent_id"
     t.integer  "root_id"
     t.string   "attachment_file_name"
@@ -51,10 +51,14 @@ ActiveRecord::Schema.define(version: 20130911003038) do
     t.integer  "legacy_asset_id"
     t.text     "comment"
     t.string   "credit_name"
-    t.string   "ciredit_url"
+    t.string   "credit_url"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.string   "kind",                    default: "picture", null: false
+    t.string   "kind",                       default: "picture", null: false
+    t.string   "legacy_original_image_url"
+    t.string   "legacy_thumbnail_span3_url"
+    t.string   "legacy_display_image_url"
+    t.string   "legacy_display_image2_url"
   end
 
   add_index "album_items", ["album_id"], name: "index_album_items_on_album_id", using: :btree
@@ -329,15 +333,12 @@ ActiveRecord::Schema.define(version: 20130911003038) do
   add_foreign_key "album_item_categories", "album_item_categories", :name => "album_item_categories_parent_id_fk", :column => "parent_id"
 
   add_foreign_key "album_items", "album_item_categories", :name => "album_items_category_id_fk", :column => "category_id"
-  add_foreign_key "album_items", "album_items", :name => "album_items_parent_id_fk", :column => "parent_id"
-  add_foreign_key "album_items", "album_items", :name => "album_items_root_id_fk", :column => "root_id"
   add_foreign_key "album_items", "users", :name => "album_items_user_id_fk"
 
   add_foreign_key "assets", "album_items", :name => "assets_origin_album_item_id_fk", :column => "origin_album_item_id"
 
   add_foreign_key "inquiries", "users", :name => "inquiries_user_id_fk"
 
-  add_foreign_key "project_item_assets", "album_items", :name => "project_item_assets_album_item_id_fk"
   add_foreign_key "project_item_assets", "project_items", :name => "project_item_assets_project_item_id_fk", :dependent => :delete
 
   add_foreign_key "project_items", "projects", :name => "project_items_project_id_fk", :dependent => :delete

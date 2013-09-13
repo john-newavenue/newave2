@@ -17,7 +17,7 @@
             <li class="item item-<%= item.object.id %>">
               <div class="tile light">
                 <div class="draggable-handle vertical">Drag to Move</div>
-                <div class="center-text"><%= image_tag item.object.attachment(:medium_square), :style => "width: 75%;" %></div>
+                <div class="center-text"><%= image_tag item.object.get_attachment(:medium_square), :style => "width: 75%;" %></div>
                 <ul>
                   <%= item.input :title, :label => false, :placeholder => "Title" %>
                   <%= item.input :description, :as => :text, :input_html => { :rows => 2 }, :label => false, :placeholder => "Description"  %>

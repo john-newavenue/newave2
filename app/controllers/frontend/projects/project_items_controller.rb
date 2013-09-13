@@ -6,7 +6,7 @@ module Frontend
 
       layout :resolve_layout
 
-      before_action :authenticate_user!, :only => [:new, :create, :destroy, :edit, :update, :index_public_feed]
+      before_action :authenticate_user!, :only => [:new, :create, :destroy, :edit, :update]
       before_action :authorize_user, :except => [:new, :create, :index_public_feed]
 
       def index_public_feed

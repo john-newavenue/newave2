@@ -2,7 +2,7 @@ module Physical
   module Project
     class Project < ActiveRecord::Base
 
-      acts_as_paranoid
+      # acts_as_paranoid
 
       #
       # associations
@@ -80,7 +80,7 @@ module Physical
 
         def build_associated_models
           self.build_address
-          self.build_primary_album(:parent => self, :title => "Project Album")
+          self.build_primary_album(:id => id, :parent => self, :title => "Project Album")
           self.save(:validate => false)
         end
     end

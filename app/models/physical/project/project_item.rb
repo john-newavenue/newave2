@@ -36,7 +36,7 @@ module Physical
       # behaviors
       #
 
-      acts_as_paranoid
+      # acts_as_paranoid
       
 
       #
@@ -47,7 +47,7 @@ module Physical
       scope :private, -> { where('project_items.private is true')}
       scope :none, -> { where('false') }
 
-      def save
+      def save(params = {:validate => true})
           
         if new_record?
 
@@ -83,7 +83,7 @@ module Physical
           end
         end
         
-        super
+        super(params)
         
         project.touch if project
 

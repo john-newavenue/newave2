@@ -11,9 +11,9 @@ module Frontend
 
         def compile_return_params(album_item)
           {
-            'url' => album_item.attachment(:original),
+            'url' => album_item.get_attachment(:original),
             'name' =>  album_item.attachment_file_name,
-            'thumbnail_url' => album_item.attachment(:small_square)
+            'thumbnail_url' => album_item.get_attachment(:small_square)
             # 'item_url'
             # 'item_id'
           }
