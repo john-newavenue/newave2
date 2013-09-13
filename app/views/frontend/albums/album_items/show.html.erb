@@ -5,9 +5,11 @@
       <i class="general foundicon-heart"></i>Save Idea
     <% end %>
   </li>
+  <% if false %>
   <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %></li>
   <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %></li>
   <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %></li>
+  <% end %>
 </ul>
 <% end %>
 
@@ -18,7 +20,7 @@
 
     <!-- screen -->
     <div class="large-12 small-12 columns screen">
-      <%= image_tag @item.get_attachment(:original), :class => "screen-featured-image"%>
+      <%= image_tag @item.get_attachment2(:large), :class => "screen-featured-image"%>
 
       <!-- nav -->
       <% p = @item.get_image_position_info %>
@@ -80,7 +82,7 @@
         <% @item.get_neighboring_images(10).each do |sibling| %>
         <li>
           <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
-            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :medium_square, :klass => "item-thumb", :standalone_link => true } %>
+            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :klass => "item-thumb", :standalone_link => true } %>
           </div>
         </li>
         <% end %>

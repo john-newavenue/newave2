@@ -30,7 +30,7 @@ module Frontend
           @album_item = Physical::Album::AlbumItem.find_by(:id => params[:album_item_id].to_i )
         end
 
-        @modal = 'new_save_album_item'
+        @modal = 'frontend/projects/project_album/new_clip_image_modal'
         if current_user.has_role?(:customer)
           @modal = 'frontend/projects/projects/prompt_create_first_project' if current_user.projects.count < 1
         elsif current_user.has_role?(:vendor)

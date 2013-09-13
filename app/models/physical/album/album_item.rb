@@ -84,7 +84,7 @@ module Physical
       #
 
       def get_attachment2(size)
-        if legacy_original_image_url
+        if legacy_display_image2_url
           return { 
             :small_square => legacy_thumbnail_span3_url,
             :medium_square => legacy_display_image_url,

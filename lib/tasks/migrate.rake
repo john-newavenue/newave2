@@ -5,7 +5,7 @@ namespace :migrate do
   class DBConnectionManager
 
     DJANGO_DB = {:adapter=>"postgresql", :host => "localhost", "database" => "newave", :username => "postgres"}
-    RAILS_DB = {:adapter=>"postgresql", :host => "localhost", "database" => "newave2_production", :username => "newave2"}
+    RAILS_DB = {:adapter=>"postgresql", :host => "localhost", "database" => Rails.configuration.database_configuration[Rails.env]["database"], :username => "newave2"}
     
     @which_db = nil
     @connection = nil
@@ -200,8 +200,7 @@ namespace :migrate do
         :username => u["user_username"].length > 2 ? u["user_username"] : u["user_username"] + "1", # fix imported emails short
         :email => ( u["user_email"].blank? or not Devise.email_regexp.match(u["user_email"]) ) ? Devise.friendly_token[0,10] + "@email.com" : u["user_email"],
         # :password => u["user_password"].length < 6 ? (0...8).map { (65 + rand(26)).chr }.join : u["user_password"], # fix imported passwords too short
-        :password => "password123",
-        :encrypted_password => u["user_password"],
+        :password => "password",
         :created_at => Time.parse(u["user_created_at"]),
         :slug => u["user_username"].parameterize
       )
@@ -380,7 +379,7 @@ namespace :migrate do
       if item["item_item_type"].to_i == 0 # if a picture
         if (item["item_parent_id"].to_i == 0 or item["item_parent_id"].nil?) # if no parent, must be original
           return {
-            :legacy_original_image_url => legacy_cdn_url + item["item_original_image"],
+            :legacy_original_image_url => item["item_original_image_url"].nil? ? (legacy_cdn_url + item["item_original_image"]) : (legacy_cdn_url + item["item_original_image_url"]),
             :legacy_thumbnail_span3_url => item["item_thumbnail_span3_url"],
             :legacy_display_image_url => item["item_display_image_url"],
             :legacy_display_image2_url => item["item_display_image2_url"]

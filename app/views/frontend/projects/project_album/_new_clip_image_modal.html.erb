@@ -3,7 +3,7 @@
 
   <% if @album_item %>
     <div class="panel" style="text-align:center;">
-      <%= image_tag @album_item.parent.get_attachment(:medium_square), :style => 'max-height: 150px;' %>
+      <%= image_tag @album_item.parent.get_attachment2(:medium_square), :style => 'max-height: 150px;' %>
       <h6><%= @album_item.title %></h6>
       
       <% if @album_item.parent.album.parent.class == "Physical::Project::Project" %>
