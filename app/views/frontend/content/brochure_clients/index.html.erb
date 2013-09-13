@@ -1,0 +1,62 @@
+<% provide(:title, "Client Stories") %>
+
+
+<% content_for :main do %>
+
+  <h1><%=yield(:title) %></h1>
+
+  <p>
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+  </p>
+
+  <% @brochures.each do |c| %>
+    <% if c.is_published %>
+    <div class="row">
+      <div class="large-3 columns small-12">
+        <%= link_to brochure_floorplan_with_slug_path(:slug => c.slug), :title => c.title, :class => "link-block hide-for-small" do %>
+          <%= image_tag c.cover_image(:medium_square),:title => c.title, :alt => c.title %>
+        <% end %>
+      </div>
+      <div class="large-9 columns small-12">
+
+        <h4 class="hide-for-small"><%= link_to c.title, brochure_floorplan_with_slug_path(:slug => c.slug) %></h4>
+
+        <div class="row">
+        <div class="small-4 columns show-for-small">
+          <%= link_to brochure_floorplan_with_slug_path(:slug => c.slug), :title => c.title, :class => "link-block" do %>
+            <%= image_tag c.cover_image(:medium_square),:title => c.title, :alt => c.title %>
+          <% end %>
+        </div>
+        <div class="small-8 columns show-for-small">
+          <h4 class="show-for-small"><%= link_to c.title, brochure_floorplan_with_slug_path(:slug => c.slug) %></h4>
+          <ul>
+            <li>Area, sq. ft.: <%= c.area %></li>
+            <li># Bed: <%= c.number_of_bed %></li>
+            <li># Bath: <%= c.number_of_bath %></li>
+            <li>Has loft? <%= c.has_loft ? "Yes" : "No" %></li>
+          </ul>
+        </div>
+
+        <div class="small-12 columns" style="margin-top: 1em;">
+          <ul class="hide-for-small">
+            <li>Area, sq. ft.: <%= c.area %></li>
+            <li># Bed: <%= c.number_of_bed %></li>
+            <li># Bath: <%= c.number_of_bath %></li>
+            <li>Has loft? <%= c.has_loft ? "Yes" : "No" %></li>
+          </ul>
+        <%= simple_format c.short_description %>
+        </div>
+        </div>
+
+      </div>
+    </div>
+    <hr> 
+    <% end %>
+  <% end %>
+
+
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'frontend/inquiries/mad_lib_form' %>
+<% end %>

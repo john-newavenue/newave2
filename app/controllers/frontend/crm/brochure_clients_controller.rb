@@ -5,7 +5,7 @@ module Frontend
       private
 
         def set_collection_category
-          @category = Physical::General::Brochure::CLIENT_CATEGORY
+          @category = "Client"
         end
 
     end

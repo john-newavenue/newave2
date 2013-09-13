@@ -153,6 +153,7 @@ namespace :migrate do
     Rake::Task['migrate:setup_rails_db'].invoke
     Rake::Task['migrate:create_users'].invoke
     # Rake::Task['migrate:create_projects'].invoke
+    Rake::Task['migrate:assign_admin'].invoke
     puts "MIGRATION > Took #{Time.now - s} seconds"
   end
 
@@ -492,6 +493,11 @@ namespace :migrate do
       j = j + 1
     end
 
+  end
+
+  desc "Assign admin role to AbigailMathews"
+  task :assign_admin => :environment do
+    User.find(1).add_role :admin
   end
 
 # ==================

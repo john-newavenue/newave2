@@ -4,7 +4,10 @@ module Physical
 
       # title, position, short_description, long_description, area, number_of_bath, number_of_bed, has_loft, category, album, is_published
 
-      CATEGORIES = ["Client", "Floor Plan"]
+      
+      CLIENT_CATEGORY = "Client"
+      FLOORPLAN_CATEGORY = "Floor Plan"
+      CATEGORIES = [CLIENT_CATEGORY, FLOORPLAN_CATEGORY]
 
       #
       # callbacks

@@ -1,8 +1,10 @@
-<% provide(:title, "Design Example: #{@brochure.title}") %>
+<% provide(:title, "Client Story: #{@brochure.title}") %>
 
 <% content_for :main do %>
 
   <h1><%= @brochure.title %></h1>
+
+  <%= (render :partial => 'frontend/content/brochure/gallery', :locals => { :album => @brochure.album }) if @brochure.album%>
 
   <div class="row">
     <div class="large-8 columns">

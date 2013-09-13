@@ -18,7 +18,7 @@
       <%= f.input :category, :as => :hidden,  :value => Physical::General::Brochure::CLIENT_CATEGORY %>
     </div>
     <div class="large-4 columns">
-      <%= f.input :album, :as => :select, :label => "Accompanying Album", :collection => Physical::Album::Album.all.map { |a| ["#{a.id} - #{a.title}", a.id] } %>
+      <%= f.input :album, :as => :select, :label => "Accompanying Project Album", :collection => Physical::Project::Project.all.order('id ASC').map { |p| ["#{p.primary_album_id} - #{p.title}", p.primary_album_id] } %>
     </div>
     <div class="large-4 columns">
       <% if @brochure.album %>

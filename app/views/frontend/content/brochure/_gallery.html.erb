@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="large-12 columns">
+    <div id="slides-album-<%= album.id %>" class="slides-gallery">
+      <% album.images.each do |item| %>
+        <div data-image-source="<%= item.get_attachment2(:large) %>" data-thumbnail-source="<%= item.get_attachment2(:small_square) %>">
+          <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
+            <img src="" class="slide-image" />
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    
+    c = "#slides-album-<%= album.id %>"
+
+    function load_slide(n) {
+      // n = slide number
+      slide = $(c + " .slidesjs-slide:nth-child(" + n + ")")
+      slide.find('.slide-image').attr('src', slide.data('image-source'))
+    }
+
+    function setup_slide_thumbnails() {
+      pagination = $(c + " .slidesjs-pagination")
+      $(c + " .slidesjs-slide").each( function (index, element) {
+        pagination
+          .find('a[data-slidesjs-item="'+ index+'"]')
+          .html("<img src='" + $(element).data('thumbnail-source') + "' />")
+      })
+    }
+
+    $(c).slidesjs({
+      width: 720,
+      height: 500,
+      callback: {
+        loaded: function (n) {
+          load_slide(1)
+          setup_slide_thumbnails()
+        },
+        start:function (n) {
+        },
+        complete: function (n) {
+          load_slide(n)
+        }
+
+      }
+    });
+  });
+</script>

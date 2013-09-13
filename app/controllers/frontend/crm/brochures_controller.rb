@@ -48,7 +48,7 @@ module Frontend
       private
 
         def brochure_index_path
-          case brochure_params[:category].to_i
+          case brochure_params[:category]
           when Physical::General::Brochure::CLIENT_CATEGORY
             crm_brochure_clients_path
           when Physical::General::Brochure::FLOORPLAN_CATEGORY

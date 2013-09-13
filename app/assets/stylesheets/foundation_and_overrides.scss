@@ -1530,8 +1530,8 @@ form {
   margin: 0; 
   font-family: Arial, sans-serif; 
 
-  p { font-size: 1em; }
-  label { font-size: 1em; }
+  p { font-size: 12px; }
+  label { font-size: 12px; }
 }
 
 .formtastic {
@@ -1778,4 +1778,20 @@ ul.item-tags {
 
 .template-upload {
   .progress-note { color: $NA-color-light-green; }
+}
+
+//
+// Slides Gallery
+//
+
+.slides-gallery { 
+  position: relative;
+  .slidesjs-container { background: #efefef;}
+  .slidesjs-pagination {  list-style: none; }
+  .slidesjs-pagination li { display: inline-block; width: 80px; text-align: center; padding: .2em; }
+  .slidesjs-pagination li a.active img { box-shadow: 0 0 1px 1px $NA-color-light-green; }
+  .slidesjs-pagination-item { }
+  .slidesjs-slide { text-align: center; background: #efefef; }
+  .slide-image { max-height: 500px;  }
+  .slidesjs-previous, .slidesjs-next { display: inline-block; font-size: 0; color: transparent; width: 1px; height: 30px; }
 }
