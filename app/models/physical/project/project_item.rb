@@ -69,7 +69,7 @@ module Physical
                 attachment_content_type = project_item_asset.album_item.attachment_content_type
                 # if project_item_asset.album_item.parent and (project_item_asset.album_item.parent.album != project.primary_album and project_item_asset.album_item.root_id)
                 if project_item_asset.album_item.parent_id
-                  if image_regex.match attachment_content_type
+                  if image_regex.match attachment_content_type or project_item_asset.album_item.legacy_display_image_url
                     self.category = "clipped_picture"
                   end
                 else

@@ -154,6 +154,7 @@ namespace :migrate do
     Rake::Task['migrate:create_users'].invoke
     # Rake::Task['migrate:create_projects'].invoke
     Rake::Task['migrate:assign_admin'].invoke
+    Rake::Task['migrate:advance_keys'].invoke
     puts "MIGRATION > Took #{Time.now - s} seconds"
   end
 
@@ -498,6 +499,15 @@ namespace :migrate do
   desc "Assign admin role to AbigailMathews"
   task :assign_admin => :environment do
     User.find(1).add_role :admin
+  end
+
+  desc "Advance primary keys for all tables"
+  task :advance_keys => :environment do 
+    ActiveRecord::Base.connection.reset_pk_sequence!('users')
+    ActiveRecord::Base.connection.reset_pk_sequence!('authentications')
+    ActiveRecord::Base.connection.reset_pk_sequence!('projects')
+    ActiveRecord::Base.connection.reset_pk_sequence!('albums')
+    ActiveRecord::Base.connection.reset_pk_sequence!('album_items')
   end
 
 # ==================

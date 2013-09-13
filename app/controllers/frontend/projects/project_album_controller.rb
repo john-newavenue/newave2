@@ -31,6 +31,8 @@ module Frontend
           @album_image = @album.images.build(save_clip_image_params)
           @album_image.user = current_user
 
+          debugger
+
           if @album_image.save
             @modal = 'new_clip_image_success_modal'
             @album_image.reload
