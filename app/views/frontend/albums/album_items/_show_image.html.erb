@@ -19,13 +19,13 @@ klass = '' if not defined? klass
   <% if standalone_link %>
 
     <%= link_to item2_path(:id => item.id, :slug => item.slug), :title=> item.title do %>
-      <%= image_tag item.attachment(size), :class => klass %>
+      <%= image_tag item.get_attachment2(size), :class => klass %>
     <% end %>
 
   <% else %>
 
     <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
-      <%= image_tag item.attachment(size), :class => klass %>
+      <%= image_tag item.get_attachment2(size), :class => klass %>
     <% end %>
 
   <% end %>

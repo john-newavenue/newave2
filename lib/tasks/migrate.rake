@@ -80,16 +80,28 @@ namespace :migrate do
             "item"."credit_url" AS "item_credit_url",
             "item"."credit_name" AS "item_credit_name",
             "item"."parent_root_id" AS "item_parent_root_id",
-            "item"."thumbnail_span3_url" AS "item_thumbnail_span3_url",
-            "item"."display_image_url" AS "item_display_image_url",
             "item"."imagekit_ttl" AS "item_imagekit_ttl",
             "item"."exhibit_mode" AS "item_exhibit_mode",
             "item"."cover_image" AS "item_cover_image",
             "item"."valid_image" AS "item_valid_image",
             "item"."original_image_width" AS "item_original_image_width",
             "item"."original_image_height" AS "item_original_image_height",
+
+            "item"."thumbnail_span3_url" AS "item_thumbnail_span3_url",
+            "item"."display_image_url" AS "item_display_image_url",
             "item"."original_image_url" AS "item_original_image_url",
             "item"."display_image2_url" AS "item_display_image2_url",
+
+            "parent_item"."thumbnail_span3_url" AS "parent_item_thumbnail_span3_url",
+            "parent_item"."display_image_url" AS "parent_item_display_image_url",
+            "parent_item"."original_image_url" AS "parent_item_original_image_url",
+            "parent_item"."display_image2_url" AS "parent_item_display_image2_url",
+
+            "root_item"."thumbnail_span3_url" AS "root_item_thumbnail_span3_url",
+            "root_item"."display_image_url" AS "root_item_display_image_url",
+            "root_item"."original_image_url" AS "root_item_original_image_url",
+            "root_item"."display_image2_url" AS "root_item_display_image2_url",
+
             "item"."project_position" AS "item_project_position",
             "item"."space_position" AS "item_space_position",
             "space"."id" AS "space_id",
@@ -112,6 +124,14 @@ namespace :migrate do
             "estate_space" AS "space"
           ON
             "item"."space_id" = "space"."id"
+          LEFT JOIN
+            "estate_item" AS "parent_item"
+          ON
+            "item"."parent_id" = "parent_item"."id"
+          LEFT JOIN
+            "estate_item" AS "root_item"
+          ON
+            "item"."parent_root_id" = "root_item"."id"
           ORDER BY
             "item"."parent_id" DESC,
             "item"."parent_root_id" DESC,
@@ -132,7 +152,7 @@ namespace :migrate do
     s = Time.now
     Rake::Task['migrate:setup_rails_db'].invoke
     Rake::Task['migrate:create_users'].invoke
-    Rake::Task['migrate:create_projects'].invoke
+    # Rake::Task['migrate:create_projects'].invoke
     puts "MIGRATION > Took #{Time.now - s} seconds"
   end
 
@@ -179,7 +199,8 @@ namespace :migrate do
         :id => u["user_id"].to_i,
         :username => u["user_username"].length > 2 ? u["user_username"] : u["user_username"] + "1", # fix imported emails short
         :email => ( u["user_email"].blank? or not Devise.email_regexp.match(u["user_email"]) ) ? Devise.friendly_token[0,10] + "@email.com" : u["user_email"],
-        :password => u["user_password"].length < 6 ? (0...8).map { (65 + rand(26)).chr }.join : u["user_password"], # fix imported passwords too short
+        # :password => u["user_password"].length < 6 ? (0...8).map { (65 + rand(26)).chr }.join : u["user_password"], # fix imported passwords too short
+        :password => "password123",
         :encrypted_password => u["user_password"],
         :created_at => Time.parse(u["user_created_at"]),
         :slug => u["user_username"].parameterize
@@ -234,7 +255,10 @@ namespace :migrate do
       )
         if User.where(:id => p["user_id"].to_i).count == 1 and project.valid? and project.save
           project.add_user_as_customer(User.find(p["user_id"].to_i))
+
           puts "Successfully saved project #{project.id} with album #{project.primary_album_id}"
+          # debugger
+          # puts "hi"
           # if project.primary_album_id != p["id"].to_i
           #   project.primary_album = Physical::Album::Album.create(
           #     :id => p["id"].to_i,
@@ -351,8 +375,45 @@ namespace :migrate do
      return 14
     end
 
+    def resolve_legacy_image_url(item)
+      legacy_cdn_url = "http://e106ce00de004b7393de-0058d95ebdf51c2bd9f43fd0921533e4.r92.cf1.rackcdn.com/"
+      if item["item_item_type"].to_i == 0 # if a picture
+        if (item["item_parent_id"].to_i == 0 or item["item_parent_id"].nil?) # if no parent, must be original
+          return {
+            :legacy_original_image_url => legacy_cdn_url + item["item_original_image"],
+            :legacy_thumbnail_span3_url => item["item_thumbnail_span3_url"],
+            :legacy_display_image_url => item["item_display_image_url"],
+            :legacy_display_image2_url => item["item_display_image2_url"]
+          }
+        elsif not item["parent_item_original_image_url"].nil? #   try to get urls from parent
+          return {
+            :legacy_original_image_url => item["parent_item_original_image_url"],
+            :legacy_thumbnail_span3_url => item["parent_item_thumbnail_span3_url"],
+            :legacy_display_image_url => item["parent_item_display_image_url"],
+            :legacy_display_image2_url => item["parent_item_display_image2_url"]
+          }
+        else # try to get urls from root
+          return {
+            :legacy_original_image_url => item["root_item_original_image_url"],
+            :legacy_thumbnail_span3_url => item["root_item_thumbnail_span3_url"],
+            :legacy_display_image_url => item["root_item_display_image_url"],
+            :legacy_display_image2_url => item["root_item_display_image2_url"]
+          }
+        end
+      else
+        return {
+          :legacy_original_image_url => nil,
+          :legacy_thumbnail_span3_url => nil,
+          :legacy_display_image_url => nil,
+          :legacy_display_image2_url => nil
+        }
+      end
+    end
+
     items.each do |i|
       puts "Processing estate_item #{j} of #{total}"
+      legacy_image_urls = resolve_legacy_image_url(i)
+
       album_item = Physical::Album::AlbumItem.new(
         :id => i["item_id"],
         :title => i["item_title"],
@@ -368,12 +429,18 @@ namespace :migrate do
         :credit_url => i["item_credit_url"],
         :user_id => i["item_user_id"].to_i,
         :category_id => resolve_category(i),
-        :kind => (i["item_item_type"].to_i == 0 ? "picture" : "other"),
+        :kind => (i["item_item_type"].to_i == 0 ? "picture" : "text"),
         :attachment_type => (i["item_item_type"].to_i == 0 ? "image" : "other"),
-        :legacy_original_image_url => i["item_original_image_url"] ? i["item_original_image_url"] : nil ,
-        :legacy_thumbnail_span3_url => i["item_original_image_url"] ? i["item_thumbnail_span3_url"] : nil ,
-        :legacy_display_image_url => i["item_original_image_url"] ? i["item_display_image_url"]  : nil ,
-        :legacy_display_image2_url => i["item_original_image_url"] ? i["item_display_image2_url"] : nil
+
+        # :legacy_original_image_url => i["item_original_image_url"] ? i["item_original_image_url"] : nil ,
+        # :legacy_thumbnail_span3_url => i["item_original_image_url"] ? i["item_thumbnail_span3_url"] : nil ,
+        # :legacy_display_image_url => i["item_original_image_url"] ? i["item_display_image_url"]  : nil ,
+        # :legacy_display_image2_url => i["item_original_image_url"] ? i["item_display_image2_url"] : nil
+
+        :legacy_original_image_url => legacy_image_urls[:legacy_original_image_url],
+        :legacy_thumbnail_span3_url => legacy_image_urls[:legacy_thumbnail_span3_url],
+        :legacy_display_image_url => legacy_image_urls[:legacy_display_image_url],
+        :legacy_display_image2_url => legacy_image_urls[:legacy_display_image2_url]
       )
 
     # t.integer  "asset_id"   <=== should drop column
@@ -397,8 +464,8 @@ namespace :migrate do
           p.updated_at = Time.parse(i["item_date_modified"])
           p.deleted_at = album_item.deleted_at
           
-          p.category = "uploaded_picture" if i["item_parent_id"].to_i == 0
-          p.category = "clipped_picture" if i["item_parent_id"].to_i > 0
+          p.category = "uploaded_picture" if (i["item_parent_id"].nil? and i["item_item_type"].to_i == 0)
+          p.category = "clipped_picture" if (i["item_parent_id"].to_i > 0 and i["item_item_type"].to_i == 0)
           p.category = "text" if not p.category
           
           p.user_id = (i["item_user_id"].to_i == 0 or i["item_user_id"].nil?) ? 1 : i["item_user_id"].to_i
