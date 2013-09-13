@@ -1792,6 +1792,7 @@ ul.item-tags {
   .slidesjs-pagination li a.active img { box-shadow: 0 0 1px 1px $NA-color-light-green; }
   .slidesjs-pagination-item { }
   .slidesjs-slide { text-align: center; background: #efefef; }
-  .slide-image { max-height: 500px;  }
+  .slidesjs-slide .display-save-album-image-prompt {  }
+  .slide-image { height: 470px; margin-bottom: 25x; }
   .slidesjs-previous, .slidesjs-next { display: inline-block; font-size: 0; color: transparent; width: 1px; height: 30px; }
 }
