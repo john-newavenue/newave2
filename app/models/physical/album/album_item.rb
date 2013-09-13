@@ -182,11 +182,11 @@ module Physical
             self.attachment_content_type = self.root.attachment_content_type
             self.attachment_file_size = self.root.attachment_file_size
             self.attachment_updated_at = self.root.attachment_updated_at
+            self.legacy_original_image_url = self.root.legacy_original_image_url if self.root.legacy_original_image_url
+            self.legacy_thumbnail_span3_url = self.root.legacy_thumbnail_span3_url if self.root.legacy_thumbnail_span3_url
+            self.legacy_display_image_url = self.root.legacy_display_image_url if self.root.legacy_display_image_url
+            self.legacy_display_image2_url = self.root.legacy_display_image2_url if self.root.legacy_display_image2_url
           end
-          self.legacy_original_image_url = self.root.legacy_original_image_url if self.root.legacy_original_image_url
-          self.legacy_thumbnail_span3_url = self.root.legacy_thumbnail_span3_url if self.root.legacy_thumbnail_span3_url
-          self.legacy_display_image_url = self.root.legacy_display_image_url if self.root.legacy_display_image_url
-          self.legacy_display_image2_url = self.root.legacy_display_image2_url if self.root.legacy_display_image2_url
         end
 
         def assign_attachment_type
