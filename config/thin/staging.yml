@@ -5,3 +5,4 @@ environment: staging
 chdir: /var/www/dev.newavenuehomes.com/current
 port: 4000
 max_conns: 1024
+timeout: 120
