@@ -50,6 +50,8 @@
 
   <% else %>
 
+
+
     <ul class="pagination">
       <% if items.previous_page %>
         <li class="arrow"><%= link_to raw("&laquo;"), ideas_path + "?page=#{items.previous_page.to_i}&category=#{params[:category] ? params[:category] : 'all'}" %></li>
@@ -57,10 +59,15 @@
 
       <% if items.total_pages > 1 %>
         <% (1..(items.total_pages)).each do |p| %>
-          <% if p == items.current_page.to_i %>
-            <li class="current"><%= p.to_i %></li>
-          <% else %>
-            <li><%= link_to p.to_i, ideas_path + "?page=#{p}&category=#{params[:category] ? params[:category] : 'all'}" %></li>
+
+          <% if (p.to_i - items.current_page.to_i).abs <= 12 %>
+
+            <% if p == items.current_page.to_i %>
+              <li class="current"><%= p.to_i %></li>
+            <% else %>
+              <li><%= link_to p.to_i, ideas_path + "?page=#{p}&category=#{params[:category] ? params[:category] : 'all'}" %></li>
+            <% end %>            
+
           <% end %>
 
         <% end %>
