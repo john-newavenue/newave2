@@ -1270,15 +1270,17 @@ section#home-splash {
 
 #home-orbiter {
   .orbit-slide-number, .orbit-progress, .orbit-bullets, .orbit-timer { display: none; }
-  .orbit-next, .orbit-prev { background-color: rgba(0,0,0,0.1); }
-  .orbit-caption { background-color: rgba(0, 0, 0, 0.1); text-align: center; }
+  .orbit-next, .orbit-prev { background-color: rgba(0,0,0,0.5); }
+  .orbit-caption { background-color: rgba(0, 0, 0, 0.5); text-align: center; }
 
   li { 
     background-size: cover;
-    height: 400px; 
+    background-position: 50% 20%;
+    background-repeat: no-repeat;
+    height: 600px; 
 
-    h3.jumbo { font-size: 4em; font-family: 'Open Sans', sans-serif; }
-    p.large { font-size: 2em; font-family: 'Open Sans', sans-serif; }
+    h3.jumbo { font-size: 5em; font-family: 'Open Sans', sans-serif; }
+    p.large { font-size: 3em; font-family: 'Open Sans', sans-serif; }
   }
 
 }
