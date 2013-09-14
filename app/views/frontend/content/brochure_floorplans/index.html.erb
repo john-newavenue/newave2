@@ -9,12 +9,6 @@
     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
   </p>
 
-  <% if current_user.has_role? :admin %>
-    <hr>
-      <%= link_to "New", new_brochure_floorplan_path, :class => "button small lightblue" %>
-    <hr>
-  <% end %>
-
   <% @brochures.each do |c| %>
     <% if c.is_published %>
     <div class="row">

@@ -4,6 +4,8 @@
 
   <h1><%= @brochure.title %></h1>
 
+  <%= (render :partial => 'frontend/content/brochure/gallery', :locals => { :album => @brochure.album }) if @brochure.album%>
+
   <div class="row">
     <div class="large-8 columns">
       <h2 class="byline"><%= @brochure.short_description %></h2>
@@ -22,10 +24,13 @@
       <%= simple_format @brochure.ideal_for %>
     </div>
     <div class="large-4 columns">
+
+      <% if false %>
       <% if @brochure.attachment %>
         <%= link_to "Download PDF", @brochure.attachment(:original), :class => "button light-blue small" %>
       <% end %>
       <hr>
+      <% end %>
 
       <h3>Share this design!</h3>
       <ul>
@@ -37,13 +42,10 @@
     </div>
   </div>
 
-
-
-
-
-
 <% end %>
 
 <% content_for :sidebar do %>
+  <%= render :partial => 'frontend/content/brochure/side_nav', :locals => { :category => @brochure.category, :link_fun => Proc.new { |slug| brochure_floorplan_with_slug_path(:slug => slug) } } %>
+  <hr>
   <%= render :partial => 'frontend/inquiries/mad_lib_form' %>
 <% end %>

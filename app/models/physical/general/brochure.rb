@@ -38,13 +38,13 @@ module Physical
 
       validates :category, :presence => true, :allow_blank => false, :inclusion => { :in => CATEGORIES }
       
-      validates :slug, :presence => true, :allow_blank => false, :format => { :with => /\A[A-Za-z0-9-_]+\z/i, :message => "Invalid format."}, :uniqueness => true
+      validates :slug, :presence => true, :allow_blank => false, :format => { :with => /\A[A-Za-z0-9\-_]+\z/i, :message => "Invalid format."}, :uniqueness => true
       validates :title, :presence => true, :allow_blank => false
       validates :position, :numericality => true
 
       validates :area, :numericality => { :greater_than_or_equal_to => 0 }
-      validates :number_of_bed, :numericality => { :greater_than_or_equal_to => 0 }
-      validates :number_of_bath, :numericality => { :greater_than_or_equal_to => 0 }
+      validates :number_of_bed, :numericality => { :greater_than_or_equal_to => 0 }, :format => { :with => /\A\d(\.\d)?\z/ }
+      validates :number_of_bath, :numericality => { :greater_than_or_equal_to => 0 }, :format => { :with => /\A\d(\.\d)?\z/ }
 
       validates_with AttachmentContentTypeValidator, :attributes => :cover_image, :content_type => /^image\/(png|gif|jpeg|jpg)/
       validates_with AttachmentSizeValidator, :attributes => :cover_image, :in => (1.kilobytes..(2.5).megabytes)

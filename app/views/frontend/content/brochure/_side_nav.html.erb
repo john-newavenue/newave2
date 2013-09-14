@@ -1,0 +1,7 @@
+<h3><%= category.pluralize %></h3>
+
+<ul class="side-nav">
+  <% Physical::General::Brochure.where(:category => category).each do |b| %>
+    <%= active_link_to b.title, link_fun.call(b.slug), :wrap_tag => :li %>
+  <% end %>
+</ul>
