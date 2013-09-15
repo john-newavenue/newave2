@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/mbleigh/seed-fu.git
+  revision: f89ea306472c500ec7911c7be111a4aad9c1bc78
+  specs:
+    seed-fu (2.2.0)
+      activerecord (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+
+GIT
   remote: git://github.com/radar/paranoia.git
   revision: 5aaef5ad96d6de3bc9db93c550c5442368881a0b
   specs:
@@ -411,6 +419,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   rvm-capistrano
   sass-rails (~> 4.0.0.beta1)
+  seed-fu!
   stringex
   syntax
   therubyracer

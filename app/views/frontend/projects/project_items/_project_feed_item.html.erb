@@ -27,7 +27,6 @@
 
           <% project_item.project_item_assets.each do |pia| %>
             <% item = pia.album_item %>
-            <%= "Looking at album_item #{item.id}" %>
             <% if item %>
 
             <p>
@@ -48,13 +47,6 @@
             <p><%= project_item.body %></p>
 
             <%-# if screen large enough, show modal. otherwise, show standalone page -%>
-
-            <%= item.get_attachment2(:small_square) %>
-            <%= item.get_attachment2(:medium_square) %>
-            <%= item.get_attachment2(:small_rectangle) %>
-            <%= item.get_attachment2(:medium_rectangle) %>
-            <%= item.get_attachment2(:tall_large_rectangle) %>
-            <%= item.get_attachment2(:large) %>
 
             <%= link_to item2_path(:id => item.id, :slug => item.slug, :format => :js), :remote => true, :title=> item.title, :class => "display-theater hide-for-small" do %>
               <%= image_tag item.get_attachment2(:medium_square) if item.attachment_type == "image" %>

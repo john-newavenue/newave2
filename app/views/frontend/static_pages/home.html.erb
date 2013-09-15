@@ -5,22 +5,23 @@
   <ul data-orbit>
     <li style="background: url('https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/hero-springs-cottage.jpg');">
       <div class="orbit-caption">
-        <h3 class="jumbo">Jingle Bells, Jingle Bells</h3>
-        <p class="large">We are the champions, my friends.</p>
+        <h3 class="jumbo">We're the small home experts</h3>
+        <p class="large">We are consultants who take your project from idea to completion.</p>
       </div>
     </li>
     <li style="background: url('https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/hero-people-on-patio.jpg');">
       <div class="orbit-caption">
-        <h3 class="jumbo">Jingle all the way</h3>
-        <p class="large">We'll keep on fighting, 'til the end.</p>
+        <h3 class="jumbo">Live better by living together</h3>
+        <p class="large">We bring friends and family closer.</p>
       </div>
     </li>
     <li style="background: url('https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/hero-karens-cottage.jpg');">
       <div class="orbit-caption">
-        <h3 class="jumbo">Oh what fun, it is to ride</h3>
-        <p class="large">We are the champions</p>
+        <h3 class="jumbo">Guided Project Delivery</h3>
+        <p class="large">Our connections and our process make things easy.</p>
       </div>
     </li>
+    <% if false %>
     <li style="background: url('https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/hero-birds-on-wire.jpg');">
       <div class="orbit-caption">
         <h3 class="jumbo">In a one horse open sleigh</h3>
@@ -33,6 +34,7 @@
         <p class="large">Of the world.......</p>
       </div>
     </li>
+    <% end %>
   </ul>
 </div>
 
@@ -128,7 +130,7 @@
 
   <div class="large-9 columns push-3">
     <h3>What's Happening</h3>
-    <% @project_items = Physical::Project::ProjectItem.community_feed.limit(10).page(1) %>
+    <% @project_items = Physical::Project::ProjectItem.community_feed.limit(10).page(3) %>
     <%= 
       render :partial => 'frontend/projects/project_items/project_feed', 
           :locals => { 
