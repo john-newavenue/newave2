@@ -3,32 +3,47 @@
 <section id="content">
 
   <div class="row">
+    <div class="columns large-12">
+      <h1><%= @project.title %></h1>
+      <hr>
+    </div>
+  </div>
 
-    <div class="large-9 columns">
+  <div class="row">
+
+    <div class="large-9 push-3 columns">
       <%= yield %>
     </div>
 
-    <% if false %>
     <div class="large-3 pull-9 columns">
       
-      <img src="http://placehold.it/137x150" alt="TODO: Project cover photo">
-      
+      <h3 class="side-nav-header">Project</h3>
       <ul class="side-nav project-menu fancy-menu">
-        <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-home"></i> My Project Story<% end %>
+        <%= active_link_to edit_project_path(@project), :wrap_tag => :li, :active => :exclusive do %> <i class="general foundicon-edit"></i>Edit Project Info<% end %>
         <%= active_link_to project_path(@project.id), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-tasks"></i> Timeline<% end %>
+        <%= active_link_to medium_path(@project.primary_album_id), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-picture"></i> Photos and Ideas<% end %>
+        <% if false %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-signal"></i> Budget and Progress<% end %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-briefcase"></i> Documents and Files<% end %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-shopping-cart"></i> Shopping List<% end %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-money"></i> Billing<% end %>
-        <% if false %>
-        <%= active_link_to edit_project_path(@project), :wrap_tag => :li do %><i class='general foundicon-edit'></i> Edit Project<% end %>
         <% end %>
       </ul>
 
-      
+      <h3 class="side-nav-header">Team</h3>
+      <ul class="side-nav project-members fancy-menu">
+      <% @project.members.each do |m| %>
+        <%= active_link_to profile_path(m), :wrap_tag => :li, :active => :exclusive do %>
+          <i class="icon-user"></i><%= m.username %> <br />
+          <% if false %>
+            <%-# for titles and such %>
+            <i class="icon-user" style="visibility: hidden; "></i>
+          <% end %>
+        <% end %>
+      <% end %>
+      </ul>
 
     </div>
-    <% end %>
 
   </div>
 

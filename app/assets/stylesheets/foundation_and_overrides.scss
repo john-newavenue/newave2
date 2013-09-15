@@ -1102,6 +1102,8 @@ table {
 
 .page-content { margin-bottom: 1.5em; }
 
+.alert-box { font-size: 12px; }
+
 .alert-box p:last-child { margin-bottom: 0; }
 
 body > section#content, section.margin-top-bottom { margin: 1em 0; }
@@ -1184,11 +1186,16 @@ body > section#content, section.margin-top-bottom { margin: 1em 0; }
 
 .horizontal-nav { min-height: 44px; }
 
+.side-nav-header {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+}
+
 .side-nav.fancy-menu {
   li { 
     margin: 0; 
-    border-bottom: 1px solid #ccc;
-    &:first-child { border-top: 1px solid #ccc;}
+    &:first-child { border-top: none; }
     i { padding: 0 1em; }
     a { padding: .75em 0; color: #666; }
     .active { background: #efefef; color: $NA-color-light-green !important; }
@@ -1559,7 +1566,7 @@ form {
 
 p.inline-hints { color: #999;}
 
-textarea { height: auto; font-size: 1em; }
+textarea { height: auto; font-size: 12px; }
 
 i[class*="foundicon"] {
   vertical-align: middle;

@@ -102,3 +102,5 @@ gem 'acts-as-taggable-on'
 gem 'font-awesome-rails'
 gem 'httparty'
 gem "cocoon"
+
+gem 'seed-fu', github: 'mbleigh/seed-fu'

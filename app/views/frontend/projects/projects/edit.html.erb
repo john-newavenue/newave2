@@ -1,13 +1,9 @@
-<% provide(:title, "Edit Project - #{@project.title}") %>
+<% provide(:title, "#{@project.title} - Edit Project Info") %>
 
-<h3><%= @project.title %></h3>
-<ul class="breadcrumbs">
-  <li><%= link_to "Project", project_path(@project) %></li>
-  <li class="current">Edit Proje</li>
-</ul>
+<h2>Edit Project Info</h2>
 
 <%= semantic_form_for @project, :as => :project, :url => project_path(@project), :method => "patch" do |f| %>
-  <%= f.inputs 'Project Information' do %>
+  <%= f.inputs do %>
 
     <%= render 'frontend/projects/projects/project_title_description_input', :f => f %>
 
