@@ -11,16 +11,16 @@
 
       <% provide :title do %>
         <% if @user.has_role? :vendor %>
-          <h3>
+          <h1>
             <% if !@profile.full_name.blank? %>
               <%= @profile.full_name %> (<%= @user.username %>)
             <% else %>
               <%= @user.username %>
             <% end %>
-          </h3>
+          </h1>
           <div class="hide-for-small"><p>of <% @user.vendors.each do |vendor| %><%= link_to vendor.name, vendor_profile_path(vendor.slug) %><% end %></p></div>
         <% else %>
-          <h3><%= @user.username %></h3>
+          <h1><%= @user.username %></h1>
         <% end %>
       <% end %>
 
@@ -68,47 +68,49 @@
 
       <% if !@profile.bio.blank? %>
         <div><%= simple_format @profile.bio %></div>
-      <% else %>
-        <p>No bio information provided.</p>
       <% end %>
 
-      <%= link_to new_project_path, :class => 'button' do %>
-        <i class='general foundicon-plus'></i>New Project
-      <% end %>
+      <hr>
 
-      <% if true %>
-
+      <!-- New Project Button -->
+      <% if @user.object == current_user %>
+        <%= link_to new_project_path, :class => 'button small' do %><i class='general foundicon-plus'></i>New Project<% end %>
         <hr>
-
-        <!-- Project List -->
-
-        <% project_count = @user.object && @user.project_count | 0 %>
-
-        <% if @user.object == current_user and current_user.has_role? :customer %>
-
-          <% if project_count == 0 %>
-            <%= link_to new_project_path, :class => 'button' do %>
-              <i class='general foundicon-plus'></i>Start Your First Project
-            <% end %>
-          <% end %>
-          
-        <% else %>
-
-          <p>No Projects.</p>
-
-        <% end %>
-
       <% end %>
 
-      <ul class="large-block-grid-3">
-        <% @user.projects.each do |p| %>
-          <li>
-            <h4><%= link_to p.title, project_path(p) %></h4>
-            <p><%= truncate(p.description, :length => 50) %></p>
-          </li>
-        <% end %>      
-      </ul>
+      <!-- Project List -->
 
+      <% if @user.projects.count > 0 %>
+      <ul class="large-block-grid-3">
+          <% @user.projects.order('title ASC').each do |p| %>
+            <li>
+              <div class="tile">
+                <%= link_to project_path(p) do %>
+                <div class="row">
+                  <% img1, img2, img3, img4 = p.primary_album.images[0..3] %>
+                  <div class="columns large-12 small-12 project-cover-img1 project-cover-img" >
+                    <span style="display: block; height: 160px; background-image: <%= "url('#{img1.get_attachment2(:medium_square)}')" if img1 %>;"></span>
+                  </div>
+                  <div class="columns large-4 small-4 project-cover-img2 project-cover-img" >
+                    <span style="display: block; height: 40px; width: 100%; background-image: <%= "url('#{img2.get_attachment2(:small_square)}')" if img2 %>;;"></span>
+                  </div>
+                  <div class="columns large-4 small-4 project-cover-img3 project-cover-img" >
+                    <span style="display: block; height: 40px; width: 100%; background-image: <%= "url('#{img3.get_attachment2(:small_square)}')" if img3 %>;;"></span>
+                  </div>
+                  <div class="columns large-4 small-4 project-cover-img4 project-cover-img" >
+                    <span style="display: block; height: 40px; width: 100%; background-image: <%= "url('#{img4.get_attachment2(:small_square)}')" if img4 %>;;"></span>
+                  </div>
+                </div>
+                <% end %>
+                <h3><%= link_to p.title, project_path(p) %></h3>
+              </div>
+            </li>
+          <% end %>
+      </ul>
+      <br />
+      <% else %>
+        <p>No projects found.</p>
+      <% end %>
 
     </div>
 

@@ -1406,6 +1406,13 @@ section.footer {
   }
 }
 
+$project-cover-img-gutter: 3px;
+.project-cover-img span {  background: #eee; background-size: cover; background-position: 50% 50%; }
+.project-cover-img1 { padding-bottom: $project-cover-img-gutter}
+.project-cover-img2 { padding-right: 0; }
+.project-cover-img3 { padding-left: $project-cover-img-gutter; padding-right: $project-cover-img-gutter; }
+.project-cover-img4 { padding-left: 0; }
+
 //
 // profiles, staff
 //
