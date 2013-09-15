@@ -4,13 +4,14 @@ module Physical
 
       #
       # fields:
-      # id, body, deleted_at, created_at, updated_at, category, has_assets, project
+      # "id", "project_id", "body", "deleted_at", "created_at", "updated_at", "private",, "user_id", "category",, "has_assets",
 
       # categories (lower case)
       #   * text
       #   * clipped_picture
       #   * uploaded_picture
       #   * milestone
+      #   * joined
 
       #
       # callbacks
@@ -43,7 +44,8 @@ module Physical
       # scope
       #
 
-      scope :public, -> { where('project_items.private is false')}
+      # scope :public, -> { where('project_items.private is false')}
+      scope :community_feed, -> { joins('LEFT JOIN projects ON projects.id = project_items.project_id').where("(category LIKE ?) OR (project_id IS NOT NULL and projects.private IS FALSE)", "joined").order('created_at DESC') }
       scope :private, -> { where('project_items.private is true')}
       scope :none, -> { where('false') }
 
@@ -51,7 +53,7 @@ module Physical
           
         if new_record?
 
-          self.category = "text" # unless otherwise overridden
+          self.category = "text" if not self.category # unless otherwise overridden
 
           number_of_assets = project_item_assets.length
 

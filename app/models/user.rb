@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   # callbacks
   #
 
+  after_create :create_joined_timeline_event
   after_create :build_associated_models
   acts_as_url :username, :sync_url => true, :url_attribute => :slug
 
@@ -77,6 +78,18 @@ class User < ActiveRecord::Base
       if self.has_role? :vendor and profile.featured_work_album == nil
         profile.build_featured_work_album(:parent => profile, :title => "Featured Work") 
         profile.save
+      end
+    end
+
+    def create_joined_timeline_event
+      # if the user was invited, don't create the timeline event
+      if invitation_token.nil? and Physical::Project::ProjectItem.where(:category => "joined", :user => self).count == 0
+        Physical::Project::ProjectItem.create(
+          :category => "joined",
+          :user => self,
+          :created_at => created_at,
+          :updated_at => updated_at
+        )
       end
     end
 

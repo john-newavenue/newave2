@@ -8,6 +8,11 @@
     <div class="large-11 small-10 columns">
 
       <% case project_item.category %>
+        <% when "joined" %>
+
+          <p><%= link_to project_item.user.username, user_profile_path(:username_slug => project_item.user.username) %> joined New Avenue!</p>
+          <p><%= time_ago_in_words project_item.created_at %> ago</p>
+
         <% when "text" %>
 
           <p>
@@ -16,9 +21,7 @@
           
           <p><%= project_item.body %></p>
 
-          <p>
-            Like &middot; Share &middot; Save &middot; <%= time_ago_in_words project_item.created_at %> ago
-          </p>
+          <p><%= time_ago_in_words project_item.created_at %> ago</p>
 
         <% when "clipped_picture", "uploaded_picture" %>
 

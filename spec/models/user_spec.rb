@@ -40,5 +40,19 @@ describe User do
     end
   end
 
+  describe "callbacks" do
+    it "shold create an associated profile" do
+      user = FactoryGirl.create(:customer_user)
+      expect(user.profile).to_not be_nil
+    end
+
+    it "should create join timeline event upon signup and password" do
+      user = FactoryGirl.create(:customer_user)
+      event = Physical::Project::ProjectItem.order('id DESC').limit(1).first
+      expect(event.category).to eql("joined")
+      expect(event.user).to eql(user)
+    end
+  end
+
 
 end
