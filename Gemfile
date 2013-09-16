@@ -104,3 +104,5 @@ gem 'httparty'
 gem "cocoon"
 
 gem 'seed-fu', github: 'mbleigh/seed-fu'
+
+gem 'feedzirra' 

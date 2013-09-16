@@ -1278,7 +1278,7 @@ section#home-splash {
 #home-orbiter {
   .orbit-slide-number, .orbit-progress, .orbit-bullets, .orbit-timer { display: none; }
   .orbit-next, .orbit-prev { background-color: rgba(0,0,0,0.5); }
-  .orbit-caption { background-color: rgba(0, 0, 0, 0.5); text-align: center; }
+  .orbit-caption { background-color: rgba(0, 0, 0, 0.5); }
 
   li { 
     background-size: cover;
@@ -1286,8 +1286,16 @@ section#home-splash {
     background-repeat: no-repeat;
     height: 600px; 
 
-    h3.jumbo { font-size: 5em; font-family: 'Open Sans', sans-serif; }
-    p.large { font-size: 3em; font-family: 'Open Sans', sans-serif; }
+    .panel { 
+      background: rgba(255,255,255,0.25);
+      margin: 1.1em;
+      border: none;
+      .button.large { font-size: 16px; }
+    }
+
+    h4.jumbo { font-size: 2em; }
+    h3.jumbo { font-size: 4em; font-weight: bold; font-family: 'Open Sans', sans-serif; }
+    p.large { font-size: 2em; font-family: 'Open Sans', sans-serif; }
   }
 
 }

@@ -1,0 +1,31 @@
+<% if format == "list" %>
+
+  <ul class="side-nav">
+  <% entries.each do |entry| %>
+    <li><%= link_to entry.title, entry.url %></li>
+  <% end %>
+  </ul>
+
+<% elsif format == "grid" %>
+
+  <ul class="large-block-grid-4 small-block-grid-2">
+  <% entries.each do |entry| %>
+    <li>
+      <h4><%= link_to entry.title, entry.url %></h4>
+      <%= entry.summary.html_safe %>
+    </li>
+  <% end %>
+  </ul>
+
+<% elsif format == "columns" %>
+
+  <% entries.each do |entry| %>
+  <div class="columns <%= column_class %>">
+    <div class="caption-container">
+      <h4><%= link_to entry.title, entry.url %></h4>
+      <p><%= entry.summary.html_safe %></p>
+    </div>
+  </div>
+  <% end %>
+
+<% end %>

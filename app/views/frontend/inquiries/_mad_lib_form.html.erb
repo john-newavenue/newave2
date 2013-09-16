@@ -1,14 +1,10 @@
 
-<h3>I'm interested</h3>
+<<%= defined?(header_tag) ? header_tag : "h3" %>>I'm interested</<%= defined?(header_tag) ? header_tag : "h3" %>>
 <% @inquiry = Physical::General::Inquiry.new if @inquiry.nil? %>
 
 <%= semantic_form_for @inquiry, :url => inquiry_mad_lib_submit_path, :as => 'inquiry', :html => { :class => "mad-lib-form inline" } do |f| %>
-
-  <%= f.input  :category, :as => :hidden, :value => "mad_lib_form" %>
-
-  <%= f.input  :submitted_from_url, :as => :hidden, :value => @inquiry.submitted_from_url ? @inquiry.submitted_from_url : request.original_url %>
-
-  Hi there. My name is 
+  <%= f.input  :category, :as => :hidden, :value => "mad_lib_form" %><%= f.input  :submitted_from_url, :as => :hidden, :value => @inquiry.submitted_from_url ? @inquiry.submitted_from_url : request.original_url %>Hi there. My name is 
+  
   <%= f.input :first_name, :label => false, :placeholder => "first name", :input_html => { :style => "display: inline-block; "} %>
   <%= f.input :last_name, :label => false, :placeholder => "last name", :input_html => { :style => "display: inline-block; "} %>,
   and I am interested in 
