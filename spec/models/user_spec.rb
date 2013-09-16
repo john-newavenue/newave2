@@ -41,7 +41,7 @@ describe User do
   end
 
   describe "callbacks" do
-    it "shold create an associated profile" do
+    it "should create an associated profile" do
       user = FactoryGirl.create(:customer_user)
       expect(user.profile).to_not be_nil
     end
