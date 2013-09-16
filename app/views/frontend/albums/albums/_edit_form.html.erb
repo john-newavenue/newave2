@@ -1,0 +1,14 @@
+<%= semantic_form_for @album, :as => :album, :url => form_action_url do |f| %>
+  <% if show_title_field %><%= f.input :title %><% end %>
+  <% if show_description_field %><%= f.input :description, :as => :text, :input_html => { :rows => 5 }  %><% end %>
+
+  <% if @album.items.count == 0 %>
+  <p>There are no pictures to display</p>
+  <% end %>
+
+  <%= render :partial => 'frontend/albums/album_items/edit_images_inline_fields', :locals => { :f => f } %>
+
+  <button type="submit" class="button small">Save Changes</button>
+  <%= link_to "Cancel and Go Back", go_back_url %>
+
+<% end %>

@@ -1552,7 +1552,7 @@ form {
 
 .formtastic {
   ol { margin-bottom: 0; font-size: inherit;}
-  ol li, > li { list-style: none; display: inline; }
+  ol li, li { list-style: none; display: inline; }
   fieldset.nested ol { margin: 0; }
   li.button_action button { margin-bottom: 0; }
   input[type="checkbox"] { margin: 0; }
