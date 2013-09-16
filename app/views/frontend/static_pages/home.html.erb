@@ -130,7 +130,7 @@
 
   <div class="large-9 columns push-3">
     <h3>What's Happening</h3>
-    <% @project_items = Physical::Project::ProjectItem.community_feed.limit(10).page(3) %>
+    <% @project_items = Physical::Project::ProjectItem.community_feed.limit(10).page(1) %>
     <%= 
       render :partial => 'frontend/projects/project_items/project_feed', 
           :locals => { 

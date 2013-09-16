@@ -119,10 +119,11 @@ Newave2::Application.routes.draw do
 
       resources :projects, :path => "/project" do
         resources :project_items, :path => 'item', :as => 'item'
-        match '/photos/new_clip' => "project_album#new_clip_image", :as => 'new_clip_image', :via => 'get'
-        match '/photos/save_clip' => "project_album#save_clip_image", :as => 'save_clip_image', :via => 'post'
-        match '/photos/new' => "project_album#new_images", :as => 'new_images', :via => 'get'
-        match '/photos/upload' => "project_album#upload_images", :as => 'upload_images', :via => 'post'
+        resource :project_album, :as => "album", :path => "ideas", :except => [:new]
+        match '/ideas/new_clip' => "project_albums#new_clip_image", :as => 'new_clip_image', :via => 'get'
+        match '/ideas/save_clip' => "project_albums#save_clip_image", :as => 'save_clip_image', :via => 'post'
+        match '/ideas/new' => "project_albums#new_images", :as => 'new_images', :via => 'get'
+        match '/ideas/upload' => "project_albums#upload_images", :as => 'upload_images', :via => 'post'
       end
     end
 

@@ -1,8 +1,13 @@
 module Frontend
   module Projects
-    class ProjectAlbumController < ::Frontend::Albums::AlbumsController
+    class ProjectAlbumsController < ::Frontend::Albums::AlbumsController
 
       before_action :get_album, :except => [:new_clip_image, :save_clip_image]
+      layout 'project'
+
+      def show
+        puts "hi"
+      end
       
       def new_clip_image
         @parent = Physical::Album::AlbumItem.find_by(:id => params[:album_item_id].to_i )
@@ -11,7 +16,7 @@ module Frontend
           :root => @parent.root ? @parent.root : @parent
         )
 
-        @modal = 'frontend/projects/project_album/new_clip_image_modal'
+        @modal = 'frontend/projects/project_albums/new_clip_image_modal'
         if current_user.has_role?(:customer)
           @modal = 'frontend/projects/projects/prompt_create_first_project' if current_user.projects.count < 1
         elsif current_user.has_role?(:vendor)
@@ -52,7 +57,8 @@ module Frontend
       def get_album
         projects = Physical::Project::Project.where(:id => params[:project_id])
         return not_found if projects.count == 0
-        @album = projects.first.primary_album
+        @project = projects.first
+        @album = @project.primary_album
       end
 
       def authorize_user

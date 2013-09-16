@@ -1,0 +1,23 @@
+<% provide(:title, "#{@project.title} - Design Book" ) %>
+
+<div class="row">
+  <div class="columns large-12">
+    <% @project.members do |m| %>
+      
+    <% end %>
+  </div>
+</div>
+
+<%= render :partial => 'frontend/projects/project_items/new_post', :locals => { :project_item => Physical::Project::ProjectItem.new(:project => @project) } %>
+
+<br />
+
+<ul class="large-block-grid-3 image-collection">
+  <% @album.images.each do  |item| %>
+  <li>
+    <div class="tile <%= item.id == item.id ? "active" : "" %>">
+      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :medium_square, :standalone_link => false} %>
+    </div>
+  </li>
+  <% end %>
+</ul>
