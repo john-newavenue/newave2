@@ -25,9 +25,7 @@
   <div class="screen-footer-content-wrapper blank-loader pad center-text">
     <ul class="button-group" style="display: inline-block;">
       <li>
-        <%= link_to (current_user == nil ? join_path : project_new_clip_image_path(:project_id => -1, :album_item_id => @item.id )), :class => "button small radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
-          <i class="general foundicon-heart"></i>Save to my project
-        <% end %>
+        <%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %>
       </li>
       <li>
         <%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button small secondary radius" do %>

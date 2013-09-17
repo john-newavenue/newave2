@@ -57,7 +57,7 @@ module Frontend
         end
 
         def brochure_params
-          params.require(:brochure).permit(:title, :category, :slug, :album_id, :short_description, :long_description, :cover_image, :area, :number_of_bed, :number_of_bath, :has_loft, :position)
+          params.require(:brochure).permit(:title, :category, :slug, :album_id, :short_description, :long_description, :cover_image, :area, :number_of_bed, :number_of_bath, :number_of_stories, :teaser_line, :has_loft, :position)
         end
 
         def set_collection_category

@@ -11,7 +11,7 @@
   <ul class="large-block-grid-4 small-block-grid-2">
   <% entries.each do |entry| %>
     <li>
-      <h4><%= link_to entry.title, entry.url %></h4>
+      <%= link_to entry.title, entry.url %>
       <%= entry.summary.html_safe %>
     </li>
   <% end %>
@@ -22,7 +22,7 @@
   <% entries.each do |entry| %>
   <div class="columns <%= column_class %>">
     <div class="caption-container">
-      <h4><%= link_to entry.title, entry.url %></h4>
+      <%= link_to entry.title, entry.url %>
       <p><%= entry.summary.html_safe %></p>
     </div>
   </div>

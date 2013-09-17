@@ -24,7 +24,7 @@ module Physical
       has_attached_file :cover_image, :styles => { 
           :small_square => "80x80#",
           :medium_square => "334x334#",
-          :large_square => "500x500#",
+          :large_square => "500x500#"
         },
         :default_url => 'https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/blank_user.png',
         :path => 'brochures/:id/cover_image/:style/:filename'
@@ -46,9 +46,10 @@ module Physical
       validates :number_of_bed, :numericality => { :greater_than_or_equal_to => 0 }, :format => { :with => /\A\d(\.\d)?\z/ }
       validates :number_of_bath, :numericality => { :greater_than_or_equal_to => 0 }, :format => { :with => /\A\d(\.\d)?\z/ }
 
-      validates_with AttachmentContentTypeValidator, :attributes => :cover_image, :content_type => /^image\/(png|gif|jpeg|jpg)/
-      validates_with AttachmentSizeValidator, :attributes => :cover_image, :in => (1.kilobytes..(2.5).megabytes)
-      validates_with AttachmentContentTypeValidator, :attributes => :cover_image, :content_type => /^application\/pdf/
+      validates_with AttachmentContentTypeValidator, :attributes => :cover_image, :content_type => /^image\/(png|gif|jpeg|jpg|bmp)/
+      validates_with AttachmentSizeValidator, :attributes  => :cover_image, :in => (1.kilobytes..(2.5).megabytes)
+
+      validates_with AttachmentContentTypeValidator, :attributes => :attachment, :content_type => /^application\/pdf/
       validates_with AttachmentSizeValidator, :attributes => :attachment, :in => (1.kilobytes..(10).megabytes)
 
       #

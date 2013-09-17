@@ -3,13 +3,21 @@
     <div id="slides-album-<%= album.id %>" class="slides-gallery">
       <% album.images.each do |item| %>
         <div data-image-source="<%= item.get_attachment2(:large) %>" data-thumbnail-source="<%= item.get_attachment2(:small_square) %>">
-          <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
-            <img src="" class="slide-image" />
-            <br>
-            <%= link_to (current_user == nil ? join_path : project_new_clip_image_path(:project_id => -1, :album_item_id => item.id )), :class => "button small hidden radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
-              <i class="general foundicon-heart"></i>Save to my project
-            <% end %>
-          <% end %>
+          <!-- I don't like doing this (centering vertically and horizontally with a table) but it works... -->
+          <table style="height: 100%;">
+            <tbody>
+              <tr>
+                <td style="vertical-align: middle;">
+                  <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
+                    <img src="" class="slide-image" />
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="action-buttons">
+            <%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => item.id, :btn_class => "small" } %>
+          </div>
         </div>
       <% end %>
     </div>

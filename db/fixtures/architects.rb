@@ -9,13 +9,14 @@ users_data = [
     :first_name => "Gary",
     :last_name => "Harcourt",
     :email => "gharcourt@mailinator.com", # constraint
-    :username => "gayharcourt",
+    :username => "garyharcourt",
+    :slug => "garyharcourt".parameterize,
     :role => :vendor,
     :website_title => "gfh Architecture",
     :website_url => "http://www.gfharchitecture.com/",
-    :avatar => nil,
+    :avatar => File.new("#{Rails.root}/tmp/fixtures/architects/gary_harcourt/gary2.jpg"),
     :is_featured_architect => true,
-    :featured_architect_position => 3,
+    :featured_architect_position => 1,
     :bio => """
       In California, I’ve worked on projects up and down the state, from San Diego to Sacramento as well as several states within the continental US. 
 
@@ -29,7 +30,7 @@ users_data = [
       {
         :title => "Hollister Residential Addition/Remodel",
         :description => "",
-        :position => "1",
+        :position => 1,
         :attachment => File.new("#{Rails.root}/tmp/fixtures/architects/gary_harcourt/IMG_2909.JPG"),
         :attachment_file_name => "#{Rails.root}/tmp/fixtures/architects/gary_harcourt/IMG_2909.JPG".split('/').last,
         :process_attachment => PROCESS_ATTACHMENTS
@@ -47,6 +48,7 @@ users_data.each do |ud|
   User.seed(:email) do |s|
     s.email = ud[:email]
     s.username = ud[:username]
+    s.slug = ud[:slug]
     s.password = "password"
   end
 
@@ -62,7 +64,8 @@ users_data.each do |ud|
     :featured_architect_position => ud[:featured_architect_position],
     :bio => ud[:bio],
     :website_url => ud[:website_url],
-    :website_title => ud[:website_title]
+    :website_title => ud[:website_title],
+    :avatar => ud[:avatar]
   })
   # update album images
   if ud[:featured_work_album_images]

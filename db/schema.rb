@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130912225300) do
+ActiveRecord::Schema.define(version: 20130917200011) do
 
   create_table "addresses", force: true do |t|
     t.string "line_1"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20130912225300) do
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
     t.text     "ideal_for"
+    t.integer  "number_of_stories"
+    t.string   "teaser_line"
   end
 
   add_index "brochures", ["album_id"], name: "index_brochures_on_album_id", using: :btree

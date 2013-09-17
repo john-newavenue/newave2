@@ -8,20 +8,25 @@
 
   <div class="row">
     <div class="large-8 columns">
-      <h2 class="byline"><%= @brochure.short_description %></h2>
+      
+      <% if @brochure.teaser_line %>
+      <h3 class="teaser-line"><%= @brochure.teaser_line %></h3>
+      <% end %>
 
       <ul>
         <li>Area (Square Feet): <%= @brochure.area %></li>
         <li>Number of Bed: <%= @brochure.number_of_bed %></li>
         <li>Number of Bath: <%= @brochure.number_of_bath %></li>
         <li>Has loft?: <%= @brochure.has_loft == true ? 'Yes' : 'No' %></li>
+        <li>Number of stories: <%= @brochure.number_of_stories ? @brochure.number_of_stories : 1 %></li>
       </ul>
 
       <%= simple_format @brochure.long_description %>
 
       <h3>Ideal for...</h3>
 
-      <%= simple_format @brochure.ideal_for %>
+      <%= simple_format @brochure.short_description %>
+
     </div>
     <div class="large-4 columns">
 

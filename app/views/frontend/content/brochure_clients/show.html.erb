@@ -15,6 +15,7 @@
         <li>Number of Bed: <%= @brochure.number_of_bed %></li>
         <li>Number of Bath: <%= @brochure.number_of_bath %></li>
         <li>Has loft?: <%= @brochure.has_loft == true ? 'Yes' : 'No' %></li>
+        <li>Number of stories: <%= @brochure.number_of_stories ? @brochure.number_of_stories : 1 %></li>
       </ul>
 
       <%= simple_format @brochure.long_description %>
