@@ -49,8 +49,8 @@ module Physical
           :tall_large_rectangle => "1000x2000#", # size of legacy_display_image2 
           :large => "1440x960"
         }, 
-        :path => 'assets/:id_or_legacy_id/:style/:filename'
-        # :preserve_files => true
+        :path => 'assets/:id_or_legacy_id/:style/:filename',
+        :preserve_files => Rails.env != "production"
 
       before_post_process :skip_for_nonimage
 

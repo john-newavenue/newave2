@@ -152,9 +152,10 @@ namespace :migrate do
     s = Time.now
     Rake::Task['migrate:setup_rails_db'].invoke
     Rake::Task['migrate:create_users'].invoke
-    # Rake::Task['migrate:create_projects'].invoke
+    Rake::Task['migrate:create_projects'].invoke
     Rake::Task['migrate:assign_admin'].invoke
     Rake::Task['migrate:advance_keys'].invoke
+    Rake::Task['db:seed_fu filter=architects'].invoke
     puts "MIGRATION > Took #{Time.now - s} seconds"
   end
 

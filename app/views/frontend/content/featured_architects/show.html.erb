@@ -17,8 +17,11 @@
 <br>
 
 <ul class="lined-list">
-<li><strong>Featured Architect</strong></li>
-<li>Joined <%= @profile.user.created_at.strftime("%B %d, %Y") %></li>
+  <li><strong>Featured Architect</strong></li>
+  <li>Joined on <%= @profile.user.created_at.strftime("%B %d, %Y") %></li>
+  <% if @profile.website_title and @profile.website_url %>
+    <li><i class="icon-link"></i> <%= link_to @profile.website_title, @profile.website_url, :target => "_blank" %></li>
+  <% end %>
 </ul>
 
 <% end %>
