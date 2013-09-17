@@ -3,6 +3,7 @@ users_data = [
     :first_name => "Gary",
     :last_name => "Harcourt",
     :email => "garyharcourt_seed@email.com",
+    :username => "gharcourt",
     :role => :vendor,
     :website_title => "",
     :website_url => "",
@@ -18,7 +19,7 @@ users_data = [
 
 users_data.each do |ud| 
 
-  User.seed(:email) do |s|
+  User.seed(:username, :email) do |s|
     s.email = ud[:email]
     s.username = ud[:username]
     s.password = "password"
