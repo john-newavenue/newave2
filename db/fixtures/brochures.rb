@@ -173,6 +173,4 @@ brochures_data.each do |br|
     s.is_published = br[:is_published]
   end
 
-  s = Physical::General::Brochure.find_by(:title => br[:title])
-
 end

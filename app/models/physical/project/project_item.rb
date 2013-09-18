@@ -25,6 +25,11 @@ module Physical
       belongs_to :project, :class_name => "Physical::Project::Project"
       belongs_to :user, :class_name => "::User"
       has_many :project_item_assets, :class_name => "Physical::Project::ProjectItemAsset"
+      
+      # has_many :album_items, :through => :project_item_assets, :class_name => "Physical::Album::AlbumItem"
+      # has_many :albums, :through => :album_items
+      # has_many :album_projects, :through => :albums, :source_type => "Physical::Project::Project", :source => :parent, :as => :album_projects
+      
       accepts_nested_attributes_for :project_item_assets
 
       #

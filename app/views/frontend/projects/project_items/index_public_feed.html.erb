@@ -9,7 +9,7 @@
         :locals => { 
           :project => nil,
           :project_items => @project_items,
-          :next_page_url => community_path(:page => @project_items.current_page.to_i + 1, :layout => false),
+          :next_page_url => community_path(:page => @project_items.current_page.to_i + 1, :icat => params[:icat], :layout => false),
           :context => "global",
           :infinite => true
         }
@@ -18,14 +18,32 @@
 <% end %>
 
 <% content_for :sidebar do %>
-  
-  <h3>TODO: Some interesting links?</h3>
-  
+
+  <h3 style="font-weight: normal;">Browse by Idea</h3>
   <ul class="side-nav">
-    <li>something</li>
-    <li>something</li>
-    <li>something</li>
-    <li>something</li>
+    <% Physical::Album::AlbumItemCategory.all.each do |c| %>
+      <li><%= link_to c.name, community_path + "?icat=#{c.name}" %></li>
+    <% end %>
   </ul>
+
+  
+  <% if false %>
+  <%= semantic_form_for 'feed_filter', :as => 'feed_filter', :url => community_path, :html => { :method => :get, :class => "feed-filter" } do |f| %>
+    <% if false %>
+    <h4 style="font-weight: normal;">Show me when someone...</h4>
+      <%= f.input 'show_joined', :as => :boolean, :label => "Joined" %>
+      <%= f.input 'show_uploaded', :as => :boolean, :label => "Uploaded something" %>
+      <%= f.input 'show_clipped', :as => :boolean, :label => "Clipped something" %>
+    <hr>
+    <% end %>
+    <h4 style="font-weight: normal;">Browse by Idea</h4>
+      <div class="feed-filter idea-category">
+        <%= f.input 'icat', :as => :radio, :label => false, :collection => Physical::Album::AlbumItemCategory.all.map { |c| [c.name,c.name] } %>
+      </div>
+    <%= f.action :submit, :label => "Apply", :as => :button, :class => "small button light-blue" %>
+  <% end %>
+  <% end %>
+
+
 
 <% end %>

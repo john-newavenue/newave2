@@ -10,7 +10,10 @@ module Frontend
       before_action :authorize_user, :except => [:new, :create, :index_public_feed]
 
       def index_public_feed
-        @project_items = Physical::Project::ProjectItem.community_feed.page(get_page_param)
+        require 'activity_browser'
+        b = ActivityBrowser::Query.new(params)
+        @project_items = b.get_results
+        puts "hi"
       end
 
       def index

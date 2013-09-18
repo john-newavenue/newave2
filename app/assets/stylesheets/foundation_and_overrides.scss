@@ -1803,6 +1803,14 @@ ul.item-tags {
   }
 }
 
+// public feed
+.feed-filter {
+  .idea-category {
+    fieldset { margin: 0; padding: 0; border: none;  }
+    li, input { margin: 0; }
+  }
+}
+
 //
 // Ideas
 //

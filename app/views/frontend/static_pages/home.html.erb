@@ -182,7 +182,7 @@
           :locals => { 
             :project => nil,
             :project_items => @project_items,
-            :next_page_url => community_path(:page => @project_items.current_page.to_i + 1, :layout => false),
+            :next_page_url => community_path(:page => 1, :layout => false),
             :context => "global",
             :infinite => false
           }
