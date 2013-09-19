@@ -1,47 +1,31 @@
-<% content_for :content do %>
+<% content_for :main do %>
 
-<br>
 
-<section class="user-profile">
+<% provide(:title, "Edit Profile") %>
 
+<h1><%= yield(:title) %></h1>
+
+<%= semantic_form_for @profile, :as => :profile, :url => profile_path(@user), :method => "patch" do |f| %>
+  <%= f.semantic_fields_for :user do |u|  %>
+    <%= u.input :username %>
+    <%= u.input :email %>
+  <% end %>
   <div class="row">
-
-    <!-- content -->
+    <div class="large-6 columns"><%= f.input :first_name %></div>
+    <div class="large-6 columns"><%= f.input :last_name %></div>
     <div class="large-12 columns">
-
-      <% provide(:title, "#{@user.username} - Edit Profile") %>
-
-      <%= semantic_form_for @profile, :as => :profile, :url => profile_path(@user), :method => "patch" do |f| %>
-        <%= f.inputs "Profile Info" do %>
-          <%= f.input :avatar, :as => :file %>
-          <br />
-          <%= image_tag user_picture_for(@user, :profile), :class => "user-profile-picture" %>
-        <% end %>
-
-        <%= f.inputs "Personal Info" do %>
-          <% if @user.has_role? :customer %>
-          <div class="alert-box secondary"><i class='general foundicon-flag'></i>This information will not be publicly visible.</div>
-          <% end %>
-          <div class="row">
-            <div class="large-4 columns"><%= f.input :first_name %></div>
-            <div class="large-4 columns"><%= f.input :middle_name %></div>
-            <div class="large-4 columns"><%= f.input :last_name %></div>
-          </div>
-          <%= f.input :bio, :as => :text, :input_html => { :rows => 12 }, :label => "Bio" %>
-        <% end %>
-        <%= f.actions do %>
-          <%= f.action :submit, :as => :button, :label => 'Update', :class => "success button" %>
-          <%= link_to "Cancel and go back", user_profile_path(@user.slug), :class => "secondary button" %>
-        <% end %>
-      <% end %>
-
-
+      <p class="inline-hints">
+        Your name will not be publicly visible.
+      </p>
     </div>
-
   </div>
+  <%= f.input :bio, :as => :text, :input_html => { :rows => 4 }, :label => "Bio" %>
+  <%= f.input :avatar, :as => :file %>
 
-</section>
-
+  <br />
+  
+  <%= f.action :submit, :as => :button, :label => 'Update', :class => "success button" %>
+  <%= link_to "Cancel and go back", user_profile_path(@user.slug) %>
 <% end %>
 
-<%= render :template => 'layouts/application' %>
+<% end %>

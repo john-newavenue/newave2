@@ -1,7 +1,7 @@
 module Frontend
   module Users
     class ProfilesController < ApplicationController
-      layout 'application'
+      layout 'profile'
 
       before_filter :authenticate_user! => [:edit, :update]
       before_action :authorize_user, :only => [:edit, :update]
@@ -25,6 +25,7 @@ module Frontend
         @profile.update_attributes(profile_params)
         if @profile.valid?
           @profile.save
+          @user.reload
           flash[:notice] = "Successfully updated your profile information."
           redirect_to user_profile_path(@user.slug)
         else
@@ -42,7 +43,7 @@ module Frontend
         end
 
         def profile_params
-          params.require(:profile).permit(:first_name, :middle_name, :last_name, :avatar, :bio)
+          params.require(:profile).permit(:first_name, :middle_name, :last_name, :avatar, :bio, :user_attributes => [:username, :email, :id] )
         end
 
     end

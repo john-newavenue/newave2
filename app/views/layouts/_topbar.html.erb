@@ -65,17 +65,14 @@
               
 
               <li class="pad-on-small has-dropdown settings-dropdown">
-                <a href="#" class="settings"><i class="general foundicon-settings"></i> <span class="show-for-expanded">Preferences</span></a>
+                <a href="#" class="settings"><span class="show-for-expanded">Options</span></a>
                 <ul class="dropdown">
-                  
                   <% if current_user.has_role? :vendor %>
                     <% current_user.vendors.each do |v| %>
                       <li><%= link_to v.name, vendor_profile_path(:slug => v.slug) %></li>
                     <% end %>
                   <% end %>
-
                   <li class="divider"></li>
-                  <li><%= link_to "Preferences", "#" %></li>
                   <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
                 </ul>
               </li>

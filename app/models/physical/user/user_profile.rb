@@ -19,6 +19,7 @@ module Physical
       belongs_to :user, :class_name => "::User"
       belongs_to :address, :class_name => "Physical::General::Address"
       belongs_to :featured_work_album, :class_name => "Physical::Album::Album"
+      accepts_nested_attributes_for :user
 
       #
       # validations

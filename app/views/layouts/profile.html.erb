@@ -1,0 +1,53 @@
+<% content_for :content do %>
+
+<section id="content">
+
+  <div class="row">
+
+    <div class="large-9 push-3 columns">
+      <%= yield(:main) if content_for?(:main) %>
+    </div>
+
+    <div class="large-3 columns pull-9">
+
+      <hr class="show-for-small">
+
+      <div class="row">
+
+        <div class="large-12 small-3 columns hide-for-small">
+          <%= link_to user_profile_path(@user.slug) do %>
+            <%= image_tag @user.profile.avatar(:square) %>
+          <% end %>
+        </div>
+
+        <div class="large-12 small-9  columns">
+
+          <ul class="side-nav">
+            <li>Joined on <%= @profile.user.created_at.strftime("%B %d, %Y") %></li>
+            <% if can? :update, @user.profile %>
+              <li><%= link_to edit_profile_path(@user) do %><i class="general foundicon-edit"></i>Edit Profile<% end %></li>
+            <% end %>
+          </ul>
+
+          <!-- companies -->
+          <div class="hide-for-small"><%= yield(:companies) %></div>
+
+        </div>
+
+        <div class="large-12 small-3 columns show-for-small">
+          <%= link_to user_profile_path(@user.slug) do %>
+            <%= image_tag @user.profile.avatar(:square) %>
+          <% end %>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+</section>
+
+<% end %>
+
+<%= render :template => 'layouts/application' %>
