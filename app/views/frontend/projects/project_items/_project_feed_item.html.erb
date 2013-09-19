@@ -46,7 +46,7 @@
 
             <p><%= project_item.body %></p>
 
-            <%= render(:partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :medium_square, :standalone_link => false}) if item.attachment_type == "image" %>
+            <%= render(:partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :medium_square, :standalone_link => false, :show_save_button => true}) if item.attachment_type == "image" %>
 
           <% end %>
 

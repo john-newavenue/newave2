@@ -1,6 +1,6 @@
 require 'debugger'
 
-PROCESS_ATTACHMENTS = false
+PROCESS_ATTACHMENTS = true
 PROCESS_CATEGORY = ["Client"] # options: ["Client", "Floor Plan"]
 
 puts "SEED > brochures with PROCESS_ATTACHMENTS = #{PROCESS_ATTACHMENTS}"
@@ -173,7 +173,7 @@ brochures_data = [
     :number_of_stories => 1,
     :has_loft => false,
     :short_description => "See Spring's beautiful 674-square-foot cottage with fireplace and extra large windows built on her daughter's property.", 
-    :long_description => "My name is Spring and I'm retired and living in Orinda, CA. After living far from my daughter's family and wanting to be closer, we decided to hire New Avenue to build a cottage on their property. Now I can spend much more time with them and help with childcare while living in a beautiful 674 square foot home tucked between old oaks and giant redwoods. New Avenue helped me design a living space perfect for me with a double sided glass fireplace that faces both the bedroom and the living room and large windows in the kitchen and living room that overlook the Orinda hills. Extra storage is tucked throughout with a nice coat closet at the main door and extra linen storage in the bathroom. I love it! SmartPlanet did a video interview about this project. < a href='http://www.smartplanet.com/video/downsizing-to-an-eco-friendly-home/6335544?tag=search-river' target='_blank'>Click here to watch it!</a>",
+    :long_description => "My name is Spring and I'm retired and living in Orinda, CA. After living far from my daughter's family and wanting to be closer, we decided to hire New Avenue to build a cottage on their property. Now I can spend much more time with them and help with childcare while living in a beautiful 674 square foot home tucked between old oaks and giant redwoods. New Avenue helped me design a living space perfect for me with a double sided glass fireplace that faces both the bedroom and the living room and large windows in the kitchen and living room that overlook the Orinda hills. Extra storage is tucked throughout with a nice coat closet at the main door and extra linen storage in the bathroom. I love it! SmartPlanet did a video interview about this project. <a href='http://www.smartplanet.com/video/downsizing-to-an-eco-friendly-home/6335544?tag=search-river' target='_blank'>Click here to watch it!</a>",
     :album_id => 50,
     :cover_image => File.new(cover_images_path.call("springs-cottage.jpg")),
     :cover_image_file_name => "springs-cottage.jpg",
@@ -293,7 +293,6 @@ brochures_data = [
 brochures_data.each do |br|
   puts "SEED > Processing Brochure #{br[:title]}"
   next unless PROCESS_CATEGORY.include? br[:category]
-  debugger
   Physical::General::Brochure.seed(:title) do |s|
     s.title = br[:title]
     s.slug = br[:slug]

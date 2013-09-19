@@ -17,7 +17,7 @@
         <li>Number of stories: <%= @brochure.number_of_stories ? @brochure.number_of_stories : 1 %></li>
       </ul>
 
-      <%= simple_format(@brochure.long_description, {}, :sanitize => false ) %>
+      <%=simple_format( @brochure.long_description.html_safe ) %>
 
       <%= simple_format @brochure.ideal_for %>
     </div>
