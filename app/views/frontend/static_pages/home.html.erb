@@ -90,13 +90,13 @@
   <div class="columns large-6">
     <h2>Small Homes Build Family</h2>
     <p>Our clients care deeply about family and being close together, which is why we focus on small home and backyard cottage projects that maximize family living space. Small accessory dwelling units (ADU) can be added to almost any property. Enjoy independence, privacy and financial security while sharing your home with family for 30 years or more.  A small home, backyard cottage or guest house increases the value of your home while creating flexibility and the opportunity to keep  your home in your family for generations.</p>
-    <p><%= link_to "Learn more about us", about_path, :class => "button large light-blue radius" %></p>
+    <p><%= link_to "Learn more about us", about_path, :class => "button light-blue radius" %></p>
   </div>
   <div class="columns large-6">
     <h2>Why Build a Backyard Cottage with Us?</h2>
     <p>Building a small home or ADU (accessory dwelling unit) is complex. We've created a simple and highly efficient system to manage each step. We’ll help you sketch ideas, understand permits, and find the perfect architect and builder for your dream tiny house. Everyone involved works within our proprietary platform that streamlines the entire planning and building process to make sure your small home is done on time and on budget with few surprises. Work with us for a stress-free, and some would say even fun, experience!</p>
     <p>
-      <%= link_to "Find out how we work", how_path, :class => "button large light-blue radius" %>
+      <%= link_to "Find out how we work", how_path, :class => "button light-blue radius" %>
     </p>
   </div>
   <div class="columns large-12"><hr /></div>
@@ -108,7 +108,9 @@
     <ul class="large-block-grid-3 small-block-grid-2">
       <li>
         <div class="tile">
-          <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-spring.jpg"%>
+          <%= link_to brochure_client_with_slug_path(:slug => "springs-cottage") do %>
+            <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-springs-cottage.jpg"%>
+          <% end %>
           <div class="caption-container">
             <h3>Meet a client: Spring's Spanish Cottage</h3>
             <p>See Spring's beautiful 674-square-foot cottage with fireplace and extra large windows built on her daughter's property.</p>
@@ -117,7 +119,9 @@
       </li>
       <li>
         <div class="tile">
+          <%= link_to brochure_client_with_slug_path(:slug => "karens-cottage") do %>
           <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-karen.jpg"%>
+          <% end %>
           <div class="caption-container">
             <h3>Meet a client: Karen and Her ADU</h3>
             <p>Karen, a UC Berkeley professor, built this custom small home and uses it as a workspace, guest home, and income generator.</p>
@@ -126,7 +130,9 @@
       </li>
       <li>
         <div class="tile">
+          <%= link_to brochure_client_with_slug_path(:slug => "judys-garden-cottage") do %>
           <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-judy.jpg" %>
+          <% end %>
           <div class="caption-container">
             <h3>Meet a client: Judy's Garden Cottage</h3>
             <p>Judy's family removed an old garage and added this backyard home to give her mother her own space and cottage and secret garden.</p>
@@ -134,7 +140,9 @@
       </li>
       <li>
         <div class="tile">
-          <%= image_tag "http://lorempixel.com/350/350/abstract"%>
+          <%= link_to brochure_floorplan_with_slug_path(:slug => "green-mod") do %>
+          <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-green-mod.jpg"%>
+          <% end %>
           <div class="caption-container">
             <h3>Design example: Green Mod</h3>
             <p>Learn why we're experts in small home and cottage building, including in-law apartments, guest houses, ADUs, and backyard studios.</p>
@@ -143,7 +151,9 @@
       </li>
       <li>
         <div class="tile">
-          <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-bill.jpg"%>
+          <%= link_to brochure_floorplan_with_slug_path(:slug => "big-l") do %>
+          <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-big-l.jpg"%>
+          <% end %>
           <div class="caption-container">
             <h3>Design example: Big L</h3>
             <p>Meet Bill and see his extensive experience in multi-family and live/work spaces in the San Francisco Bay Area.</p>
@@ -152,7 +162,9 @@
       </li>
       <li>
         <div class="tile">
-          <%= image_tag "http://lorempixel.com/350/350/nature"%>
+          <%= link_to brochure_floorplan_with_slug_path(:slug => "mansion") do %>
+          <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/home-box-mansion.jpg"%>
+          <% end %>
           <div class="caption-container">
             <h3>Design example: Mansion</h3>
             <p>Building a small home or ADU (accessory dwelling unit) is complex but we’ve created a simple and highly efficient system to manage each step.</p>
