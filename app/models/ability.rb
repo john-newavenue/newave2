@@ -11,10 +11,8 @@ class Ability
     end
 
     # anyone can read or update their own profile
-    if user.has_any_role?
-        can :update, Physical::User::UserProfile, :id => [user.profile.id]
-        can :read, Physical::User::UserProfile, :id => [user.profile.id]
-    end
+    can :update, Physical::User::UserProfile, :id => [user.profile.id]
+    can :read, Physical::User::UserProfile
 
     # user's projects
     can :update, Physical::Project::Project, :id => user.projects.map(&:id)

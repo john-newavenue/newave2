@@ -10,7 +10,7 @@ module Frontend
           flash[:notice] = "Logged in Successfully"
           sign_in_and_redirect User.find(authentication.user_id)
         
-        # there exists a user, who has not authenticated his/her twitter account yet.
+        # there exists a user, who has not authenticated his/her facebook account yet.
         elsif current_user
          token = omni['credentials'].token
          token_secret = omni['credentials'].secret
@@ -31,6 +31,16 @@ module Frontend
           end
           user.slug = user.username.parameterize
           if user.save
+            # capture profile info from facebook
+            profile = user.profile
+            profile.update_attributes!({
+              :first_name => omni['info']['first_name'],
+              :last_name => omni['info']['last_name'],
+              :bio => omni['info']['bio'],
+              :avatar => URI.parse(omni['info']['image'].gsub('?type=square','?type=large'))
+            })
+            # add customer role
+            user.add_role :customer
             flash[:notice] = "Welcome."
             sign_in_and_redirect User.find(user.id)
           else
