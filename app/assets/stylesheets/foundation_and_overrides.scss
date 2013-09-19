@@ -1224,6 +1224,8 @@ body > section#content, section.margin-top-bottom { margin: 1em 0; }
 
 }
 
+.shrink-1p25 { font-size: 1.25em; }
+
 //
 // Users
 //
@@ -1767,6 +1769,24 @@ ul.item-tags {
 
 .project-item-feed {
   hr { border-color: #efefef; }
+}
+
+.item-image-container {
+
+  display: inline-block;
+  position: relative;
+
+  .hover-button-container {
+    text-align: center;
+    visibility: hidden;
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+  }
+
+  &:hover .hover-button-container {
+    visibility: visible;
+  }
 }
 
 //

@@ -2,7 +2,7 @@
 
 <% content_for :main do %>
 
-  <h1><%= @brochure.title %></h1>
+  <h1 class="shrink-1p25"><%= @brochure.title %></h1>
 
   <%= (render :partial => 'frontend/content/brochure/gallery', :locals => { :album => @brochure.album }) if @brochure.album%>
 

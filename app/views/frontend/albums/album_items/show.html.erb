@@ -82,7 +82,7 @@
         <% @item.get_neighboring_images(10).each do |sibling| %>
         <li>
           <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
-            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :klass => "item-thumb", :standalone_link => true } %>
+            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :klass => "item-thumb", :standalone_link => true, :show_save_button => false } %>
           </div>
         </li>
         <% end %>

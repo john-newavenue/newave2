@@ -2,13 +2,12 @@
 
 <% content_for :main do %>
 
-  <h1><%= @brochure.title %></h1>
+  <h1 class="shrink-1p25"><%= @brochure.title %></h1>
 
   <%= (render :partial => 'frontend/content/brochure/gallery', :locals => { :album => @brochure.album }) if @brochure.album%>
 
   <div class="row">
     <div class="large-8 columns">
-      <h2 class="byline"><%= @brochure.short_description %></h2>
 
       <ul>
         <li>Area (Square Feet): <%= @brochure.area %></li>
@@ -18,7 +17,7 @@
         <li>Number of stories: <%= @brochure.number_of_stories ? @brochure.number_of_stories : 1 %></li>
       </ul>
 
-      <%= simple_format @brochure.long_description %>
+      <%= simple_format(@brochure.long_description, {}, :sanitize => false ) %>
 
       <%= simple_format @brochure.ideal_for %>
     </div>

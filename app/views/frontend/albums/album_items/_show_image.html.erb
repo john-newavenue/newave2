@@ -5,14 +5,18 @@
 # => klass
 # => standalone_link (if false, triggers show theater)
 # => disable_link (if true, show only the image)
+# => show_save_button
 
 # EXAMPLE USAGE
 # render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => @item, :size => :small_square, :klass => "item-thumb", :standalone_link => true, :disable_link => false}
 
 disable_link = false if not defined? disable_link
 klass = '' if not defined? klass
+show_save_button = true if not defined? show_save_button
 
 %>
+
+<div class="item-image-container">
 
 <% if disable_link != true %>
 
@@ -26,6 +30,13 @@ klass = '' if not defined? klass
 
     <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
       <%= image_tag item.get_attachment2(size), :class => klass %>
+
+    <% end %>
+
+    <% if show_save_button %>
+      <div class="hover-button-container">
+        <%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => item.id, :btn_class => "" } %>
+      </div>
     <% end %>
 
   <% end %>
@@ -35,3 +46,5 @@ klass = '' if not defined? klass
   <%= image_tag item.attachment(size), :class => klass %>
 
 <% end %>
+
+</div>
