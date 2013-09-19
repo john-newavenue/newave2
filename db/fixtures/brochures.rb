@@ -311,4 +311,9 @@ brochures_data.each do |br|
     s.is_published = br[:is_published]
   end
 
+  # check album to see if it was actually added
+  a = Physical::General::Brochure.find_by(:slug => br[:slug])
+  a.album_id = br[:album_id] if a.album == nil
+  a.save
+
 end
