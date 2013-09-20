@@ -16,11 +16,12 @@
 
 <br>
 
-<ul class="lined-list">
-  <li><strong>Featured Architect</strong></li>
-  <li>Joined on <%= @profile.user.created_at.strftime("%B %d, %Y") %></li>
+<h3 class="side-nav-header">Featured Architect</h3>
+<ul class="side-nav project-menu fancy-menu">
+  <li><span class="pad"><i class="icon-user"></i> <%= @profile.user.username %></span></li>
+  <li><span class="pad"><i class="icon-calendar"></i> Joined <%= @profile.user.created_at.strftime("%B %d, %Y") %></span></li>
   <% if @profile.website_title and @profile.website_url %>
-    <li><i class="icon-link"></i> <%= link_to @profile.website_title, @profile.website_url, :target => "_blank" %></li>
+  <li><%= link_to @profile.website_url, :target => "_blank" do %><i class="icon-link"></i> <%= @profile.website_title %><% end %></li>
   <% end %>
 </ul>
 

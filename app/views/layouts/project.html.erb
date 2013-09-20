@@ -33,7 +33,7 @@
       <h3 class="side-nav-header">Team</h3>
       <ul class="side-nav project-members fancy-menu">
       <% @project.members.each do |m| %>
-        <%= active_link_to profile_path(m), :wrap_tag => :li, :active => :exclusive do %>
+        <%= active_link_to user_profile_path(m.slug), :wrap_tag => :li, :active => :exclusive do %>
           <i class="icon-user"></i><%= m.username %> <br />
           <% if false %>
             <%-# for titles and such %>

@@ -4,7 +4,7 @@ module Frontend
 
       layout :resolve_layout
       before_action :get_album
-      before_action :authorize_user, :only => [:edit, :update, :upload_images]
+      before_action :authorize_user, :only => [:edit, :update, :upload_images, :new_images]
       protect_from_forgery :except => [:upload_images]
 
       def show

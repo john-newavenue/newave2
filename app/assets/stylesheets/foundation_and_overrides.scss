@@ -1214,12 +1214,10 @@ section#content, section.margin-top-bottom { margin: 1em 0; }
     margin: 0; 
     &:first-child { border-top: none; }
     i { padding: 0 1em; }
-    a { padding: .75em 0; color: #666; }
+    a { padding: .5em 0; color: #666; }
     .active { background: #efefef; color: $NA-color-light-green !important; }
     &:hover { box-shadow: 0px 0px 20px 1px #ddd; }
-  }
-  &.no-icons {
-    a { padding: .75em; }
+    .pad  { padding: .5em 0; display: inline-block; }
   }
 
 }
@@ -1478,6 +1476,8 @@ $project-cover-img-gutter: 3px;
   li:last-child { border-bottom: 1px solid #ddd; }
 
 }
+
+
 
 // Theater and Items
 
