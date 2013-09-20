@@ -512,8 +512,6 @@ namespace :migrate do
     local_dump_path =  "#{Rails.root}/tmp/#{dump_filename}"
     system "pg_dump -U #{db_config['username']} #{db_config['database']} | gzip > #{local_dump_path}"
 
-    puts "Hi"
-
     # upload database to remote
     remote_dump_dir = "/tmp"
     remote_dump_path = "#{remote_dump_dir}/#{dump_filename}"
@@ -522,7 +520,7 @@ namespace :migrate do
     # import data
     system "RAILS_ENV=staging cap deploy:import_database_dump -s dump_path=#{remote_dump_path} -s db_username=postgres -s db_database=#{db_config['database']}"
 
-    # start database
+    # start staging server
     system "RAILS_ENV=staging cap deploy:start"
   end
 
