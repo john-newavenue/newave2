@@ -11,7 +11,9 @@ class Ability
     end
 
     # anyone can read or update their own profile
-    can :update, Physical::User::UserProfile, :id => [user.profile.id]
+    if user.id
+        can :update, Physical::User::UserProfile, :id => [user.profile.id]
+    end
     can :read, Physical::User::UserProfile
 
     # user's projects

@@ -2,7 +2,7 @@
 <div class="row">
   <% img1, img2, img3, img4 = project.primary_album.images[0..3] %>
   <div class="columns large-12 small-12 project-cover-img1 project-cover-img" >
-    <span style="display: block; height: 160px; background-image: <%= "url('#{img1.get_attachment2(:medium_square)}')" if img1 %>;"></span>
+    <span style="display: block; height: 160px; background-image: <%= "url('#{img1.get_attachment2(:large_square)}')" if img1 %>;"></span>
   </div>
   <div class="columns large-4 small-4 project-cover-img2 project-cover-img" >
     <span style="display: block; height: 40px; width: 100%; background-image: <%= "url('#{img2.get_attachment2(:small_square)}')" if img2 %>;;"></span>

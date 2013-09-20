@@ -50,7 +50,7 @@
   <% @profile.featured_work_album.images.each do  |item| %>
   <li>
     <div class="tile <%= item.id == item.id ? "active" : "" %>">
-      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :medium_square, :standalone_link => false} %>
+      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false} %>
     </div>
   </li>
   <% end %>

@@ -11,7 +11,7 @@
   <li>
     <div class="tile center-text">
       <%= link_to featured_architect_with_slug_path(:slug => p.user.slug), :title => "#{p.first_name} #{p.last_name}" do %>
-        <%= image_tag p.avatar, :alt => "#{p.first_name} #{p.last_name}" %>
+        <%= image_tag p.avatar(:square), :alt => "#{p.first_name} #{p.last_name}" %>
       <% end %>
       <h3><%="#{p.first_name} #{p.last_name}"%></h3>
     </div>
@@ -20,4 +20,8 @@
 </ul>
 
 
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'frontend/inquiries/mad_lib_form' %>
 <% end %>
