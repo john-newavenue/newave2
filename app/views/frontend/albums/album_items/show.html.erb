@@ -1,9 +1,9 @@
+<% provide(:title, @item.title) %>
+
 <% provide(:action_buttons) do %>
 <ul class="button-group" style="display: inline-block;">
   <li>
-    <%= link_to (current_user == nil ? join_path : new_project_item_path(:project_id => -1, :album_item_id => @item.id )), :class => "button radius display-save-album-image-prompt display-prompt-modal",  :remote => current_user != nil do %>
-      <i class="general foundicon-heart"></i>Save Idea
-    <% end %>
+    <%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %>
   </li>
   <% if false %>
   <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %></li>
@@ -45,7 +45,7 @@
       <!-- title -->
       <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
       <% item_owner = @item.album.parent %>
-      <p class="center-for-small">In <%= link_to @item.album.title, medium_path(@item.album) %></p>
+      <p class="center-for-small">In <%= link_to @item.album.get_title, @item.album.get_parent_uri %></p>
 
       <!-- vendor logo -->
       <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
@@ -82,7 +82,7 @@
         <% @item.get_neighboring_images(10).each do |sibling| %>
         <li>
           <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
-            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :klass => "item-thumb", :standalone_link => true, :show_save_button => false } %>
+            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :klass => "item-thumb", :standalone_link => true, :show_save_button => false, :force_size => true  } %>
           </div>
         </li>
         <% end %>

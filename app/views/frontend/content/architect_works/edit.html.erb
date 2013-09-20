@@ -2,7 +2,7 @@
 
 <% content_for :main do %>
 
-  <h1>Edit Featured Work</h1>
+  <h1><%= yield(:title) %></h1>
 
   <%= album_edit_form(featured_architect_work_path(@profile), featured_architect_with_slug_path(:slug => @profile.user.slug)) %>
 

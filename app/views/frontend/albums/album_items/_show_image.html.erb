@@ -13,10 +13,11 @@
 disable_link = false if not defined? disable_link
 klass = '' if not defined? klass
 show_save_button = true if not defined? show_save_button
+force_size = false if not defined? force_size # set item image as background image with size cover
 
 %>
 
-<div class="item-image-container">
+<div class="item-image-container size-<%= size %> <% if force_size %>force-size force-square<% end %>" style="background-image: url('<%= item.get_attachment2(size) %>');">
 
 <% if disable_link != true %>
 
@@ -30,7 +31,6 @@ show_save_button = true if not defined? show_save_button
 
     <%= link_to item2_path(:id => item.id, :slug => item.slug), :remote => true, :class => "display-theater" do %>
       <%= image_tag item.get_attachment2(size), :class => klass %>
-
     <% end %>
 
     <% if show_save_button %>

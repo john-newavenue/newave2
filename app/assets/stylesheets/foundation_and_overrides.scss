@@ -1775,6 +1775,14 @@ ul.item-tags {
   display: inline-block;
   position: relative;
 
+  &.force-size {
+    width: 100%; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    a { display: block; height: 100%; }
+    img { visibility: hidden; }
+  }
+
   .hover-button-container {
     text-align: center;
     visibility: hidden;
@@ -1786,6 +1794,8 @@ ul.item-tags {
   &:hover .hover-button-container {
     visibility: visible;
   }
+
+
 }
 
 //

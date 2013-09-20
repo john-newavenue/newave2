@@ -8,15 +8,20 @@
   </div>
 </div>
 
-<%= render :partial => 'frontend/projects/project_items/new_post', :locals => { :project_item => Physical::Project::ProjectItem.new(:project => @project) } %>
+<div class="row">
+  <div class="columns large-12">
+    <%= link_to project_new_images_path(@project.id), :class => "button secondary add-picture small" do %><i class="icon-camera"></i> Upload Picture<% end %>
+    <%= link_to "Edit Design Book", edit_project_album_path(@project.id), :class => "button small" %>
+  </div>
+</div>
 
 <br />
 
-<ul class="large-block-grid-3 image-collection">
+<ul class="large-block-grid-3 small-block-grid-3 image-collection">
   <% @album.images.each do  |item| %>
   <li>
     <div class="tile <%= item.id == item.id ? "active" : "" %>">
-      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :medium_square, :standalone_link => false} %>
+      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false, :force_size => true } %>
     </div>
   </li>
   <% end %>

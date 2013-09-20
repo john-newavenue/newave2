@@ -6,7 +6,9 @@ module Frontend
       layout 'project'
 
       def show
-        puts "hi"
+      end
+
+      def edit
       end
       
       def new_clip_image
@@ -64,6 +66,10 @@ module Frontend
       def authorize_user
         @album = get_album if @album == nil
         forbidden unless can? :update, @album
+      end
+
+      def get_update_success_return_url
+        project_album_path(@project)
       end
 
       private

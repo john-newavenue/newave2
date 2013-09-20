@@ -42,11 +42,8 @@ module Physical
       has_attached_file :attachment, 
         :styles => { 
           :small_square => "80x80#",
-          # :medium_square => "334x334#",
           :large_square => "500x500#",
-          # :small_rectangle => "260x180#",  # size of legacy_thumbnail_span3 
           :medium_rectangle => "800x600#", # size of legacy_display_image 
-          # :tall_large_rectangle => "1000x2000#", # size of legacy_display_image2 
           :large => "1440x960"
         }, 
         :path => 'assets/:id_or_legacy_id/:style/:filename',

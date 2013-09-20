@@ -5,3 +5,5 @@ theater_modal = $('#theater-modal')
 theater_modal.find('.content-wrapper').html "<%= escape_javascript(render :partial => 'show_theater') %>"
 
 position_and_size_theater()
+
+$('#theater-modal').trigger('opened')
