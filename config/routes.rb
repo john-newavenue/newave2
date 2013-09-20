@@ -15,6 +15,9 @@ Newave2::Application.routes.draw do
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_patch", :via => "patch"
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_put", :via => "put"
 
+  match '/users/sign_in/redirect' => 'frontend/users/authentications#redirect', :as => "sign_in_success_redirect", :via => "get"
+  match '/users/sign_up/redirect' => 'frontend/users/authentications#redirect', :as => "sign_up_success_redirect", :via => "get"
+
   scope :module => 'frontend' do
 
     #

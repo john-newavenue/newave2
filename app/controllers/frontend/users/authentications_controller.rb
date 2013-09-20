@@ -1,7 +1,13 @@
 module Frontend
   module Users
-
     class AuthenticationsController < ApplicationController
+
+      before_action :authenticate_user!, :only => [:redirect]
+      layout 'blank'
+
+      def redirect
+      end
+
       def facebook
         omni = request.env["omniauth.auth"]
         authentication = Authentication.find_by(:provider => omni['provider'], :uid => omni['uid'])
@@ -50,6 +56,7 @@ module Frontend
         end
 
       end
+
     end
   end
 end

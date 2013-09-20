@@ -6,17 +6,14 @@ module Frontend
     class RegistrationsController < ::Devise::RegistrationsController
       after_filter :assign_user_role, :only => :create
 
-      def after_sign_up_path_for(resource)
-        '/user/' + resource.slug
-      end
-
       def create
         self.resource = build_resource(sign_up_params)
         if resource.save
           if resource.active_for_authentication?
             set_flash_message :notice, :signed_up if is_navigational_format?
             sign_up(resource_name, resource)
-            respond_with resource, :location => user_profile_path(resource.slug)
+            redirect_destination = user_profile_path(:username_slug => resource.slug)
+            respond_with resource, :location => sign_up_success_redirect_path + "?redirect=#{redirect_destination}"
           else
             set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
             expire_session_data_after_sign_in!

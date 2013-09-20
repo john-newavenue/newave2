@@ -8,13 +8,15 @@ class ApplicationController < ActionController::Base
     page = /\A([0-9]+)\z/.match(params[:page]) ? params[:page].to_i : 1
   end
 
-  def after_sign_in_path_for(resource_or_scope)
-    user = resource_or_scope
-    if user.has_role? :admin
-      crm_path
-    else
-      user_profile_path(:username_slug => resource_or_scope.slug)
-    end
+  # set in Frontend::DeviseCustom::RegistrationsController
+  # def after_sign_up_path_for(user)
+  #   redirect_destination = user_profile_path(:username_slug => user.slug)
+  #   sign_up_success_redirect_path + "?redirect=#{redirect_destination}"
+  # end
+
+  def after_sign_in_path_for(user)
+    redirect_destination = user_profile_path(:username_slug => user.slug)
+    sign_in_success_redirect_path + "?redirect=#{redirect_destination}"
   end
 
   def not_found
