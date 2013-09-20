@@ -41,8 +41,10 @@
     <h2>Featured Work</h2>
   </div>
   <div class="large-6 columns" style="text-align:right;">
+    <% if can?(:update, @profile) %>
     <%= link_to "Edit Work", edit_featured_architect_work_path(@profile), :class => "button small lightblue" %>
     <%= link_to "Upload Work", featured_architect_new_images_path(@profile), :class => "button small lightblue" %>
+    <% end %>
   </div>
 </div>
 

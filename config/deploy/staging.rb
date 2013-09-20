@@ -46,4 +46,11 @@ namespace :deploy do
     run "#{try_sudo} ln -s #{deploy_to}/shared/config/application.yml #{current_path}/config/application.yml"
   end
 
+  desc "Import a database dump"
+  task :import_database_dump do
+    run "dropdb -U #{db_username} #{db_database}"
+    run "createdb -U #{db_username} #{db_database}"
+    run "cat #{dump_path} | gunzip | psql -U #{db_username} #{db_database}"
+  end
+
 end
