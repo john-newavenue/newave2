@@ -59,4 +59,9 @@ Newave2::Application.configure do
     :authtoken => ENV['ZOHO_AUTHTOKEN_DEV']
   }
 
+  # other
+  config.domain_settings = {
+    :host => ENV['HOST_DEV']
+  }
+
 end
