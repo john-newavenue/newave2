@@ -1626,7 +1626,9 @@ fieldset fieldset {
   font-size: .85em; 
   padding: .2em; 
   cursor: move; 
+  margin-bottom: .5em; 
 }
+
 
 .tagit, .tagit input, .tagit-new {
   font-size: .7em;
@@ -1643,6 +1645,10 @@ ul.tagit {
 }
 
 div.no-lists li { list-style :none; }
+
+.sortable-album-items-fields {
+  margin: 0;
+}
 
 // Mad-Lib Form
 
@@ -1796,7 +1802,6 @@ ul.item-tags {
   &:hover .hover-button-container {
     visibility: visible;
   }
-
 
 }
 

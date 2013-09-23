@@ -23,6 +23,7 @@ module ActivityBrowser
       
       out = {}
 
+      # sanitization
       ALLOWED_PARAMS.each do |ap|
         if params[ap] and SAFE_TEXT_INPUT.match params[ap]
           params[ap] = params[ap]
@@ -52,6 +53,7 @@ module ActivityBrowser
     end
 
     def get_results
+      # join a bunch of tables for a complex querying
       join_query = '
         LEFT OUTER JOIN "project_item_assets" AS "assets" ON "assets"."project_item_id" = "project_items"."id"
         LEFT OUTER JOIN "album_items" AS "album_items" ON "assets"."album_item_id" = "album_items"."id"
@@ -60,11 +62,15 @@ module ActivityBrowser
         LEFT OUTER JOIN "projects" AS "projects" ON "albums"."parent_id" = "projects"."id"
       '
       where_array = []
-      where_array.push('("album_item_categories"."name" in (\'' + @params[:icat].join("','") + '\'))') unless @params[:icat].count == 0
-      where_array.push('("project_items"."category" in (\'' + @params[:acat].join("','") + '\'))') unless @params[:acat].count == 0
+      # if in a specific idea category icat, show only uploaded stuff; don't show clipped stuff, those will yield duplicate pictures
+      where_array.push('("album_item_categories"."name" IN (\'' + @params[:icat].join("','") + '\') AND "project_items"."category" LIKE \'%uploaded%\')') unless @params[:icat].count == 0
+      # acat is a activity category - joined, uploaded, clipped
+      where_array.push('("project_items"."category" IN (\'' + @params[:acat].join("','") + '\'))') unless @params[:acat].count == 0
+      # show activity only from public projects
       where_array.push('(( "albums"."parent_type" = \'Physical::Project::Project\' AND "projects"."private" IS FALSE) OR ("project_items"."project_id" IS NULL))')
+      # put it all together
       where_query = where_array.join(" AND ")
-
+      # order reverse chronological
       order_query = '"project_items"."created_at" DESC'
 
       @results = Physical::Project::ProjectItem.joins(join_query).where(where_query).order(order_query).paginate(:page => @params[:page], :per_page => @params[:pp])

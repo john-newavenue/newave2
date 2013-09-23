@@ -21,6 +21,8 @@ module Physical
 
       default_scope order('position ASC, id ASC')
 
+      UNCATEGORIZED = Physical::Album::AlbumItemCategory.find_by(:name => "Uncategorized")
+
     end
   end
 end

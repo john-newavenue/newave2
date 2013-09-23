@@ -90,7 +90,7 @@ module Frontend
         end
 
         def album_params
-          params.require(:album).permit(:title, :description, :cover_image_id, :images_attributes => [:id, :title, :description, :position, :tag_list])
+          params.require(:album).permit(:title, :description, :cover_image_id, :images_attributes => [:id, :title, :description, :position, :tag_list, :category_id])
         end
 
         def album_item_params

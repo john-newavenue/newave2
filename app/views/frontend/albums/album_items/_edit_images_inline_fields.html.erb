@@ -4,10 +4,18 @@
     <div class="tile light">
       <div class="draggable-handle vertical">Drag to Move</div>
       <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item.object, :size => :medium_square, :standalone_link => false, :force_size => true } %>
-      <ul>
-        <%= item.input :title, :label => false, :placeholder => "Title" %>
+      <ul class="sortable-album-items-fields">
+        <%= item.input :category,
+            :as => :select,
+            :label => false,
+            :collection => options_for_select(
+              Physical::Album::AlbumItemCategory.all.map { |c| [c.name, c.id] },
+              item.object.category ? item.object.category_id : Physical::Album::AlbumItemCategory::UNCATEGORIZED.id
+            )
+        %>
         <%= item.input :description, :as => :text, :input_html => { :rows => 2 }, :label => false, :placeholder => "Description"  %>
-        <%= item.input :tag_list, :label => "Tags, comma-separated", :input_html => { :rows => 2, :class => "taggable tagit", :value => item.object.tag_list } %>
+
+        <%-# item.input :tag_list, :label => "Tags, comma-separated", :input_html => { :rows => 2, :class => "taggable tagit", :value => item.object.tag_list } %>
         <label for="mark_for_deletion">
           <input type="checkbox"
             name="album[images_attributes][<%= item.index %>][mark_for_deletion]"
