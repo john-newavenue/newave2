@@ -140,6 +140,11 @@ Newave2::Application.routes.draw do
     match '/item/:id(/:slug)' => "albums/album_items#show", :as => "item2", :via => 'get'
     resources :uploads, :controller => "assets/uploads", :as => "uploads", :path => "uploads"
 
+    # legacy
+    get '/estate/item/:id/:slug', :to => redirect("/item/%{id}/%{slug}")
+    get '/estate/item/:id', :to => redirect("/item/%{id}")
+    get '/estate/project/:id', :to => redirect("/project/%{id}")
+
   end
 
 end
