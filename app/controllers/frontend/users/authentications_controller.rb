@@ -8,6 +8,21 @@ module Frontend
       def redirect
       end
 
+      # def sign_in_and_redirect references after_sign_in_path_for,
+      # which goes through the redirect page
+
+
+      # sign_up_and_redirect_custom written here to go through
+      # the redirect page
+      def sign_up_and_redirect_custom(resource_or_scope, *args)
+        options  = args.extract_options!
+        scope    = Devise::Mapping.find_scope!(resource_or_scope)
+        resource = args.last || resource_or_scope
+        sign_in(scope, resource, options)
+        redirect_destination = user_profile_path(:username_slug => resource.slug)
+        redirect_to sign_up_success_redirect_path + "?redirect=#{redirect_destination}"
+      end
+
       def facebook
         omni = request.env["omniauth.auth"]
         authentication = Authentication.find_by(:provider => omni['provider'], :uid => omni['uid'])
@@ -36,6 +51,7 @@ module Frontend
             user.username = user.username + Devise.friendly_token[0,1]
           end
           user.slug = user.username.parameterize
+          # attempt creating a user
           if user.save
             # capture profile info from facebook
             profile = user.profile
@@ -48,7 +64,9 @@ module Frontend
             # add customer role
             user.add_role :customer
             flash[:notice] = "Welcome."
-            sign_in_and_redirect User.find(user.id)
+            # special page to record user sign up event
+            sign_up_and_redirect_custom User.find(user.id)
+          # error creating a user
           else
             session[:omniauth] = omni.except('extra')
             redirect_to new_user_registration_path
