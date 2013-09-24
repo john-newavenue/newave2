@@ -5,16 +5,19 @@
   <div class="row stage">
     <div class="large-6 large-offset-3 columns" style="text-align: center;">
       
-      <h3>We are small home and backyard cottage pros. Create a project, clip design ideas, and consult us!</h3>
-
-      <h5>We connect you with the design, construction, financing, and all the resources you need to build your project.</h5>
-      <p>
-        <%= link_to "Learn more", about_path %>
+      <p style="font-size: 1.5em; ">
+        We are small home and backyard cottage pros. Gather your  ideas ask us questions!
       </p>
 
       <p style="margin-top: 2em; ">
-        <%= link_to "Sign up to start your project", new_user_registration_path, :class => "button large primary" %>
+        <%= link_to "Get Started", new_user_registration_path, :class => "button primary large radius" %>
       </p>
+
+      <p>Use Facebook for quick and easy sign up.</p>
+
+      <%= link_to omniauth_authorize_path("user", "facebook") do %>
+        <%= image_tag "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/general/facbook-connect-button.png" %>
+      <% end %>
 
       <p style="margin-top: 2em; ">
         <%= link_to "Already have an account? Sign in here.", new_user_session_path %>

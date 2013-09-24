@@ -9,7 +9,7 @@
 <ul class="large-block-grid-3 small-block-grid-2 featured-architects grid">
 <% @featured_architect_profiles.each do |p| %>
   <li>
-    <div class="tile center-text">
+    <div class="center-text">
       <%= link_to featured_architect_with_slug_path(:slug => p.user.slug), :title => "#{p.first_name} #{p.last_name}" do %>
         <%= image_tag p.avatar(:square), :alt => "#{p.first_name} #{p.last_name}" %>
       <% end %>
@@ -18,6 +18,11 @@
   </li>
 <% end %>
 </ul>
+
+<hr>
+
+<h2>Join us!</h2>
+<p>Are you an architect or general contractor interested in becoming a New Avenue partner? <%= link_to "Contact us!", contact_path %></p>
 
 
 <% end %>
