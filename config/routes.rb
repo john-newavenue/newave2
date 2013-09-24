@@ -76,8 +76,8 @@ Newave2::Application.routes.draw do
 
       # Design Examples
 
-      match '/small-home-design/:slug' => 'brochure_floorplans#show', :as => 'brochure_floorplan_with_slug', :via => 'get', :constraint => { :slug => /[A-Za-z]+/}
-      resources :brochure_floorplans, :path => '/small-home-designs', :as => 'brochure_floorplans', :only => [:index, :show] do
+      match '/small-house-plans/:slug' => 'brochure_floorplans#show', :as => 'brochure_floorplan_with_slug', :via => 'get', :constraint => { :slug => /[A-Za-z]+/}
+      resources :brochure_floorplans, :path => '/small-house-plans', :as => 'brochure_floorplans', :only => [:index, :show] do
         resource :brochure_floorplan_album, :path => '/album', :as => 'album', :only => [:update, :edit, :index]
         match '/album/new' => "brochure_floorplan_albums#new_images", :as => 'new_images', :via => 'get'
         match '/album/upload' => "brochure_floorplan_albums#upload_images", :as => 'upload_images', :via => 'post'
@@ -118,7 +118,7 @@ Newave2::Application.routes.draw do
 
     scope :module => 'projects' do
       
-      match "/community" => "project_items#index_public_feed", :as => "community", :via => 'get'
+      match "/design-ideas" => "project_items#index_public_feed", :as => "community", :via => 'get'
 
       resources :projects, :path => "/project" do
         resources :project_items, :path => 'item', :as => 'item'
@@ -133,8 +133,6 @@ Newave2::Application.routes.draw do
     resources :albums, :controller => "albums/albums", :as => "media", :path => "media"
     resources :albums, :controller => "albums/albums", :as => "medium", :path => "media"
     match '/media/:id/upload' => "albums/albums#upload", :as => "media_upload", :via => 'get'
-
-    match "/ideas" => "albums/album_items#index_ideas", :as => "ideas", :via => 'get'
 
     resources :album_items, :controller => "albums/album_items", :as => "item", :path => "item"
     match '/item/:id(/:slug)' => "albums/album_items#show", :as => "item2", :via => 'get'

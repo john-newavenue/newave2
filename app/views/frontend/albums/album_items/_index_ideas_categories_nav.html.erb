@@ -1,5 +1,5 @@
 <ul class="side-nav">
   <% Physical::Album::AlbumItemCategory.all.each do |c| %>
-    <li><%= link_to c.name, ideas_path(:category => c.name.parameterize) %></li>
+    <li><%= link_to c.name, community_path + "?icat=#{c.name}" %></li>
   <% end %>
 </ul>
