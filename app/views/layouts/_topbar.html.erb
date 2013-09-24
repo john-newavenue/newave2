@@ -48,7 +48,7 @@
             <% if user_signed_in? %>
               <li class="pad-on-small">
                 <%= link_to user_profile_path(current_user.slug), :class => "user-profile-link transition-buffer" do %>
-                  <%=image_tag user_icon_for(current_user), :class=> "user-icon" %>
+                  <%=image_tag current_user.profile.avatar(:tiny), :class=> "user-icon" %>
                   <%="#{current_user.username}"%>
                 <% end %>
               </li>

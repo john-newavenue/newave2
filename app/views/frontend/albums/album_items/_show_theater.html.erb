@@ -24,17 +24,19 @@
 <div class="screen-footer">
   <div class="screen-footer-content-wrapper blank-loader pad center-text">
     <ul class="button-group" style="display: inline-block;">
-      <li>
-        <%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %>
-      </li>
-      <li>
-        <%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button small secondary radius" do %>
-          <i class="general foundicon-page"></i>Permalink
-        <% end %>
-      </li>
-      <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %></li>
-      <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %></li>
-      <li><%= link_to "#", :class => "button small secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %></li>
+      <% 
+        share_url = "#{request.protocol}#{Rails.application.config.domain_settings[:host]}#{item2_path(:id => @item.id, :slug => @item.slug)}"
+        share_title = @item.title
+        share_image = @item.get_attachment2(:large_square)
+        share_description = @item.description
+
+        facebook_share_url = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{share_url}&p[images][0]=#{share_image}&p[title]=#{share_title}&p[summary]=#{share_description}"
+        twitter_share_url = "http://twitter.com/home?status=#{share_url}"
+      %>
+      <li><%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %></li>
+      <li><%= link_to_function raw('<i class="social foundicon-facebook"></i>'), "share_popup(600,600,'#{facebook_share_url}')", :class => "button secondary radius"  %></li>
+      <li><%= link_to_function raw('<i class="social foundicon-twitter"></i>'), "share_popup(600,600, '#{twitter_share_url}')", :class => "button secondary radius twitter-share-button" do %><% end %></li>
+      <li><%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button secondary radius" do %><i class="icon-link" style="display:inline-block;height:13px;"></i><% end %></li>
     </ul>
   </div>
 </div>

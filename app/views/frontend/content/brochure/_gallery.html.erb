@@ -41,7 +41,7 @@
       $(c + " .slidesjs-slide").each( function (index, element) {
         pagination
           .find('a[data-slidesjs-item="'+ index+'"]')
-          .html("<img src='" + $(element).data('thumbnail-source') + "' />")
+          .html("<img src='" + $(element).data('thumbnail-source') + "' nopin='nopin' />")
       })
     }
 

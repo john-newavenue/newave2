@@ -2,16 +2,12 @@
 
 <% provide(:action_buttons) do %>
 <ul class="button-group" style="display: inline-block;">
-  <li>
-    <%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %>
-  </li>
-  <% if false %>
-  <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-facebook"></i><% end %></li>
-  <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-twitter"></i><% end %></li>
-  <li><%= link_to "#", :class => "button secondary radius icon-only" do %><i class="social foundicon-pinterest"></i><% end %></li>
-  <% end %>
+  <li><%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %></li>
+  <li><%= render :partial => 'frontend/content/brochure/social_buttons', :locals => { } %></li>
 </ul>
 <% end %>
+
+
 
 <br>
 <div class="section" id="theater-page" style="margin-bottom: 1em; ">
@@ -77,9 +73,9 @@
       <hr>
 
       <!-- more images-->
-      <h6>More in this album:</h6>
-      <ul class="large-block-grid-5 small-block-grid-4 image-collection">
-        <% @item.get_neighboring_images(10).each do |sibling| %>
+      <h6>More in this project:</h6>
+      <ul class="large-block-grid-4 small-block-grid-4 image-collection">
+        <% @item.get_neighboring_images(8).each do |sibling| %>
         <li>
           <div class="tile <%= sibling.id == @item.id ? "active" : "" %>">
             <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => sibling, :size => :small_square, :klass => "item-thumb", :standalone_link => true, :show_save_button => false, :force_size => true  } %>

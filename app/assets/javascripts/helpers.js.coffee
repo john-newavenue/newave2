@@ -11,6 +11,4 @@ $(document).ready( () ->
   $(window).resize( force_squares )
   $("#theater-modal").bind('opened', ()-> force_squares())
   force_squares()
-
-
 )
