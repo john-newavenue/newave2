@@ -44,30 +44,12 @@
 <!-- sidebar -->
 <div class="screen-sidebar">
   <div class="screen-sidebar-content-wrapper pad blank-loader">
+    
     <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
-    <% item_owner = @item.album.parent %>
+
     <h6><%= link_to @item.album.get_title, media_path(@item.album) %></h6>
 
     <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
-
-    <p class="hidden"><% if @item.tag_list %>Tags: <%= @item.tag_list %><% end %></p>
-
-    <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
-      <table class="vertical-middle">
-        <tbody>
-          <tr>
-            <td>
-              <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
-                <%= image_tag item_owner.logo(:tiny), :style => "max-width: 70px;", :alt => item_owner.name %>
-              <% end %>
-            </td>
-            <td>
-              <h6><%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %></h6>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
 
     <h6>More:</h6>
 

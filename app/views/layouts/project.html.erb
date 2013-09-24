@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="columns large-12">
-      <h1><%= @project.title %></h1>
+      <h1><%= link_to project_path(@project.id) do %> <i class="icon-home"></i> <%= @project.title %><% end %></h1>
       <hr>
     </div>
   </div>
@@ -20,8 +20,7 @@
       <h3 class="side-nav-header">Project</h3>
       <ul class="side-nav project-menu fancy-menu">
         <%= active_link_to edit_project_path(@project), :wrap_tag => :li, :active => :exclusive do %> <i class="general foundicon-edit"></i>Project Info<% end %>
-        <%= active_link_to project_path(@project.id), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-tasks"></i> Timeline<% end %>
-        <%= active_link_to project_album_path(@project), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-picture"></i> Design Book<% end %>
+        <%= active_link_to project_album_path(@project), :wrap_tag => :li, :active => :exclusive do %> <i class="icon-picture"></i> Design Ideas<% end %>
         <% if false %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-signal"></i> Budget and Progress<% end %>
         <%= active_link_to "#", :wrap_tag => :li, :active => :exclusive do %> <i class="icon-briefcase"></i> Documents and Files<% end %>
@@ -30,7 +29,6 @@
         <% end %>
       </ul>
 
-      <h3 class="side-nav-header">Team</h3>
       <ul class="side-nav project-members fancy-menu">
       <% @project.members.each do |m| %>
         <%= active_link_to user_profile_path(m.slug), :wrap_tag => :li, :active => :exclusive do %>

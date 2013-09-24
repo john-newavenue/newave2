@@ -1,5 +1,5 @@
 <%= semantic_form_for @album_item, :as => 'album_item', :url => project_save_clip_image_path(:project_id => -1), :remote => true do |f| %>
-  <h4>Save to My Project</h4>
+  <h3>Save this idea</h3>
 
   <% if @album_item %>
     <div class="panel" style="text-align:center;">
@@ -26,20 +26,36 @@
     category_options = Physical::Album::AlbumItemCategory.all.map { |c| [c.name, c.id] }
     category_selected = @album_item.parent.category ? @album_item.parent.category_id : Physical::Album::AlbumItemCategory::UNCATEGORIZED.id
   %>
-  <%= f.input :album_id,
+
+
+<div class="row">
+  <div class="columns large-12 small-12"><p>What do you like about this idea?</p></div>
+  <div class="columns large-12 small-12"><%= f.input :description, 
     :label => false,
-    :as => :select,
-    :collection => options_for_select( album_options, album_selected)
-  %>
-  <%= f.input :category_id,
+    :placeholder => 'Add a comment or a description.',
+    :input_html => { :rows => 2, :class => 'large-font' }
+  %></div>
+  <div class="columns large-4 small-12"><p>Save this to:</p></div>
+  <div class="columns large-8 small-12">
+     <%= f.input :album_id,
+      :label => false,
+      :as => :select,
+      :collection => options_for_select( album_options, album_selected)
+    %>
+  </div>
+  <div class="columns large-4 small-12"><p>Categorize this idea as:</p></div>
+  <div class="columns large-8 small-12">
+      <%= f.input :category_id,
     :label => false,
     :as => :select,
     :collection => options_for_select( category_options, category_selected)
   %>
-  <%= f.input :description, 
-    :label => false,
-    :placeholder => 'Add a comment! What do you like about this?',
-    :input_html => { :rows => 2, :class => 'large-font' }
-  %>
-  <button class="radius button small display-prompt-modal" type="submit" style="width: 100%; ">Save</button>
+  </div>
+
+</div>
+
+ 
+
+  
+  <button class="radius button display-prompt-modal" type="submit" style="width: 100%; ">Save</button>
 <% end %>

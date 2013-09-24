@@ -1,10 +1,10 @@
-<% provide(:title, "#{@project.title} - Design Book" ) %>
+<% provide(:title, "#{@project.title} - Design Ideas" ) %>
 
 <% if can? :update, @project %>
 <div class="row">
   <div class="columns large-12">
     <%= link_to project_new_images_path(@project.id), :class => "button secondary add-picture small" do %><i class="icon-camera"></i> Upload Picture<% end %>
-    <%= link_to "Edit Design Book", edit_project_album_path(@project.id), :class => "button small" %>
+    <%= link_to "Edit Design Ideas", edit_project_album_path(@project.id), :class => "button small" %>
   </div>
 </div>
 <% end %>

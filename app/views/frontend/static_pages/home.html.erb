@@ -178,7 +178,7 @@
 <div class="row">
   <div class="large-12 columns">
     <hr>
-    <h2>Announcements and Upcoming Events</h2>
+    <h3>Announcements and Upcoming Events</h3>
     <%= render_blog_feed(4, "grid", "large-3 small-6", source = "http://blog.newavenuehomes.com/index.php/category/events/feed/") %>
   </div>
 </div>
@@ -187,7 +187,7 @@
   <div class="large-12 columns"><hr></div>
 
   <div class="large-9 columns push-3">
-    <h3>What's Happening</h3>
+    <h3>Find inspiration and ideas</h3>
     <% @project_items = Physical::Project::ProjectItem.community_feed.limit(10).page(1) %>
     <%= 
       render :partial => 'frontend/projects/project_items/project_feed', 
@@ -200,7 +200,7 @@
           }
     %>
     <div style="margin-bottom: 2em;">
-      <%= link_to raw("See more of what's happening"), community_path, :class => "button light-blue", :style => "width: 100%;" %>
+      <%= link_to raw("More"), community_path, :class => "button light-blue", :style => "width: 100%;" %>
     </div>
   </div>
 

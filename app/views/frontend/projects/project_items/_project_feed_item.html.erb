@@ -46,12 +46,12 @@
 
             <p><%= project_item.body %></p>
 
-            <%= render(:partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false, :show_save_button => true}) if item.kind == "picture" %>
+            <%= render(:partial => 'frontend/albums/album_items/show_image', :locals => { :item => item, :size => :large_square, :standalone_link => false, :show_save_button => !project_item.project.members.include?(current_user) }) if item.kind == "picture" %>
 
           <% end %>
 
-          <p>
-            <%= time_ago_in_words project_item.created_at %> ago
+          <p style="padding-top: 1em; ">
+            <%= time_ago_in_words project_item.created_at %> ago |
           </p>
           <% end %>
 

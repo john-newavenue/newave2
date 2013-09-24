@@ -1,4 +1,4 @@
-<% provide(:title, "What's Happening") %>
+<% provide(:title, "Find inspiration and ideas") %>
 
 <% content_for :main do %>
 
@@ -19,7 +19,7 @@
 
 <% content_for :sidebar do %>
 
-  <h3 style="font-weight: normal;">Browse by Idea</h3>
+  <h3 style="font-weight: normal;">Browse Design Ideas</h3>
   <ul class="side-nav">
     <% Physical::Album::AlbumItemCategory.all.each do |c| %>
       <li><%= link_to c.name, community_path + "?icat=#{c.name}" %></li>
