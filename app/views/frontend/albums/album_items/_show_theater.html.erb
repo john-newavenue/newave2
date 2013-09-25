@@ -84,7 +84,7 @@
       <% if @item.get_items_also_saved_by_others.count > 0 %>
       <div class="large-12 columns">
         <hr>
-        <p>People who saved this idea also saved</p>
+        <p>People who saved this idea also saved:</p>
         <ul class="large-block-grid-4 image-collection">
         <% @item.get_items_also_saved_by_others.each do |ai| %>
           <li>

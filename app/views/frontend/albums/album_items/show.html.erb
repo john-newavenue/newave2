@@ -50,6 +50,17 @@
       <!-- description/comment -->
       <% if not @item.description.blank? %><%= simple_format @item.description %><% end %>
 
+      <!-- projects that also saved this idea -->
+      <% if @item.get_projects_that_also_clipped_item.count %> 
+      <hr>
+      <p>Idea was saved in <strong><%= @item.get_projects_that_also_clipped_item.count %></strong> other projects.</p>
+      <ul>
+      <% @item.get_projects_that_also_clipped_item.each do |project| %>
+        <li><%= link_to project.title, project_path(project) %></li>
+      <% end %>
+      </ul>
+      <% end %>
+
     </div>
     
     <div class="large-6 small-12 columns">
@@ -70,26 +81,11 @@
         </li>
         <% end %>
       </ul>
-    </div>
 
-    <!-- projects that also saved this idea -->
-    <div class="large-6 small-12 columns">
-      <% if @item.get_projects_that_also_clipped_item.count %> 
-      <hr>
-      <p>Idea was saved in <strong><%= @item.get_projects_that_also_clipped_item.count %></strong> other projects.</p>
-      <ul>
-      <% @item.get_projects_that_also_clipped_item.each do |project| %>
-        <li><%= link_to project.title, project_path(project) %></li>
-      <% end %>
-      </ul>
-      <% end %>
-    </div>
-
-    <!-- ideas also saved by others -->
-    <div class="large-6 small-12 columns">
+      <!-- ideas also saved by others -->
       <% if @item.get_items_also_saved_by_others.count > 0 %>
       <hr>
-      <p>People who saved this idea also saved</p>
+      <p>People who saved this idea also saved:</p>
       <ul class="large-block-grid-4 small-block-grid-4 image-collection">
       <% @item.get_items_also_saved_by_others.each do |ai| %>
         <li>
@@ -101,8 +97,6 @@
       </ul>
       <% end %>
     </div>
-
-
 
   </div>
 
