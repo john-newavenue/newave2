@@ -1303,7 +1303,7 @@ section#home-splash {
   .orbit-caption { background-color: rgba(0, 0, 0, 0.5); }
 
   li { 
-    background-size: cover;
+    background-size: cover !important;
     background-position: 50% 20%;
     background-repeat: no-repeat;
     height: 600px; 
