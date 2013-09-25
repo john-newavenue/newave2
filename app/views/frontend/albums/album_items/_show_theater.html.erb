@@ -53,7 +53,7 @@
         <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
         
         <!-- project title -->
-        <h6><%= link_to @item.album.get_title, media_path(@item.album) %></h6>
+        <p> <i class="icon-home"></i> <%= link_to @item.album.get_title, media_path(@item.album) %></p>
         
         <!-- description/comment -->
         <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
@@ -77,9 +77,10 @@
         </ul>
       </div>
 
+      <!-- ideas also saved by others -->
       <% if @item.get_items_also_saved_by_others.count > 0 %>
-      <hr>
       <div class="large-12 columns">
+        <hr>
         <p>People who saved this idea also saved</p>
         <ul class="large-block-grid-4 image-collection">
         <% @item.get_items_also_saved_by_others.each do |ai| %>
@@ -94,9 +95,10 @@
       <% end %>
 
       
+      <!-- projects that also saved this idea -->
       <% if @item.get_projects_that_also_clipped_item.count %> 
-      <hr>
       <div class="large-12 columns">
+        <hr>
         <p>Idea was saved in <strong><%= @item.get_projects_that_also_clipped_item.count %></strong> other projects.</p>
         <ul>
         <% @item.get_projects_that_also_clipped_item[0..9].each do |project| %>

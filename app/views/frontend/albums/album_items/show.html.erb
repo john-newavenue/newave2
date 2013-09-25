@@ -38,29 +38,14 @@
       <!-- action buttons -->
       <div class="show-for-small" style="text-align: center; margin-bottom: .5em; "><%= yield(:action_buttons) %></div>
 
-      <!-- title -->
+      <!-- item title -->
       <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
+
+      <!-- project title -->
       <% item_owner = @item.album.parent %>
-      <p class="center-for-small">In <%= link_to @item.album.get_title, @item.album.get_parent_uri %></p>
+      <p class="center-for-small"> <i class="icon-home"></i> <%= link_to @item.album.get_title, @item.album.get_parent_uri %></p>
 
-      <!-- vendor logo -->
-      <% if item_owner.class.to_s == "Physical::Vendor::Vendor" %>
-        <table class="vertical-middle">
-          <tbody>
-            <tr>
-              <td>
-                <%= link_to vendor_profile_path(:slug => item_owner.slug), :title => item_owner.name do %>
-                  <%= image_tag item_owner.logo(:tiny), :style => "max-width: 70px;", :alt => item_owner.name %>
-                <% end %>
-              </td>
-              <td>
-                <h6><%= link_to item_owner.name, vendor_profile_path(:slug => item_owner.slug) %></h6>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
-
+      <!-- description/comment -->
       <% if not @item.description.blank? %><%= simple_format @item.description %><% end %>
 
     </div>
@@ -84,12 +69,38 @@
         <% end %>
       </ul>
     </div>
-  </div>
 
-    <!-- other info -->
-    <div class="span12">
-      
+    <!-- projects that also saved this idea -->
+    <div class="large-6 small-12 columns">
+      <% if @item.get_projects_that_also_clipped_item.count %> 
+      <hr>
+      <p>Idea was saved in <strong><%= @item.get_projects_that_also_clipped_item.count %></strong> other projects.</p>
+      <ul>
+      <% @item.get_projects_that_also_clipped_item.each do |project| %>
+        <li><%= link_to project.title, project_path(project) %></li>
+      <% end %>
+      </ul>
+      <% end %>
     </div>
+
+    <!-- ideas also saved by others -->
+    <div class="large-6 small-12 columns">
+      <% if @item.get_items_also_saved_by_others.count > 0 %>
+      <hr>
+      <p>People who saved this idea also saved</p>
+      <ul class="large-block-grid-4 small-block-grid-4 image-collection">
+      <% @item.get_items_also_saved_by_others.each do |ai| %>
+        <li>
+          <div class="tile <%= ai.id == @item.id ? "active" : "" %>">
+            <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => ai, :size => :small_square, :standalone_link => true, :show_save_button => false, :force_size => true} %>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+      <% end %>
+    </div>
+
+
 
   </div>
 

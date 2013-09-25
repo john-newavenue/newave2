@@ -91,7 +91,8 @@ module Physical
           joins_query = 'INNER JOIN "albums" ON "album_items"."album_id" = "albums"."id"'
           where_query = '"albums"."id" IN (' +  get_projects_that_also_clipped_item.map(&:primary_album_id).join(',') + ') AND "albums"."id" NOT IN (' + album_id.to_s + ')'
           where_query += 'AND "album_items"."root_id" NOT IN (' + root_id.to_s + ')' if root_id
-          return Physical::Album::AlbumItem.joins(joins_query).where(where_query).limit(4)
+          order_query = '"album_items"."created_at" DESC'
+          return Physical::Album::AlbumItem.joins(joins_query).where(where_query).order(order_query).limit(4)
         end
         Physical::Album::AlbumItem.where(:id => -1)
       end
