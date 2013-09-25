@@ -15,6 +15,11 @@
     <<-BIO
       <p>Justin Martinez has a Civil Engineering B.S. and a Structural Engineering M.S. from UC Berkeley. With an interest in systems engineering and programming, he has worked with professors and researchers in developing and deploying cloud infrastructures and servers through his undergraduate and graduate education. He is self-taught in frontend, middleware, and backend web development and has experience with WordPress, Drupal, Django and Rails. Justin leverages open source software and custom modules to create AJAX applications, interact with cloud services and APIs, and craft and improve user interfaces and experiences. Justin's ongoing work with New Avenue involves integrating and organizing the company's business logic and systems in the cloud, providing and exploring technical solutions, and designing interfaces for not just New Avenue but also homeowners, designers, and builders.</p>
     BIO
+  ],
+  ["John Hayden", "https://b6694dc98fc00ffe8b6d-3d8cead74be35266d0f147cdde9ccbfd.ssl.cf1.rackcdn.com/team/john-hayden.jpg",
+    <<-BIO
+      <p>John Hayden co-founded and served as the CEO of Versation for 12 years, a software company providing international student management and English as a Second Language software to over 75 educational institutions. Their consumer product, englishbaby.com, is one of the largest sites in the world for English language learners with 2 million members. His passion for international education came from living in Tokyo, Japan immediately after college where he managed international partnerships for Hitachi, Ltd. While still serving as the Chairman for Versation, John also serves on the board of several other organizations including Portland State University's School of Business Administration Advisory Council, Portland-based digital music licensing company Rumblefish, Los Angeles-based Boston Educational Services, and Hand2Mouth Theater Company.</p>
+    BIO
   ]
 ].each do |member| %>
 <%= render :partial => 'team_entry', :locals => { :name => member[0], :image_url => member[1], :bio => member[2] } %>

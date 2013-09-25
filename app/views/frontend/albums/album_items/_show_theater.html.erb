@@ -48,11 +48,16 @@
     <div class="row">
 
       <div class="large-12 columns">
+        
+        <!-- item title -->
         <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
-
+        
+        <!-- project title -->
         <h6><%= link_to @item.album.get_title, media_path(@item.album) %></h6>
-
+        
+        <!-- description/comment -->
         <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
+        
       </div>
 
 
