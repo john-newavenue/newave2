@@ -52,11 +52,14 @@
         <!-- item title -->
         <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
         
-        <!-- project title -->
-        <p> <i class="icon-home"></i> <%= link_to @item.album.get_title, media_path(@item.album) %></p>
+        <!-- item meta -->
+        <p>
+          <%= link_to @item.album.get_parent_uri do %> <i class="icon-home"></i> <%= @item.album.get_title %><% end %><br />
+          <%= link_to community_path + "?icat=#{@item.category.name}" do %> <i class="icon-tag"></i> <%= @item.category.name %> <% end %>
+        </p>
         
         <!-- description/comment -->
-        <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
+        <% if not @item.description.blank? %><%= simple_format @item.description %><% end %>
         
       </div>
 
