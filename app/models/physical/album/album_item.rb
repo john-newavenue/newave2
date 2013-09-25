@@ -80,6 +80,22 @@ module Physical
       # public methods
       #
 
+      def get_projects_that_also_clipped_item
+        joins_query = 'INNER JOIN "albums" ON "projects"."primary_album_id" = "albums"."id" INNER JOIN "album_items" ON "albums"."id" = "album_items"."album_id"'
+        where_query = '"albums"."parent_type" = \'Physical::Project::Project\' AND "projects"."private" IS FALSE AND "album_items"."root_id" IN (' + (root_id ? root_id : id).to_s + ')'
+        Physical::Project::Project.joins(joins_query).where(where_query)
+      end
+
+      def get_items_also_saved_by_others
+        if get_projects_that_also_clipped_item.count > 0
+          joins_query = 'INNER JOIN "albums" ON "album_items"."album_id" = "albums"."id"'
+          where_query = '"albums"."id" IN (' +  get_projects_that_also_clipped_item.map(&:primary_album_id).join(',') + ') AND "albums"."id" NOT IN (' + album_id.to_s + ')'
+          where_query += 'AND "album_items"."root_id" NOT IN (' + root_id.to_s + ')' if root_id
+          return Physical::Album::AlbumItem.joins(joins_query).where(where_query).limit(4)
+        end
+        Physical::Album::AlbumItem.where(:id => -1)
+      end
+
       def get_attachment2(size)
         if legacy_display_image2_url
           return { 

@@ -30,12 +30,12 @@
         share_image = @item.get_attachment2(:large_square)
         share_description = @item.description
 
-        facebook_share_url = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{share_url}&p[images][0]=#{share_image}&p[title]=#{share_title}&p[summary]=#{share_description}"
+        facebook_share_url = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{share_url}&p[images][0]=#{share_image}&p[title]=#{share_title}"
         twitter_share_url = "http://twitter.com/home?status=#{share_url}"
       %>
       <li><%= render :partial => 'frontend/albums/album_items/save_to_my_project_button', :locals => { :album_item_id => @item.id, :btn_class => "" } %></li>
-      <li><%= link_to_function raw('<i class="social foundicon-facebook"></i>'), "share_popup(600,600,'#{facebook_share_url}')", :class => "button secondary radius"  %></li>
-      <li><%= link_to_function raw('<i class="social foundicon-twitter"></i>'), "share_popup(600,600, '#{twitter_share_url}')", :class => "button secondary radius twitter-share-button" do %><% end %></li>
+      <li><a href="#" onClick="share_popup(600,600,'<%=facebook_share_url%>')" class="button secondary radius"><i class="social foundicon-facebook"></i></a></li>
+      <li><a href="#" onClick="share_popup(600,600,'<%=twitter_share_url%>')" class="button secondary radius"><i class="social foundicon-twitter"></i></a></li>
       <li><%= link_to item2_path(:id => @item.id, :slug => @item.slug), :class => "button secondary radius" do %><i class="icon-link" style="display:inline-block;height:13px;"></i><% end %></li>
     </ul>
   </div>
@@ -45,17 +45,22 @@
 <div class="screen-sidebar">
   <div class="screen-sidebar-content-wrapper pad blank-loader">
     
-    <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
-
-    <h6><%= link_to @item.album.get_title, media_path(@item.album) %></h6>
-
-    <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
-
-    <h6>More:</h6>
-
     <div class="row">
+
+      <div class="large-12 columns">
+        <% if !@item.title.blank? %><h6><%= @item.title %></h6><% end %>
+
+        <h6><%= link_to @item.album.get_title, media_path(@item.album) %></h6>
+
+        <p><% if not @item.description.blank? %><%= simple_format @item.description %><% end %></p>
+      </div>
+
+
       <!-- neighboring images-->
       <div class="large-12 columns">
+
+
+        <p>More ideas in this project:</p>
         <ul class="large-block-grid-4 image-collection">
           <% @item.get_neighboring_images(8).each do |sibling| %>
           <li>
@@ -66,6 +71,39 @@
           <% end %>
         </ul>
       </div>
+
+      <% if @item.get_items_also_saved_by_others.count > 0 %>
+      <hr>
+      <div class="large-12 columns">
+        <p>People who saved this idea also saved</p>
+        <ul class="large-block-grid-4 image-collection">
+        <% @item.get_items_also_saved_by_others.each do |ai| %>
+          <li>
+            <div class="tile <%= ai.id == @item.id ? "active" : "" %>">
+              <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => ai, :size => :small_square, :standalone_link => false, :show_save_button => false, :force_size => true} %>
+            </div>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      
+      <% if @item.get_projects_that_also_clipped_item.count %> 
+      <hr>
+      <div class="large-12 columns">
+        <p>Idea was saved in <strong><%= @item.get_projects_that_also_clipped_item.count %></strong> other projects.</p>
+        <ul>
+        <% @item.get_projects_that_also_clipped_item[0..9].each do |project| %>
+          <li><%= link_to project.title, project_path(project) %></li>
+        <% end %>
+          <% if @item.get_projects_that_also_clipped_item.count > 10 %>
+            <li>and more.</li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
     </div>
   </div>
 

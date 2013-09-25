@@ -1872,7 +1872,7 @@ ul.item-tags {
   .slidesjs-pagination-item { }
   .slidesjs-slide { background: #efefef; height: 100%; }
   .slidesjs-slide .display-save-album-image-prompt {  }
-  .slide-image { margin-bottom: 25x; }
+  .slide-image { margin-bottom: 25x; max-height: 500px; }
   .slidesjs-previous, .slidesjs-next { display: inline-block; font-size: 0; color: transparent; width: 1px; height: 1px; }
   .action-buttons { position: absolute; bottom: 1em; width: 100%; text-align: center;  }
   table { background: #efefef; }
