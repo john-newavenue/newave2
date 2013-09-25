@@ -17,7 +17,11 @@ force_size = false if not defined? force_size # set item image as background ima
 
 %>
 
-<div class="item-image-container size-<%= size %> <% if force_size %>force-size force-square<% end %>" style="background-image: url('<%= item.get_attachment2(size) %>');">
+<% if force_size %>
+<div class="item-image-container size-<%= size %> force-size force-square" style="background-image: url('<%= item.get_attachment2(size) %>');">
+<% else %>
+<div class="item-image-container size-<%= size %>">
+<% end %>
 
 <% if disable_link != true %>
 
