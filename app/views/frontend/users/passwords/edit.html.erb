@@ -1,0 +1,15 @@
+<% provide(:title, "Change Password") %>
+
+<% content_for :main do %>
+
+<h1><%= yield(:title) %></h1>
+
+<%= semantic_form_for @password_change, :as => 'password_change', :url => change_password_path(current_user.id), :method => :patch do |f| %>
+  <%= f.input :current_password, :label => "Enter your current password." %>
+  <%= f.input :new_password, :label => "Enter your new password." %>
+  <%= f.input :new_password_confirmation, :label => "Re-enter your new password."  %>
+  <%= f.action :submit, :as => :button, :label => 'Update', :class => "success button" %>
+  <%= link_to "Cancel and go back", user_profile_path(@user.slug) %>
+<% end %>
+
+<% end %>

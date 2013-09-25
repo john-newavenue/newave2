@@ -23,11 +23,16 @@
         <div class="large-12 small-9  columns">
 
           <ul class="side-nav fancy-menu">
-            <li><span class="pad"><i class="icon-user"></i> <%= @profile.user.username %></span></li>
+
+            <%= active_link_to user_profile_path(@user.slug), :wrap_tag => :li, :exclusive => true do %><i class="icon-user"></i> <%= @profile.user.username %><% end %>
+
             <li><span class="pad"><i class="icon-calendar"></i> Joined on <%= @profile.user.created_at.strftime("%B %d, %Y") %></span></li>
+
             <% if can? :update, @user.profile %>
-              <li><%= link_to edit_profile_path(@user) do %><i class="general foundicon-edit"></i>Edit Profile<% end %></li>
+              <%= active_link_to edit_profile_path(@user), :wrap_tag => :li, :exclusive => true do %><i class="general foundicon-edit"></i>Edit Profile<% end %>
+              <%= active_link_to change_password_form_path(@user), :wrap_tag => :li, :exclusive => true do %><i class="general foundicon-edit"></i>Change Password<% end %>
             <% end %>
+
           </ul>
 
           <!-- companies -->

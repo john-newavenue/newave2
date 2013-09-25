@@ -6,18 +6,22 @@ Newave2::Application.routes.draw do
   root to: 'frontend/static_pages#home'
   match '/join' => 'frontend/static_pages#join', :via => 'get'
 
-  
+  # devise 
   devise_for :users, :controllers => {
     :registrations => 'frontend/devise_custom/registrations',
     :invitations => "frontend/users/invitations",
     :omniauth_callbacks => "frontend/users/authentications"
   }
+  
+  # user invitations
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_patch", :via => "patch"
   match "/users/invitation" => "frontend/users/invitations#update", :as => "accept_invitation_set_password_put", :via => "put"
-
+  
+  # redirects
   match '/users/sign_in/redirect' => 'frontend/users/authentications#redirect', :as => "sign_in_success_redirect", :via => "get"
   match '/users/sign_up/redirect' => 'frontend/users/authentications#redirect', :as => "sign_up_success_redirect", :via => "get"
 
+  
   scope :module => 'frontend' do
 
     #
@@ -113,7 +117,13 @@ Newave2::Application.routes.draw do
 
     scope :module => 'users' do
       match '/u/:username_slug' => 'profiles#show', :as => 'user_profile', :via =>'get'
-      resources :profiles, :path => 'user'
+      resources :profiles, :path => 'user' do
+
+      end
+
+      match '/user/:id/password/edit' => 'passwords#edit', :via => :get, :as => 'change_password_form'
+      match '/user/:id/password/' => 'passwords#update', :via => :patch, :as => 'change_password'
+      match '/user/:id/password/' => 'passwords#update', :via => :put
     end
 
     scope :module => 'projects' do
