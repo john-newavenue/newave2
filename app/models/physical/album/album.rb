@@ -8,7 +8,6 @@ module Physical
       #
       # behaviors
       #
-      # acts_as_paranoid
       before_destroy :destroy_album_items
       acts_as_taggable
       acts_as_taggable_on :internal
@@ -19,8 +18,7 @@ module Physical
       belongs_to :parent, :polymorphic => true
       belongs_to :cover_image, :class_name => "Physical::Asset::ImageAsset"
       has_many :items, :class_name => "::Physical::Album::AlbumItem", :source => :asset
-      # has_many :images, :class_name => "::Physical::Album::AlbumItem", :source => :asset, :conditions => { :asset_type => "Physical::Asset::ImageAsset" }
-      has_many :images, :class_name => "::Physical::Album::AlbumItem", :conditions => { :kind => "picture" }
+      has_many :images, :class_name => "::Physical::Album::AlbumItem", :conditions => '"album_items"."kind" LIKE \'%picture%\' AND "album_items"."deleted_at" IS NULL'
       accepts_nested_attributes_for :items
       accepts_nested_attributes_for :images, allow_destroy: true
 

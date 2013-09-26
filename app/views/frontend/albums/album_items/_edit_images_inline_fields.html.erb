@@ -3,7 +3,7 @@
   <li class="item item-<%= item.object.id %>">
     <div class="tile light">
       <div class="draggable-handle vertical">Drag to Move</div>
-      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item.object, :size => :medium_square, :standalone_link => false, :force_size => true } %>
+      <%= render :partial => 'frontend/albums/album_items/show_image', :locals => { :item => item.object, :size => :large_square, :standalone_link => false, :force_size => true } %>
       <ul class="sortable-album-items-fields">
         <%= item.input :category,
             :as => :select,

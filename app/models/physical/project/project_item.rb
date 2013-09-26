@@ -17,6 +17,7 @@ module Physical
       # callbacks
       #
       # before_save ProjectItemWrapper.new
+      before_save :remove_associated_album_items
 
       #
       # relations
@@ -53,6 +54,19 @@ module Physical
       scope :community_feed, -> { joins('LEFT JOIN projects ON projects.id = project_items.project_id').where("(category LIKE ?) OR (project_id IS NOT NULL and projects.private IS FALSE)", "joined").order('created_at DESC') }
       scope :private, -> { where('project_items.private is true')}
       scope :none, -> { where('false') }
+      default_scope -> { where('"project_items"."deleted_at" IS NULL')}
+
+      def remove_associated_album_items
+        if deleted_at
+          # find related album items (clipped, saved pictures) and destroy them
+          Physical::Album::AlbumItem.joins(
+            'INNER JOIN "project_item_assets" ON "project_item_assets"."album_item_id" = "album_items"."id" ' +
+            'INNER JOIN "project_items" ON "project_items"."id" = "project_item_assets"."project_item_id"'
+          ).where(
+            '"project_items"."id" = ? AND "album_items"."deleted_at" IS NULL', id
+          ).readonly(false).update_all(:deleted_at => Time.now())
+        end
+      end
 
       def save(params = {:validate => true})
           
@@ -97,38 +111,6 @@ module Physical
       end
 
     end
-
-    # class ProjectItemWrapper
-    #   def after_save(record)
-    #     # create album item if needed
-
-    #     # create project item asset
-
-    #     #
-
-
-    #     # update category and has_assets
-    #     current_category = record.category
-    #     current_has_assets = record.has_assets
-    #     project_item_assets = record.project_item_assets
-    #     if project_item_assets.count > 0
-    #       record.has_assets = true
-    #       if project_item_assets.count == 1
-    #         album_item = record.project_item_assets.first.album_item
-    #         if album_item.album.parent == record.project
-    #           record.category = "uploaded_picture"
-    #         else
-    #           record.cateogry = "clipped_picture"
-    #         end
-    #         # 
-    #       end
-    #     else
-    #       record.category = "text"
-    #       record.has_assets = false
-    #     end
-    #     record.save if record.category != current_category and record.has_assets != record.has_assets
-    #   end
-    # end
 
   end
 end

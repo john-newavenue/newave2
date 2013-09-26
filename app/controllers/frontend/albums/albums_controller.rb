@@ -21,7 +21,7 @@ module Frontend
             params['album']['images_attributes'].keys.each do |n|
               if params['album']['images_attributes']["#{n}"]['mark_for_deletion'].in? ["on",true,1] 
                 s = @album.items.where(:id => params['album']['images_attributes']["#{n}"]['id'])
-                s[0].destroy if s.count == 1
+                s[0].update_attributes!(:deleted_at => Time.now()) if s.count == 1
               end
             end
             

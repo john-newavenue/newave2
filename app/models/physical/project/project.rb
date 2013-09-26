@@ -12,7 +12,11 @@ module Physical
       belongs_to :primary_album, :class_name => "Physical::Album::Album"
       has_many :memberships, :class_name => "Physical::Project::ProjectMember"
       has_many :members, :through => :memberships, :source => :user, :class_name => "::User"
-      has_many :items, :class_name => "Physical::Project::ProjectItem", :after_add => proc { |p| p.touch }
+      has_many :items, :class_name => "Physical::Project::ProjectItem", :after_add => proc { |p| p.touch } do
+        def visible
+          where('"project_items"."deleted_at" IS NULL')
+        end
+      end
 
       #
       # validations

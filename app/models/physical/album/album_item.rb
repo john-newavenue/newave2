@@ -12,6 +12,7 @@ module Physical
       before_save :assign_ancestral_attachment
       before_save :assign_attachment_type
       after_create :add_to_project_timeline
+      before_save :remove_from_project_timeline
 
       #
       # assocations
@@ -73,7 +74,6 @@ module Physical
       #
       # behaviors
       #
-      # acts_as_paranoid # soft delete
       acts_as_taggable
 
       #
@@ -116,6 +116,7 @@ module Physical
       def get_image_position_info
         # check if this is an image
         if kind == "picture"
+          # debugger
           collection = album.images
           position = collection.index(self) + 1
           total = collection.length
@@ -227,6 +228,18 @@ module Physical
               :album_item => self
             )
             project_item.save
+          end
+        end
+
+        def remove_from_project_timeline
+          if deleted_at
+            # find timeline activity that mentions this album item and destroy it
+            Physical::Project::ProjectItem.joins(
+              'INNER JOIN "project_item_assets" ON "project_item_assets"."project_item_id" = "project_items"."id" ' +
+              'INNER JOIN "album_items" ON "album_items"."id" = "project_item_assets"."album_item_id"'
+            ).where(
+              '"album_items"."id" IN (?) AND "album_items"."deleted_at" IS NULL', id.to_s
+            ).readonly(false).update_all('"deleted_at" = \''+ Time.now.to_s+'\'')
           end
         end
 
