@@ -59,8 +59,48 @@ brochures_data = [
     :number_of_bed => 1,
     :number_of_stories => 1,
     :has_loft => true,
-    :short_description => "Ideal for a second home or guest house in a natural setting. The bedroom holds a queen sized bed and the loft provides room for occasional guests. ", 
-    :long_description => "This modern gem brings the outdoors in to your living space with lots of glass and great views. It's small footprint leaves plenty of room for a modern garden and guests.",
+    :short_description => <<EOS
+
+        <p>Ideal for a second home or guest house in a natural setting. The bedroom holds a queen sized bed and the loft provides room for occasional guests. </p>
+
+    EOS,
+    :long_description => <<EOS
+
+        <p>New Avenue partnered with The US Department of Energy, The City of San Jose and The City of Palo Alto, to create this modular home as a model of sustainability and energy efficiency. The DOE funded the initial display in San Jose.</p>
+        <p>The small home has a full kitchen, bathroom, laundry, one bedroom and an extra sleeping loft.</p>
+        <p>The home is fully wheelchair accessible and incorporates sustainable products from all of the companies below. Most notably, this includes bamboo floors, salvaged windows, Trex decking, Mythic non-toxic paints, recycled glass counters, recycled glass tiles, an efficient mini split heat pump for heating and cooling, solar panels a metal roof and rain barrels.</p>
+        <p>More than This home is open to the public through April 2013. Contact the City of Palo Alto here: click here to schedule a visit.</p>
+        <p>As a a modular home it was built under factory conditions and was inspected and permitted by the state of California. It can be set on any property or in any backyard in the state. At the end of the Palo Alto exhibit we will sell the home. Contact us if you are interested in purchasing the home. New Avenue can manage your local permitting, utilities and foundation work as needed.</p>
+
+        <ul>
+        <li><a href="http://www.newavenuehomes.com" target="_blank">New Avenue, Inc.</a> - Design, Financing, and Construction</li>
+        <li><a href="http://www.bakermarble.com" target="_blank">Baker Marble +Granite</a> - Counter Fabrication and Installation</li>
+        <li><a href="http://www.ocisf.com" target="_blank">Ogden Contract Interiors</a> - Bamboo Flooring Installation</li>
+        <li><a href="http://www.velux.com" target="_blank">Velux</a> - Skylights and Sun Tunnels</li>
+        <li><a href="http://www.jeld-wen target="_blank".com">Jeld Wen</a> - Windows and Doors</li>
+        <li><a href="http://us.sanyo.com target="_blank"/hvac">Sanyo</a> - Mini-Split Heat and A/C</li>
+        <li><a href="http://www.panasonic.com" target="_blank">Panasonic</a> - Energy Recovery Ventilator</li>
+        <li><a href="http://www.rohlhome.com" target="_blank">Rohl</a> - Bath Fixtures</li>
+        <li><a href="http://www.moen.com" target="_blank">Moen</a> - Kitchen Fixtures</li>
+        <li><a href="http://www.trex.com" target="_blank">Trex</a> - Decking</li>
+        <li><a href="http://www.mieleusa.com" target="_blank">Miele</a> - Appliances</li>
+        <li><a href="http://www.icestone.com" target="_blank">IceStone</a> - Recycled Glass Counters</li>
+        <li><a href="http://www.ibew.org" target="_blank">IBEW</a> - Electrical Work</li>
+        <li><a href="http://www.bondedlogic.com" target="_blank">Bonded Logic</a> - Recycled Denim Insulation</li>
+        <li><a href="http://www.eestairs.com" target="_blank">EEStairs</a> - Ladder to Loft</li>
+        <li><a href="http://www.metalroof.net" target="_blank">Metal Roof Network</a> - Metal Roof</li>
+        <li><a href="http://www.blanco.com" target="_blank">Blanco</a> - Kitchen Sink</li>
+        <li><a href="http://www.jameshardie.com" target="_blank">James Hardie</a> - Siding</li>
+        <li><a href="http://www.water-concepts target="_blank".info">Water Concepts</a> - Bathroom FInishes</li>
+        <li><a href="http://www.fireclay.com" target="_blank">Fireclay Tile</a> - Recycled Glass Tile</li>
+        <li><a href="http://www.teragren.com" target="_blank">Teragren</a> - Bamboo Flooring</li>
+        <li><a href="http://www.mythicpaint.com" target="_blank">Mythic Paint</a> - Nontoxic Paint</li>
+        <li>Catherine Chang Design Studio - Landscape Design</li>
+        <li><a href="http://www.optoelectronix.com" target="_blank">OPTO Electronix</a> - Living Room LED Lighting</li>
+        <li><a href="http://www.lumiversal.com" target="_blank">Lumiversal</a> - LED Lighting</li>
+        </ul>
+        
+    EOS,
     :teaser_line => "simple, sleek, modern",
     :album_id => 24,
     :cover_image => File.new(cover_images_path.call("eco-house.jpg")),

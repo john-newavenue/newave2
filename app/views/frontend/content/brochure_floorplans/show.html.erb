@@ -21,11 +21,13 @@
         <li>Number of stories: <%= @brochure.number_of_stories ? @brochure.number_of_stories : 1 %></li>
       </ul>
 
-      <%= simple_format @brochure.long_description %>
-
       <h3>Ideal for...</h3>
 
-      <%= simple_format @brochure.short_description %>
+      <%= raw @brochure.short_description %>
+
+      <h3>About this design</h3>
+
+      <%= raw @brochure.long_description %>
 
     </div>
     <div class="large-4 columns">
