@@ -69,8 +69,8 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
  # User Matters
-gem 'devise', :git => 'https://github.com/plataformatec/devise.git', :branch => 'rails4'
-gem 'devise_invitable', :git => 'https://github.com/scambra/devise_invitable.git', :branch => 'rails4'
+gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
+gem 'devise_invitable', :git => 'https://github.com/scambra/devise_invitable.git'
 gem 'cancan'
 gem 'rolify', :git => 'https://github.com/EppO/rolify.git'
 gem 'omniauth-twitter'

@@ -28,23 +28,22 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: 6b5988d756d780903bf8c9ccb3e2b3b724ccebe8
-  branch: rails4
+  revision: c323065b57277e175af21a693a115c55f98936e6
   specs:
-    devise (2.2.4)
+    devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
-      warden (~> 1.2.1)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
 
 GIT
   remote: https://github.com/scambra/devise_invitable.git
-  revision: 970ff21b4088f97207835dcea5468bfa8cc19612
-  branch: rails4
+  revision: 746f3d94a25b43899af30a7f941859c460f075d1
   specs:
-    devise_invitable (1.1.7)
-      actionmailer (>= 4.0.0.rc1)
-      railties (>= 4.0.0.rc1)
+    devise_invitable (1.2.2)
+      actionmailer (>= 3.2.6, < 5)
+      devise (>= 3.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -135,12 +134,12 @@ GEM
     daemons (1.1.9)
     database_cleaner (1.0.1)
     debug_inspector (0.0.2)
-    debugger (1.6.0)
+    debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.1)
+      debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.2)
+    debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     draper (1.2.1)
       actionpack (>= 3.0)
@@ -371,7 +370,7 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    warden (1.2.1)
+    warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.4)
     xpath (2.0.0)
