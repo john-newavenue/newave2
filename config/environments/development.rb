@@ -39,7 +39,7 @@ Newave2::Application.configure do
   BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
 
   # for devise
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' } 
+  config.action_mailer.default_url_options = { :host => ENV['HOST_DEV'] } 
 
   # paperclip and fog
   config.paperclip_defaults = {

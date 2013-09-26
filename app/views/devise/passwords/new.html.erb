@@ -10,7 +10,11 @@
     <p>Enter your email address, and we will send you a link to reset your password.</p>
 
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-      <%= devise_error_messages! %>
+      <% if resource.errors.messages.count and resource.errors.messages.include? :email %>
+        <div class="alert-box alert">
+          The email address provided is not associated with an account or is invalid.
+        </div>
+      <% end %>
 
       <%= f.email_field :email, :autofocus => true %>
 
