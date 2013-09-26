@@ -44,6 +44,7 @@ namespace :deploy do
   desc "Create symlinks to sensitive config files"
   task :symlink_config_files do
     run "#{try_sudo} ln -s #{deploy_to}/shared/config/application.yml #{current_path}/config/application.yml"
+
   end
 
   desc "Import a database dump"
