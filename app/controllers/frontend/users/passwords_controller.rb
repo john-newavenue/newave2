@@ -31,7 +31,7 @@ module Frontend
 
         def authorize_user
           user = ::User.find_by_id(params[:id])
-          forbidden unless can? :update, user
+          forbidden unless current_user == user
           @user = user
           @profile = @user.profile
         end

@@ -22,6 +22,7 @@ module Frontend
         else
           clean_up_passwords resource
           @resource = resource
+          @resource.errors.messages.delete(:slug)
           respond_with @resource
         end
         session[:omniauth] = nil unless @user.new_record?
