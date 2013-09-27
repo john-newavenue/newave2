@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
   validates :slug, :presence => true, :allow_blank => false
 
+  attr_writer :password_confirmation
+  validate :password_confirmation_matches
+
   #
   # other
   #
@@ -54,6 +57,16 @@ class User < ActiveRecord::Base
   #
   # methods
   #
+
+  def password_confirmation_matches
+    if password_confirmation 
+      if password_confirmation == "" or password == ""
+        errors.add(:password, "Fill out both fields to reset your password.")
+      elsif (password_confirmation != "" and password != "") and password_confirmation != password
+        errors.add(:password, "Password and Password Confirmation must match.")
+      end
+    end
+  end
 
   def apply_omniauth(omni)
     authentications.build(

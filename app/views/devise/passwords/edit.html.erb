@@ -9,6 +9,19 @@
 
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
       <%= devise_error_messages! %>
+
+      <% if resource.errors.messages.count > 0 %>
+        <div class="alert-box alert">
+          <ul>
+            <% resource.errors.messages.each do |k,v| %>
+              <% if k == :password %> 
+              <li><%= "#{v[0]}" %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <%= f.hidden_field :reset_password_token %>
 
       <div><%= f.label :password, "New password" %><br />
