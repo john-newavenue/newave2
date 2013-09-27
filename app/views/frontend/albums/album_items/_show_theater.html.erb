@@ -55,7 +55,9 @@
         <!-- item meta -->
         <p>
           <%= link_to @item.album.get_parent_uri do %> <i class="icon-home"></i> <%= @item.album.get_title %><% end %><br />
+          <% if @item.category %>
           <%= link_to community_path + "?icat=#{@item.category.name}" do %> <i class="icon-tag"></i> <%= @item.category.name %> <% end %>
+          <% end %>
         </p>
         
         <!-- description/comment -->
