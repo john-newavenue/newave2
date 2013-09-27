@@ -17,8 +17,8 @@
   <%= f.inputs "Profile Info" do %>
     <%= f.semantic_fields_for :profile, :as => :profile_attributes do |profile| %>
       <%= profile.input :first_name %>
-      <%= profile.input :middle_name %>
       <%= profile.input :last_name %>
+      <%= profile.input :display_name %>
       <%= profile.input :bio %>
       <%= profile.input :avatar, :as => :file, :required => false %>
       <p>

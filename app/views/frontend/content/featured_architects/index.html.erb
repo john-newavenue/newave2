@@ -12,8 +12,8 @@
     <div class="center-text">
       <%= link_to featured_architect_with_slug_path(:slug => p.user.slug), :title => "#{p.first_name} #{p.last_name}" do %>
         <%= image_tag p.avatar(:square), :alt => "#{p.first_name} #{p.last_name}" %>
+        <h3><%="#{p.first_name} #{p.last_name}"%></h3>
       <% end %>
-      <h3><%="#{p.first_name} #{p.last_name}"%></h3>
     </div>
   </li>
 <% end %>

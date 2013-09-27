@@ -30,8 +30,7 @@
 
 <% content_for :main do %>
 
-<h1 style="margin-bottom: .1em;"><%= "#{@profile.first_name} #{@profile.last_name}" %></h1>
-<h3><%= "#{@profile.user.username}" %></h3>
+<h1 style="margin-bottom: .1em;"><%= "#{@profile.get_display_name}" %></h1>
 
 <%= simple_format @profile.bio %>
 

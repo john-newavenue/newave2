@@ -30,6 +30,14 @@ module Physical
       validates_with AttachmentContentTypeValidator, :attributes => :avatar, :content_type => /^image\/(png|gif|jpeg|jpg)/
       validates_with AttachmentSizeValidator, :attributes => :avatar, :in => (0.kilobytes..(1000).kilobytes)
 
+      #
+      # methods
+      #
+
+      def get_display_name
+        display_name ? display_name : "#{first_name} #{last_name}"
+      end
+
     end
   end
 end

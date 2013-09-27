@@ -43,7 +43,7 @@ module Frontend
         end
 
         def profile_params
-          params.require(:profile).permit(:first_name, :middle_name, :last_name, :avatar, :bio, :user_attributes => [:username, :email, :id] )
+          params.require(:profile).permit(:first_name, :middle_name, :last_name, :avatar, :bio, :display_name, :user_attributes => [:username, :email, :id] )
         end
 
     end

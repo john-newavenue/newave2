@@ -44,7 +44,7 @@ module Frontend
         end
 
         def profile_params
-          params.require(:profile).permit(:first_name, :middle_name, :last_name, :avatar, :bio)
+          params.require(:profile).permit(:first_name, :middle_name, :last_name, :display_name, :avatar, :bio)
         end
 
         def resolve_layout

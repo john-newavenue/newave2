@@ -13,11 +13,16 @@
   <div class="row">
     <div class="large-6 columns"><%= f.input :first_name %></div>
     <div class="large-6 columns"><%= f.input :last_name %></div>
+    <% if current_user.has_role? :admin or current_user.has_role? :vendor %>
+    <div class="large-12 columns"><%= f.input :display_name, :hint => "For example: John Doe, Architect " %></div>
+    <% end %>
+    <% if current_user.has_role? :customer %>
     <div class="large-12 columns">
       <p class="inline-hints">
-        Your name will not be publicly visible.
+        Your first and last name will not be publicly visible.
       </p>
     </div>
+    <% end %>
   </div>
   <%= f.input :bio, :as => :text, :input_html => { :rows => 4 }, :label => "Bio" %>
   <%= f.input :avatar, :as => :file, :label => "Profile Picture" %>

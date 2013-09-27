@@ -2,7 +2,7 @@
 
 <% content_for :main do %>
 
-<h1><%= @user.username %></h1>
+<h1><%= !@user.has_role?(:customer) ? @user.profile.display_name : @user.username %></h1>
 
 <hr>
 
